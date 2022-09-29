@@ -6,7 +6,9 @@
 @section("content")
 
 <div class="vh-100">
-Obsah
+    <h1>@lang('mainPageTexts.cryptoInNutshell')</h1>
+    <p>@lang('mainPageTexts.annotation')</p>
+    <p>@lang('mainPageTexts.annotationEnd')</p>
 </div>
 
     @include("components/footer")
