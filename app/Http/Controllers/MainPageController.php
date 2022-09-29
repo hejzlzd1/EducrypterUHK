@@ -14,7 +14,7 @@ class MainPageController extends BaseController
 
     public function index()
     {
-        Session::flash("alert-danger", "Testovací message");
+        //Session::flash("alert-success", "success message example");
         return view("mainPage");
     }
 }
