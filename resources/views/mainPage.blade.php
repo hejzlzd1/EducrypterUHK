@@ -1,5 +1,5 @@
 @extends("components/pageTemplate")
-@section("title","Krypto aplikace - úvodní stránka")
+@section("title",__("mainPageTexts.mainPageTitle"))
 @section("comment",__('mainPageTexts.metaComment'))
 @section("content")
     @include("components/menu")
@@ -12,11 +12,11 @@
                 <div class="row align-items-start">
                     <h1>@lang('mainPageTexts.cryptoInNutshell')</h1>
                     <hr />
-                    <div class="col-9">
+                    <div class="col-lg-9">
                         <p>@lang('mainPageTexts.annotation')</p>
                     </div>
 
-                    <div class="col-3 m-auto">
+                    <div class="col-lg-3 m-auto">
                         <img width="100%" src="{{asset("img/mainPage/cryptoInNutshell.jpg")}}" class="rounded-4">
                     </div>
                 </div>
@@ -32,10 +32,10 @@
                 <div class="row align-items-start">
                     <h1>@lang('mainPageTexts.symetric')</h1>
                     <hr />
-                    <div class="col-4 m-auto">
+                    <div class="col-lg-4 m-auto">
                         <a href="{{"img/mainPage/symetric_".App::getLocale().".png"}}" target="_blank"><img width="100%" src="{{asset("img/mainPage/symetric_".App::getLocale().".png")}}" class="rounded-4"></a>
                     </div>
-                    <div class="col-8">
+                    <div class="col-lg-8">
                         <p>@lang('mainPageTexts.symetricInfo')</p>
                     </div>
                 </div>
@@ -51,11 +51,11 @@
                 <div class="row align-items-start">
                     <h1>@lang('mainPageTexts.asymetric')</h1>
                     <hr />
-                    <div class="col-8">
+                    <div class="col-lg-8">
                         <p>@lang('mainPageTexts.asymetricInfo')</p>
                     </div>
 
-                    <div class="col-4 m-auto">
+                    <div class="col-lg-4 m-auto">
                         <a href="{{"img/mainPage/asymetric_".App::getLocale().".png"}}" target="_blank"><img width="100%" src="{{asset("img/mainPage/asymetric_".App::getLocale().".png")}}" class="rounded-4"></a>
                     </div>
                 </div>
@@ -71,10 +71,10 @@
                 <div class="row align-items-start">
                     <h1>@lang('mainPageTexts.usage')</h1>
                     <hr />
-                    <div class="col-3 m-auto">
+                    <div class="col-lg-3 m-auto">
                         <img width="100%" src="{{asset("img/mainPage/personalInfo.jpg")}}" class="rounded-4">
                     </div>
-                    <div class="col-9">
+                    <div class="col-lg-9">
                         <p>@lang('mainPageTexts.usageInfo')</p>
                     </div>
                 </div>
@@ -90,11 +90,11 @@
                 <div class="row align-items-start">
                     <h1>@lang('mainPageTexts.protocols')</h1>
                     <hr />
-                    <div class="col-9">
+                    <div class="col-lg-9">
                         <p>@lang('mainPageTexts.protocolsInfo')</p>
                     </div>
 
-                    <div class="col-3 m-auto">
+                    <div class="col-lg-3 m-auto">
                         <img width="100%" src="{{asset("img/mainPage/protocols.webp")}}" class="rounded-4">
                     </div>
                 </div>
@@ -110,11 +110,11 @@
                 <div class="row align-items-start">
                     <h1>SSL vs TLS</h1>
                     <hr />
-                    <div class="col-4 m-auto">
+                    <div class="col-lg-4 m-auto">
                         <a href="img/mainPage/handshake.png" target="_blank"><img width="100%" src="{{asset("img/mainPage/handshake.png")}}" class="rounded-4"></a>
                         <figure class="text-center">Handshake</figure>
                     </div>
-                    <div class="col-8">
+                    <div class="col-lg-8">
                         <p>@lang('mainPageTexts.sslvstlsInfo')</p>
                     </div>
                 </div>
@@ -130,11 +130,11 @@
                 <div class="row align-items-start">
                     <h1>@lang('mainPageTexts.certificates')</h1>
                     <hr />
-                    <div class="col-9">
+                    <div class="col-lg-9">
                         <p>@lang('mainPageTexts.certificatesInfo')</p>
                     </div>
 
-                    <div class="col-3 m-auto">
+                    <div class="col-lg-3 m-auto">
                         <img width="100%" src="{{asset("img/mainPage/sslcert.webp")}}" class="rounded-4">
                     </div>
                 </div>

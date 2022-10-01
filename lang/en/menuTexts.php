@@ -8,6 +8,6 @@ return [
     "protocols" => "Protocols",
     "tscertificates" => "SSL/TLS Certificates",
 
-    "caesarCipher" => "Ceasar cipher",
+    "caesarCipher" => "Caesar cipher",
     "vigenereCipher" => "Vigenère cipher"
 ];

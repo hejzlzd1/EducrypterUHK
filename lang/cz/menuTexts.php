@@ -7,6 +7,6 @@ return [
     "cryptoUsage" => "Využití kryptografie",
     "protocols" => "Protokoly",
     "tscertificates" => "Certifikáty SSL/TLS",
-    "caesarCipher" => "Ceasarova šifra",
+    "caesarCipher" => "Caesarova šifra",
     "vigenereCipher" => "Vigenèrova šifra"
 ];
