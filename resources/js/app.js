@@ -4,7 +4,7 @@ window.$ = jQuery;
 
 $(document).ready(function() {
     var delay = 5000
-    $('.js-timer').each((i, obj) => {
+    $($('.js-timer').get().reverse()).each((i, obj) => {
         closeMessage(obj,delay);
         delay += 4000;
     });

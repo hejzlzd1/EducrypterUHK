@@ -16,6 +16,11 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', [MainPageController::class,"index"])->name("mainPage");
 Route::get('language/{locale}', function ($locale) {
+    if($locale == "cz"){
+        Session::flash("alert-success", "Úspěšně jsi změnil jazyk na češtinu");
+    }else{
+        Session::flash("alert-success", "You have successfully changed your language to english");
+    }
     app()->setLocale($locale);
     session()->put('locale', $locale);
     return redirect()->back();
