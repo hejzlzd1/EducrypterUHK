@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Controllers\CaesarCipher;
+use App\Http\Controllers\CaesarCipherController;
 use App\Http\Controllers\MainPageController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Session;
@@ -29,5 +29,5 @@ Route::get('language/{locale}', function ($locale) {
     session()->put('locale', $locale);
     return redirect()->back();
 })->name("changeLang");
-Route::get("caesarCipher",[CaesarCipher::class,"index"])->name("caesarCipher");
-Route::post("caesarCipher",[CaesarCipher::class,"index"])->name("caesarCipherCompute");
+Route::get("caesarCipher",[CaesarCipherController::class,"index"])->name("caesarCipher");
+Route::post("caesarCipher",[CaesarCipherController::class,"compute"])->name("caesarCipherCompute");
