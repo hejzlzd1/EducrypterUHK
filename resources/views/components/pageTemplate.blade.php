@@ -18,6 +18,14 @@
     @include("components/flashMessage")
 
     @yield("content")
+
+        <div>
+        @if(App::getLocale() == "cz")
+            <a href="{{route("changeLang", ['locale' => "en"])}}" class="back-to-top d-flex align-items-center justify-content-center"><img width="40px" src="{{asset("/img/en.png")}}" /></a>
+        @else
+            <a href="{{route("changeLang", ['locale' => "cz"])}}" class="back-to-top d-flex align-items-center justify-content-center"><img width="40px" src="{{asset("/img/cz.png")}}" /></a>
+        @endif
+        </div>
     </div>
     </body>
 
