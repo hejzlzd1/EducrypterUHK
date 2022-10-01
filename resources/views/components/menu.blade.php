@@ -15,14 +15,14 @@
                         @lang("menuTexts.mainPage")
                     </a>
                     <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="#">@lang("menuTexts.introInfo")</a></li>
-                        <li><a class="dropdown-item" href="#">@lang("menuTexts.symetricAlgo")</a></li>
-                        <li><a class="dropdown-item" href="#">@lang("menuTexts.asymetricAlgo")</a></li>
-                        <li><a class="dropdown-item" href="#">@lang("menuTexts.cryptoUsage")</a></li>
+                        <li><a class="dropdown-item" href="/#intro">@lang("menuTexts.introInfo")</a></li>
+                        <li><a class="dropdown-item" href="/#symetric">@lang("menuTexts.symetricAlgo")</a></li>
+                        <li><a class="dropdown-item" href="/#asymetric">@lang("menuTexts.asymetricAlgo")</a></li>
+                        <li><a class="dropdown-item" href="/#usage">@lang("menuTexts.cryptoUsage")</a></li>
                         <li><hr class="dropdown-divider"></li>
-                        <li><a class="dropdown-item" href="#">@lang("menuTexts.protocols")</a></li>
-                        <li><a class="dropdown-item" href="#">SSL vs TLS</a></li>
-                        <li><a class="dropdown-item" href="#">@lang("menuTexts.tscertificates")</a></li>
+                        <li><a class="dropdown-item" href="/#protocols">@lang("menuTexts.protocols")</a></li>
+                        <li><a class="dropdown-item" href="/#sslvstls">SSL vs TLS</a></li>
+                        <li><a class="dropdown-item" href="/#certificates">@lang("menuTexts.tscertificates")</a></li>
                     </ul>
                 </li>
                 <li class="nav-item dropdown">
