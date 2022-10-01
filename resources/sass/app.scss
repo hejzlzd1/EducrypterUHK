@@ -165,8 +165,11 @@ $c-purples: #532E62, #8E44AD, #9B59B6;
     color:grey
 }
 
-section{
-
+.anchor{
+    display: block;
+    position: relative;
+    top: -250px;
+    visibility: hidden;
 }
 
 

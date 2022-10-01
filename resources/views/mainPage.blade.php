@@ -4,8 +4,10 @@
 @section("content")
     @include("components/menu")
 
+    <div class="anchor" id="intro"></div>
+
     <section class="m-5">
-        <div id="intro">
+        <div>
             <div class="container shadow-lg border rounded-4 p-5">
                 <div class="row align-items-start">
                     <h1>@lang('mainPageTexts.cryptoInNutshell')</h1>
@@ -22,8 +24,10 @@
         </div>
     </section>
 
+    <div class="anchor" id="symetric"></div>
+
     <section class="m-5">
-        <div id="symetric">
+        <div>
             <div class="container shadow-lg border rounded-4 p-5">
                 <div class="row align-items-start">
                     <h1>@lang('mainPageTexts.symetric')</h1>
@@ -39,8 +43,10 @@
         </div>
     </section>
 
+    <div class="anchor" id="asymetric"></div>
+
     <section class="m-5">
-        <div id="asymetric">
+        <div>
             <div class="container shadow-lg border rounded-4 p-5">
                 <div class="row align-items-start">
                     <h1>@lang('mainPageTexts.asymetric')</h1>
@@ -57,8 +63,10 @@
         </div>
     </section>
 
+    <div class="anchor" id="usage"></div>
+
     <section class="m-5">
-        <div id="usage">
+        <div>
             <div class="container shadow-lg border rounded-4 p-5">
                 <div class="row align-items-start">
                     <h1>@lang('mainPageTexts.usage')</h1>
@@ -74,8 +82,10 @@
         </div>
     </section>
 
+    <div class="anchor" id="protocols"></div>
+
     <section class="m-5">
-        <div id="protocols">
+        <div>
             <div class="container shadow-lg border rounded-4 p-5">
                 <div class="row align-items-start">
                     <h1>@lang('mainPageTexts.protocols')</h1>
@@ -92,8 +102,10 @@
         </div>
     </section>
 
+    <div class="anchor" id="sslvstls"></div>
+
     <section class="m-5">
-        <div id="sslvstls">
+        <div>
             <div class="container shadow-lg border rounded-4 p-5">
                 <div class="row align-items-start">
                     <h1>SSL vs TLS</h1>
@@ -110,8 +122,10 @@
         </div>
     </section>
 
+    <div class="anchor" id="certificates"></div>
+
     <section class="m-5">
-        <div id="certificates">
+        <div>
             <div class="container shadow-lg border rounded-4 p-5">
                 <div class="row align-items-start">
                     <h1>@lang('mainPageTexts.certificates')</h1>
