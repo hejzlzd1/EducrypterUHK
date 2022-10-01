@@ -1,27 +1,29 @@
 import './bootstrap';
 import jQuery from 'jquery';
+
 window.$ = jQuery;
 
-$(document).ready(function() {
-    var delay = 5000
+$(document).ready(function () {
+    var delay = 10000
     $($('.js-timer').get().reverse()).each((i, obj) => {
-        closeMessage(obj,delay);
-        delay += 4000;
+        closeMessage(obj, delay);
+        delay += 5000;
     });
 });
 
 function closeMessage(obj, delay) {
-    setTimeout(()=>{
+    setTimeout(() => {
         $(obj).addClass("is-hidden");
-    },delay)
+    }, delay)
 }
 
-$('.js-messageClose').on('click', function(e) {
+$('.js-messageClose').on('click', function (e) {
     closeMessage($(this).closest('.Message'));
 });
 
-$(".close").click(function() {
+$(".close").click(function () {
     $(this)
         .parent(".alert")
         .fadeOut();
 });
+
