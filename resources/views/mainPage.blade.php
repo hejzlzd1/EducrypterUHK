@@ -64,7 +64,7 @@
                     <h1>@lang('mainPageTexts.usage')</h1>
                     <hr />
                     <div class="col-3 m-auto">
-                        <img width="100%" src="{{asset("img/cryptoInNutshell.jpg")}}" class="rounded-4">
+                        <img width="100%" src="{{asset("img/mainPage/personalInfo.jpg")}}" class="rounded-4">
                     </div>
                     <div class="col-9">
                         <p>@lang('mainPageTexts.usageInfo')</p>
@@ -85,7 +85,7 @@
                     </div>
 
                     <div class="col-3 m-auto">
-                        <img width="100%" src="{{asset("img/cryptoInNutshell.jpg")}}" class="rounded-4">
+                        <img width="100%" src="{{asset("img/mainPage/protocols.webp")}}" class="rounded-4">
                     </div>
                 </div>
             </div>
@@ -98,10 +98,11 @@
                 <div class="row align-items-start">
                     <h1>SSL vs TLS</h1>
                     <hr />
-                    <div class="col-3 m-auto">
-                        <img width="100%" src="{{asset("img/cryptoInNutshell.jpg")}}" class="rounded-4">
+                    <div class="col-4 m-auto">
+                        <img width="100%" src="{{asset("img/mainPage/handshake.png")}}" class="rounded-4">
+                        <figure class="text-center">Handshake</figure>
                     </div>
-                    <div class="col-9">
+                    <div class="col-8">
                         <p>@lang('mainPageTexts.sslvstlsInfo')</p>
                     </div>
                 </div>
@@ -120,7 +121,7 @@
                     </div>
 
                     <div class="col-3 m-auto">
-                        <img width="100%" src="{{asset("img/cryptoInNutshell.jpg")}}" class="rounded-4">
+                        <img width="100%" src="{{asset("img/mainPage/sslcert.webp")}}" class="rounded-4">
                     </div>
                 </div>
             </div>
