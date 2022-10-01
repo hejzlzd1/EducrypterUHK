@@ -39,12 +39,12 @@
                         <fieldset class="row">
                             <div class="col-lg-6">
                                 <label class="form-label" for="text">@lang('baseTexts.text')</label>
-                                <input class="form-control" type="text" id="text" name="text"
+                                <input class="form-control" maxlength="40" minlength="1" required type="text" id="text" name="text"
                                        placeholder="@lang('baseTexts.inputText')">
                             </div>
                             <div class="col-lg-6">
                                 <label class="form-label" for="shift">@lang('baseTexts.shift')</label>
-                                <input class="form-control" type="number" id="shift" name="shift" value=0>
+                                <input class="form-control" min="0" type="number" id="shift" name="shift" value=0>
                             </div>
                         </fieldset>
                         <div>
@@ -102,18 +102,50 @@
 
                 //steps
                 <div>
-                    <h1>Tabulka abecedy</h1>
-                    <table class="table">
+                    <h1>@lang('caesarPageTexts.alphabetTable')</h1>
+                    <div class="table-responsive-lg">
+                    <table class="table table-bordered">
                         <tr>
-                            Původní
                             @foreach(range('A','Z') as $char)
                                 <td class="">{{$char}}</td>
                             @endforeach
-                            @for($i = 0; $i <=26; $i++)
-
-                            @endfor
+                        </tr>
+                        <tr>
+                            @foreach(range('A','Z') as $char)
+                                <td class=""><i class="fa-solid fa-arrow-down-long"></i></td>
+                            @endforeach
+                        </tr>
+                        <tr>
+                            @foreach($data["shiftedAlphabet"] as $char)
+                                <td class=""><b>{{$char}}</b></td>
+                            @endforeach
                         </tr>
                     </table>
+                </div>
+                </div>
+
+                <div>
+                    <h1>@lang('caesarPageTexts.algorithmSteps')</h1>
+                    <div id="carouselCaesarSteps" class="carousel slide" data-bs-ride="carousel">
+                        <div class="carousel-inner">
+                            @for($i = 0 ; $i < strlen($data["text"]); $i++)
+                                <div class="carousel-item @if($i == 0) active @endif">
+                                    <div>
+                                        //{{//$data["text"][$i]}} = {{//$data["finalText"][$i]}}
+                                    </div>
+                                </div>
+                            @endfor
+
+                        </div>
+                        <div class="carousel-indicators row">
+                            <button type="button" data-bs-target="#carouselCaesarSteps" data-bs-slide-to="0"
+                                    class="active bg-black" aria-current="true"></button>
+                            @for($i = 1 ; $i < strlen($data["text"]); $i++)
+                                <button type="button" class="bg-black" data-bs-target="#carouselCaesarSteps"
+                                        data-bs-slide-to="{{$i}}"></button>
+                            @endfor
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>

@@ -7,5 +7,6 @@ return [
                     <br/><br/>Toto šifrování je pojmenováno podle Julia Caesara, který ji využíval ve své osobní korespondenci. V reálném prostředí se již nepoužívá samostatně, jelikož poskytuje slabé zabezpečení - je lehce prolomitelná.
                     <br/><br/>Jednoduchost prolomení je zapříčiněno omezeným počtem klíčů (počtem posunutí). Existuje 26 možných klíčů pro dešifraci. Pomocí hrubé síly se takto šifrovaný text velice jednoduše dešifruje.",
     "alphabetShift" => "Posunutí abecedy",
-    "cipherForm" => "Zkušební formulář"
+    "cipherForm" => "Zkušební formulář",
+    "alphabetTable" => "Abecední tabulka"
 ];

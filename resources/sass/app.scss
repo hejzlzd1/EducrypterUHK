@@ -4,7 +4,7 @@
 // Variables
 @import 'variables';
 
-@import url(https://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css);
+@import url("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css");
 
 // Bootstrap
 @import 'bootstrap/scss/bootstrap';
@@ -172,4 +172,12 @@ $c-purples: #532E62, #8E44AD, #9B59B6;
     visibility: hidden;
 }
 
+.carousel-indicators{
+    position: relative;
+}
 
+.carousel-indicators [data-bs-target]{
+    width: 10px;
+    height: 10px;
+    border-radius: 100%;
+}
