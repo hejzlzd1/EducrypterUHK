@@ -33,7 +33,7 @@
                     <h1>@lang('mainPageTexts.symetric')</h1>
                     <hr />
                     <div class="col-4 m-auto">
-                        <img width="100%" src="{{asset("img/mainPage/symetric_".App::getLocale().".png")}}" class="rounded-4">
+                        <a href="{{"img/mainPage/symetric_".App::getLocale().".png"}}" target="_blank"><img width="100%" src="{{asset("img/mainPage/symetric_".App::getLocale().".png")}}" class="rounded-4"></a>
                     </div>
                     <div class="col-8">
                         <p>@lang('mainPageTexts.symetricInfo')</p>
@@ -56,7 +56,7 @@
                     </div>
 
                     <div class="col-4 m-auto">
-                        <img width="100%" src="{{asset("img/mainPage/asymetric_".App::getLocale().".png")}}" class="rounded-4">
+                        <a href="{{"img/mainPage/asymetric_".App::getLocale().".png"}}" target="_blank"><img width="100%" src="{{asset("img/mainPage/asymetric_".App::getLocale().".png")}}" class="rounded-4"></a>
                     </div>
                 </div>
             </div>
@@ -111,7 +111,7 @@
                     <h1>SSL vs TLS</h1>
                     <hr />
                     <div class="col-4 m-auto">
-                        <img width="100%" src="{{asset("img/mainPage/handshake.png")}}" class="rounded-4">
+                        <a href="img/mainPage/handshake.png" target="_blank"><img width="100%" src="{{asset("img/mainPage/handshake.png")}}" class="rounded-4"></a>
                         <figure class="text-center">Handshake</figure>
                     </div>
                     <div class="col-8">
