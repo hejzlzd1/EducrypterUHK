@@ -91,25 +91,28 @@
 
     @if(isset($data))
         <section class="m-5">
-            <div class="container shadow-lg border rounded-4 p-5">
+            <div class="container text-break shadow-lg border rounded-4 p-5">
                 @if($data["action"] != "bruteforce")
                 <h1 class="text-center">@lang('baseTexts.cipherResult')</h1>
                 <hr/>
-                <div class="row">
-                    <div class="col-lg-6">
+                <div class="row align-items-start">
+                    <div class="col-lg-5">
                         <h4>@lang('baseTexts.insertedText')</h4>
                         <p>{{$data["text"]}}</p>
                     </div>
-                    <div class="col-lg-6">
+                    <div class="col-lg-5">
                         <h4>@lang('baseTexts.shift')</h4>
                         <p>{{$data["shift"]}}</p>
                     </div>
                 </div>
-
+                <div class="row align-items-start">
+                    <div class="col">
                 @if(isset($data["finalText"]))
                     <h4>@lang('baseTexts.outputText')</h4>
                     <p>{{$data["finalText"]}}</p>
                 @endif
+                    </div>
+                </div>
 
                     <hr />
 
@@ -165,23 +168,23 @@
                             @endfor
 
                         </div>
-                        <div class="carousel-indicators row">
-                            <button class="carousel-control-prev" type="button" data-bs-target="#carouselCaesarSteps" data-bs-slide="prev">
-                                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                                <span class="visually-hidden">Previous</span>
-                            </button>
-
+                        <div class="carousel-indicators mt-3 row">
                             <button type="button" data-bs-target="#carouselCaesarSteps" data-bs-slide-to="0"
                                     class="active bg-black" aria-current="true"></button>
                             @for($i = 1 ; $i < strlen($data["text"]); $i++)
                                 <button type="button" class="bg-black" data-bs-target="#carouselCaesarSteps"
                                         data-bs-slide-to="{{$i}}"></button>
                             @endfor
-
-                            <button class="carousel-control-next" type="button" data-bs-target="#carouselCaesarSteps" data-bs-slide="next">
-                                <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                                <span class="visually-hidden">Next</span>
-                            </button>
+                        </div>
+                        <div class="row justify-content-center">
+                        <button class="carousel-control-prev" style="position: relative" type="button" data-bs-target="#carouselCaesarSteps" data-bs-slide="prev">
+                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Previous</span>
+                        </button>
+                        <button class="carousel-control-next" style="position: relative" type="button" data-bs-target="#carouselCaesarSteps" data-bs-slide="next">
+                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Next</span>
+                        </button>
                         </div>
                     </div>
                 </div>

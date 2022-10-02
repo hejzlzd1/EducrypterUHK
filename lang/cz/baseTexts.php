@@ -7,7 +7,7 @@ return [
     "bruteforce" => "Dešifrovat hrubou silou",
     "action" => "Prováděná akce:",
     "text" => "Text pro šifrování/dešifrování",
-    "shift" => "Počet znaků k posunutí",
+    "shift" => "Počet posunutí",
     "inputText" => "Zadej text, který chceš šifrovat/dešifrovat",
     "insertedText" => "Vložený text:",
     "cipherResult" => "Výsledky formuláře",
