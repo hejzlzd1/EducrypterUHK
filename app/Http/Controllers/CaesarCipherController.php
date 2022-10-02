@@ -11,12 +11,12 @@ use Illuminate\Support\Facades\View;
 
 class CaesarCipherController extends BaseController
 {
-    public function index()
+    public function index(): Factory|\Illuminate\Contracts\View\View|Application
     {
         return view("caesarCipher");
     }
 
-    public function compute(Request $request)
+    public function compute(Request $request): \Illuminate\Contracts\View\View
     {
         $timerStart = microtime(true);
         $data = $request->all();
@@ -35,7 +35,8 @@ class CaesarCipherController extends BaseController
         return View::make('caesarCipher')->with('data', $data);
     }
 
-    function rotateAlphabet($key){
+    function rotateAlphabet($key): array
+    {
         $alphabet = [];
         foreach (range("A","Z") as $char){
             $alphabet[] = $char;
@@ -47,7 +48,8 @@ class CaesarCipherController extends BaseController
         return $alphabet;
     }
 
-    function bruteForce($textToDecrypt){
+    function bruteForce($textToDecrypt): array
+    {
         $bruteForceResults = [];
         for($i = 0; $i < 26; $i++){
             $bruteForceResults[] = $this->performCaesar($textToDecrypt, $i, "decrypt");
@@ -55,7 +57,7 @@ class CaesarCipherController extends BaseController
         return $bruteForceResults;
     }
 
-    function normalize($string)
+    function normalize($string): string
     {
         $table = array(
             'Š' => 'S', 'š' => 's', 'Đ' => 'Dj', 'đ' => 'dj', 'Ž' => 'Z', 'ž' => 'z', 'Č' => 'C', 'č' => 'c', 'Ć' => 'C', 'ć' => 'c',
@@ -71,7 +73,7 @@ class CaesarCipherController extends BaseController
         return strtr($string, $table);
     }
 
-    function performCaesar($text, $s,$type)
+    function performCaesar($text, $s,$type): string
     {
         $result = "";
 

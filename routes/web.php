@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\CaesarCipherController;
 use App\Http\Controllers\MainPageController;
+use App\Http\Controllers\VigenereCipherController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Session;
 
@@ -31,3 +32,6 @@ Route::get('language/{locale}', function ($locale) {
 })->name("changeLang");
 Route::get("caesarCipher",[CaesarCipherController::class,"index"])->name("caesarCipher");
 Route::post("caesarCipher",[CaesarCipherController::class,"compute"])->name("caesarCipherCompute");
+
+Route::get("vigenereCipher",[VigenereCipherController::class,"index"])->name("vigenereCipher");
+Route::post("vigenereCipher",[VigenereCipherController::class,"compute"])->name("vigenereCipherCompute");
