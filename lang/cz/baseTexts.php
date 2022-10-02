@@ -4,7 +4,7 @@ return [
     "cipherForm" => "Zkušební formulář",
     "encrypt" => "Šifrovat",
     "decrypt" => "Dešifrovat",
-    "bruteforce" => "Dešifrovat hrubou sílou",
+    "bruteforce" => "Dešifrovat hrubou silou",
     "action" => "Prováděná akce:",
     "text" => "Text pro šifrování/dešifrování",
     "shift" => "Počet znaků k posunutí",
@@ -12,5 +12,8 @@ return [
     "insertedText" => "Vložený text:",
     "cipherResult" => "Výsledky formuláře",
     "outputText" => "Výsledek funkce",
-
+    "stepNum" => "Krok č.",
+    "actualResult" => "Aktuální výsledek funkce:",
+    "bruteForceResult" => "Výsledky hrubé síly",
+    "actionTook" => "Akce trvala ",
 ];

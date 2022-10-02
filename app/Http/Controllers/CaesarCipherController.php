@@ -6,6 +6,7 @@ use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller as BaseController;
+use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\View;
 
 class CaesarCipherController extends BaseController
@@ -17,28 +18,41 @@ class CaesarCipherController extends BaseController
 
     public function compute(Request $request)
     {
+        $timerStart = microtime(true);
         $data = $request->all();
         $data["text"] = $this->normalize($data["text"]);
 
+        if($data["action"] != "bruteforce"){
+            $data["finalText"] = $this->performCaesar($data["text"],$data["shift"],$data["action"]);
+            $data["shiftedAlphabet"] = $this->rotateAlphabet($request->input("shift"));
+        }else{
+            $data["bruteForceResult"] = $this->bruteForce($data["text"]);
+            $data["shift"] = 0;
+        }
 
-        $data["finalText"] = $data["text"]; // TODO: perform encryption
-
-
-        $data["shiftedAlphabet"] = $this->rotateAlphabet($request->input("shift"));
-
+        $time_elapsed_secs = microtime(true) - $timerStart;
+        Session::flash("alert-info",trans("baseTexts.actionTook") . " ".$time_elapsed_secs . " s");
         return View::make('caesarCipher')->with('data', $data);
     }
 
     function rotateAlphabet($key){
         $alphabet = [];
         foreach (range("A","Z") as $char){
-            array_push($alphabet,$char);
+            $alphabet[] = $char;
         }
         for ($i = 0; $i < $key; $i++) {
              $temp = array_shift($alphabet);
-             array_push($alphabet,$temp);
+             $alphabet[] = $temp;
         }
         return $alphabet;
+    }
+
+    function bruteForce($textToDecrypt){
+        $bruteForceResults = [];
+        for($i = 0; $i < 26; $i++){
+            $bruteForceResults[] = $this->performCaesar($textToDecrypt, $i, "decrypt");
+        }
+        return $bruteForceResults;
     }
 
     function normalize($string)
@@ -55,5 +69,34 @@ class CaesarCipherController extends BaseController
         );
 
         return strtr($string, $table);
+    }
+
+    function performCaesar($text, $s,$type)
+    {
+        $result = "";
+
+        if($type =="decrypt") $s = 26-$s;
+
+        // traverse text
+        for ($i = 0; $i < strlen($text); $i++)
+        {
+            if($text[$i] != " "){
+            // apply transformation to each
+            // character Encrypt Uppercase letters
+            if (ctype_upper($text[$i]))
+                $result = $result.chr((ord($text[$i]) +
+                            $s - 65) % 26 + 65);
+
+            // Encrypt Lowercase letters
+            else
+                $result = $result.chr((ord($text[$i]) +
+                            $s - 97) % 26 + 97);
+            }else{
+                $result = $result.chr(32);
+            }
+        }
+
+        // Return the resulting string
+        return $result;
     }
 }

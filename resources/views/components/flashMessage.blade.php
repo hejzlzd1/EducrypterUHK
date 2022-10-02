@@ -8,7 +8,7 @@
                     <i class="fa fa-times"></i>
                     @break
                     @case ("info")
-                    <i class="fa fa-bell-o"></i>
+                    <i class="fa fa-bell"></i>
                     @break
                     @case ("warning")
                     <i class="fa fa-exclamation"></i>

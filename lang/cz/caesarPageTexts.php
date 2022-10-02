@@ -8,5 +8,6 @@ return [
                     <br/><br/>Jednoduchost prolomení je zapříčiněno omezeným počtem klíčů (počtem posunutí). Existuje 26 možných klíčů pro dešifraci. Pomocí hrubé síly se takto šifrovaný text velice jednoduše dešifruje.",
     "alphabetShift" => "Posunutí abecedy",
     "cipherForm" => "Zkušební formulář",
-    "alphabetTable" => "Abecední tabulka"
+    "alphabetTable" => "Abecední tabulka",
+    "algorithmSteps" => "Postup algoritmu"
 ];

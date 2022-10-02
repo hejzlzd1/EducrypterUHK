@@ -13,4 +13,8 @@ return [
     "insertedText" => "Input text:",
     "cipherResult" => "Result of form",
     "outputText" => "Result of action:",
+    "stepNum" => "Step",
+    "actualResult" => "Result for this step:",
+    "bruteForceResult" => "Result set of brute force",
+    "actionTook" => "Action took ",
 ];
