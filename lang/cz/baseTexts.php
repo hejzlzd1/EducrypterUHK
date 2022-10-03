@@ -6,7 +6,7 @@ return [
     "decrypt" => "Dešifrovat",
     "bruteforce" => "Dešifrovat hrubou silou",
     "action" => "Prováděná akce:",
-    "text" => "Text pro šifrování/dešifrování",
+    "text" => "Text pro šifrování / dešifrování",
     "shift" => "Počet posunutí",
     "inputText" => "Zadej text, který chceš šifrovat/dešifrovat",
     "insertedText" => "Vložený text:",
@@ -16,4 +16,7 @@ return [
     "actualResult" => "Aktuální výsledek funkce:",
     "bruteForceResult" => "Výsledky hrubé síly",
     "actionTook" => "Akce trvala ",
+    "key" => "Šifrovací / dešifrovací klíč",
+    "insertKey" => "Vlož šifrovací / dešifrovací klíč",
+
 ];

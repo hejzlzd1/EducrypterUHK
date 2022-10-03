@@ -16,7 +16,7 @@
     <body>
     <div id="wrapper">
     @include("components/flashMessage")
-
+        @include("components/menu")
     @yield("content")
 
         <div>

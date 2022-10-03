@@ -2,7 +2,7 @@
 @section("title",__("mainPageTexts.mainPageTitle"))
 @section("comment",__('mainPageTexts.metaComment'))
 @section("content")
-    @include("components/menu")
+
 
     <div class="anchor" id="intro"></div>
 

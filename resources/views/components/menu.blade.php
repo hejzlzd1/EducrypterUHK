@@ -31,7 +31,7 @@
                     </a>
                     <ul class="dropdown-menu">
                         <li><a class="dropdown-item" href="{{route("caesarCipher")}}">@lang("menuTexts.caesarCipher")</a></li>
-                        <li><a class="dropdown-item" href="#">@lang("menuTexts.vigenereCipher")</a></li>
+                        <li><a class="dropdown-item" href="{{route("vigenereCipher")}}">@lang("menuTexts.vigenereCipher")</a></li>
                         <li><a class="dropdown-item" href="#">Blowfish</a></li>
                         <li><a class="dropdown-item" href="#">DES</a></li>
                         <li><a class="dropdown-item" href="#">AES</a></li>

@@ -2,7 +2,7 @@
 @section("title",__('caesarPageTexts.title'))
 @section("comment",__('caesarPageTexts.metaComment'))
 @section("content")
-    @include("components/menu")
+
 
     <div class="anchor" id="info"></div>
 
