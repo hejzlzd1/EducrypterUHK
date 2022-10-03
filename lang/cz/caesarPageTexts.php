@@ -9,5 +9,4 @@ return [
     "alphabetShift" => "Posunutí abecedy",
     "cipherForm" => "Zkušební formulář",
     "alphabetTable" => "Abecední tabulka",
-    "algorithmSteps" => "Postup algoritmu"
 ];

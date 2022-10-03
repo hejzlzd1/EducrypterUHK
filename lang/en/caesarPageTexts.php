@@ -8,5 +8,5 @@ return [
                     <br/><br/>The ease of cracking is due to the limited number of keys (number of shifts). There are 26 possible keys for decryption. Using bruteforce, the ciphertext is very easy to decrypt.",
     "alphabetShift" => "Shifted alphabet",
     "alphabetTable" => "Alphabet table",
-    "algorithmSteps" => "Algorithm steps"
+
     ];

@@ -19,4 +19,8 @@ return [
     "actionTook" => "Action took ",
     "key" => "Encryption / decryption key",
     "insertKey" => "Enter encryption / decryption key",
+    "algorithmSteps" => "Algorithm steps",
+    "column" => "column",
+    "row" => "row",
+    "formatedKey"=> "Formated key",
 ];

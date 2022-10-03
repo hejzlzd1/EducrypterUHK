@@ -18,5 +18,7 @@ return [
     "actionTook" => "Akce trvala ",
     "key" => "Šifrovací / dešifrovací klíč",
     "insertKey" => "Vlož šifrovací / dešifrovací klíč",
-
+    "algorithmSteps" => "Postup algoritmu",
+    "column" => "sloupec",
+    "row" => "řádek",
 ];

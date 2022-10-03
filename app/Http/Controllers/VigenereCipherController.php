@@ -20,10 +20,11 @@ class VigenereCipherController extends BaseController
         $data = $request->all();
 
         $data["action"] == "encrypt" ? $encrypt = true : $encrypt = false;
-        $data["finalText"] = $this->vigenere($this->normalize($data["text"]),$data["key"],$encrypt);
+        $data["finalText"] = $this->vigenere($this->normalize($data["text"]), $data["key"], $encrypt);
+        $data["formatedKey"] = $this->formatKey($data["text"], $data["key"]);
 
         $time_elapsed_secs = microtime(true) - $timerStart;
-        Session::flash("alert-info",trans("baseTexts.actionTook") . " ".$time_elapsed_secs . " s");
+        Session::flash("alert-info", trans("baseTexts.actionTook") . " " . $time_elapsed_secs . " s");
         return View::make('vigenereCipher')->with('data', $data);
     }
 
@@ -70,10 +71,8 @@ class VigenereCipherController extends BaseController
         $nonAlphaCharCount = 0;
         $inputLen = strlen($input);
 
-        for ($i = 0; $i < $inputLen; ++$i)
-        {
-            if (ctype_alpha($input[$i]))
-            {
+        for ($i = 0; $i < $inputLen; ++$i) {
+            if (ctype_alpha($input[$i])) {
                 $cIsUpper = ctype_upper($input[$i]);
                 $offset = ord($cIsUpper ? 'A' : 'a');
                 $keyIndex = ($i - $nonAlphaCharCount) % $keyLen;
@@ -81,14 +80,23 @@ class VigenereCipherController extends BaseController
                 $k = $encipher ? $k : -$k;
                 $ch = chr(($this->mod(((ord($input[$i]) + $k) - $offset), 26)) + $offset);
                 $output .= $ch;
-            }
-            else
-            {
+            } else {
                 $output .= $input[$i];
                 ++$nonAlphaCharCount;
             }
         }
 
         return $output;
+    }
+
+    private function formatKey($text, $key)
+    {
+        $keyLen = strlen($key);
+        for ($i = 0; $i < $keyLen; ++$i) {
+            if (!ctype_alpha($key[$i]))
+                return ""; // Error
+        }
+        if (strlen($key) >= strlen($text)) $key = substr($key, 0, strlen($text));
+        return str_pad($key, strlen($text), $key);
     }
 }
