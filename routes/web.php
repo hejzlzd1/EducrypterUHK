@@ -17,7 +17,10 @@ use Illuminate\Support\Facades\Session;
 |
 */
 
+//main page
 Route::get('/', [MainPageController::class,"index"])->name("mainPage");
+
+//language swap
 Route::get('language/{locale}', function ($locale) {
     if($locale == "cz"){
         Session::flash("alert-success", "Úspěšně jsi změnil jazyk na češtinu");
@@ -30,8 +33,34 @@ Route::get('language/{locale}', function ($locale) {
     session()->put('locale', $locale);
     return redirect()->back();
 })->name("changeLang");
+
+//caesarCipher
 Route::get("caesarCipher",[CaesarCipherController::class,"index"])->name("caesarCipher");
 Route::post("caesarCipher",[CaesarCipherController::class,"compute"])->name("caesarCipherCompute");
 
+//vigenereCipher
 Route::get("vigenereCipher",[VigenereCipherController::class,"index"])->name("vigenereCipher");
 Route::post("vigenereCipher",[VigenereCipherController::class,"compute"])->name("vigenereCipherCompute");
+
+Route::get('blowfish', function () {
+        Session::flash("alert-warning", trans("baseTexts.notReady"));
+    return redirect()->back();
+})->name("blowfishCipher");
+
+
+Route::get('des', function () {
+    Session::flash("alert-warning", trans("baseTexts.notReady"));
+    return redirect()->back();
+})->name("desCipher");
+
+
+Route::get('aes',function() {
+    Session::flash("alert-warning", trans("baseTexts.notReady"));
+    return redirect()->back();
+})->name("aesCipher");
+
+
+Route::get('rsa', function () {
+    Session::flash("alert-warning", trans("baseTexts.notReady"));
+    return redirect()->back();
+})->name("rsaCipher");

@@ -23,4 +23,6 @@ return [
     "column" => "column",
     "row" => "row",
     "formatedKey"=> "Formated key",
+
+    "notReady" => "This function is not ready yet.",
 ];

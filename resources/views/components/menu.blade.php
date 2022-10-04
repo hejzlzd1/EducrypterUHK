@@ -32,9 +32,9 @@
                     <ul class="dropdown-menu">
                         <li><a class="dropdown-item" href="{{route("caesarCipher")}}">@lang("menuTexts.caesarCipher")</a></li>
                         <li><a class="dropdown-item" href="{{route("vigenereCipher")}}">@lang("menuTexts.vigenereCipher")</a></li>
-                        <li><a class="dropdown-item" href="#">Blowfish</a></li>
-                        <li><a class="dropdown-item" href="#">DES</a></li>
-                        <li><a class="dropdown-item" href="#">AES</a></li>
+                        <li><a class="dropdown-item" href="{{route("blowfishCipher")}}">Blowfish</a></li>
+                        <li><a class="dropdown-item" href="{{route("desCipher")}}">DES</a></li>
+                        <li><a class="dropdown-item" href="{{route("aesCipher")}}">AES</a></li>
                     </ul>
                 </li>
 
@@ -43,11 +43,9 @@
                         @lang("menuTexts.asymetricAlgo")
                     </a>
                     <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="#">RSA</a></li>
+                        <li><a class="dropdown-item" href="{{route("rsaCipher")}}">RSA</a></li>
                     </ul>
                 </li>
-                <li class="nav-item"><a class="nav-link" href="#">TODO</a></li>
-                <li class="nav-item"><a class="nav-link" href="#">TODO</a></li>
             </ul>
             <i class="bi bi-list mobile-nav-toggle"></i>
         </div><!-- .navbar -->

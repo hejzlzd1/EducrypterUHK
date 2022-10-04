@@ -21,4 +21,6 @@ return [
     "algorithmSteps" => "Postup algoritmu",
     "column" => "sloupec",
     "row" => "řádek",
+
+    "notReady" => "Tato funkce není zatím připravena.",
 ];
