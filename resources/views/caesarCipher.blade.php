@@ -154,7 +154,7 @@
                 <hr />
 
                 <div class="mt-4">
-                    <h1>@lang('caesarPageTexts.algorithmSteps')</h1>
+                    <h1>@lang('baseTexts.algorithmSteps')</h1>
                     <div id="carouselCaesarSteps" class="carousel slide" data-bs-ride="carousel">
                         <div class="carousel-inner">
                             @for($i = 0 ; $i < strlen($data["text"]); $i++)
