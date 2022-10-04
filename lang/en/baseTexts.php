@@ -23,6 +23,7 @@ return [
     "column" => "column",
     "row" => "row",
     "formatedKey"=> "Formated key",
+    "textInputOnly" => "This field can only contain text (possibly spaces)",
 
     "notReady" => "This function is not ready yet.",
 ];

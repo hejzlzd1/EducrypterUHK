@@ -46,7 +46,7 @@
                             <div class="col-lg-6">
                                 <label class="form-label" for="key">@lang('baseTexts.key')</label>
                                 <input class="form-control" maxlength="30" type="text" id="key" name="key"
-                                       placeholder="@lang('baseTexts.insertKey')"
+                                       placeholder="@lang('baseTexts.insertKey')" pattern="^[a-zA-Z ]*$" title="@lang("baseTexts.textInputOnly")"
                                        @if(isset($data["key"]))value="{{$data["key"]}}" @else value="" @endif>
                             </div>
                         </fieldset>
@@ -56,13 +56,13 @@
                                 <br/>
                                 <div class="form-check form-switch">
                                     <label class="form-check-label" for="encrypt">@lang('baseTexts.encrypt')</label>
-                                    <input class="form-check-input" onclick="flipShiftInput()" required type="radio"
+                                    <input class="form-check-input" required type="radio"
                                            id="encrypt" name="action"
                                            value="encrypt">
                                 </div>
                                 <div class="form-check form-switch">
                                     <label class="form-check-label" for="decrypt">@lang('baseTexts.decrypt')</label>
-                                    <input class="form-check-input" onclick="flipShiftInput()" required type="radio"
+                                    <input class="form-check-input" required type="radio"
                                            id="decrypt" name="action"
                                            value="decrypt">
                                 </div>

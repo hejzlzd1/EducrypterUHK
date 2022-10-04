@@ -21,6 +21,7 @@ return [
     "algorithmSteps" => "Postup algoritmu",
     "column" => "sloupec",
     "row" => "řádek",
+    "textInputOnly" => "Toto pole může obsahovat pouze text (případně mezery)",
 
     "notReady" => "Tato funkce není zatím připravena.",
 ];

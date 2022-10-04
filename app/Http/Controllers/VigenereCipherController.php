@@ -8,7 +8,6 @@ use Illuminate\Http\Request;
 use Illuminate\Routing\Controller as BaseController;
 use Illuminate\Routing\Redirector;
 use Illuminate\Support\Facades\Session;
-use Illuminate\Support\Facades\View;
 
 class VigenereCipherController extends BaseController
 {

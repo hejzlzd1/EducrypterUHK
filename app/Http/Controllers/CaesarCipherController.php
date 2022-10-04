@@ -4,16 +4,16 @@ namespace App\Http\Controllers;
 
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
+use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller as BaseController;
 use Illuminate\Routing\Redirector;
 use Illuminate\Support\Facades\Session;
-use Illuminate\Support\Facades\View;
 
 class CaesarCipherController extends BaseController
 {
-    public function index(): Factory|\Illuminate\Contracts\View\View|Application
+    public function index(): Factory|View|Application
     {
         if(Session::exists("data")) return view("caesarCipher")->with(["data" => Session::get("data")]);
         return view("caesarCipher");
