@@ -4,8 +4,10 @@ namespace App\Http\Controllers;
 
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller as BaseController;
+use Illuminate\Routing\Redirector;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\View;
 
@@ -13,10 +15,11 @@ class CaesarCipherController extends BaseController
 {
     public function index(): Factory|\Illuminate\Contracts\View\View|Application
     {
+        if(Session::exists("data")) return view("caesarCipher")->with(["data" => Session::get("data")]);
         return view("caesarCipher");
     }
 
-    public function compute(Request $request): \Illuminate\Contracts\View\View
+    public function compute(Request $request): Application|RedirectResponse|Redirector
     {
         $timerStart = microtime(true);
         $data = $request->all();
@@ -32,7 +35,8 @@ class CaesarCipherController extends BaseController
 
         $time_elapsed_secs = microtime(true) - $timerStart;
         Session::flash("alert-info",trans("baseTexts.actionTook") . " ".$time_elapsed_secs . " s");
-        return View::make('caesarCipher')->with('data', $data);
+        Session::flash("data",$data);
+        return redirect("caesarCipher");
     }
 
     function rotateAlphabet($key): array

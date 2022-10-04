@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Contracts\Foundation\Application;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller as BaseController;
+use Illuminate\Routing\Redirector;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\View;
 
@@ -11,10 +14,11 @@ class VigenereCipherController extends BaseController
 {
     public function index()
     {
+        if(Session::exists("data")) return view("vigenereCipher")->with(["data" => Session::get("data")]);
         return view("vigenereCipher");
     }
 
-    public function compute(Request $request)
+    public function compute(Request $request): Redirector|Application|RedirectResponse
     {
         $timerStart = microtime(true);
         $data = $request->all();
@@ -25,7 +29,8 @@ class VigenereCipherController extends BaseController
 
         $time_elapsed_secs = microtime(true) - $timerStart;
         Session::flash("alert-info", trans("baseTexts.actionTook") . " " . $time_elapsed_secs . " s");
-        return View::make('vigenereCipher')->with('data', $data);
+        Session::flash("data",$data);
+        return redirect('vigenereCipher');
     }
 
     function normalize($string): string
