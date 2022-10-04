@@ -3,7 +3,7 @@
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
-use Illuminate\Support\Facades\Url;
+use Illuminate\Support\Facades\URL;
 use Illuminate\Support\Facades\Request;
 
 class AppServiceProvider extends ServiceProvider
