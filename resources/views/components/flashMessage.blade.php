@@ -18,7 +18,7 @@
                     @break
                 @endswitch
             </div>
-            <div class="Message-body">
+            <div class="Message-body shadow-lg">
                 <p>{{Session::get('alert-'.$msg)}}</p>
             </div>
             <button class="Message-close js-messageClose"><i class="fa fa-times"></i></button>
