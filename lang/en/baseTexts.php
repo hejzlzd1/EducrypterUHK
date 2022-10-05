@@ -24,6 +24,7 @@ return [
     "row" => "row",
     "formatedKey"=> "Formated key",
     "textInputOnly" => "This field can only contain text (possibly spaces)",
+    "initVector" => "Initialization vector (static for example)",
 
     "notReady" => "This function is not ready yet.",
 ];

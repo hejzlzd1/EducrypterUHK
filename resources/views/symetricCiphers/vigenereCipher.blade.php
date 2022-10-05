@@ -115,7 +115,7 @@
                 <hr/>
                 <div class="mt-4">
                     <h1>@lang('baseTexts.algorithmSteps')</h1>
-                    <div id="carouselCaesarSteps" class="carousel slide" data-bs-ride="carousel">
+                    <div id="carouselVigenereSteps" class="carousel slide" data-bs-ride="carousel">
                         <div class="carousel-inner">
                             @for($i = 0 ; $i < strlen($data["text"]); $i++)
                                 <div class="carousel-item @if($i == 0) active @endif">
@@ -132,21 +132,21 @@
                             @endfor
                         </div>
                         <div class="carousel-indicators mt-3 row">
-                            <button type="button" data-bs-target="#carouselCaesarSteps" data-bs-slide-to="0"
+                            <button type="button" data-bs-target="#carouselVigenereSteps" data-bs-slide-to="0"
                                     class="active bg-black" aria-current="true"></button>
                             @for($i = 1 ; $i < strlen($data["text"]); $i++)
-                                <button type="button" class="bg-black" data-bs-target="#carouselCaesarSteps"
+                                <button type="button" class="bg-black" data-bs-target="#carouselVigenereSteps"
                                         data-bs-slide-to="{{$i}}"></button>
                             @endfor
                         </div>
                         <div class="row justify-content-center">
                             <button class="carousel-control-prev" style="position: relative" type="button"
-                                    data-bs-target="#carouselCaesarSteps" data-bs-slide="prev">
+                                    data-bs-target="#carouselVigenereSteps" data-bs-slide="prev">
                                 <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                                 <span class="visually-hidden">Previous</span>
                             </button>
                             <button class="carousel-control-next" style="position: relative" type="button"
-                                    data-bs-target="#carouselCaesarSteps" data-bs-slide="next">
+                                    data-bs-target="#carouselVigenereSteps" data-bs-slide="next">
                                 <span class="carousel-control-next-icon" aria-hidden="true"></span>
                                 <span class="visually-hidden">Next</span>
                             </button>

@@ -22,6 +22,7 @@ return [
     "column" => "sloupec",
     "row" => "řádek",
     "textInputOnly" => "Toto pole může obsahovat pouze text (případně mezery)",
+    "initVector" => "Inicializační vektor (pro ukázku statický)",
 
     "notReady" => "Tato funkce není zatím připravena.",
 ];
