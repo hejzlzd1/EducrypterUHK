@@ -7,11 +7,11 @@ use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
-use Illuminate\Routing\Controller as BaseController;
+use Illuminate\Routing\Controller;
 use Illuminate\Routing\Redirector;
 use Illuminate\Support\Facades\Session;
 
-class CaesarCipherController extends BaseController
+class CaesarCipherController extends Controller
 {
     public function index(): Factory|View|Application
     {
