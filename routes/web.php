@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AesCipherController;
 use App\Http\Controllers\BlowfishCipherController;
 use App\Http\Controllers\CaesarCipherController;
 use App\Http\Controllers\MainPageController;
@@ -47,19 +48,15 @@ Route::post("vigenereCipher",[VigenereCipherController::class,"compute"])->name(
 Route::get("blowfishCipher",[BlowfishCipherController::class,"index"])->name("blowfishCipher");
 Route::post("blowfishCipher",[BlowfishCipherController::class,"compute"])->name("blowfishCipherCompute");
 
+Route::get("aesCipher",[AesCipherController::class,"index"])->name("aesCipher");
+Route::post("aesCipher",[AesCipherController::class,"compute"])->name("aesCipherCompute");
+
 
 
 Route::get('des', function () {
     Session::flash("alert-warning", trans("baseTexts.notReady"));
     return redirect()->back();
 })->name("desCipher");
-
-
-Route::get('aes',function() {
-    Session::flash("alert-warning", trans("baseTexts.notReady"));
-    return redirect()->back();
-})->name("aesCipher");
-
 
 Route::get('rsa', function () {
     Session::flash("alert-warning", trans("baseTexts.notReady"));

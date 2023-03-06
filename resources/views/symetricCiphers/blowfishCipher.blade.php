@@ -7,8 +7,9 @@
     <div class="anchor" id="info"></div>
 
     <section class="m-5">
+        <div class="shadow-lg border rounded-4 p-5">
         <div>
-            <div class="container shadow-lg border rounded-4 p-5">
+            <div class="container">
                 <div class="row align-items-start">
                     <h1>Blowfish</h1>
                     <hr/>
@@ -17,29 +18,26 @@
                     </div>
 
                     <div class="col-lg-4 m-auto">
-                        <a href="img/blowfishPage/blowfish.png" target="_blank"> <img width="100%"
-                                                                                        src="{{asset("img/blowfishPage/blowfish.png")}}"
+                        <a href="{{asset("img/blowfishPage/blowfish_".App::getLocale().".png")}}" target="_blank"> <img width="100%"
+                                                                                        src="{{asset("img/blowfishPage/blowfish_".App::getLocale().".png")}}"
                                                                                         class="rounded-4"></a>
                         <figure class="text-center">@lang("blowfishPageTexts.blockSchema")</figure>
                     </div>
                 </div>
             </div>
         </div>
-    </section>
-
-
-    <section class="m-5">
-        <div>
-            <div class="container shadow-lg border rounded-4 p-5">
+        <div class="">
+            <div class="container">
                 <div class="row align-items-start">
-                    <h1 class="text-center">@lang('baseTexts.cipherForm')</h1>
+                    <h1 class="">@lang('baseTexts.cipherForm')</h1>
+                    <p class="text-black-50">@lang('baseTexts.formInfoDescription')</p>
                     <hr/>
                     <form action="" method="post">
                         @csrf
                         <fieldset class="row">
                             <div class="col-lg-6">
                                 <label class="form-label" for="text">@lang('baseTexts.text')</label>
-                                <input class="form-control" maxlength="40" minlength="1" required type="text" id="text"
+                                <input class="form-control" minlength="1" required type="text" id="text"
                                        name="text"
                                        placeholder="@lang('baseTexts.inputText')"
                                        @if(isset($data["text"]))value="{{$data["text"]}}"@endif>
@@ -78,11 +76,12 @@
                 </div>
             </div>
         </div>
+        </div>
     </section>
 
     @if(isset($data))
-        <section class="m-5">
-            <div class="container text-break shadow-lg border rounded-4 p-5">
+        <section class="m-5 shadow-lg border rounded-4 p-5">
+            <div class="container text-break">
 
                 <h1 class="text-center">@lang('baseTexts.cipherResult')</h1>
                 <hr/>
@@ -111,39 +110,7 @@
 
                 <div class="mt-4">
                     <h1>@lang('baseTexts.algorithmSteps')</h1>
-                    <div id="carouselBlowfishSteps" class="carousel slide" data-bs-ride="carousel">
-                        <div class="carousel-inner">
-                            @for($i = 0 ; $i < 2; $i++)
-                                <div class="carousel-item @if($i == 0) active @endif">
-                                    <div>
-                                        <h4 class="text-decoration-underline">@lang('baseTexts.stepNum') {{$i+1}}</h4>
-                                        <h5 class="text-black-50 ">TODO</h5>
-                                    </div>
-                                </div>
-                            @endfor
 
-                        </div>
-                        <div class="carousel-indicators mt-3 row">
-                            <button type="button" data-bs-target="#carouselBlowfishSteps" data-bs-slide-to="0"
-                                    class="active bg-black" aria-current="true"></button>
-                            @for($i = 1 ; $i < 2; $i++)
-                                <button type="button" class="bg-black" data-bs-target="#carouselBlowfishSteps"
-                                        data-bs-slide-to="{{$i}}"></button>
-                            @endfor
-                        </div>
-                        <div class="row justify-content-center">
-                            <button class="carousel-control-prev" style="position: relative" type="button"
-                                    data-bs-target="#carouselBlowfishSteps" data-bs-slide="prev">
-                                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                                <span class="visually-hidden">Previous</span>
-                            </button>
-                            <button class="carousel-control-next" style="position: relative" type="button"
-                                    data-bs-target="#carouselBlowfishSteps" data-bs-slide="next">
-                                <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                                <span class="visually-hidden">Next</span>
-                            </button>
-                        </div>
-                    </div>
                 </div>
             </div>
         </section>

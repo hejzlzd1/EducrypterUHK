@@ -7,8 +7,9 @@
     <div class="anchor" id="info"></div>
 
     <section class="m-5">
+        <div class="shadow-lg border rounded-4 p-5">
         <div>
-            <div class="container shadow-lg border rounded-4 p-5">
+            <div class="container ">
                 <div class="row align-items-start">
                     <h1>@lang('menuTexts.caesarCipher')</h1>
                     <hr/>
@@ -25,14 +26,11 @@
                 </div>
             </div>
         </div>
-    </section>
-
-
-    <section class="m-5">
-        <div>
-            <div class="container shadow-lg border rounded-4 p-5">
+        <div class="pt-2">
+            <div class="container">
                 <div class="row align-items-start">
-                    <h1 class="text-center">@lang('baseTexts.cipherForm')</h1>
+                    <h1 class="">@lang('baseTexts.cipherForm')</h1>
+                    <p class="text-black-50">@lang('baseTexts.formInfoDescription')</p>
                     <hr/>
                     <form action="" method="post">
                         @csrf
@@ -43,7 +41,7 @@
                                        placeholder="@lang('baseTexts.inputText')" @if(isset($data["text"]))value="{{$data["text"]}}"@endif>
                             </div>
                             <div class="col-lg-6">
-                                <label class="form-label" for="shift">@lang('baseTexts.shift')</label>
+                                <label class="form-label" for="shift">@lang('baseTexts.shift') - max 26</label>
                                 <input class="form-control" min="0" max="26" type="number" id="shift" name="shift" @if(isset($data["shift"]))value="{{$data["shift"]}}"@else value="0" @endif>
                             </div>
                         </fieldset>
@@ -87,11 +85,12 @@
                 </div>
             </div>
         </div>
+        </div>
     </section>
 
     @if(isset($data))
-        <section class="m-5">
-            <div class="container text-break shadow-lg border rounded-4 p-5">
+        <section class="m-5 shadow-lg border rounded-4 p-5">
+            <div class="container text-break">
                 @if($data["action"] != "bruteforce")
                 <h1 class="text-center">@lang('baseTexts.cipherResult')</h1>
                 <hr/>
@@ -155,39 +154,26 @@
 
                 <div class="mt-4">
                     <h1>@lang('baseTexts.algorithmSteps')</h1>
-                    <div id="carouselCaesarSteps" class="carousel slide" data-bs-ride="carousel">
-                        <div class="carousel-inner">
-                            @for($i = 0 ; $i < strlen($data["text"]); $i++)
-                                <div class="carousel-item @if($i == 0) active @endif">
-                                    <div>
-                                        <h4 class="text-decoration-underline">@lang('baseTexts.stepNum') {{$i+1}}</h4>
-                                        <h5 class="text-black-50 ">{{$data["text"][$i]}} => {{$data["finalText"][$i]}} <br/></h5>
-                                        <div>@lang('baseTexts.actualResult') {{substr($data["finalText"],0,$i)}}<b>{{$data["finalText"][$i]}}</b></div>
+                    <div class="accordion" id="accordion">
+                        @for($i = 0 ; $i < strlen($data["text"]); $i++)
+                            <div class="accordion-item">
+                                <h2 class="accordion-header" id="heading{{$i+1}}">
+                                    <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapse{{$i}}" aria-expanded="true" aria-controls="collapse{{$i}}">
+                                        @lang('baseTexts.stepNum') {{$i+1}}
+                                    </button>
+                                </h2>
+                                <div id="collapse{{$i}}" class="accordion-collapse collapse" aria-labelledby="heading{{$i}}" data-bs-parent="#accordion{{$i}}">
+                                    <div class="accordion-body">
+                                        <h5 class="text-black-50 ">@lang('baseTexts.substitution') {{$data["text"][$i]}} => {{$data["finalText"][$i]}} <br/></h5>
+                                        <div>
+                                            @lang('baseTexts.actualResult')
+                                            {{substr($data["finalText"],0,$i)}}<b>{{$data["finalText"][$i]}}</b>
+                                        </div>
                                     </div>
                                 </div>
-                            @endfor
-
-                        </div>
-                        <div class="carousel-indicators mt-3 row">
-                            <button type="button" data-bs-target="#carouselCaesarSteps" data-bs-slide-to="0"
-                                    class="active bg-black" aria-current="true"></button>
-                            @for($i = 1 ; $i < strlen($data["text"]); $i++)
-                                <button type="button" class="bg-black" data-bs-target="#carouselCaesarSteps"
-                                        data-bs-slide-to="{{$i}}"></button>
-                            @endfor
-                        </div>
-                        <div class="row justify-content-center">
-                        <button class="carousel-control-prev" style="position: relative" type="button" data-bs-target="#carouselCaesarSteps" data-bs-slide="prev">
-                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                            <span class="visually-hidden">Previous</span>
-                        </button>
-                        <button class="carousel-control-next" style="position: relative" type="button" data-bs-target="#carouselCaesarSteps" data-bs-slide="next">
-                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                            <span class="visually-hidden">Next</span>
-                        </button>
-                        </div>
+                            </div>
+                        @endfor
                     </div>
-                </div>
                     @else
                     <h1 class="text-center">@lang('baseTexts.bruteForceResult')</h1>
                         <div class="d-flex p-4 flex-wrap gap-4 border border-2">

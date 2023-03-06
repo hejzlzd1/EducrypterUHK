@@ -1,32 +1,32 @@
 @extends("components/pageTemplate")
-@section("title",__('vigenerePageTexts.title'))
-@section("comment",__('vigenerePageTexts.metaComment'))
+@section("title",__('aesPageTexts.title'))
+@section("comment",__('aesPageTexts.metaComment'))
 @section("content")
+
 
     <div class="anchor" id="info"></div>
 
     <section class="m-5">
-        <div class="p-5 shadow-lg border rounded-4">
-        <div class="">
-            <div class="container">
+        <div class="shadow-lg border rounded-4 p-5">
+        <div>
+            <div class="container ">
                 <div class="row align-items-start">
-                    <h1>@lang('menuTexts.vigenereCipher')</h1>
+                    <h1>AES (Advanced Encryption Standard)</h1>
                     <hr/>
                     <div class="col-lg-8">
-                        <p>@lang('vigenerePageTexts.annotation')</p>
+                        <p>@lang('aesPageTexts.annotation')</p>
                     </div>
 
                     <div class="col-lg-4 m-auto">
-                        <a href="img/vigenerePage/vigenere.svg" target="_blank"> <img width="100%"
-                                                                                      src="{{asset("img/vigenerePage/vigenere.svg")}}"
-                                                                                      class="rounded-4"></a>
-                        <figure class="text-center">@lang("vigenerePageTexts.table")</figure>
+                        <a href="img/blowfishPage/blowfish.png" target="_blank"> <img width="100%"
+                                                                                        src="{{asset("img/aesPage/aesSchema.png")}}"
+                                                                                        class="rounded-4"></a>
+                        <figure class="text-center">@lang("aesPageTexts.blockSchema")</figure>
                     </div>
                 </div>
             </div>
         </div>
-
-        <div class="pt-2">
+        <div>
             <div class="container">
                 <div class="row align-items-start">
                     <h1 class="">@lang('baseTexts.cipherForm')</h1>
@@ -44,13 +44,36 @@
                             </div>
                             <div class="col-lg-6">
                                 <label class="form-label" for="key">@lang('baseTexts.key')</label>
-                                <input class="form-control" maxlength="30" required type="text" id="key" name="key"
-                                       placeholder="@lang('baseTexts.insertKey')" pattern="^[a-zA-Z ]*$" title="@lang("baseTexts.textInputOnly")"
+                                <input class="form-control" maxlength="30" type="text" id="key" name="key"
+                                       placeholder="@lang('baseTexts.insertKey')" pattern="^[a-zA-Z ]*$"
+                                       title="@lang("baseTexts.textInputOnly")"
                                        @if(isset($data["key"]))value="{{$data["key"]}}" @else value="" @endif>
                             </div>
                         </fieldset>
-                        <div>
-                            <fieldset>
+                        <div class="d-flex">
+                            <fieldset class="col-lg-6">
+                                <legend>@lang("baseTexts.keyBits")</legend>
+                                <br/>
+                                <div class="form-check form-switch">
+                                    <label class="form-check-label" for="128bit">128bit</label>
+                                    <input class="form-check-input" required type="radio"
+                                           id="128bit" name="bits"
+                                           value="128">
+                                </div>
+                                <div class="form-check form-switch">
+                                    <label class="form-check-label" for="192bit">192bit</label>
+                                    <input class="form-check-input" required type="radio"
+                                           id="192bit" name="bits"
+                                           value="192">
+                                </div>
+                                <div class="form-check form-switch">
+                                    <label class="form-check-label" for="256bit">256bit</label>
+                                    <input class="form-check-input" required type="radio"
+                                           id="256bit" name="bits"
+                                           value="256">
+                                </div>
+                            </fieldset>
+                            <fieldset class="col-lg-6 px-2">
                                 <legend>@lang("baseTexts.action")</legend>
                                 <br/>
                                 <div class="form-check form-switch">
@@ -79,9 +102,9 @@
     </section>
 
     @if(isset($data))
-        <section class="m-5">
-            <div class="shadow-lg border rounded-4 p-5">
+        <section class="m-5 shadow-lg border rounded-4 p-5">
             <div class="container text-break">
+
                 <h1 class="text-center">@lang('baseTexts.cipherResult')</h1>
                 <hr/>
                 <div class="row align-items-start">
@@ -91,46 +114,29 @@
                     </div>
                     <div class="col-lg-5">
                         <h4>@lang('baseTexts.key')</h4>
-                        <p>{{$data["key"]}}</p>
+                        <p>{{$data["key"]}} ({{$data["bits"]}}bit)</p>
                     </div>
                 </div>
                 <div class="row align-items-start">
                     <div class="col-lg-5">
-                        <h4>@lang('baseTexts.formatedKey') </h4>
-                        <p class="text-black-50">@lang("baseTexts.keyFormatted")</p>
-                        <p>{{$data["formatedKey"]}}</p>
+                        <h4 title="@lang("baseTexts.initVectorDescription")">@lang('baseTexts.initVector')</h4>
+                        <p>{{$data["iv"]}}</p>
                     </div>
                     <div class="col-lg-5">
                         <h4>@lang('baseTexts.outputText')</h4>
                         <p>{{$data["finalText"]}}</p>
                     </div>
                 </div>
+
                 <hr/>
 
+                <div class="mt-4">
                     <h1>@lang('baseTexts.algorithmSteps')</h1>
-                    <div class="accordion" id="accordion">
-                        @for($i = 0 ; $i < strlen($data["text"]); $i++)
-                        <div class="accordion-item">
-                            <h2 class="accordion-header" id="heading{{$i+1}}">
-                                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapse{{$i}}" aria-expanded="true" aria-controls="collapse{{$i}}">
-                                    @lang('baseTexts.stepNum') {{$i+1}}
-                                </button>
-                            </h2>
-                            <div id="collapse{{$i}}" class="accordion-collapse collapse" aria-labelledby="heading{{$i}}" data-bs-parent="#accordion{{$i}}">
-                                <div class="accordion-body">
-                                    <h5 class="text-black-50">
-                                        {{ucfirst(trans('baseTexts.column'))}}
-                                        <b>{{$data["text"][$i]}}</b>, @lang("baseTexts.row")
-                                        <b>{{$data["formatedKey"][$i]}}</b> => <b>{{$data["finalText"][$i]}}</b>
-                                    </h5>
-                                    <div>@lang('baseTexts.actualResult') {{substr($data["finalText"],0,$i)}}<b>{{$data["finalText"][$i]}}</b></div>
-                                </div>
-                            </div>
-                        </div>
-                        @endfor
-                    </div>
-            </div>
+
+                </div>
             </div>
         </section>
     @endif
+
+    @include("components/footer")
 @endsection

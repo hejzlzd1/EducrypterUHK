@@ -23,6 +23,14 @@ return [
     "row" => "řádek",
     "textInputOnly" => "Toto pole může obsahovat pouze text (případně mezery)",
     "initVector" => "Inicializační vektor (pro ukázku statický)",
+    "keyBits" => "Délka klíče v bitech",
+    "formatedKey"=> "Formátovaný klíč",
+    "keyFormatted" => "Klíč byl upraven aby odpovídal požadavkům",
+    "formInfoDescription" => "Formulář slouží k ilustrativnímu vyzkoušení daného algoritmu. Výsledná data se nedoporučují k použití - jedná se pouze o edukativní ukázku výstupu!",
+    "substitution" => "Substituce",
+
+
+    "initVectorDescription" => "TODO: ADD ME", //TODO ADD THIS TEXT
 
     "notReady" => "Tato funkce není zatím připravena.",
 ];

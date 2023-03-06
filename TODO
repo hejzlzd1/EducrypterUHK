@@ -1,0 +1,24 @@
+Kroky pod sebe - postup algoritmu (design) - done
+
+Vernemova šifra
+
+DSA - asymetric - https://en.wikipedia.org/wiki/Digital_Signature_Algorithm
+
+Triple DES - diagram + implementace (skrze knihovnu)
+
+--------------------------------------------
+
+Proudová šifra - A5/1 - LFSR info
+
+Form - zadat adresu - získat informace z certifikátu - https
+(https://stackoverflow.com/questions/3081042/how-to-get-ssl-certificate-info-with-curl-in-php)
+
+Hash funkce + MAC (ověření autenticity zprávy)
+SHA-1, SHA-2, SHA-3
+
+---------------------------------------------
+
+? Módy blokových šifer (schema + popis + implementace)
+
+\\ Diplomka - text
+Popsat algoritmy (články na Scopus) - jen algoritmy v appce

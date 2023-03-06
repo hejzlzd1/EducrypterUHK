@@ -22,9 +22,15 @@ return [
     "algorithmSteps" => "Algorithm steps",
     "column" => "column",
     "row" => "row",
-    "formatedKey"=> "Formated key",
+    "formatedKey"=> "Formatted key",
+    "keyFormatted" => "Key was formatted to meet criteria of algorithm",
     "textInputOnly" => "This field can only contain text (possibly spaces)",
     "initVector" => "Initialization vector (static for example)",
+    "keyBits" => "Délka klíče v bitech",
+    "formInfoDescription" => "The form is used to test the algorithm for illustrative purposes. The resulting data is not recommended for use - it is an educational sample output only!",
+    "substitution" => "Substitution",
+    "initVectorDescription" => "TODO: ADD ME", //TODO ADD THIS TEXT
+
 
     "notReady" => "This function is not ready yet.",
 ];

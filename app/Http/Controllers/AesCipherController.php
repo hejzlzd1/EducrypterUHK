@@ -1,39 +1,38 @@
 <?php
 namespace App\Http\Controllers;
 
-use App\Algorithms\Blowfish;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Session;
 
-class BlowfishCipherController extends Controller{
-    function index(){
-        if(Session::exists("data")) return view("symetricCiphers/blowfishCipher")->with(["data" => Session::get("data")]);
-        return view("symetricCiphers/blowfishCipher");
+class AesCipherController extends Controller
+{
+    function index()
+    {
+        if (Session::exists("data")) return view("symetricCiphers/aesCipher")->with(["data" => Session::get("data")]);
+        return view("symetricCiphers/aesCipher");
     }
 
-    function compute(Request $request){
+    function compute(Request $request)
+    {
         $timerStart = microtime(true);
         $data = $request->all();
 
-        $bf = new Blowfish($data["key"]);
+        $ivText = "LHG0xiZoQHusxqsdwadLQe";
+        $iv = base64_decode($ivText);
+        $bits = $data["bits"];
 
-        if($data["action"] == "encrypt"){
-           $data["finalText"] = base64_encode($bf->b_encrypt($data["text"]));
-        }else{
-            $data["finalText"] = $bf->b_decrypt(base64_decode($data["text"]));
+        $data["iv"] = $ivText;
+        if ($data["action"] == "encrypt") {
+            $data["finalText"] = base64_encode(openssl_encrypt(bin2hex($data["text"]), "aes".$bits, bin2hex($data["key"]), 1, $iv));
+        } else {
+            $data["finalText"] = $this->hextobin(openssl_decrypt(base64_decode($data["text"]), "aes".$bits, bin2hex($data["key"]), 1, $iv));
         }
-
-        //TODO add these variables
-        $data["steps"] = "To be added";
-        $data["iv"] = "To be added";
-
-
 
         $time_elapsed_secs = microtime(true) - $timerStart;
         Session::flash("alert-info",trans("baseTexts.actionTook") . " ".$time_elapsed_secs . " s");
         Session::flash("data",$data);
-        return redirect("blowfishCipher");
+        return redirect("aesCipher");
     }
 
     function hextobin($hexstr)
@@ -53,4 +52,5 @@ class BlowfishCipherController extends Controller{
         }
         return $sbin;
     }
+
 }
