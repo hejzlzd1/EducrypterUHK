@@ -25,10 +25,19 @@ return [
     "formatedKey"=> "Formatted key",
     "keyFormatted" => "Key was formatted to meet criteria of algorithm",
     "textInputOnly" => "This field can only contain text (possibly spaces)",
-    "initVector" => "Initialization vector (static for example)",
     "keyBits" => "Délka klíče v bitech",
     "formInfoDescription" => "The form is used to test the algorithm for illustrative purposes. The resulting data is not recommended for use - it is an educational sample output only!",
     "substitution" => "Substitution",
+    "block" => "Block",
+    "inputSize" => "Input size",
+    "output" => "Output",
+    "finalOperation" => "Final operation",
+    "round" => "Round",
+    "blockOutput" => "Block output",
+    "subkey" => "Subkey",
+    "subkeys" => "Subkeys",
+
+    "initVector" => "Initialization vector",
     "initVectorDescription" => "TODO: ADD ME", //TODO ADD THIS TEXT
 
 

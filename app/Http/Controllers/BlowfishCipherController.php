@@ -24,9 +24,10 @@ class BlowfishCipherController extends Controller{
             $data["finalText"] = $bf->b_decrypt(base64_decode($data["text"]));
         }
 
-        //TODO add these variables
-        $data["steps"] = "To be added";
-        $data["iv"] = "To be added";
+        $data["steps"] = $bf->getStepsOfAlgorithm();
+        $data["inputSize"] = $bf->getInputSize();
+        $data["initVector"] = $bf->getInitVector();
+        $data["subkeys"] = $bf->getSubkeys();
 
 
 

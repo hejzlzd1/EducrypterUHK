@@ -22,12 +22,20 @@ return [
     "column" => "sloupec",
     "row" => "řádek",
     "textInputOnly" => "Toto pole může obsahovat pouze text (případně mezery)",
-    "initVector" => "Inicializační vektor (pro ukázku statický)",
+    "initVector" => "Inicializační vektor",
     "keyBits" => "Délka klíče v bitech",
     "formatedKey"=> "Formátovaný klíč",
     "keyFormatted" => "Klíč byl upraven aby odpovídal požadavkům",
     "formInfoDescription" => "Formulář slouží k ilustrativnímu vyzkoušení daného algoritmu. Výsledná data se nedoporučují k použití - jedná se pouze o edukativní ukázku výstupu!",
     "substitution" => "Substituce",
+    "block" => "Blok",
+    "inputSize" => "Velikost vstupu",
+    "output" => "Výstup",
+    "finalOperation" => "Finální operace",
+    "round" => "Runda",
+    "blockOutput" => "Výstup bloku",
+    "subkey" => "Podklíč",
+    "subkeys" => "Podklíče",
 
 
     "initVectorDescription" => "TODO: ADD ME", //TODO ADD THIS TEXT
