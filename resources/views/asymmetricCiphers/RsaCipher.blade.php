@@ -46,14 +46,64 @@
                             <fieldset class="row p-2">
                                 <div class="col-lg-6">
                                     <label class="form-label" for="primeNumber1">1. @lang('baseTexts.primeNumber')</label>
-                                    <input class="form-control" min="1" type="number" id="primeNumber1" name="primeNumber1"
+                                    <input class="form-control" min="1" type="number" id="primeNumber1" name="primeNumber1" onchange="checkIsPrime('primeNumber1', 'primeNumber2')"
                                            @if(isset($data["primeNumber1"]))value="{{$data["primeNumber1"]}}"@endif>
                                 </div>
                                 <div class="col-lg-6">
                                     <label class="form-label" for="primeNumber2">2. @lang('baseTexts.primeNumber')</label>
-                                    <input class="form-control" min="1" type="number" id="primeNumber2" name="primeNumber2"
+                                    <input class="form-control" min="1" type="number" id="primeNumber2" name="primeNumber2" onchange="checkIsPrime('primeNumber2', 'primeNumber1')"
                                            @if(isset($data["primeNumber2"]))value="{{$data["primeNumber2"]}}" @endif>
                                 </div>
+                                <div id="error-dialog" style="display: none;" class="text-danger">Error: Some input values are not prime numbers</div>
+                                <script>
+                                    function checkIsPrime(inputId, otherInputId) {
+                                        const input = document.getElementById(inputId);
+                                        const otherInput = document.getElementById(otherInputId);
+                                        const number = input.value;
+                                        const otherNumber = otherInput.value;
+
+                                        let firstResult = isPrime(number);
+                                        let secondResult = isPrime(otherNumber);
+
+                                        if (number <= 1 || !firstResult || !secondResult && (number !== "" && otherNumber !== "")) {
+                                            showErrorDialog();
+                                            !firstResult ? input.style.color = "red" : input.style.color = "black";
+                                            !secondResult ? otherInput.style.color = "red" : otherInput.style.color = "black";
+                                            if(number <= 1){
+                                                input.style.color = "red";
+                                                otherInput.style.color = "red";
+                                            }
+                                        } else {
+                                            hideErrorDialog();
+                                            input.style.color = 'black'
+                                            otherInput.style.color = 'black'
+                                        }
+                                    }
+
+                                    function isPrime(number) {
+                                        if (number <= 1) {
+                                            return false;
+                                        }
+
+                                        const sqrt = Math.floor(Math.sqrt(number));
+                                        for (let i = 2; i <= sqrt; i++) {
+                                            if (number % i === 0) {
+                                                return false;
+                                            }
+                                        }
+                                        return true;
+                                    }
+
+                                    function showErrorDialog() {
+                                        const errorDialog = document.getElementById('error-dialog');
+                                        errorDialog.style.display = 'block';
+                                    }
+
+                                    function hideErrorDialog() {
+                                        const errorDialog = document.getElementById('error-dialog');
+                                        errorDialog.style.display = 'none';
+                                    }
+                                </script>
                             </fieldset>
                             <div class="p-2">
                                 <fieldset>
@@ -74,7 +124,7 @@
                                 </fieldset>
                             </div>
                             <div class="m-auto text-center">
-                                <input type="submit" class="btn btn-primary form-control w-auto"
+                                <input type="submit" id="submit" class="btn btn-primary form-control w-auto"
                                        value="@lang('baseTexts.submit')">
                             </div>
                         </form>
