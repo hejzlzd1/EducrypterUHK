@@ -15,8 +15,8 @@ class CaesarCipherController extends Controller
 {
     public function index(): Factory|View|Application
     {
-        if(Session::exists("data")) return view("symetricCiphers/caesarCipher")->with(["data" => Session::get("data")]);
-        return view("symetricCiphers/caesarCipher");
+        if(Session::exists("data")) return view("symmetricCiphers/caesarCipher")->with(["data" => Session::get("data")]);
+        return view("symmetricCiphers/caesarCipher");
     }
 
     public function compute(Request $request): Application|RedirectResponse|Redirector

@@ -9,8 +9,8 @@ class AesCipherController extends Controller
 {
     function index()
     {
-        if (Session::exists("data")) return view("symetricCiphers/aesCipher")->with(["data" => Session::get("data")]);
-        return view("symetricCiphers/aesCipher");
+        if (Session::exists("data")) return view("symmetricCiphers/aesCipher")->with(["data" => Session::get("data")]);
+        return view("symmetricCiphers/aesCipher");
     }
 
     function compute(Request $request)

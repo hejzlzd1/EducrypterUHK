@@ -13,8 +13,8 @@ class VigenereCipherController extends Controller
 {
     public function index()
     {
-        if(Session::exists("data")) return view("symetricCiphers/vigenereCipher")->with(["data" => Session::get("data")]);
-        return view("symetricCiphers/vigenereCipher");
+        if(Session::exists("data")) return view("symmetricCiphers/vigenereCipher")->with(["data" => Session::get("data")]);
+        return view("symmetricCiphers/vigenereCipher");
     }
 
     public function compute(Request $request): Redirector|Application|RedirectResponse

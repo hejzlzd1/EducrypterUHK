@@ -36,6 +36,8 @@ Route::get('language/{locale}', function ($locale) {
     return redirect()->back();
 })->name("changeLang");
 
+//Symmetrical ciphers
+
 //caesarCipher
 Route::get("caesarCipher",[CaesarCipherController::class,"index"])->name("caesarCipher");
 Route::post("caesarCipher",[CaesarCipherController::class,"compute"])->name("caesarCipherCompute");
@@ -51,14 +53,12 @@ Route::post("blowfishCipher",[BlowfishCipherController::class,"compute"])->name(
 Route::get("aesCipher",[AesCipherController::class,"index"])->name("aesCipher");
 Route::post("aesCipher",[AesCipherController::class,"compute"])->name("aesCipherCompute");
 
+//Asymmetrical ciphers
 
+Route::get("rsaCipher",[\App\Http\Controllers\RsaController::class,"index"])->name("rsaCipher");
 
 Route::get('des', function () {
     Session::flash("alert-warning", trans("baseTexts.notReady"));
     return redirect()->back();
 })->name("desCipher");
 
-Route::get('rsa', function () {
-    Session::flash("alert-warning", trans("baseTexts.notReady"));
-    return redirect()->back();
-})->name("rsaCipher");

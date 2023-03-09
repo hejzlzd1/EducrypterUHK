@@ -8,8 +8,8 @@ use Illuminate\Support\Facades\Session;
 
 class BlowfishCipherController extends Controller{
     function index(){
-        if(Session::exists("data")) return view("symetricCiphers/blowfishCipher")->with(["data" => Session::get("data")]);
-        return view("symetricCiphers/blowfishCipher");
+        if(Session::exists("data")) return view("symmetricCiphers/blowfishCipher")->with(["data" => Session::get("data")]);
+        return view("symmetricCiphers/blowfishCipher");
     }
 
     function compute(Request $request){
