@@ -36,6 +36,8 @@ return [
     "blockOutput" => "Block output",
     "subkey" => "Subkey",
     "subkeys" => "Subkeys",
+    "primeNumber" => "Prime number",
+
 
     "initVector" => "Initialization vector",
     "initVectorDescription" => "TODO: ADD ME", //TODO ADD THIS TEXT

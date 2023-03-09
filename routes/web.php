@@ -56,6 +56,7 @@ Route::post("aesCipher",[AesCipherController::class,"compute"])->name("aesCipher
 //Asymmetrical ciphers
 
 Route::get("rsaCipher",[\App\Http\Controllers\RsaController::class,"index"])->name("rsaCipher");
+Route::post("rsaCipher",[\App\Http\Controllers\RsaController::class,"compute"])->name("rsaCipherCompute");
 
 Route::get('des', function () {
     Session::flash("alert-warning", trans("baseTexts.notReady"));

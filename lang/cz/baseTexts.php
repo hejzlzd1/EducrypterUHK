@@ -36,6 +36,7 @@ return [
     "blockOutput" => "Výstup bloku",
     "subkey" => "Podklíč",
     "subkeys" => "Podklíče",
+    "primeNumber" => "Prvočíslo",
 
 
     "initVectorDescription" => "TODO: ADD ME", //TODO ADD THIS TEXT
