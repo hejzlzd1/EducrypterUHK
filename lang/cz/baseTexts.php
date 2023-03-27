@@ -42,4 +42,9 @@ return [
     "initVectorDescription" => "TODO: ADD ME", //TODO ADD THIS TEXT
 
     "notReady" => "Tato funkce není zatím připravena.",
+    "404" => "Stránka nenalezena!",
+    "notFound" => "Tato adresa na webu neexistuje - obsah buď neexistuje nebo nebyl přidán.",
+    "500" => "Nastala chyba v aplikaci!",
+    "internalError" => "V aplikaci se vyskytla neočekávaná chyba, prosím kontaktujte vývojáře na emailové adrese pomocí odkazu níže. Omlouváme se za způsobené komplikace!",
+    "reportException" => "Nahlásit chybu aplikace",
 ];

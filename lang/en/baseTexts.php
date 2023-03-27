@@ -44,4 +44,10 @@ return [
 
 
     "notReady" => "This function is not ready yet.",
+
+    "404" => "Page not found!",
+    "notFound" => "URL address does not exist on this website - content does not exist or page was not added.",
+    "500" => "An error occurred in the application!",
+    "internalError" => "An unexpected error occurred in the application, please contact the developer at the email by link below. We apologize for the inconvenience!",
+    "reportException" => "Report exception in application"
 ];
