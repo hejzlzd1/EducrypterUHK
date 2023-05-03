@@ -1,22 +1,38 @@
-Vernemova šifra
+Současné funkční části:
+Caesar, Vigenere, Blowfish (zkonzultovat vizualizaci?), error pages, hlavní stránka
 
+Rozpracované:
+RSA, AES (krokování)
+
+
+V plánu:
+Vernamova šifra
 DSA - asymetric - https://en.wikipedia.org/wiki/Digital_Signature_Algorithm
-
 Triple DES - diagram + implementace (skrze knihovnu)
+Stránka s informacemi o hashování + diagramy?
+Stránka s informacemi ohledně blokových a proudových šifer (diagramy)
+Stránka s informacemi ohledně módů blokových šifer (schémata a popis)
+Stránka s informacemi ohledně digitálních podpisů (tj. zkusit udělat formulář na ověřování zpráv - viz netacad bob & alice
+Stránka s informacemi s kryptoanalýzou a postupy
 
---------------------------------------------
+Caesar, interaktivní posuvník jako je zde - https://www.onlinecryptographytools.com a ROT13
 
-Proudová šifra - A5/1 - LFSR info
+HTTPS certificate info - formulář na adresu, na backendu použít curl k získání ssl certifikátu - https://stackoverflow.com/questions/3081042/how-to-get-ssl-certificate-info-with-curl-in-php
 
-Form - zadat adresu - získat informace z certifikátu - https
-(https://stackoverflow.com/questions/3081042/how-to-get-ssl-certificate-info-with-curl-in-php)
+K vyzkoušení:
+Proudová šifra - A5/1 - LFSR + info (info page ano), případně RC4
 
-Hash funkce + MAC (ověření autenticity zprávy)
+Hash funkce + MAC (ověření autenticity zprávy) - formulář - zkusit s krokováním/bez krokování
 SHA-1, SHA-2, SHA-3
 
----------------------------------------------
+Nápady:
+Kvízy?
+Výukové kartičky?
 
-? Módy blokových šifer (schema + popis + implementace)
+Inspirace:
+https://www.onlinecryptographytools.com/index.html
+
+---------------------------------------------
 
 \\ Diplomka - text
 Popsat algoritmy (články na Scopus) - jen algoritmy v appce
