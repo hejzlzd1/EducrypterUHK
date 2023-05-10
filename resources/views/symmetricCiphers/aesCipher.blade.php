@@ -109,11 +109,11 @@
                 <hr/>
                 <div class="row align-items-start">
                     <div class="col-lg-5">
-                        <h4>@lang('baseTexts.insertedText')</h4>
+                        <h4><i class="fa-solid fa-keyboard"></i> @lang('baseTexts.insertedText')</h4>
                         <p>{{$data["text"]}}</p>
                     </div>
                     <div class="col-lg-5">
-                        <h4>@lang('baseTexts.key')</h4>
+                        <h4><i class="fa-solid fa-key"></i> @lang('baseTexts.key')</h4>
                         <p>{{$data["key"]}} ({{$data["bits"]}}bit)</p>
                     </div>
                 </div>
@@ -123,7 +123,7 @@
                         <p>{{$data["iv"]}}</p>
                     </div>
                     <div class="col-lg-5">
-                        <h4>@lang('baseTexts.outputText')</h4>
+                        <h4><i class="fa-solid fa-circle-down"></i> @lang('baseTexts.outputText')</h4>
                         <p>{{$data["finalText"]}}</p>
                     </div>
                 </div>

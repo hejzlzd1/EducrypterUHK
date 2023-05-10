@@ -30,7 +30,7 @@
             <div class="">
                 <div class="container">
                     <div class="row align-items-start">
-                        <h1 class=""><i class="fa-regular fa-file-lines"></i> @lang('baseTexts.cipherForm') (CBC)</h1>
+                        <h1 class=""><i class="fa-regular fa-file-lines"></i> @lang('baseTexts.cipherForm')</h1>
                         <p class="text-black-50">@lang('baseTexts.formInfoDescription')</p>
                         <hr/>
                         <form action="" method="post">
@@ -89,21 +89,17 @@
                 <hr/>
                 <div class="row align-items-start">
                     <div class="col-lg-5">
-                        <h4>@lang('baseTexts.insertedText')</h4>
-                        <p>{{$data["text"]}}</p>
+                        <h4><i class="fa-solid fa-keyboard"></i> @lang('baseTexts.insertedText')</h4>
+                        <p>{{$data["text"]}} ({{strlen($data["text"])*8}}bit)</p>
                     </div>
                     <div class="col-lg-5">
-                        <h4>@lang('baseTexts.key')</h4>
-                        <p>{{$data["key"]}}</p>
+                        <h4><i class="fa-solid fa-key"></i> @lang('baseTexts.key')</h4>
+                        <p>{{$data["key"]}} ({{strlen($data["key"])*8}}bit)</p>
                     </div>
                 </div>
                 <div class="row align-items-start">
-                    <div class="col-lg-5">
-                        <h4>@lang('baseTexts.initVector')</h4>
-                        <p>{{$data["initVector"]}}</p>
-                    </div>
-                    <div class="col-lg-5">
-                        <h4>@lang('baseTexts.outputText')</h4>
+                    <div class="col-lg">
+                        <h4><i class="fa-solid fa-circle-down"></i> @lang('baseTexts.outputText')</h4>
                         <p>{{$data["finalText"]}}</p>
                     </div>
                 </div>
@@ -124,8 +120,9 @@
 
                 <div class="mt-4">
                     <h1><i class="fa-solid fa-list-ol"></i> @lang('baseTexts.algorithmSteps')</h1>
-                    <p>@lang('baseTexts.inputSize') - {{$data["inputSize"]}}bit</p>
+                    <p>@lang('baseTexts.inputSize') - {{$data["inputSize"]}}bit ({{ceil($data["inputSize"]/64)}} x 64bit {{strtolower(trans("baseTexts.block"))}})</p>
                     <div class="accordion" id="blockAccordion">
+                        <!-- blocks cycle -->
                         @foreach($data["steps"] as $block)
                             <div class="accordion-item">
                                 <h2 class="accordion-header" id="blockHeading{{$loop->index}}">
@@ -138,9 +135,9 @@
                                 <div id="block{{$loop->index}}" class="accordion-collapse collapse"
                                      aria-labelledby="blockHeading{{$loop->index}}" data-bs-parent="#blockAccordion">
                                     <div class="accordion-body">
-                                        <!-- nested accordion -->
+                                        <!-- nested accordion round steps cycle-->
                                         <div class="accordion" id="stepAccordion{{$loop->index}}">
-                                        @foreach($block["blockSteps"] as $step)
+                                        @foreach($block["roundSteps"] as $step)
 
                                                 <div class="accordion-item">
                                                     <h2 class="accordion-header" id="stepHeading{{$loop->index}}{{$loop->parent->index}}">
@@ -155,15 +152,73 @@
                                                          aria-labelledby="stepHeading{{$loop->index}}{{$loop->parent->index}}" data-bs-parent="#stepAccordion{{$loop->parent->index}}">
                                                         <div class="accordion-body">
                                                             <div class="d-flex flex-wrap">
-                                                            <div class="col-md-5">
-                                                                <h3>@lang('baseTexts.blockOutput'):</h3>
-                                                                <p>{{$step["stringBlock"]}}</p>
+                                                                <div class="col-md-5">
+                                                                    <h3>@lang('blowfishPageTexts.leftInput')</h3>
+                                                                    <p>{{$step["inputLeft"]}}</p>
+                                                                </div>
+                                                                <div class="col-md-5">
+                                                                    <h3>@lang('blowfishPageTexts.rightInput')</h3>
+                                                                    <p>{{$step["inputRight"]}}</p>
+                                                                </div>
                                                             </div>
-                                                            <div class="col-md-5">
-                                                                <h3>@lang('baseTexts.subkey'):</h3>
-                                                                <p>{{$step["subkey"]}}</p>
-                                                            </div>
-                                                            </div>
+
+                                                            <hr />
+
+                                                            @if($loop->last)
+                                                                <div class="d-flex flex-wrap">
+                                                                    <div class="col-md-5">
+                                                                        <h3><i class="fa-solid fa-key"></i> @lang('baseTexts.subkey') #17</h3>
+                                                                        <p>{{$step["subkey17"]}}</p>
+                                                                    </div>
+
+                                                                    <div class="col-md-5">
+                                                                        <h3><i class="fa-solid fa-key"></i> @lang('baseTexts.subkey') #18</h3>
+                                                                        <p>{{$step["subkey18"]}}</p>
+                                                                    </div>
+                                                                </div>
+
+                                                                <hr />
+                                                                <div class="d-flex flex-wrap">
+                                                                    <div class="col-md-5">
+                                                                        <h4>@lang('blowfishPageTexts.leftBlockXorOutput') #18</h4>
+                                                                        <p>{{$step["leftBlockAfterXor"]}}</p>
+                                                                    </div>
+                                                                    <div class="col-md-5">
+                                                                        <h4>@lang('blowfishPageTexts.rightBlockXorKeyOutput') #17</h4>
+                                                                        <p>{{$step["rightBlockAfterXor"]}}</p>
+                                                                    </div>
+                                                                </div>
+                                                            @else
+                                                                <div class="d-flex flex-wrap">
+                                                                    <div class="col-md">
+                                                                        <h3><i class="fa-solid fa-key"></i> @lang('baseTexts.subkey')</h3>
+                                                                        <p>{{$step["subkey"]}}</p>
+                                                                    </div>
+                                                                </div>
+
+                                                                <hr />
+                                                                <div class="d-flex flex-wrap justify-content-start gap-5">
+                                                                    <div class="flex-item">
+                                                                        <h4>@lang('blowfishPageTexts.leftBlockXorOutput')</h4>
+                                                                        <p>{{$step["leftBlockAfterXor"]}}</p>
+                                                                    </div>
+                                                                    <div>
+                                                                        <h4><i class="fa-solid fa-right-long"></i></h4>
+                                                                    </div>
+                                                                    <div class="flex-item">
+                                                                        <h4>@lang('blowfishPageTexts.rightBlockFeistelOutput')</h4>
+                                                                        <p>{{$step["rightBlockAfterFeistel"]}}</p>
+                                                                    </div>
+                                                                    <div>
+                                                                        <h4><i class="fa-solid fa-right-long"></i></h4>
+                                                                    </div>
+                                                                    <div class="flex-item">
+                                                                        <h4>@lang('blowfishPageTexts.rightBlockXorOutput')</h4>
+                                                                        <p>{{$step["rightBlockAfterXor"]}}</p>
+                                                                    </div>
+                                                                </div>
+                                                            @endif
+
                                                         </div>
                                                     </div>
 

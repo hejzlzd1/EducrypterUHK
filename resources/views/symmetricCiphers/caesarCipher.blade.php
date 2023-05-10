@@ -102,18 +102,18 @@
                     <hr/>
                     <div class="row align-items-start">
                         <div class="col-lg-5">
-                            <h4>@lang('baseTexts.insertedText')</h4>
+                            <h4><i class="fa-solid fa-keyboard"></i> @lang('baseTexts.insertedText')</h4>
                             <p>{{$data["text"]}}</p>
                         </div>
                         <div class="col-lg-5">
-                            <h4>@lang('baseTexts.shift')</h4>
+                            <h4><i class="fa-solid fa-rotate"></i> @lang('baseTexts.shift')</h4>
                             <p>{{$data["shift"]}}</p>
                         </div>
                     </div>
                     <div class="row align-items-start">
                         <div class="col">
                             @if(isset($data["finalText"]))
-                                <h4>@lang('baseTexts.outputText')</h4>
+                                <h4><i class="fa-solid fa-circle-down"></i> @lang('baseTexts.outputText')</h4>
                                 <p>{{$data["finalText"]}}</p>
                             @endif
                         </div>

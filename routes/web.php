@@ -4,6 +4,7 @@ use App\Http\Controllers\AesCipherController;
 use App\Http\Controllers\BlowfishCipherController;
 use App\Http\Controllers\CaesarCipherController;
 use App\Http\Controllers\MainPageController;
+use App\Http\Controllers\RsaController;
 use App\Http\Controllers\VigenereCipherController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Session;
@@ -55,11 +56,7 @@ Route::post("aesCipher",[AesCipherController::class,"compute"])->name("aesCipher
 
 //Asymmetrical ciphers
 
-Route::get("rsaCipher",[\App\Http\Controllers\RsaController::class,"index"])->name("rsaCipher");
-Route::post("rsaCipher",[\App\Http\Controllers\RsaController::class,"compute"])->name("rsaCipherCompute");
+Route::get("rsaCipher",[RsaController::class,"index"])->name("rsaCipher");
+Route::post("rsaCipher",[RsaController::class,"compute"])->name("rsaCipherCompute");
 
-Route::get('des', function () {
-    Session::flash("alert-warning", trans("baseTexts.notReady"));
-    return redirect()->back();
-})->name("desCipher");
 

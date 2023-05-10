@@ -4,22 +4,102 @@ namespace App\Algorithms;
 
 use Exception;
 
-// 2x 32bit blocks implementation of cbc blowfish ( uses init vector )
+// 64bit block implementation of ecb blowfish
+
+/**
+ * @author hejzlzd1
+ */
 class Blowfish {
 
-    private $sboxes;
-    private $parr;
-    private $initVector;
-    private $subkeys;
-    private $blockSteps;
-    private $stepsOfAlgorithm;
-    private $inputSize;
+    /**
+     * Array for storing sboxes
+     * @var array
+     */
+    private array $sboxes;
+    /**
+     * Array for storing permuted subkeys
+     * @var array
+     */
+    private array $parr;
+    /**
+     * Array that saves used subkey for current block (in rounds) - serves only for visualisation in templates
+     * @var array
+     */
+    private array $subkeys;
+    /**
+     * Array that saves blocks in round algorithm - serves only for visualisation in templates
+     * @var array
+     */
+    private array $roundSteps;
 
-    public function __construct($key) { //set key on construction
-            $this->setKey($key);
+    private bool $keysModified = false;
+
+    /**
+     * Array that saves additional info in algorithm - serves only for visualisation in templates
+     * @var array
+     */
+    private array $stepsOfAlgorithm;
+    /**
+     * Value that stores length of input from user - serves only for visualisation in templates
+     * @var int
+     */
+    private int $inputSize;
+
+    /**
+     * Prepare subkeys and sboxes based on user input key
+     * @param $key
+     * @throws Exception
+     */
+    public function __construct($key) {
+        //init default sboxes and keys
+        $this->initDefaultKeys();
+
+        //check key validity and convert to binary array
+        if(empty($key)) throw new Exception("Key cannot be empty!");
+        $keyArray = stringToWordArray($key);
+        if(count($keyArray) > 14) throw new Exception("Key cannot be longer than 448-bits");
+
+        //start blowfish key schedule -> modify sboxes and generate permuted subkeys
+        $this->modifySubkeys($keyArray);
+        $this->keysModified = true;
     }
 
-    private function resetKey() { //declare sboxes - initialized with the digits of pi
+    /**
+     * Blowfish key schedule
+     * Function modifies default permuted keys and sboxes depending on key that user filled in
+     * @param array $keyArray
+     * @return void
+     */
+    private function modifySubkeys(array $keyArray){
+        for($i = 0; $i < 18; ++$i) // 18 permutation subkeys (modify predefined parr keys with input key)
+            $this->parr[$i] ^= $keyArray[$i % count($keyArray)];
+
+        //fill input blocks with zeros for padding shorter input key
+        $rightBlock = 0x00000000;
+        $leftBlock = 0x00000000;
+
+        //key and sbox expansion
+        for($i = 0; $i < 9; ++$i) {
+            $lastoutput = $this->rounds($leftBlock,$rightBlock);
+            list($this->parr[2*$i], $this->parr[2*$i+1]) = $lastoutput;
+        }
+
+        for ($j = 0; $j < 4; ++$j)
+            for($i = 0; $i < 128; ++$i) {
+                $lastoutput = $this->rounds($leftBlock,$rightBlock);
+                list($this->sboxes[$j][2*$i], $this->sboxes[$j][2*$i+1]) = $lastoutput;
+            }
+        $this->subkeys = $this->parr;
+
+    }
+
+    /**
+     * Initialise sboxes and permuted keys with init values - digits of pi
+     * Source of default sboxes and p keys:
+     * https://www.geeksforgeeks.org/blowfish-algorithm-with-examples/
+     * @return void
+     */
+    private function initDefaultKeys() { //declare sboxes - initialized with the digits of pi - precalculated
         $this->sboxes = array( array(
             0xd1310ba6, 0x98dfb5ac, 0x2ffd72db, 0xd01adfb7, 0xb8e1afed, 0x6a267e96,
             0xba7c9045, 0xf12c7f99, 0x24a19947, 0xb3916cf7, 0x0801f2e2, 0x858efc16,
@@ -206,183 +286,178 @@ class Blowfish {
         );
     }
 
-    /* F function
+    /**
+     * F function
      * The input $x is split into four 8-bit chunks, using bit masking and bit shifting operations.
      * Each chunk is used to index into four different S-boxes, and the results are added together.
      * The result of previous step is then XORed with a value from another S-box. The result of that is then added to another value from another S-box.
      * S-boxes used in the F function are pre-computed values that are part of the Blowfish algorithm's key schedule.
+     * For more information check Feistel schema image on internet.
      */
-    private function Feistel($x)
+    private function feistelFunction($inputBlock)
     {
-        $d = $x & 0b11111111; // & = and bitwise
-        $c = ($x >> 8) & 0b11111111; // >> = shift bits to right by 8 steps (each step means divide by two)
-        $b = ($x >> 16) & 0b11111111;
-        $a = ($x >> 24) & 0b11111111;
+        //create 4 8-bit chunks
+        $d = $inputBlock & 0xFF;
+        $c = ($inputBlock >> 8) & 0xFF;
+        $b = ($inputBlock >> 16) & 0xFF;
+        $a = ($inputBlock >> 24) & 0xFF;
 
-        return (((($this->sboxes[0][$a] + $this->sboxes[1][$b])
-                        & 0xFFFFFFFF) ^ $this->sboxes[2][$c]) + $this->sboxes[3][$d])
-            & 0xFFFFFFFF; // return result of Feistel function -> combine sboxes with input (check schema for better understanding)
+        $feistelOutput = $this->sboxes[0][$a] + $this->sboxes[1][$b];
+        $feistelOutput = $feistelOutput ^ $this->sboxes[2][$c];
+        return $feistelOutput + $this->sboxes[3][$d];
     }
 
-    /* this method repeats for 16 rounds (blowfish definition) */
-    // two branches for block left and right (according to schema)
-    private function blowfish(array $x)
-    {
-        $left = 1;
-        $right = 0;
-        $this->blockSteps = array();
-        for($i = 0; $i < 16; ++$i) {
-            $left ^= 1; //  bitwise XOR assignment operator, operation on two values - store the result back in the left-hand side variable.
-            $right ^= 1;
-            $x[$left] ^= $this->parr[$i];
-            $x[$right] ^= $this->Feistel($x[$left]); // make feistel function on current block
-            $this->blockSteps[] = array("stringBlock"=>base64_encode(wordArrayToString(array($x[$left], $x[$right]))),"subkey" => base64_encode($this->parr[$i])); //make string output of blocks with according subkey value
-        }
-        $x[$right] ^= $this->parr[16];
-        $x[$left] ^= $this->parr[17];
-        $this->blockSteps[] = array("stringBlock" => base64_encode(wordArrayToString(array($x[$left], $x[$right]))),"subkey" =>base64_encode($this->parr[16]). " " . base64_encode($this->parr[17])); //make output of string blocks, with last subkeys
-
-
-        return array($x[$left], $x[$right]);
-    }
-
-    /*
-     * Init key, modify sboxes and parr
+    /**
+     * @ This functions performs blowfish rounds - 16 in total, parameters are two 32-bit binary strings
+     * @param $leftBlock
+     * @param $rightBlock
+     * @return array
      */
-    private function keyExpansion(array $key)
+    private function rounds($leftBlock, $rightBlock): array
     {
-        for($i = 0; $i < 18; ++$i)
-            $this->parr[$i] ^= $key[$i % count($key)];
+        $this->roundSteps = array();
+        for($i = 0 ; $i < 16; ++$i){
+            $inputLeft = $leftBlock;
+            $inputRight = $rightBlock;
 
-        $lastoutput = array(0, 0); //fill with zeros for padding shorter key
+            $leftBlock = $leftBlock ^ $this->parr[$i]; // XOR left block with permuted key
 
-        for($i = 0; $i < 9; ++$i) { //modify parr -> combine key with default values
-            $lastoutput = $this->blowfish($lastoutput);
-            list($this->parr[2*$i], $this->parr[2*$i+1]) = $lastoutput;
-        }
+            $leftBlockAfterXor = $leftBlock;
+            $rightBlockAfterFeistel = $this->feistelFunction($leftBlock);
 
-        for ($j = 0; $j < 4; ++$j) //modify sboxes with input key
-            for($i = 0; $i < 128; ++$i) {
-                $lastoutput = $this->blowfish($lastoutput);
-                list($this->sboxes[$j][2*$i], $this->sboxes[$j][2*$i+1]) = $lastoutput;
+            $rightBlock = $this->feistelFunction($leftBlock) ^ $rightBlock; // XOR right block with result of Feistel
+
+            $rightBlockAfterXor = $rightBlock;
+
+            list($leftBlock, $rightBlock) = array($rightBlock, $leftBlock); // swap blocks
+
+            if($this->keysModified){
+            $this->roundSteps[] = array(
+                "inputLeft" => base64_encode($inputLeft),
+                "inputRight" => base64_encode($inputRight),
+                "leftBlockAfterXor" => base64_encode($leftBlockAfterXor),
+                "rightBlockAfterXor" => base64_encode($rightBlockAfterXor),
+                "rightBlockAfterFeistel" => base64_encode($rightBlockAfterFeistel),
+                "subkey" => base64_encode($this->parr[$i])
+            ); //make string output of blocks with according subkey value
             }
-        $this->subkeys = $this->parr;
-    }
-
-    // 64bit block size - encryption of plaintext
-    private function encryptBlock($plainblock)
-    {
-        $cipherblock = $this->blowfish($plainblock); // encrypt input by 16 rounds
-        return $cipherblock;
-    }
-
-    // decryption of blocks
-    private function decryptBlock($cipherblock)
-    {
-        $this->parr = array_reverse($this->parr); //reverse subkey values (to achieve reverse steps)
-        $plainblock = $this->blowfish($cipherblock); //perform decryption
-        $this->parr = array_reverse($this->parr); //reverse subkeys back
-
-        return $plainblock;
-    }
-
-    /**
-     * @throws Exception
-     */
-    public function setKey($key)
-    {
-        $this->resetKey(); //set init values
-
-        if (empty($key)) return;
-
-        $keyarr = stringToWordArray($key); //convert key to block
-
-        if (count($keyarr) > 14) throw new Exception('Key size can not be greater than 448-bits'); //throw err if key is longer
-
-        $this->keyExpansion($keyarr); // modify sboxes and subkeys with key
-    }
-
-    //encrypt - input parameter is plaintext
-    public function b_encrypt($plaintext): string
-    {
-        $this->inputSize = strlen($plaintext) * 8;
-        $iv = array(mt_rand(0, 0xFFFFFFFF), mt_rand(0, 0xFFFFFFFF)); // generate initialization vector
-        $this->initVector = base64_encode(wordArrayToString($iv));
-
-        $ciphertext = wordArrayToString($iv); //start working with init vector -> first part of blowfish encryption
-
-        $x = array_chunk(stringToWordArray($plaintext), 2); // make two data chunks (blocks)
-
-        $lastblock = $iv; // set temp last block to init vector
-
-        $this->stepsOfAlgorithm = array();
-
-        foreach($x as $block) { // for each block of data
-            if (count($block) == 1) $block[1] = 0;
-            $xoredblock = array($block[0] ^ $lastblock[0], $block[1] ^ $lastblock[1]);
-            $lastblock = $this->encryptBlock($xoredblock);
-            $ciphertext .= wordArrayToString($lastblock); // concat cipher text from blocks
-
-            $this->stepsOfAlgorithm[] = array("blockSteps" => $this->blockSteps, "blockFinalString" => base64_encode($ciphertext));
         }
-        return $ciphertext;
-    }
+        //last step
+        list($leftBlock, $rightBlock) = array($rightBlock, $leftBlock); //undo last swap from cycle
 
-    public function b_decrypt($ciphertext): string
-    {
-        $this->inputSize = strlen($ciphertext) * 8;
-        $x = stringToWordArray($ciphertext); //convert string to block
+        $inputLeft = $leftBlock;
+        $inputRight = $rightBlock;
 
-        $iv = array_slice($x, 0, 2); //create init vector from first two elements in input block
-        $this->initVector = base64_encode(wordArrayToString($iv));
+        $rightBlock = $rightBlock ^ $this->parr[16]; //xor right block with corresponding subkey
+        $leftBlock = $leftBlock ^ $this->parr[17]; //xor left block with corresponding subkey
 
-        $x = array_chunk(array_slice($x, 2), 2); // make two chunks from input blocks
+        $rightBlockAfterXor = $rightBlock;
+        $leftBlockAfterXor = $leftBlock;
 
-        $lastblock = $iv;
-
-        $plaintext = '';
-
-        foreach($x as $block) {
-            $deciphered = $this->decryptBlock($block);
-
-            $deciphered[0] ^= $lastblock[0];
-            $deciphered[1] ^= $lastblock[1];
-            $plaintext .= wordArrayToString($deciphered);
-            $lastblock = $block;
-            $this->stepsOfAlgorithm[] = array("blockSteps" => $this->blockSteps,"blockFinalString" =>(($plaintext)));
-
+        if($this->keysModified){
+            $this->roundSteps[] = array(
+                "inputLeft" => base64_encode($inputLeft),
+                "inputRight" => base64_encode($inputRight),
+                "leftBlockAfterXor" => base64_encode($leftBlockAfterXor),
+                "rightBlockAfterXor" => base64_encode($rightBlockAfterXor),
+                "subkey17" => base64_encode($this->parr[16]),
+                "subkey18" => base64_encode($this->parr[17])
+            ); //make string output of blocks with according subkey value
         }
-        return $plaintext;
+
+        return array($leftBlock,$rightBlock); //return two encrypted blocks
     }
 
     /**
-     * @return mixed
+     * Public function to encrypt plain string
+     * @param String $plaintext
+     * @return string
      */
-    public function getInitVector()
+    public function encrypt(String $plaintext):string{
+        $this->inputSize = strlen($plaintext) * 8; //set bit length of input for visualisation
+        $cipherText = ""; //init variable for ciphered text
+        $chunks = array_chunk(stringToWordArray($plaintext),2); //create arrays that contain 2x 32bit blocks
+        $this->stepsOfAlgorithm = array(); //init variable for stepping algorithm
+
+        foreach ($chunks as $chunk){ //for each 64 bit chunk
+            if (count($chunk) == 1) $chunk[1] = 0; //if second 32bit chunk is not present fill it with 0 to make sure function works
+            $encryptedChunk = $this->encryptChunk($chunk); //encrypt 64bit by blowfish chunk
+            $blockText = wordArrayToString($encryptedChunk); //get text value of encryption
+            $cipherText .= wordArrayToString($encryptedChunk);
+            $this->stepsOfAlgorithm[] = array("roundSteps" => $this->roundSteps, "blockFinalString" => base64_encode($blockText)); //make output for visualisation
+        }
+        return $cipherText; //return full encrypted text
+    }
+
+    /**
+     * Public function to decrypt text
+     * @param String $cipherText
+     * @return string
+     */
+    public function decrypt(String $cipherText):string{
+        $this->inputSize = strlen($cipherText) * 8; //set bit length of input for visualisation
+        $chunks = stringToWordArray($cipherText); //get 32bit blocks array
+        $chunks = array_chunk($chunks,2); //make 64bit chunks
+        $plainText = "";
+        $this->stepsOfAlgorithm = array(); //init variable for stepping algorithm
+
+        foreach($chunks as $chunk){ //repeat for all chunks
+            $deciphered = $this->decryptChunk($chunk); //decipher whole chunk
+            $blockText = wordArrayToString($deciphered); //get text value of decryption
+            $plainText .= wordArrayToString($deciphered);
+            $this->stepsOfAlgorithm[] = array("roundSteps" => $this->roundSteps,"blockFinalString" => $blockText); //make output for visualisation
+        }
+        return $plainText; //return full plain text
+    }
+
+    /**
+     * Function receives 64bit chunk (array - containing 2x 32bit blocks)
+     * Input blocks to blowfish cipher and return two encrypted blocks
+     * @param $chunk
+     * @return array
+     */
+    private function encryptChunk($chunk): array
     {
-        return $this->initVector;
+        return $this->rounds($chunk[0],$chunk[1]);
     }
 
     /**
-     * @return mixed
+     * Function receives 64bit chunk (array - containing 2x 32bit blocks)
+     * 1. First reverse permuted keys
+     * 2. Input blocks to blowfish cipher and return two decrypted blocks
+     * 3. Undo reversion of keys
+     * @param $chunk
+     * @return array
      */
-    public function getSubkeys()
+    private function decryptChunk($chunk): array
+    {
+        $this->parr = array_reverse($this->parr);
+        $plainBlock = $this->rounds($chunk[0],$chunk[1]);
+        $this->parr = array_reverse($this->parr);
+
+        return $plainBlock;
+    }
+
+    /**
+     * @return array
+     */
+    public function getSubkeys(): array
     {
         return $this->subkeys;
     }
 
     /**
-     * @return mixed
+     * @return array
      */
-    public function getStepsOfAlgorithm()
+    public function getStepsOfAlgorithm(): array
     {
         return $this->stepsOfAlgorithm;
     }
 
     /**
-     * @return mixed
+     * @return int
      */
-    public function getInputSize()
+    public function getInputSize(): int
     {
         return $this->inputSize;
     }
@@ -390,7 +465,12 @@ class Blowfish {
 }
 
 
-function stringToWordArray($str): array //binary string to array (from string to data block)
+/**
+ * Function to make 32bit data blocks from string input
+ * @param string $str
+ * @return array
+ */
+function stringToWordArray(string $str): array
 {
     $bytes = array_values(unpack('C*', $str)); // unpack binary string to array (each byte as unsigned integers)
 
@@ -404,6 +484,11 @@ function stringToWordArray($str): array //binary string to array (from string to
 }
 
 
+/**
+ * Function to convert data block back to binary string
+ * @param $arr
+ * @return string
+ */
 function wordArrayToString($arr): string //array to binary string - from binary block to string
 {
     $str = '';

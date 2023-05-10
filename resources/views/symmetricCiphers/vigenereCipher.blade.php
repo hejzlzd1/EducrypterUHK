@@ -86,22 +86,24 @@
                 <hr/>
                 <div class="row align-items-start">
                     <div class="col-lg-5">
-                        <h4>@lang('baseTexts.insertedText')</h4>
+                        <h4><i class="fa-solid fa-keyboard"></i> @lang('baseTexts.insertedText')</h4>
                         <p>{{$data["text"]}}</p>
                     </div>
                     <div class="col-lg-5">
-                        <h4>@lang('baseTexts.key')</h4>
+                        <h4><i class="fa-solid fa-key"></i> @lang('baseTexts.key')</h4>
                         <p>{{$data["key"]}}</p>
                     </div>
                 </div>
                 <div class="row align-items-start">
+                    @if(strlen($data["key"]) != strlen($data["formatedKey"]))
                     <div class="col-lg-5">
-                        <h4>@lang('baseTexts.formatedKey') </h4>
+                        <h4><i class="fa-solid fa-key"></i> @lang('baseTexts.formatedKey') </h4>
                         <p class="text-black-50">@lang("baseTexts.keyFormatted")</p>
                         <p>{{$data["formatedKey"]}}</p>
                     </div>
+                    @endif
                     <div class="col-lg-5">
-                        <h4>@lang('baseTexts.outputText')</h4>
+                        <h4><i class="fa-solid fa-circle-down"></i> @lang('baseTexts.outputText')</h4>
                         <p>{{$data["finalText"]}}</p>
                     </div>
                 </div>
