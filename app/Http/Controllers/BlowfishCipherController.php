@@ -30,11 +30,7 @@ class BlowfishCipherController extends Controller{
 
         $bf = new Blowfish($data["key"]);
 
-        if($data["action"] == "encrypt"){
-           $data["finalText"] = base64_encode($bf->encrypt($data["text"]));
-        }else{
-            $data["finalText"] = $bf->decrypt(base64_decode($data["text"]));
-        }
+        $data["action"] == "encrypt" ? $data["finalText"] = base64_encode($bf->encrypt($data["text"])) : $data["finalText"] = $bf->decrypt(base64_decode($data["text"]));
 
         $data["steps"] = $bf->getStepsOfAlgorithm();
         $data["inputSize"] = $bf->getInputSize();

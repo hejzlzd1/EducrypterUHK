@@ -7,7 +7,7 @@ class Caesar
     /**
      * @var string
      */
-    private string $text = "";
+    private string $text;
 
     /**
      * Normalize input string to basic chars
