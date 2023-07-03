@@ -60,13 +60,13 @@
                                         <label class="form-check-label" for="encrypt">@lang('baseTexts.encrypt')</label>
                                         <input class="form-check-input" required type="radio"
                                                id="encrypt" name="action"
-                                               value="encrypt">
+                                               value=1>
                                     </div>
                                     <div class="form-check form-switch">
                                         <label class="form-check-label" for="decrypt">@lang('baseTexts.decrypt')</label>
                                         <input class="form-check-input" required type="radio"
                                                id="decrypt" name="action"
-                                               value="decrypt">
+                                               value=0>
                                     </div>
                                 </fieldset>
                             </div>

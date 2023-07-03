@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Algorithms\Base;
 use App\Algorithms\Caesar;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
@@ -25,7 +26,11 @@ class CaesarCipherController extends Controller
         $timerStart = microtime(true);
         $data = $request->all();
 
-        if(!is_numeric($data["shift"])){
+        if(!isset($data["action"])){
+            Session::flash("alert-error",trans("baseTexts.actionCannotBeEmpty"));
+            return redirect("caesarCipher");
+        }
+        if(!isset($data["shift"])){
             Session::flash("alert-error",trans("baseTexts.keyCannotBeEmpty"));
             return redirect("caesarCipher");
         }
@@ -33,20 +38,15 @@ class CaesarCipherController extends Controller
             Session::flash("alert-error",trans("baseTexts.textCannotBeEmpty"));
             return redirect("caesarCipher");
         }
-        if(empty($data["action"])){
-            Session::flash("alert-error",trans("baseTexts.actionCannotBeEmpty"));
-            return redirect("caesarCipher");
-        }
 
-        $caesarCipher = new Caesar($data["text"]);
+        $caesarCipher = new Caesar($data["text"],$data["shift"],$data["action"]);
 
-        if($data["action"] != "bruteforce"){
-            $data["finalText"] = $caesarCipher->performCaesar($data["shift"],$data["action"]);
-            $data["shiftedAlphabet"] = $caesarCipher->rotateAlphabet($request->input("shift"));
+        if($caesarCipher->operation === Base::ENCRYPT || $caesarCipher->operation === Base::DECRYPT){
+            $data["finalText"] = $caesarCipher->performOperation();
         }else{
-            $data["bruteForceResult"] = $caesarCipher->bruteForce();
-            $data["shift"] = 0;
+            $data["bruteForceResult"] = $caesarCipher->performOperation();
         }
+        $data["shiftedAlphabet"] = $caesarCipher->rotateAlphabet();
 
         $time_elapsed_secs = microtime(true) - $timerStart;
         Session::flash("alert-info",trans("baseTexts.actionTook") . " ".$time_elapsed_secs . " s");

@@ -56,28 +56,28 @@
                                         <label class="form-check-label" for="encrypt">@lang('baseTexts.encrypt')</label>
                                         <input class="form-check-input" onclick="flipShiftInput()" required type="radio"
                                                id="encrypt" name="action"
-                                               value="encrypt">
+                                               value=1>
                                     </div>
                                     <div class="form-check form-switch">
                                         <label class="form-check-label" for="decrypt">@lang('baseTexts.decrypt')</label>
                                         <input class="form-check-input" onclick="flipShiftInput()" required type="radio"
                                                id="decrypt" name="action"
-                                               value="decrypt">
+                                               value=0>
                                     </div>
                                     <div class="form-check form-switch">
                                         <label class="form-check-label"
                                                for="bruteforce">@lang('baseTexts.bruteforce')</label>
                                         <input class="form-check-input" onclick="flipShiftInput()" required type="radio"
                                                id="bruteforce" name="action"
-                                               value="bruteforce">
+                                               value=2>
                                     </div>
                                     <script>
                                         function flipShiftInput() {
                                             if (document.getElementById("bruteforce").checked === true) {
-                                                document.getElementById("shift").disabled = true;
+                                                document.getElementById("shift").readonly = true;
                                                 document.getElementById("shift").value = 0;
                                             } else {
-                                                document.getElementById("shift").disabled = false;
+                                                document.getElementById("shift").readonly = false;
                                             }
                                         }
                                     </script>
@@ -97,7 +97,7 @@
     @if(isset($data))
         <section class="m-5 shadow-lg border rounded-4 p-5">
             <div class="container text-break">
-                @if($data["action"] != "bruteforce")
+                @if($data["action"] !== 2)
                     <h1 class=""><i class="fa-solid fa-comment"></i> @lang('baseTexts.cipherResult')</h1>
                     <hr/>
                     <div class="row align-items-start">
@@ -126,7 +126,7 @@
                         <div class="table-responsive-lg">
                             <table class="table table-bordered">
                                 <tr>
-                                    @if($data["action"] == "encrypt")
+                                    @if($data["action"] === 1)
                                         @foreach(range('A','Z') as $char)
                                             <td class="">{{$char}}</td>
                                         @endforeach
@@ -142,7 +142,7 @@
                                     @endforeach
                                 </tr>
                                 <tr>
-                                    @if($data["action"] == "encrypt")
+                                    @if($data["action"] === 0)
                                         @foreach($data["shiftedAlphabet"] as $char)
                                             <td class=""><b>{{$char}}</b></td>
                                         @endforeach
