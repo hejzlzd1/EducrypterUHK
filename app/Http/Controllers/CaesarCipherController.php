@@ -2,7 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Algorithms\Caesar;
+use App\Algorithms\CipherBase;
+use App\Algorithms\Ciphers\Caesar;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
@@ -16,8 +17,12 @@ class CaesarCipherController extends Controller
 {
     public function index(): Factory|View|Application
     {
-        if(Session::exists("data")) return view("symmetricCiphers/caesarCipher")->with(["data" => Session::get("data")]);
-        return view("symmetricCiphers/caesarCipher");
+        if (Session::exists('result')) {
+            return view('symmetricCiphers/caesarCipher')->with(
+                ['result' => Session::get('result'), 'data' => Session::get('data')]
+            );
+        }
+        return view('symmetricCiphers/caesarCipher');
     }
 
     public function compute(Request $request): Application|RedirectResponse|Redirector
@@ -25,32 +30,31 @@ class CaesarCipherController extends Controller
         $timerStart = microtime(true);
         $data = $request->all();
 
-        if(!is_numeric($data["shift"])){
-            Session::flash("alert-error",trans("baseTexts.keyCannotBeEmpty"));
-            return redirect("caesarCipher");
+        if (!isset($data['action'])) {
+            Session::flash('alert-error', trans('baseTexts.actionCannotBeEmpty'));
+            return redirect('caesarCipher');
         }
-        if(!is_string($data["text"]) || empty($data["text"])){
-            Session::flash("alert-error",trans("baseTexts.textCannotBeEmpty"));
-            return redirect("caesarCipher");
+        if (!isset($data['shift']) && (int)$data['action'] !== CipherBase::ALGORITHM_DECRYPT_BRUTEFORCE) {
+            Session::flash('alert-error', trans('baseTexts.keyCannotBeEmpty'));
+            return redirect('caesarCipher');
         }
-        if(empty($data["action"])){
-            Session::flash("alert-error",trans("baseTexts.actionCannotBeEmpty"));
-            return redirect("caesarCipher");
+        if (!is_string($data['text']) || empty($data['text'])) {
+            Session::flash('alert-error', trans('baseTexts.textCannotBeEmpty'));
+            return redirect('caesarCipher');
         }
 
-        $caesarCipher = new Caesar($data["text"]);
+        $caesarCipher = new Caesar(inputValue: $data['text'], shift: $data['shift'] ?? 0, operation: $data['action']);
 
-        if($data["action"] != "bruteforce"){
-            $data["finalText"] = $caesarCipher->performCaesar($data["shift"],$data["action"]);
-            $data["shiftedAlphabet"] = $caesarCipher->rotateAlphabet($request->input("shift"));
-        }else{
-            $data["bruteForceResult"] = $caesarCipher->bruteForce();
-            $data["shift"] = 0;
-        }
+        $result = match ($caesarCipher->getOperation()) {
+            CipherBase::ALGORITHM_DECRYPT => $caesarCipher->decrypt(),
+            CipherBase::ALGORITHM_ENCRYPT => $caesarCipher->encrypt(),
+            CipherBase::ALGORITHM_DECRYPT_BRUTEFORCE => $caesarCipher->bruteForce(),
+        };
 
         $time_elapsed_secs = microtime(true) - $timerStart;
-        Session::flash("alert-info",trans("baseTexts.actionTook") . " ".$time_elapsed_secs . " s");
-        Session::flash("data",$data);
-        return redirect("caesarCipher");
+        Session::flash('alert-info', trans('baseTexts.actionTook') . ' ' . $time_elapsed_secs . ' s');
+        Session::flash('result', $result);
+        Session::flash('data', $data);
+        return redirect('caesarCipher');
     }
 }

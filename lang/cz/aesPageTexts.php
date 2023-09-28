@@ -1,6 +1,6 @@
 <?php
 return [
-    "annotation" => "",
-    "title" =>"Krypto aplikace - AES",
-    "metaComment" => "",
+    'annotation' => '',
+    'title' =>'Krypto aplikace - AES',
+    'metaComment' => '',
 ];
