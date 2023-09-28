@@ -45,7 +45,7 @@
                                 </div>
                                 <div class="col-lg-6">
                                     <label class="form-label" for="key">@lang('baseTexts.key')</label>
-                                    <input class="form-control" maxlength="30" placeholder="Text without spaces"
+                                    <input class="form-control" maxlength="30"
                                            required type="text" id="key" name="key"
                                            placeholder="@lang('baseTexts.insertKey')" pattern="^[a-zA-Z]*$"
                                            title="@lang("baseTexts.textInputOnly")"
