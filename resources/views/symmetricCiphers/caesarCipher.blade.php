@@ -18,9 +18,9 @@
                         </div>
 
                         <div class="col-lg-4 m-auto">
-                            <a href="img/caesarPage/caesarCipher.png" target="_blank"> <img width="100%"
-                                                                                            src="{{asset("img/caesarPage/caesarCipher.png")}}"
-                                                                                            class="rounded-4"></a>
+                            <a href="{{asset('img/caesarPage/caesarCipher.png')}}" target="_blank"> <img width="100%"
+                                                                                                         src="{{asset("img/caesarPage/caesarCipher.png")}}"
+                                                                                                         class="rounded-4"></a>
                             <figure class="text-center">@lang("caesarPageTexts.alphabetShift")</figure>
                         </div>
                     </div>
@@ -56,28 +56,28 @@
                                         <label class="form-check-label" for="encrypt">@lang('baseTexts.encrypt')</label>
                                         <input class="form-check-input" onclick="flipShiftInput()" required type="radio"
                                                id="encrypt" name="action"
-                                               value=1>
+                                               value={{\App\Algorithms\CipherBase::ALGORITHM_ENCRYPT}}>
                                     </div>
                                     <div class="form-check form-switch">
                                         <label class="form-check-label" for="decrypt">@lang('baseTexts.decrypt')</label>
                                         <input class="form-check-input" onclick="flipShiftInput()" required type="radio"
                                                id="decrypt" name="action"
-                                               value=0>
+                                               value={{\App\Algorithms\CipherBase::ALGORITHM_DECRYPT}}>
                                     </div>
                                     <div class="form-check form-switch">
                                         <label class="form-check-label"
                                                for="bruteforce">@lang('baseTexts.bruteforce')</label>
                                         <input class="form-check-input" onclick="flipShiftInput()" required type="radio"
                                                id="bruteforce" name="action"
-                                               value=2>
+                                               value={{\App\Algorithms\CipherBase::ALGORITHM_DECRYPT_BRUTEFORCE}}>
                                     </div>
                                     <script>
                                         function flipShiftInput() {
                                             if (document.getElementById("bruteforce").checked === true) {
-                                                document.getElementById("shift").readonly = true;
+                                                document.getElementById("shift").disabled = true;
                                                 document.getElementById("shift").value = 0;
                                             } else {
-                                                document.getElementById("shift").readonly = false;
+                                                document.getElementById("shift").disabled = false;
                                             }
                                         }
                                     </script>
@@ -94,28 +94,26 @@
         </div>
     </section>
 
-    @if(isset($data))
+    @if(isset($result))
         <section class="m-5 shadow-lg border rounded-4 p-5">
             <div class="container text-break">
-                @if($data["action"] !== 2)
+                @if((int)$data['action'] !== \App\Algorithms\CipherBase::ALGORITHM_DECRYPT_BRUTEFORCE)
                     <h1 class=""><i class="fa-solid fa-comment"></i> @lang('baseTexts.cipherResult')</h1>
                     <hr/>
                     <div class="row align-items-start">
                         <div class="col-lg-5">
                             <h4><i class="fa-solid fa-keyboard"></i> @lang('baseTexts.insertedText')</h4>
-                            <p>{{$data["text"]}}</p>
+                            <p>{{$result->getInputValue()}}</p>
                         </div>
                         <div class="col-lg-5">
                             <h4><i class="fa-solid fa-rotate"></i> @lang('baseTexts.shift')</h4>
-                            <p>{{$data["shift"]}}</p>
+                            <p>{{$result->getKey()}}</p>
                         </div>
                     </div>
                     <div class="row align-items-start">
                         <div class="col">
-                            @if(isset($data["finalText"]))
-                                <h4><i class="fa-solid fa-circle-down"></i> @lang('baseTexts.outputText')</h4>
-                                <p>{{$data["finalText"]}}</p>
-                            @endif
+                            <h4><i class="fa-solid fa-circle-down"></i> @lang('baseTexts.outputText')</h4>
+                            <p>{{$result->getOutputValue()}}</p>
                         </div>
                     </div>
 
@@ -126,12 +124,12 @@
                         <div class="table-responsive-lg">
                             <table class="table table-bordered">
                                 <tr>
-                                    @if($data["action"] === 1)
+                                    @if($result->getOperation() === \App\Algorithms\CipherBase::ALGORITHM_ENCRYPT)
                                         @foreach(range('A','Z') as $char)
                                             <td class="">{{$char}}</td>
                                         @endforeach
                                     @else
-                                        @foreach($data["shiftedAlphabet"] as $char)
+                                        @foreach($result->getAdditionalInformation()['shiftedAlphabet'] as $char)
                                             <td class=""><b>{{$char}}</b></td>
                                         @endforeach
                                     @endif
@@ -142,8 +140,8 @@
                                     @endforeach
                                 </tr>
                                 <tr>
-                                    @if($data["action"] === 0)
-                                        @foreach($data["shiftedAlphabet"] as $char)
+                                    @if($result->getOperation() === \App\Algorithms\CipherBase::ALGORITHM_ENCRYPT)
+                                        @foreach($result->getAdditionalInformation()['shiftedAlphabet'] as $char)
                                             <td class=""><b>{{$char}}</b></td>
                                         @endforeach
                                     @else
@@ -161,7 +159,7 @@
                     <div class="mt-4">
                         <h1><i class="fa-solid fa-list-ol"></i> @lang('baseTexts.algorithmSteps')</h1>
                         <div class="accordion" id="accordion">
-                            @for($i = 0 ; $i < strlen($data["text"]); $i++)
+                            @for($i = 0 ; $i < strlen($result->getInputValue()); $i++)
                                 <div class="accordion-item">
                                     <h2 class="accordion-header" id="heading{{$i+1}}">
                                         <button class="accordion-button" type="button" data-bs-toggle="collapse"
@@ -173,11 +171,12 @@
                                     <div id="collapse{{$i}}" class="accordion-collapse collapse"
                                          aria-labelledby="heading{{$i}}" data-bs-parent="#accordion{{$i}}">
                                         <div class="accordion-body">
-                                            <h5 class="text-black-50 ">@lang('baseTexts.substitution') {{$data["text"][$i]}}
-                                                => {{$data["finalText"][$i]}} <br/></h5>
+                                            <h5 class="text-black-50 ">@lang('baseTexts.substitution') {{$result->getInputValue()[$i]}}
+                                                => {{$result->getOutputValue()[$i]}} <br/></h5>
                                             <div>
                                                 @lang('baseTexts.actualResult')
-                                                {{substr($data["finalText"],0,$i)}}<b>{{$data["finalText"][$i]}}</b>
+                                                {{substr($result->getOutputValue(),0,$i)}}
+                                                <b>{{$result->getOutputValue()[$i]}}</b>
                                             </div>
                                         </div>
                                     </div>
@@ -185,10 +184,11 @@
                             @endfor
                         </div>
                         @else
-                            <h1 class="text-center"><i class="fa-solid fa-comment"></i> @lang('baseTexts.bruteForceResult')</h1>
+                            <h1 class="text-center"><i
+                                        class="fa-solid fa-comment"></i> @lang('baseTexts.bruteForceResult')</h1>
                             <div class="d-flex p-4 flex-wrap gap-4 border border-2">
-                                @foreach($data["bruteForceResult"] as $result)
-                                    <div><b>{{$loop->index+1}}.</b> {{$result}}</div>
+                                @foreach($result as $data)
+                                    <div><b>{{$loop->index}}.</b> {{$data->getOutputValue()}}</div>
                                 @endforeach
                             </div>
                         @endif
