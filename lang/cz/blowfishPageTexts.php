@@ -18,7 +18,7 @@ Navzdory svému stáří zůstává Blowfish oblíbeným šifrovacím algoritmem
     'leftInput' => 'Levý blok',
     'rightInput' => 'Pravý blok',
     'leftBlockXorOutput' => 'Levý blok XOR subklíč',
-    'rightBlockFeistelOutput' => 'Výstup Feistelovi funkce',
+    'rightBlockFeistelOutput' => 'Výstup rundovní funkce',
     'rightBlockXorOutput' => 'F funkce XOR pravý blok',
     'rightBlockXorKeyOutput' => 'Pravý blok XOR subklíč',
 ];

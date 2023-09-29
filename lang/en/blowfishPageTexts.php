@@ -18,7 +18,7 @@ Despite its age, Blowfish remains a popular encryption algorithm. It has been th
     'leftInput' => 'Left block',
     'rightInput' => 'Right block',
     'leftBlockXorOutput' => 'Left block XOR subkey',
-    'rightBlockFeistelOutput' => 'Feistel function output',
+    'rightBlockFeistelOutput' => 'Round function output',
     'rightBlockXorOutput' => 'F function output XOR right block',
     'rightBlockXorKeyOutput' => 'Right block XOR subkey',
 ];

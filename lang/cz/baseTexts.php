@@ -40,9 +40,10 @@ return [
     'textCannotBeEmpty' => 'Vstupní text musí být vyplněný',
     'actionCannotBeEmpty' => 'Akce musí být zvolena',
     'keyLongerThan448' => 'Klíč nesmí být delší než 448 bitů',
-
-
-    'initVectorDescription' => 'TODO: ADD ME', //TODO ADD THIS TEXT
+    'encryptedText' => 'Zašifrovaný text',
+    'plainText' => 'Otevřený text',
+    'shortLeftSymbol' => 'L',
+    'shortRightSymbol' => 'P',
 
     'notReady' => 'Tato funkce není zatím připravena.',
     '404' => 'Stránka nenalezena!',
