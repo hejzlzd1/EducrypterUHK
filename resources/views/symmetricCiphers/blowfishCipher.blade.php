@@ -88,17 +88,31 @@
                 <hr/>
                 <div class="row align-items-start">
                     <div class="col-lg-5">
-                        <h4><i class="fa-solid fa-keyboard"></i> @lang('baseTexts.insertedText')</h4>
-                        <p>{{$data["text"]}} ({{strlen($data["text"])*8}}bit)</p>
+                        <h4>
+                            <i class="fa-solid fa-keyboard"></i>
+                            @if($result->getOperation() === \App\Algorithms\CipherBase::ALGORITHM_ENCRYPT)
+                                @lang('baseTexts.plainText')
+                            @else
+                                @lang('baseTexts.encryptedText')
+                            @endif
+                        </h4>
+                        <p>{{$data['text']}} ({{strlen($data['text'])*8}}bit)</p>
                     </div>
                     <div class="col-lg-5">
                         <h4><i class="fa-solid fa-key"></i> @lang('baseTexts.key')</h4>
-                        <p>{{$data["key"]}} ({{strlen($data["key"])*8}}bit)</p>
+                        <p>{{$data['key']}} ({{strlen($data['key'])*8}}bit)</p>
                     </div>
                 </div>
                 <div class="row align-items-start">
                     <div class="col-lg">
-                        <h4><i class="fa-solid fa-circle-down"></i> @lang('baseTexts.outputText')</h4>
+                        <h4>
+                            <i class="fa-solid fa-circle-down"></i>
+                            @if($result->getOperation() === \App\Algorithms\CipherBase::ALGORITHM_ENCRYPT)
+                                @lang('baseTexts.encryptedText')
+                            @else
+                                @lang('baseTexts.plainText')
+                            @endif
+                        </h4>
                         <p>{{$result->getOutputValue()}}</p>
                     </div>
                 </div>
@@ -109,7 +123,7 @@
                     @foreach($result->getAdditionalInformation()["subkeys"] as $subkey)
                         <div class="card col-md-2 m-2 p-1">
                             <div class="card-body">
-                                <h4>{{$loop->index+1}}. </h4>
+                                <h4>@lang('baseTexts.key') #{{$loop->index+1}}</h4>
                                 {{base64_encode($subkey)}}
                             </div>
                         </div>
@@ -119,9 +133,11 @@
 
                 <div class="mt-4">
                     <h1><i class="fa-solid fa-list-ol"></i> @lang('baseTexts.algorithmSteps')</h1>
-                    <p>@lang('baseTexts.inputSize') - {{$result->getAdditionalInformation()["inputSize"]}}bit
+                    <p>
+                        @lang('baseTexts.inputSize') - {{$result->getAdditionalInformation()["inputSize"]}}bit
                         ({{ceil($result->getAdditionalInformation()["inputSize"]/64)}} x
-                        64bit {{strtolower(trans("baseTexts.block"))}})</p>
+                        64bit {{strtolower(trans("baseTexts.block"))}})
+                    </p>
                     <div class="accordion" id="blockAccordion">
                         <!-- blocks cycle -->
                         @foreach($result->getSteps() as $block)
@@ -160,30 +176,86 @@
                                                         <div class="accordion-body">
                                                             <div class="d-flex flex-wrap">
                                                                 <div class="col-md-5">
-                                                                    <h3>@lang('blowfishPageTexts.leftInput')</h3>
+                                                                    <h3>
+                                                                        <i class="fa-solid fa-file-lines"></i>
+                                                                        @lang('blowfishPageTexts.leftInput') (@lang('baseTexts.shortLeftSymbol'){{$loop->index + 1}})
+                                                                    </h3>
                                                                     <p>{{$step->getInputLeft()}}</p>
                                                                 </div>
                                                                 <div class="col-md-5">
-                                                                    <h3>@lang('blowfishPageTexts.rightInput')</h3>
+                                                                    <h3>
+                                                                        <i class="fa-solid fa-file-lines"></i>
+                                                                        @lang('blowfishPageTexts.rightInput') (@lang('baseTexts.shortRightSymbol'){{$loop->index + 1}})
+                                                                    </h3>
                                                                     <p>{{$step->getInputRight()}}</p>
                                                                 </div>
                                                             </div>
 
                                                             <hr/>
 
-                                                            @if($loop->last)
+                                                            @if(!$loop->last)
+                                                                <div class="d-flex flex-wrap">
+                                                                    <div class="col-md">
+                                                                        <h3>
+                                                                            <i class="fa-solid fa-key"></i>
+                                                                            @lang('baseTexts.subkey')
+                                                                            #{{$loop->index+1}} (K{{$loop->index+1}})
+                                                                        </h3>
+                                                                        <p>{{$step->getSubkey()}}</p>
+                                                                    </div>
+                                                                </div>
+
+                                                                <hr/>
+                                                                <div
+                                                                    class="d-flex flex-wrap justify-content-start gap-5">
+                                                                    <div class="flex-item">
+                                                                        <h4>
+                                                                            <i class="fa-solid fa-calculator"></i>
+                                                                            @lang('baseTexts.shortLeftSymbol'){{$loop->index + 1}}
+                                                                            ⊕ @lang('baseTexts.shortRightSymbol'){{$loop->index + 1}}
+                                                                        </h4>
+                                                                        <p>{{$step->getLeftBlockAfterXor()}}</p>
+                                                                    </div>
+                                                                    <div>
+                                                                        <h4><i class="fa-solid fa-right-long"></i></h4>
+                                                                    </div>
+                                                                    <div class="flex-item">
+                                                                        <h4>
+                                                                            <i class="fa-solid fa-calculator"></i>
+                                                                            @lang('blowfishPageTexts.rightBlockFeistelOutput')
+                                                                            F(@lang('baseTexts.shortLeftSymbol'){{$loop->index + 1}}
+                                                                            ⊕ K{{$loop->index + 1}})
+                                                                        </h4>
+                                                                        <p>{{$step->getRightBlockAfterFeistel()}}</p>
+                                                                    </div>
+                                                                    <div>
+                                                                        <h4><i class="fa-solid fa-right-long"></i></h4>
+                                                                    </div>
+                                                                    <div class="flex-item">
+                                                                        <h4>
+                                                                            <i class="fa-solid fa-calculator"></i> 
+                                                                            F(@lang('baseTexts.shortLeftSymbol'){{$loop->index + 1}}
+                                                                            ⊕ K{{$loop->index + 1}})
+                                                                            ⊕ @lang('baseTexts.shortRightSymbol'){{$loop->index + 1}}
+                                                                        </h4>
+                                                                        <p>{{$step->getRightBlockAfterXor()}}</p>
+                                                                    </div>
+                                                                </div>
+
+                                                            @else
+
                                                                 <div class="d-flex flex-wrap">
                                                                     <div class="col-md-5">
                                                                         <h3>
                                                                             <i class="fa-solid fa-key"></i> @lang('baseTexts.subkey')
-                                                                            #17</h3>
+                                                                            #17 (K17)</h3>
                                                                         <p>{{$result->getAdditionalInformation()["subkey17"]}}</p>
                                                                     </div>
 
                                                                     <div class="col-md-5">
                                                                         <h3>
                                                                             <i class="fa-solid fa-key"></i> @lang('baseTexts.subkey')
-                                                                            #18</h3>
+                                                                            #18 (K18)</h3>
                                                                         <p>{{$result->getAdditionalInformation()["subkey18"]}}</p>
                                                                     </div>
                                                                 </div>
@@ -191,52 +263,23 @@
                                                                 <hr/>
                                                                 <div class="d-flex flex-wrap">
                                                                     <div class="col-md-5">
-                                                                        <h4>@lang('blowfishPageTexts.leftBlockXorOutput')
-                                                                            #18</h4>
+                                                                        <h4>
+                                                                            <i class="fa-solid fa-calculator"></i>
+                                                                            @lang('baseTexts.shortLeftSymbol')16 ⊕ K18
+                                                                        </h4>
                                                                         <p>{{$step->getLeftBlockAfterXor()}}</p>
                                                                     </div>
                                                                     <div class="col-md-5">
-                                                                        <h4>@lang('blowfishPageTexts.rightBlockXorKeyOutput')
-                                                                            #17</h4>
-                                                                        <p>{{$step->getRightBlockAfterXor()}}</p>
-                                                                    </div>
-                                                                </div>
-                                                            @else
-                                                                <div class="d-flex flex-wrap">
-                                                                    <div class="col-md">
-                                                                        <h3>
-                                                                            <i class="fa-solid fa-key"></i> @lang('baseTexts.subkey')
-                                                                        </h3>
-                                                                        <p>{{$step->getSubkey()}}</p>
-                                                                    </div>
-                                                                </div>
-
-                                                                <hr/>
-                                                                <div class="d-flex flex-wrap justify-content-start gap-5">
-                                                                    <div class="flex-item">
-                                                                        <h4>@lang('blowfishPageTexts.leftBlockXorOutput')</h4>
-                                                                        <p>{{$step->getLeftBlockAfterXor()}}</p>
-                                                                    </div>
-                                                                    <div>
-                                                                        <h4><i class="fa-solid fa-right-long"></i></h4>
-                                                                    </div>
-                                                                    <div class="flex-item">
-                                                                        <h4>@lang('blowfishPageTexts.rightBlockFeistelOutput')</h4>
-                                                                        <p>{{$step->getRightBlockAfterFeistel()}}</p>
-                                                                    </div>
-                                                                    <div>
-                                                                        <h4><i class="fa-solid fa-right-long"></i></h4>
-                                                                    </div>
-                                                                    <div class="flex-item">
-                                                                        <h4>@lang('blowfishPageTexts.rightBlockXorOutput')</h4>
+                                                                        <h4>
+                                                                            <i class="fa-solid fa-calculator"></i>
+                                                                            @lang('baseTexts.shortRightSymbol')16 ⊕ K17
+                                                                        </h4>
                                                                         <p>{{$step->getRightBlockAfterXor()}}</p>
                                                                     </div>
                                                                 </div>
                                                             @endif
-
                                                         </div>
                                                     </div>
-
                                                 </div>
                                             @endforeach
                                         </div>

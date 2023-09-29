@@ -40,11 +40,12 @@ return [
     'textCannotBeEmpty' => 'Input text must be filled in',
     'actionCannotBeEmpty' => 'Action must be choosen',
     'keyLongerThan448' => 'Key cannot be longer than 448-bits',
-
+    'encryptedText' => 'Encrypted text',
+    'plainText' => 'Plain text',
+    'shortLeftSymbol' => 'L',
+    'shortRightSymbol' => 'R',
 
     'initVector' => 'Initialization vector',
-    'initVectorDescription' => 'TODO: ADD ME', //TODO ADD THIS TEXT
-
 
     'notReady' => 'This function is not ready yet.',
 
