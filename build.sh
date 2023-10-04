@@ -1,6 +1,3 @@
-git fetch
-git pull
-
 if [ -d "vendor" ]; then
   echo "Removing 'vendor' directory..."
   rm -rf vendor
