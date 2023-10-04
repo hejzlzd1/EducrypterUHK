@@ -63,7 +63,12 @@ class Vigenere extends CipherBase
             }
         }
 
-        return new BasicOutput($this->text, $output, $this->operation, $this->key);
+        return new BasicOutput(
+            inputValue: $this->text,
+            operation: $this->operation,
+            key: $this->key,
+            outputValue: $output
+        );
     }
 
     public function decrypt(): BasicOutput|string
@@ -97,6 +102,11 @@ class Vigenere extends CipherBase
             }
         }
 
-        return new BasicOutput($this->text, $output, $this->operation, $this->key);
+        return new BasicOutput(
+            inputValue: $this->text,
+            operation: $this->operation,
+            key: $this->key,
+            outputValue: $output
+        );
     }
 }
