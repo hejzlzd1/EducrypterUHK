@@ -44,6 +44,8 @@ return [
     'plainText' => 'Plain text',
     'shortLeftSymbol' => 'L',
     'shortRightSymbol' => 'R',
+    'copy' => 'Copy',
+    'copyDone' => 'Copied!',
 
     'initVector' => 'Initialization vector',
 

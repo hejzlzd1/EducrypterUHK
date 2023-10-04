@@ -106,7 +106,11 @@
                             </div>
                         @endif
                         <div class="col-lg-5">
-                            <h4><i class="fa-solid fa-circle-down"></i> @lang('baseTexts.outputText')</h4>
+                            <h4>
+                                <i class="fa-solid fa-circle-down"></i>
+                                @lang('baseTexts.outputText')
+                                <x-copyButton :textToCopy="$result->getOutputValue()"></x-copyButton>
+                            </h4>
                             <p>{{$result->getOutputValue()}}</p>
                         </div>
                     </div>

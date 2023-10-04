@@ -98,7 +98,9 @@
         <section class="m-5 shadow-lg border rounded-4 p-5">
             <div class="container text-break">
                 @if((int)$data['action'] !== \App\Algorithms\CipherBase::ALGORITHM_DECRYPT_BRUTEFORCE)
-                    <h1 class=""><i class="fa-solid fa-comment"></i> @lang('baseTexts.cipherResult')</h1>
+                    <h1 class="">
+                        <i class="fa-solid fa-comment"></i> @lang('baseTexts.cipherResult')
+                    </h1>
                     <hr/>
                     <div class="row align-items-start">
                         <div class="col-lg-5">
@@ -112,7 +114,11 @@
                     </div>
                     <div class="row align-items-start">
                         <div class="col">
-                            <h4><i class="fa-solid fa-circle-down"></i> @lang('baseTexts.outputText')</h4>
+                            <h4>
+                                <i class="fa-solid fa-circle-down"></i>
+                                @lang('baseTexts.outputText')
+                                <x-copyButton :textToCopy="$result->getOutputValue()"></x-copyButton>
+                            </h4>
                             <p>{{$result->getOutputValue()}}</p>
                         </div>
                     </div>

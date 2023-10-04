@@ -44,6 +44,8 @@ return [
     'plainText' => 'Otevřený text',
     'shortLeftSymbol' => 'L',
     'shortRightSymbol' => 'P',
+    'copy' => 'Kopírovat',
+    'copyDone' => 'Vloženo do schránky',
 
     'notReady' => 'Tato funkce není zatím připravena.',
     '404' => 'Stránka nenalezena!',

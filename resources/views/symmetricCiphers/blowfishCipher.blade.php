@@ -112,6 +112,7 @@
                             @else
                                 @lang('baseTexts.plainText')
                             @endif
+                            <x-copyButton :textToCopy="$result->getOutputValue()"></x-copyButton>
                         </h4>
                         <p>{{$result->getOutputValue()}}</p>
                     </div>
