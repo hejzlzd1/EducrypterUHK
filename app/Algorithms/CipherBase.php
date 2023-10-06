@@ -125,5 +125,12 @@ abstract class CipherBase
         $this->operation = $operation;
     }
 
-
+    public function convertTextToBinary($text)
+    {
+        $binary = '';
+        for ($i = 0; $i < strlen($text); $i++) {
+            $binary .= sprintf("%08b", ord($text[$i]));
+        }
+        return $binary;
+    }
 }

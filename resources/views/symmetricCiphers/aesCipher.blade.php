@@ -90,10 +90,8 @@
                                 </div>
                             </fieldset>
                         </div>
-                        <div class="m-auto text-center">
-                            <input type="submit" class="btn btn-primary form-control w-auto"
-                                   value="@lang('baseTexts.submit')">
-                        </div>
+
+                        @include('components.submitButton')
                     </form>
                 </div>
             </div>
