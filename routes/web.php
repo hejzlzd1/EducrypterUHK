@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\A5_1Controller;
 use App\Http\Controllers\AesCipherController;
 use App\Http\Controllers\BlowfishCipherController;
 use App\Http\Controllers\CaesarCipherController;
@@ -58,5 +59,8 @@ Route::post("aesCipher",[AesCipherController::class,"compute"])->name("aesCipher
 
 Route::get("rsaCipher",[RsaController::class,"index"])->name("rsaCipher");
 Route::post("rsaCipher",[RsaController::class,"compute"])->name("rsaCipherCompute");
+
+Route::get("a51",[A5_1Controller::class,"index"])->name("a51");
+Route::post("a51",[A5_1Controller::class,"compute"])->name("a51Compute");
 
 

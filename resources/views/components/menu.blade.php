@@ -30,37 +30,37 @@
                         @lang("menuTexts.symetricAlgo")
                     </a>
                     <ul class="dropdown-menu">
-                        <li class="dropdown-item disabled">@lang("menuTexts.classicCiphers")</li>
-                        <li><a class="dropdown-item" href="{{route("caesarCipher")}}">@lang("menuTexts.caesarCipher")</a></li>
-                        <li><a class="dropdown-item" href="/todo">@lang("menuTexts.vernamCipher")</a></li>
-                        <li><a class="dropdown-item" href="{{route("vigenereCipher")}}">@lang("menuTexts.vigenereCipher")</a></li>
+                        <li class="dropdown-item disabled">@lang('menuTexts.classicCiphers')</li>
+                        <li><a class="dropdown-item" href="{{route('caesarCipher')}}">@lang('menuTexts.caesarCipher')</a></li>
+                        <li><a class="dropdown-item" href="/todo">@lang('menuTexts.vernamCipher')</a></li>
+                        <li><a class="dropdown-item" href="{{route('vigenereCipher')}}">@lang('menuTexts.vigenereCipher')</a></li>
 
                         <li><hr class="dropdown-divider"></li>
-                        <li class="dropdown-item disabled">@lang("menuTexts.blockCiphers")</li>
-                        <li><a class="dropdown-item" href="{{route("aesCipher")}}">AES</a></li>
-                        <li><a class="dropdown-item" href="{{route("blowfishCipher")}}">Blowfish</a></li>
+                        <li class="dropdown-item disabled">@lang('menuTexts.blockCiphers')</li>
+                        <li><a class="dropdown-item" href="{{route('aesCipher')}}">AES</a></li>
+                        <li><a class="dropdown-item" href="{{route('blowfishCipher')}}">Blowfish</a></li>
                         <li><a class="dropdown-item" href="/todo">DES</a></li>
                         <li><a class="dropdown-item" href="/todo">TripleDES</a></li>
 
                         <li><hr class="dropdown-divider"></li>
                         <li class="dropdown-item disabled">@lang("menuTexts.streamCiphers")</li>
-                        <li><a class="dropdown-item" href="/todo">A5/1</a></li>
+                        <li><a class="dropdown-item" href="{{route('a51')}}">A5/1</a></li>
                     </ul>
                 </li>
 
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="/" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        @lang("menuTexts.asymetricAlgo")
+                        @lang('menuTexts.asymetricAlgo')
                     </a>
                     <ul class="dropdown-menu">
                         <li><a class="dropdown-item" href="/todo">DSA</a></li>
-                        <li><a class="dropdown-item" href="{{route("rsaCipher")}}">RSA</a></li>
+                        <li><a class="dropdown-item" href="{{route('rsaCipher')}}">RSA</a></li>
                     </ul>
                 </li>
 
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="/" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        @lang("menuTexts.cipherInformation")
+                        @lang('menuTexts.cipherInformation')
                     </a>
                     <ul class="dropdown-menu">
                         <li><a class="dropdown-item" href="/todo">@lang('menuTexts.classicCiphers')</a></li>
