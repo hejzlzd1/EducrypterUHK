@@ -3,32 +3,53 @@
 namespace App\Algorithms\Ciphers;
 
 use App\Algorithms\Output\BasicOutput;
+use App\Algorithms\Output\Steps\A5_1Step;
 use App\Algorithms\StreamCipher;
 
 class A5_1 extends StreamCipher
 {
-    //TODO: add step mechanism
     private string $keyStream = '';
     private BasicOutput $output;
+    private array $keyArray;
+    private array $dataFrameArray;
 
-    public function __construct(string $text, ?string $key, int $operation, string $iv)
+    /**
+     * Registers for A5/1 cipher
+     */
+    protected array $R1 = array();
+    protected array $R2 = array();
+    protected array $R3 = array();
+
+    public function __construct(string $text, ?string $key, int $operation, int $dataFrame)
     {
-        $this->iv = $iv;
         parent::__construct($text, $key, $operation);
+        $this->key = $this->expandOrTrimToSpecificBits(data: $this->textToBinary($this->key), size: 64);
+        $this->dataFrame = $this->expandOrTrimToSpecificBits(data: decbin($dataFrame), size: 22);
+        $this->keyArray = str_split($this->key, 1);
+        $this->dataFrameArray = str_split($this->dataFrame, 1);
+
         $this->initializeRegisters(); // Initialize the A5/1 registers
         $this->output = new BasicOutput(inputValue: $text, operation: $operation, key: $key);
-        $this->output->addAdditionalInformation(['iv' => $this->iv]);
+        $this->output->addAdditionalInformation(['dataFrameBinary' => $this->dataFrame, 'dataFrame' => $dataFrame]);
     }
+
 
     public function encrypt(): BasicOutput|string
     {
-        $keystream = $this->generateKeystream(strlen($this->text));
+        //ISSUE - when binary to text -> ascii random chars that cannot be displayed? Solve this
+        $binText = $this->textToBinary($this->text);
+        $keystream = $this->generateKeystream(strlen($binText));
         $ciphertext = '';
-        for ($i = 0; $i < strlen($this->text); $i++) {
-            $ciphertext .= $this->text[$i] ^ $keystream[$i]; // Perform encryption
+        for ($i = 0; $i < strlen($binText); $i++) {
+            $step = $this->output->getStep($i); // get step
+            $step->setInput($binText[$i]); // set input bit
+
+            $ciphertext .= ($binText[$i] ^ (int)$keystream[$i]); // Perform encryption
+
+            $step->setOutput($binText[$i] ^ (int)$keystream[$i]); // set output after xor with text
         }
 
-        $this->output->setOutputValue($ciphertext);
+        $this->output->setOutputValue($this->binaryToText($ciphertext));
         return $this->output; // Return the result of parent's encrypt method
     }
 
@@ -37,38 +58,104 @@ class A5_1 extends StreamCipher
         return $this->encrypt(); // A5/1 encryption and decryption are the same
     }
 
-    public function generateKeystream($length)
+    public function initializeRegisters()
+    {
+        $this->R1 = array_fill(0, 19, 0);
+        $this->R2 = array_fill(0, 22, 0);
+        $this->R3 = array_fill(0, 23, 0);
+
+        for ($i = 0; $i < 64; $i++) {
+            $this->clockAllRegisters(irregular: false);
+            $keyBit = ($this->keyArray[63 - $i]);
+            $this->R1[0] ^= $keyBit;
+            $this->R2[0] ^= $keyBit;
+            $this->R3[0] ^= $keyBit;
+        }
+
+        for ($i = 0; $i < 22; $i++) {
+            $this->clockAllRegisters(irregular: false);
+            $frameBit = ($this->dataFrameArray[21 - $i]);
+            $this->R1[0] ^= $frameBit;
+            $this->R2[0] ^= $frameBit;
+            $this->R3[0] ^= $frameBit;
+        }
+
+        for ($i = 0; $i < 100; $i++) {
+            $this->clockAllRegisters();
+        }
+    }
+
+    public function generateKeystream($length): string
     {
         for ($i = 0; $i < $length; $i++) {
-            $this->clockAllRegisters(); // Clock all registers in A5/1
+            $step = new A5_1Step(
+                registerA: implode('', $this->R1),
+                registerB: implode('', $this->R2),
+                registerC: implode('', $this->R3),
+            );
+            $this->clockAllRegisters(); // Clock all registers depending on majority bit
+            $step->setClockedRegisters(
+                a: implode('', $this->R1),
+                b: implode('', $this->R2),
+                c: implode('', $this->R3),
+            );
             $bit = $this->getOutputBit(); // Get the output bit
+            $step->setKeyStreamBit($bit);
             $this->keyStream .= $bit; // Append the output bit to the keystream
+            $this->output->addStep($step);
         }
         return $this->keyStream; // Return the generated keystream
     }
 
-    private function clockAllRegisters()
-    {
-        $this->registers['a'] = $this->clock($this->registers['a']);
-        $this->registers['b'] = $this->clock($this->registers['b']);
-        $this->registers['c'] = $this->clock($this->registers['c']);
+    private function getMajorityBit($a, $b, $c) {
+        $countOnes = $a + $b + $c;
+        return ($countOnes >= 2) ? 1 : 0;
     }
 
-    private function getOutputBit()
+    private function clockAllRegisters(bool $irregular = true): void
     {
-        // Calculate the majority bit using bitwise operations
-        $maj = ($this->registers['a'][18] & $this->registers['b'][21]) ^
-            ($this->registers['a'][22] & $this->registers['b'][23]) ^
-            ($this->registers['a'][7] & $this->registers['b'][8]);
+        if ($irregular) {
+            $majority = $this->getMajorityBit($this->R1[8], $this->R2[10], $this->R3[10]);
 
-        return $maj; // Return the majority bit
+
+            if ($this->R1[8] == $majority) {
+                $this->R1 = $this->clock($this->R1, [13, 16, 17, 18]);
+            }
+
+            if ($this->R2[10] == $majority) {
+                $this->R2 = $this->clock($this->R2, [20, 21]);
+            }
+
+            if ($this->R3[10] == $majority) {
+                $this->R3 = $this->clock($this->R3, [7, 20, 21, 22]);
+            }
+        } else {
+            $this->R1 = $this->clock($this->R1, [13, 16, 17, 18]);
+            $this->R2 = $this->clock($this->R2, [20, 21]);
+            $this->R3 = $this->clock($this->R3, [7, 20, 21, 22]);
+        }
     }
 
-    private function clock($register)
+
+    private function clock(&$register, $taps): array
     {
-        // Perform clocking of a single register in A5/1
-        $bit = ((int)$register[8] ^ (int)$register[10] ^ (int)$register[11] ^ (int)$register[12]) & 1;
-        $register = $bit . $register;
-        return $register; // Return the clocked register
+        $feedback = 0;
+        foreach ($taps as $tap) {
+            $feedback ^= $register[$tap];
+        }
+
+        for ($i = count($register) - 1; $i > 0; $i--) {
+            $register[$i] = $register[$i - 1];
+        }
+
+        $register[0] = $feedback;
+
+        return $register;
     }
+
+    private function getOutputBit(): string
+    {
+        return $this->R1[18] ^ $this->R2[21] ^ $this->R3[22];
+    }
+
 }

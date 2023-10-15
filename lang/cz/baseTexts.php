@@ -5,7 +5,7 @@ return [
     'encrypt' => 'Šifrovat',
     'decrypt' => 'Dešifrovat',
     'bruteforce' => 'Dešifrovat hrubou silou',
-    'action' => 'Prováděná akce:',
+    'action' => 'Prováděná akce',
     'text' => 'Vstupní text',
     'shift' => 'Počet posunutí',
     'inputText' => 'Zadej vstupní text',
@@ -36,9 +36,6 @@ return [
     'subkey' => 'Subklíč',
     'subkeys' => 'Subklíče',
     'primeNumber' => 'Prvočíslo',
-    'keyCannotBeEmpty' => 'Klíč musí být vyplněný',
-    'textCannotBeEmpty' => 'Vstupní text musí být vyplněný',
-    'actionCannotBeEmpty' => 'Akce musí být zvolena',
     'keyLongerThan448' => 'Klíč nesmí být delší než 448 bitů',
     'encryptedText' => 'Zašifrovaný text',
     'plainText' => 'Otevřený text',
@@ -46,6 +43,12 @@ return [
     'shortRightSymbol' => 'P',
     'copy' => 'Kopírovat',
     'copyDone' => 'Vloženo do schránky',
+
+    'cannotBeEmpty' => 'Vstupní hodnoty [:variableName] musí být vyplněné. ',
+    'notBinary' => 'Vstupní hodnoty [:variableName] musí být v binární. ',
+
+    'binaryInputPrompt' => 'Vlož binární řetězec',
+    'binaryInput' => 'Binarní vstup',
 
     'notReady' => 'Tato funkce není zatím připravena.',
     '404' => 'Stránka nenalezena!',

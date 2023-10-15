@@ -1,0 +1,162 @@
+<?php
+
+namespace App\Algorithms\Output\Steps;
+
+class A5_1Step extends Step
+{
+    private string $registerA;
+    private string $registerB;
+    private string $registerC;
+
+    private ?string $registerAClocked = '';
+    private ?string $registerBClocked = '';
+    private ?string $registerCClocked = '';
+
+    private string $keyStreamBit;
+
+    /**
+     * @param string $registerA
+     * @param string $registerB
+     * @param string $registerC
+     * @param string|null $registerAClocked
+     * @param string|null $registerBClocked
+     * @param string|null $registerCClocked
+     */
+    public function __construct(
+        string $registerA,
+        string $registerB,
+        string $registerC,
+        ?string $registerAClocked = '',
+        ?string $registerBClocked = '',
+        ?string $registerCClocked = ''
+    ) {
+        $this->registerA = $registerA;
+        $this->registerB = $registerB;
+        $this->registerC = $registerC;
+        $this->registerAClocked = $registerAClocked;
+        $this->registerBClocked = $registerBClocked;
+        $this->registerCClocked = $registerCClocked;
+        parent::__construct();
+    }
+
+
+    /**
+     * @return string
+     */
+    public function getRegisterA(): string
+    {
+        return $this->registerA;
+    }
+
+    /**
+     * @param string $registerA
+     */
+    public function setRegisterA(string $registerA): void
+    {
+        $this->registerA = $registerA;
+    }
+
+    /**
+     * @return string
+     */
+    public function getRegisterB(): string
+    {
+        return $this->registerB;
+    }
+
+    /**
+     * @param string $registerB
+     */
+    public function setRegisterB(string $registerB): void
+    {
+        $this->registerB = $registerB;
+    }
+
+    /**
+     * @return string
+     */
+    public function getRegisterC(): array
+    {
+        return $this->registerC;
+    }
+
+    /**
+     * @param string $registerC
+     */
+    public function setRegisterC(string $registerC): void
+    {
+        $this->registerC = $registerC;
+    }
+
+    /**
+     * @return string
+     */
+    public function getRegisterAClocked(): string
+    {
+        return $this->registerAClocked;
+    }
+
+    /**
+     * @param string $registerAClocked
+     */
+    public function setRegisterAClocked(string $registerAClocked): void
+    {
+        $this->registerAClocked = $registerAClocked;
+    }
+
+    /**
+     * @return string
+     */
+    public function getRegisterBClocked(): string
+    {
+        return $this->registerBClocked;
+    }
+
+    /**
+     * @param string $registerBClocked
+     */
+    public function setRegisterBClocked(string $registerBClocked): void
+    {
+        $this->registerBClocked = $registerBClocked;
+    }
+
+    /**
+     * @return string
+     */
+    public function getRegisterCClocked(): string
+    {
+        return $this->registerCClocked;
+    }
+
+    /**
+     * @param string $registerCClocked
+     */
+    public function setRegisterCClocked(string $registerCClocked): void
+    {
+        $this->registerCClocked = $registerCClocked;
+    }
+
+    /**
+     * @return string
+     */
+    public function getKeyStreamBit(): string
+    {
+        return $this->keyStreamBit;
+    }
+
+    /**
+     * @param string $keyStreamBit
+     */
+    public function setKeyStreamBit(string $keyStreamBit): void
+    {
+        $this->keyStreamBit = $keyStreamBit;
+    }
+
+    public function setClockedRegisters(string $a, string $b, string $c)
+    {
+        $this->registerAClocked = $a;
+        $this->registerBClocked = $b;
+        $this->registerCClocked = $c;
+    }
+
+}

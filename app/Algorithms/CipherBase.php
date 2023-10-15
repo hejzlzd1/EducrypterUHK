@@ -63,7 +63,8 @@ abstract class CipherBase
 
     /**
      * Format key to match size of text
-     * @param $key
+     * @param string $key
+     * @param int $length
      * @return string
      */
     public function resizeKey(string $key, int $length)
@@ -125,12 +126,32 @@ abstract class CipherBase
         $this->operation = $operation;
     }
 
-    public function convertTextToBinary($text)
-    {
-        $binary = '';
+    public function textToBinary($text): string {
+        $binaryString = '';
+
         for ($i = 0; $i < strlen($text); $i++) {
-            $binary .= sprintf("%08b", ord($text[$i]));
+            $char = $text[$i];
+            $asciiValue = ord($char);
+            $binaryValue = decbin($asciiValue);
+
+            // Pad the binary value to 8 bits (1 byte) if needed
+            $binaryValue = str_pad($binaryValue, 8, '0', STR_PAD_LEFT);
+
+            $binaryString .= $binaryValue;
         }
-        return $binary;
+
+        return $binaryString;
+    }
+
+    public function binaryToText($binaryString) {
+        $text = '';
+        $binaryChunks = str_split($binaryString, 8); // Split into 8-bit chunks
+
+        foreach ($binaryChunks as $binaryChunk) {
+            $decimalValue = bindec($binaryChunk); // Convert binary to decimal
+            $text .= chr($decimalValue); // Convert decimal to character
+        }
+
+        return $text;
     }
 }

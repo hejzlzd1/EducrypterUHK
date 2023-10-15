@@ -36,9 +36,6 @@ return [
     'subkey' => 'Subkey',
     'subkeys' => 'Subkeys',
     'primeNumber' => 'Prime number',
-    'keyCannotBeEmpty' => 'Key must be filled in',
-    'textCannotBeEmpty' => 'Input text must be filled in',
-    'actionCannotBeEmpty' => 'Action must be choosen',
     'keyLongerThan448' => 'Key cannot be longer than 448-bits',
     'encryptedText' => 'Encrypted text',
     'plainText' => 'Plain text',
@@ -46,6 +43,12 @@ return [
     'shortRightSymbol' => 'R',
     'copy' => 'Copy',
     'copyDone' => 'Copied!',
+    'binaryInput' => 'Binary input',
+    'binaryInputPrompt' => 'Fill in binary string',
+    'binaryKeyInput' => 'Binary key',
+    'binaryKeyInputPrompt' => 'Input key in binary',
+    'cannotBeEmpty' => 'Input values [:variableName] cannot be empty. ',
+    'notBinary' => 'Input values [:variableName] must be in binary. ',
 
     'initVector' => 'Initialization vector',
 

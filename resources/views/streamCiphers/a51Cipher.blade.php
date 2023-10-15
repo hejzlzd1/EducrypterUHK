@@ -1,6 +1,6 @@
 @extends("components/pageTemplate")
-@section("title",__('caesarPageTexts.title'))
-@section("comment",__('caesarPageTexts.metaComment'))
+@section("title",__('a51PageTexts.title'))
+@section("comment",__('a51PageTexts.metaComment'))
 @section("content")
 
 
@@ -18,7 +18,7 @@
                         </div>
 
                         <div class="col-lg-4 m-auto">
-                            <a href="{{asset('img/caesarPage/caesarCipher.png')}}" target="_blank"> <img width="100%"
+                            <a href="{{asset('img/a51Page/caesarCipher.png')}}" target="_blank"> <img width="100%"
                                                                                                          src="{{asset("img/a51Page/a51Cipher.png")}}"
                                                                                                          class="rounded-4"></a>
                             <figure class="text-center">@lang("a51PageTexts.imageDescription")</figure>
@@ -36,23 +36,27 @@
                             @csrf
                             <fieldset class="row p-2">
                                 <div class="col-lg-6">
-                                    <label class="form-label" for="text">@lang('baseTexts.text')</label>
-                                    <input class="form-control" maxlength="40" minlength="1" required type="text"
+                                    <label class="form-label" for="text">@lang('baseTexts.binaryInput')</label>
+                                    <input class="form-control binaryValidation" maxlength="114" minlength="1" required type="text"
                                            id="text" name="text"
-                                           placeholder="@lang('baseTexts.inputText')"
+                                           placeholder="@lang('baseTexts.binaryInputPrompt')"
                                            @if(isset($data['text']))value="{{$data['text']}}"@endif>
                                 </div>
                                 <div class="col-lg-6">
                                     <label class="form-label" for="key">@lang('baseTexts.key')</label>
-                                    <input class="form-control" type="text" id="key" name="key" placeholder="@lang('baseTexts.insertKey')"
+                                    <input class="form-control binaryValidation" min="1" max="64" type="text" id="key" name="key" placeholder="@lang('baseTexts.insertKey')" required
                                            @if(isset($data['key']))value="{{$data['key']}}" @else value="" @endif>
                                 </div>
                             </fieldset>
                             <fieldset class="row p-2">
                                 <div class="col-lg-6">
-                                    <label class="form-label" for="key">@lang('baseTexts.iv')</label>
-                                    <input class="form-control" type="text" id="iv" name="iv" placeholder="@lang('baseTexts.inputIV')" required
-                                           @if(isset($data['iv']))value="{{$data['iv']}}" @else value="" @endif>
+                                    <label class="form-label" for="key">@lang('baseTexts.dataFrame')</label>
+                                    <input class="form-control" type="number" max="4194304" min="0" id="dataFrame" name="dataFrame" placeholder="@lang('a51Texts.inputDataFrame')" required
+                                           @if(isset($data['dataFrame']))value="{{$data['dataFrame']}}" @else value="" @endif>
+                                </div>
+                                <div class="col-lg-6">
+                                    <label class="form-label" for="extendedRegisterStepping">@lang('a51PageTexts.extendedRegisterSteps')</label>
+                                    <input class="form-control" type="checkbox" id="extendedRegisterStepping" name="extendedRegisterStepping">
                                 </div>
                             </fieldset>
                             <div class="p-2">
@@ -99,8 +103,8 @@
                             <p>{{$result->getKey()}}</p>
                         </div>
                         <div class="col-lg-5">
-                            <h4><i class="fa-solid fa-key"></i> @lang('baseTexts.iv')</h4>
-                            <p>{{$result->getAdditionalInformation()['iv']}}</p>
+                            <h4><i class="fa-solid fa-key"></i> @lang('baseTexts.dataFrame')</h4>
+                            <p>{{$result->getAdditionalInformation()['dataFrame']}}</p>
                         </div>
                     </div>
                     <div class="row align-items-start">

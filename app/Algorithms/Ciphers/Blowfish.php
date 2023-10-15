@@ -5,9 +5,9 @@ namespace App\Algorithms\Ciphers;
 use App\Algorithms\BlockCipher;
 use App\Algorithms\CipherBase;
 use App\Algorithms\Output\BasicOutput;
-use App\Algorithms\Output\BlowfishBlockStep;
 use App\Algorithms\Output\BlowfishRound;
 use App\Algorithms\Output\BlowfishStep;
+use App\Algorithms\Output\Steps\BlowfishBlockStep;
 use Exception;
 
 // 64bit block implementation of ecb blowfish

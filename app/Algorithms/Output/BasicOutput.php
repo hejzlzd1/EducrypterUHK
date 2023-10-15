@@ -2,6 +2,8 @@
 
 namespace App\Algorithms\Output;
 
+use App\Algorithms\Output\Steps\Step;
+
 class BasicOutput
 {
     private string $inputValue;
@@ -10,6 +12,7 @@ class BasicOutput
     private ?array $additionalInformation;
     private ?string $key;
     private ?array $steps;
+    private ?int $keyStream;
 
     /**
      * @param string $inputValue
@@ -140,4 +143,26 @@ class BasicOutput
     {
         $this->additionalInformation = array_merge($this->additionalInformation, $information);
     }
+
+    public function getStep(int $i): Step
+    {
+        return $this->steps[$i];
+    }
+
+    /**
+     * @return int|null
+     */
+    public function getKeyStream(): ?int
+    {
+        return $this->keyStream;
+    }
+
+    /**
+     * @param int|null $keyStream
+     */
+    public function setKeyStream(?int $keyStream): void
+    {
+        $this->keyStream = $keyStream;
+    }
+
 }

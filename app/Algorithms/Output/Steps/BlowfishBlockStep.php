@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Algorithms\Output;
+namespace App\Algorithms\Output\Steps;
 
+use App\Algorithms\Output\BlowfishRound;
 use JetBrains\PhpStorm\Pure;
 
 /**

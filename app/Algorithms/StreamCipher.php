@@ -4,46 +4,35 @@ namespace App\Algorithms;
 
 class StreamCipher extends CipherBase
 {
-    protected string $iv;
-    protected array $registers = array();
+    protected string $dataFrame;
 
-    public function initializeRegisters()
+    /**
+     * @return int
+     */
+    public function getIv(): int
     {
-        $this->registers['a'] = $this->convertTextToBinary($this->key);
-        $this->registers['b'] = $this->convertTextToBinary($this->iv);
-        $this->registers['c'] = str_repeat('0', 64);
+        return $this->dataFrame;
     }
 
     /**
-     * @return string
+     * @param int $dataFrame
      */
-    public function getIv(): string
+    public function setIv(int $dataFrame): void
     {
-        return $this->iv;
+        $this->dataFrame = $dataFrame;
     }
 
-    /**
-     * @param string $iv
-     */
-    public function setIv(string $iv): void
-    {
-        $this->iv = $iv;
-    }
 
-    /**
-     * @return array
-     */
-    public function getRegisters(): array
+    protected function expandOrTrimToSpecificBits($data, $size, $isString = true)
     {
-        return $this->registers;
+        $dataLength = mb_strlen($data);
+        if ($dataLength < $size) {
+            // If data is shorter, pad with zeros
+                $data = str_pad($data, $size, "0", STR_PAD_LEFT);
+        } elseif ($dataLength > $size) {
+            // If data is longer, truncate to x bits
+            $data = mb_substr($data, 0, $size);
+        }
+        return $data;
     }
-
-    /**
-     * @param array $registers
-     */
-    public function setRegisters(array $registers): void
-    {
-        $this->registers = $registers;
-    }
-
 }

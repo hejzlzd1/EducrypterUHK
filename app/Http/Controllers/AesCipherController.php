@@ -2,10 +2,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Session;
 
-class AesCipherController extends Controller
+class AesCipherController extends BaseController
 {
     function index()
     {
@@ -18,6 +17,14 @@ class AesCipherController extends Controller
         $timerStart = microtime(true);
         $data = $request->all();
 
+        $this->basicValidate($data);
+
+        if(!empty($this->validationFailedVariable)){
+            Session::flash('alert-error', $this->getValidationErrorTranslation());
+            return back()->withInput($data);
+        }
+
+        //TODO finish aes
         $ivText = 'LHG0xiZoQHusxqsdwadLQe';
         $iv = base64_decode($ivText);
         $bits = $data['bits'];
@@ -33,24 +40,6 @@ class AesCipherController extends Controller
         Session::flash('alert-info',trans('baseTexts.actionTook') . ' '.$time_elapsed_secs . ' s');
         Session::flash('data',$data);
         return redirect('aesCipher');
-    }
-
-    function hextobin($hexstr)
-    {
-        $n = strlen($hexstr);
-        $sbin = '';
-        $i = 0;
-        while ($i < $n) {
-            $a = substr($hexstr, $i, 2);
-            $c = pack('H*', $a);
-            if ($i == 0) {
-                $sbin = $c;
-            } else {
-                $sbin .= $c;
-            }
-            $i += 2;
-        }
-        return $sbin;
     }
 
 }
