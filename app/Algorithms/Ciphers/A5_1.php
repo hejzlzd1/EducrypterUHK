@@ -10,8 +10,6 @@ class A5_1 extends StreamCipher
 {
     private string $keyStream = '';
     private BasicOutput $output;
-    private array $keyArray;
-    private array $dataFrameArray;
 
     /**
      * Registers for A5/1 cipher
@@ -23,33 +21,31 @@ class A5_1 extends StreamCipher
     public function __construct(string $text, ?string $key, int $operation, int $dataFrame)
     {
         parent::__construct($text, $key, $operation);
-        $this->key = $this->expandOrTrimToSpecificBits(data: $this->textToBinary($this->key), size: 64);
+        $this->key = $this->expandOrTrimToSpecificBits(data: $this->key, size: 64);
+        $dataFrameInteger = $dataFrame;
         $this->dataFrame = $this->expandOrTrimToSpecificBits(data: decbin($dataFrame), size: 22);
-        $this->keyArray = str_split($this->key, 1);
-        $this->dataFrameArray = str_split($this->dataFrame, 1);
 
         $this->initializeRegisters(); // Initialize the A5/1 registers
         $this->output = new BasicOutput(inputValue: $text, operation: $operation, key: $key);
-        $this->output->addAdditionalInformation(['dataFrameBinary' => $this->dataFrame, 'dataFrame' => $dataFrame]);
+        $this->output->addAdditionalInformation(['dataFrameBinary' => $this->dataFrame, 'dataFrame' => $dataFrameInteger]);
     }
 
 
     public function encrypt(): BasicOutput|string
     {
-        //ISSUE - when binary to text -> ascii random chars that cannot be displayed? Solve this
-        $binText = $this->textToBinary($this->text);
-        $keystream = $this->generateKeystream(strlen($binText));
+        $keystream = $this->generateKeystream(strlen($this->text)); // Generate keystream to encrypt input by xoring bits with it
         $ciphertext = '';
-        for ($i = 0; $i < strlen($binText); $i++) {
+        for ($i = 0; $i < strlen($this->text); $i++) {
             $step = $this->output->getStep($i); // get step
-            $step->setInput($binText[$i]); // set input bit
+            $step->setInput($this->text[$i]); // set input bit
 
-            $ciphertext .= ($binText[$i] ^ (int)$keystream[$i]); // Perform encryption
+            $ciphertext .= ($this->text[$i] ^ (int)$keystream[$i]); // Perform encryption
 
-            $step->setOutput($binText[$i] ^ (int)$keystream[$i]); // set output after xor with text
+            $step->setOutput($this->text[$i] ^ (int)$keystream[$i]); // set output after xor with text
         }
 
-        $this->output->setOutputValue($this->binaryToText($ciphertext));
+        $this->output->setOutputValue($ciphertext);
+
         return $this->output; // Return the result of parent's encrypt method
     }
 
@@ -66,7 +62,7 @@ class A5_1 extends StreamCipher
 
         for ($i = 0; $i < 64; $i++) {
             $this->clockAllRegisters(irregular: false);
-            $keyBit = ($this->keyArray[63 - $i]);
+            $keyBit = ($this->key[63 - $i]);
             $this->R1[0] ^= $keyBit;
             $this->R2[0] ^= $keyBit;
             $this->R3[0] ^= $keyBit;
@@ -74,7 +70,7 @@ class A5_1 extends StreamCipher
 
         for ($i = 0; $i < 22; $i++) {
             $this->clockAllRegisters(irregular: false);
-            $frameBit = ($this->dataFrameArray[21 - $i]);
+            $frameBit = ($this->key[21 - $i]);
             $this->R1[0] ^= $frameBit;
             $this->R2[0] ^= $frameBit;
             $this->R3[0] ^= $frameBit;
@@ -116,7 +112,6 @@ class A5_1 extends StreamCipher
     {
         if ($irregular) {
             $majority = $this->getMajorityBit($this->R1[8], $this->R2[10], $this->R3[10]);
-
 
             if ($this->R1[8] == $majority) {
                 $this->R1 = $this->clock($this->R1, [13, 16, 17, 18]);

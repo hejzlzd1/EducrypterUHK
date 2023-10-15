@@ -54,10 +54,6 @@
                                     <input class="form-control" type="number" max="4194304" min="0" id="dataFrame" name="dataFrame" placeholder="@lang('a51Texts.inputDataFrame')" required
                                            @if(isset($data['dataFrame']))value="{{$data['dataFrame']}}" @else value="" @endif>
                                 </div>
-                                <div class="col-lg-6">
-                                    <label class="form-label" for="extendedRegisterStepping">@lang('a51PageTexts.extendedRegisterSteps')</label>
-                                    <input class="form-control" type="checkbox" id="extendedRegisterStepping" name="extendedRegisterStepping">
-                                </div>
                             </fieldset>
                             <div class="p-2">
                                 <fieldset>
@@ -105,6 +101,10 @@
                         <div class="col-lg-5">
                             <h4><i class="fa-solid fa-key"></i> @lang('baseTexts.dataFrame')</h4>
                             <p>{{$result->getAdditionalInformation()['dataFrame']}}</p>
+                        </div>
+                        <div class="col-lg-5">
+                            <h4><i class="fa-solid fa-0"></i><i class="fa-solid fa-1"></i> @lang('baseTexts.dataFrameBinary')</h4>
+                            <p>{{$result->getAdditionalInformation()['dataFrameBinary']}}</p>
                         </div>
                     </div>
                     <div class="row align-items-start">
