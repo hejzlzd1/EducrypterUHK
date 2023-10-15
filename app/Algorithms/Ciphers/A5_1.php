@@ -34,6 +34,7 @@ class A5_1 extends StreamCipher
     public function encrypt(): BasicOutput|string
     {
         $keystream = $this->generateKeystream(strlen($this->text)); // Generate keystream to encrypt input by xoring bits with it
+        $this->output->addAdditionalInformation(['keyStream' => $keystream]);
         $ciphertext = '';
         for ($i = 0; $i < strlen($this->text); $i++) {
             $step = $this->output->getStep($i); // get step

@@ -152,11 +152,21 @@ class A5_1Step extends Step
         $this->keyStreamBit = $keyStreamBit;
     }
 
-    public function setClockedRegisters(string $a, string $b, string $c)
+    public function setClockedRegisters(string $a, string $b, string $c): void
     {
         $this->registerAClocked = $a;
         $this->registerBClocked = $b;
         $this->registerCClocked = $c;
     }
+
+    public function getRegistersBeforeClock(): array
+    {
+        return ['R1' => $this->registerA, 'R2' => $this->registerB, 'R3' => $this->registerC];
+    }
+    public function getRegistersAfterClock(): array
+    {
+        return ['R1' => $this->registerAClocked, 'R2' => $this->registerBClocked, 'R3' => $this->registerCClocked];
+    }
+
 
 }

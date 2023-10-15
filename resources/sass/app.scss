@@ -14,6 +14,7 @@
     position: fixed;
     right: 10px;
     top: 60px;
+    z-index: 9999;
 }
 
 $c-black: #111;
@@ -209,3 +210,10 @@ $c-purples: #532E62, #8E44AD, #9B59B6;
     background: #555;
 }
 
+.register-R1-8, .register-R2-10, .register-R3-10 {
+    background-color: palevioletred !important;
+}
+
+.register-R1-18, .register-R1-17, .register-R1-16, .register-R1-13, .register-R2-21, .register-R2-20, .register-R3-22, .register-R3-21, .register-R3-20, .register-R3-7 {
+    background-color: lightgray !important;
+}
