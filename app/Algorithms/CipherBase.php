@@ -63,7 +63,8 @@ abstract class CipherBase
 
     /**
      * Format key to match size of text
-     * @param $key
+     * @param string $key
+     * @param int $length
      * @return string
      */
     public function resizeKey(string $key, int $length)
@@ -123,14 +124,5 @@ abstract class CipherBase
     public function setOperation(int $operation): void
     {
         $this->operation = $operation;
-    }
-
-    public function convertTextToBinary($text)
-    {
-        $binary = '';
-        for ($i = 0; $i < strlen($text); $i++) {
-            $binary .= sprintf("%08b", ord($text[$i]));
-        }
-        return $binary;
     }
 }

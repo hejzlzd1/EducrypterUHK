@@ -171,7 +171,7 @@
                                                     <div id="stepCollapse{{$loop->index}}{{$loop->parent->index}}"
                                                          class="accordion-collapse collapse"
                                                          aria-labelledby="stepHeading{{$loop->index}}{{$loop->parent->index}}"
-                                                         data-bs-parent="#stepAccordion{{$loop->parent->index}}">
+                                                         data-bs-parent="#stepCollapse{{$loop->parent->index}}">
                                                         <div class="accordion-body">
                                                             <div class="d-flex flex-wrap">
                                                                 <div class="col-md-5">

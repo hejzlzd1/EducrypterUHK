@@ -13,3 +13,16 @@ function clickToCopyText(textToCopy, elem) {
         copyDoneElement.hide();
     }, 3000);
 }
+
+$(document).ready(function() {
+    $('.binaryValidation').on('input', function(event) {
+        const inputValue = $(this).val();
+        const binaryPattern = /^[01]+$/;
+
+        if (!binaryPattern.test(inputValue)) {
+            event.target.setCustomValidity('Invalid input. Only 0 and 1 are allowed.');
+        } else {
+            event.target.setCustomValidity('');
+        }
+    });
+});

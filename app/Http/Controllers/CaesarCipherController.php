@@ -9,11 +9,10 @@ use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
-use Illuminate\Routing\Controller;
 use Illuminate\Routing\Redirector;
 use Illuminate\Support\Facades\Session;
 
-class CaesarCipherController extends Controller
+class CaesarCipherController extends BaseController
 {
     public function index(): Factory|View|Application
     {
@@ -30,17 +29,12 @@ class CaesarCipherController extends Controller
         $timerStart = microtime(true);
         $data = $request->all();
 
-        if (!isset($data['action'])) {
-            Session::flash('alert-error', trans('baseTexts.actionCannotBeEmpty'));
-            return redirect('caesarCipher');
-        }
-        if (!isset($data['shift']) && (int)$data['action'] !== CipherBase::ALGORITHM_DECRYPT_BRUTEFORCE) {
-            Session::flash('alert-error', trans('baseTexts.keyCannotBeEmpty'));
-            return redirect('caesarCipher');
-        }
-        if (!is_string($data['text']) || empty($data['text'])) {
-            Session::flash('alert-error', trans('baseTexts.textCannotBeEmpty'));
-            return redirect('caesarCipher');
+        $data['key'] = $data['action'] === CipherBase::ALGORITHM_DECRYPT_BRUTEFORCE ? 0 : $data['shift'] ?? null;
+        $this->basicValidate($data);
+
+        if(!empty($this->validationFailedVariable)){
+            Session::flash('alert-error', $this->getValidationErrorTranslation());
+            return back()->withInput($data);
         }
 
         $caesarCipher = new Caesar(inputValue: $data['text'], shift: $data['shift'] ?? 0, operation: $data['action']);
