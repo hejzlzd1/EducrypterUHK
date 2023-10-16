@@ -18,6 +18,11 @@ class A5_1 extends StreamCipher
     protected array $R2 = array();
     protected array $R3 = array();
 
+    /*
+     * Theoretical info:
+     * http://koclab.cs.ucsb.edu/teaching/cren/project/2017/jensen+andersen.pdf
+     * This implementation is based on information in pdf above
+     */
     public function __construct(string $text, ?string $key, int $operation, int $dataFrame)
     {
         parent::__construct($text, $key, $operation);
@@ -90,7 +95,11 @@ class A5_1 extends StreamCipher
                 registerB: implode('', $this->R2),
                 registerC: implode('', $this->R3),
             );
+            $majorityBit = $this->getMajorityBit($this->R1[8], $this->R2[10], $this->R3[10]);
+            $step->setMajorityBit($majorityBit);
+            $step->setToBeClocked([$this->R1[8] === $majorityBit ? 'R1' : '', $this->R2[10] === $majorityBit ? 'R2' : '', $this->R3[10] === $majorityBit ? 'R3' : '']);
             $this->clockAllRegisters(); // Clock all registers depending on majority bit
+
             $step->setClockedRegisters(
                 a: implode('', $this->R1),
                 b: implode('', $this->R2),
