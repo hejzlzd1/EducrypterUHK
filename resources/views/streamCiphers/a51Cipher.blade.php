@@ -107,7 +107,7 @@
                     <div class="col-lg-5">
                         <h4>
                             <i class="fa-solid fa-key"></i>
-                            @lang('A51PageTexts.keyStream')
+                            @lang('a51PageTexts.keyStream')
                         </h4>
                         <p>{{$result->getAdditionalInformation()['keyStream']}}</p>
                     </div>
@@ -143,16 +143,16 @@
                                     <div class="accordion-body">
                                         <div class="majorityBit">
                                             <h5>
-                                                <i class="fa-solid fa-gears"></i> @lang('A51PageTexts.majorityBit'):
+                                                <i class="fa-solid fa-gears"></i> @lang('a51PageTexts.majorityBit'):
                                             </h5>
-                                            <p>{{$step->getMajorityBit()}} => @lang('A51PageTexts.toBeClocked')
+                                            <p>{{$step->getMajorityBit()}} => @lang('a51PageTexts.toBeClocked')
                                                 [{{$step->getToBeClocked()}}]</p>
                                         </div>
                                         <hr>
                                         <div class="d-flex flex-wrap justify-content-lg-between registers">
                                             <div class="flex-column p-2 overflow-auto">
                                                 <h4>
-                                                    <i class="fa-solid fa-layer-group"></i> @lang('A51PageTexts.registersBeforeClock')
+                                                    <i class="fa-solid fa-layer-group"></i> @lang('a51PageTexts.registersBeforeClock')
                                                 </h4>
                                                 @foreach($step->getRegistersBeforeClock() as $key => $register)
                                                     <div class="register-{{$key}} m-1">
@@ -173,7 +173,7 @@
                                             </div>
                                             <div class="flex-column p-2 overflow-auto">
                                                 <h4>
-                                                    <i class="fa-solid fa-layer-group"></i> @lang('A51PageTexts.registersAfterClock')
+                                                    <i class="fa-solid fa-layer-group"></i> @lang('a51PageTexts.registersAfterClock')
                                                 </h4>
                                                 @foreach($step->getRegistersAfterClock() as $key => $register)
                                                     <div class="register-{{$key}}">
@@ -199,7 +199,7 @@
                                             <div class="col-lg-6">
                                                 <h5>
                                                     <i class="fa-solid fa-gears"></i> KB
-                                                    - @lang('A51PageTexts.keystreamBit') (R1[18] ⊕ R2[21] ⊕ R3[22])
+                                                    - @lang('a51PageTexts.keystreamBit') (R1[18] ⊕ R2[21] ⊕ R3[22])
                                                 </h5>
                                                 <p>{{substr($result->getAdditionalInformation()['keyStream'], 0, $loop->index)}}
                                                     <b>{{$step->getKeystreamBit()}}</b></p>
@@ -207,7 +207,7 @@
                                             <div class="col-lg-6">
                                                 <h5>
                                                     <i class="fa-solid fa-keyboard"></i> IB
-                                                    - @lang('A51PageTexts.inputBit')
+                                                    - @lang('a51PageTexts.inputBit')
                                                 </h5>
                                                 <p>
                                                     {{substr($result->getInputValue(), 0, $loop->index)}}
@@ -216,7 +216,7 @@
                                             </div>
                                             <div class="col-lg-6">
                                                 <h5>
-                                                    <i class="fa-solid fa-circle-down"></i> @lang('A51PageTexts.outputBit')
+                                                    <i class="fa-solid fa-circle-down"></i> @lang('a51PageTexts.outputBit')
                                                     (KB ⊕ IB)
                                                 </h5>
                                                 <p>
