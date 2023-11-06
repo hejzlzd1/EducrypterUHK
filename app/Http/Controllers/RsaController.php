@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Algorithms\CipherBase;
+use App\Algorithms\Ciphers\Rsa;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 
@@ -9,12 +11,11 @@ class RsaController extends BaseController
 {
     function index()
     {
-        if (Session::exists('data')) {
-            return view('asymmetricCiphers/rsaCipher')->with(['data' => Session::get('data')]);
+        if (Session::exists('result')) {
+            return view('asymmetricCiphers/RsaCipher')->with(
+                ['result' => Session::get('result'), 'data' => Session::get('data')]
+            );
         }
-
-        //Session::flash('alert-warning', trans('baseTexts.notReady'));
-        //return redirect()->back();
 
         return view('asymmetricCiphers/rsaCipher');
     }
@@ -24,53 +25,37 @@ class RsaController extends BaseController
         $timerStart = microtime(true);
         $data = $request->all();
 
-        $this->basicValidate($data);
-        $this->isVariableSet($data['primeNumber1'], self::TYPE_NONZERO_NUMBER, trans('baseTexts.primeNumber'));
-        $this->isVariableSet($data['primeNumber2'], self::TYPE_NONZERO_NUMBER, trans('baseTexts.primeNumber'));
+        $this->isVariableSet($data['text'], self::TYPE_TEXT, trans('baseTexts.text'));
+        $this->isVariableSet($data['action'], self::TYPE_NUMBER, trans('baseTexts.action'));
+        $this->isVariableSet((int)$data['primeNumber1'], self::TYPE_NONZERO_NUMBER, trans('baseTexts.primeNumber') . ' #1');
+        $this->isVariableSet((int)$data['primeNumber2'], self::TYPE_NONZERO_NUMBER, trans('baseTexts.primeNumber') . ' #2');
+        $firstInputNumber = $data['primeNumber1'];
+        $secondInputNumber = $data['primeNumber2'];
+        $this->isPrimeNumber($firstInputNumber, trans('baseTexts.primeNumber') . ' #1');
+        $this->isPrimeNumber($secondInputNumber, trans('baseTexts.primeNumber') . ' #2');
 
         if (!empty($this->validationFailedVariable)) {
             Session::flash('alert-error', $this->getValidationErrorTranslation());
             return back()->withInput($data);
         }
 
-        $firstInputNumber = $data['primeNumber1'];
-        $secondInputNumber = $data['primeNumber2'];
-
-        //Error if number is not prime number
-        if (!$this->isPrimeNumber($firstInputNumber)) {
-            return redirect()->back()->with('alert-error', trans('rsaPageTexts.firstNumberNotPrime'));
-        }
-        if (!$this->isPrimeNumber($secondInputNumber)) {
-            return redirect()->back()->with('alert-error', trans('rsaPageTexts.secondNumberNotPrime'));
+        try {
+            $rsa = new Rsa($data['text'], null, $data['action'], $firstInputNumber, $secondInputNumber);
+        } catch (\Exception $e) {
+            Session::flash('alert-error', $e->getMessage());
+            return back();
         }
 
-        //TODO finish this -> use new Encryption class - this code is deprecated
+        $result = match ($rsa->getOperation()) {
+            CipherBase::ALGORITHM_DECRYPT => $rsa->decrypt(),
+            CipherBase::ALGORITHM_ENCRYPT => $rsa->encrypt()
+        };
 
-        if ($data['action'] == 'encrypt') {
-            //$data['finalText'] = base64_encode($bf->b_encrypt($data['text']));
-        } else {
-            //$data['finalText'] = $bf->b_decrypt(base64_decode($data['text']));
-        }
-
+        dd($result);
 
         $time_elapsed_secs = microtime(true) - $timerStart;
         Session::flash('alert-info', trans('baseTexts.actionTook') . ' ' . $time_elapsed_secs . ' s');
         Session::flash('data', $data);
         return redirect('rsaCipher');
-    }
-
-    function isPrimeNumber($number): bool
-    {
-        if ($number <= 1) {
-            return false;
-        }
-
-        $sqrt = floor(sqrt($number));
-        for ($i = 2; $i <= $sqrt; $i++) {
-            if ($number % $i == 0) {
-                return false;
-            }
-        }
-        return true;
     }
 }

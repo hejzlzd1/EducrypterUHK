@@ -2,8 +2,6 @@
 @section("title",__('rsaPageTexts.title'))
 @section("comment",__('rsaPageTexts.metaComment'))
 @section("content")
-
-
     <div class="anchor" id="info"></div>
 
     <section class="m-5">
@@ -18,9 +16,8 @@
                         </div>
 
                         <div class="col-lg-4 m-auto">
-                            <a href="img/rsaPage/rsaCipher.png" target="_blank"> <img width="100%"
-                                                                                            src="{{asset("img/rsaPage/rsaPageCipher.png")}}"
-                                                                                            class="rounded-4"></a>
+                            <a href="{{asset('img/rsaPage/rsaCipher.png')}}" target="_blank">
+                                <img width="100%" src="{{asset("img/rsaPage/rsaPageCipher.png")}}" class="rounded-4"></a>
                             <figure class="text-center">@lang("rsaPageTexts.schema")</figure>
                         </div>
                     </div>
@@ -46,12 +43,12 @@
                             <fieldset class="row p-2">
                                 <div class="col-lg-6">
                                     <label class="form-label" for="primeNumber1">1. @lang('baseTexts.primeNumber')</label>
-                                    <input class="form-control" min="1" type="number" id="primeNumber1" name="primeNumber1" onchange="checkIsPrime('primeNumber1', 'primeNumber2')"
+                                    <input class="form-control primeNumber" min="1" type="number" id="primeNumber1" name="primeNumber1"
                                            @if(isset($data["primeNumber1"]))value="{{$data["primeNumber1"]}}"@endif required>
                                 </div>
                                 <div class="col-lg-6">
                                     <label class="form-label" for="primeNumber2">2. @lang('baseTexts.primeNumber')</label>
-                                    <input class="form-control" min="1" type="number" id="primeNumber2" name="primeNumber2" onchange="checkIsPrime('primeNumber2', 'primeNumber1')"
+                                    <input class="form-control primeNumber" min="1" type="number" id="primeNumber2" name="primeNumber2"
                                            @if(isset($data["primeNumber2"]))value="{{$data["primeNumber2"]}}" @endif required>
                                 </div>
                                 <div id="error-dialog" style="display: none;" class="text-danger">Error: Some input values are not prime numbers</div>
@@ -65,13 +62,13 @@
                                         <label class="form-check-label" for="encrypt">@lang('baseTexts.encrypt')</label>
                                         <input class="form-check-input" required type="radio"
                                                id="encrypt" name="action"
-                                               value="encrypt">
+                                            value={{\App\Algorithms\CipherBase::ALGORITHM_ENCRYPT}}>
                                     </div>
                                     <div class="form-check form-switch">
                                         <label class="form-check-label" for="decrypt">@lang('baseTexts.decrypt')</label>
                                         <input class="form-check-input" required type="radio"
                                                id="decrypt" name="action"
-                                               value="decrypt">
+                                               value={{\App\Algorithms\CipherBase::ALGORITHM_DECRYPT}}>
                                     </div>
                                 </fieldset>
                             </div>
@@ -124,56 +121,5 @@
             </div>
         </section>
     @endif
-    <script>
-        function checkIsPrime(inputId, otherInputId) {
-            const input = document.getElementById(inputId);
-            const otherInput = document.getElementById(otherInputId);
-            const number = input.value;
-            const otherNumber = otherInput.value;
-
-            let firstResult = isPrime(number);
-            let secondResult = isPrime(otherNumber);
-
-            if (number <= 1 || !firstResult || !secondResult && (number !== "" && otherNumber !== "")) {
-                showErrorDialog();
-                !firstResult ? input.style.color = "red" : input.style.color = "black";
-                !secondResult ? otherInput.style.color = "red" : otherInput.style.color = "black";
-                if(number <= 1){
-                    input.style.color = "red";
-                    otherInput.style.color = "red";
-                }
-                document.getElementById("submit").disabled = true;
-            } else {
-                hideErrorDialog();
-                input.style.color = 'black'
-                otherInput.style.color = 'black'
-                document.getElementById("submit").disabled = false;
-            }
-        }
-
-        function isPrime(number) {
-            if (number <= 1) {
-                return false;
-            }
-
-            const sqrt = Math.floor(Math.sqrt(number));
-            for (let i = 2; i <= sqrt; i++) {
-                if (number % i === 0) {
-                    return false;
-                }
-            }
-            return true;
-        }
-
-        function showErrorDialog() {
-            const errorDialog = document.getElementById('error-dialog');
-            errorDialog.style.display = 'block';
-        }
-
-        function hideErrorDialog() {
-            const errorDialog = document.getElementById('error-dialog');
-            errorDialog.style.display = 'none';
-        }
-    </script>
     @include("components/footer")
 @endsection

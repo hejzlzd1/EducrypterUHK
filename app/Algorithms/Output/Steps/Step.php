@@ -4,11 +4,12 @@ namespace App\Algorithms\Output\Steps;
 
 class Step
 {
-    private string $input;
     private string $output;
 
-    public function __construct(string $input = ''){
-        $this->input = $input;
+    public function __construct(
+        private string $input = ''
+    ) {
+        //
     }
 
     /**
