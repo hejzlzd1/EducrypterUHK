@@ -13,6 +13,7 @@ class Rsa extends CipherBase
         $this->key = $key;
         $this->operation = $operation;
     }
+
     /**
      * @return BasicOutput
      */
@@ -26,10 +27,14 @@ class Rsa extends CipherBase
              * e must be co-prime to phi and
              * smaller than phi.
              */
-            if (gmp_gcd($e, $phi) == 1)
+
+
+            if (gmp_gcd($e, $phi) == 1) {
                 break;
-            else
+            } else {
                 $e++;
+            }
+
         }
         $k = 2; // A constant value
         $d = (1 + ($k * $phi)) / $e;
@@ -56,17 +61,18 @@ class Rsa extends CipherBase
              * e must be co-prime to phi and
              * smaller than phi.
              */
-            if (gmp_gcd($e, $phi) == 1)
+            if (gmp_gcd($e, $phi) == 1) {
                 break;
-            else
+            } else {
                 $e++;
+            }
         }
 
         $result = '';
         foreach (explode('|', $this->text) as $char) {
-            $c = pow($char, $e);
+            $c = pow((int)$char, $e);
             $c = $c % $n;
-            $result .= $c;
+            $result .= $c . '|';
         }
 
         // Return the resulting output object

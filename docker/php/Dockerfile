@@ -1,4 +1,14 @@
-FROM php:8.2.12-apache
+FROM php:8.2-apache
+
+# Install required system packages and dependencies
+RUN apt-get update && apt-get install -y \
+    libgmp-dev \
+    && rm -rf /var/lib/apt/lists/*
+
+# Compile and install the GMP extension
+RUN docker-php-ext-configure gmp \
+    && docker-php-ext-install gmp
+
 RUN curl -SLO https://deb.nodesource.com/nsolid_setup_deb.sh \
     && chmod 500 nsolid_setup_deb.sh \
     && ./nsolid_setup_deb.sh 21 \
@@ -21,3 +31,4 @@ RUN a2enmod rewrite \
 
 RUN usermod -u 1000 www-data
 RUN groupmod -g 1000 www-data
+

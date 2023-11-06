@@ -50,12 +50,12 @@ class RsaController extends BaseController
             CipherBase::ALGORITHM_DECRYPT => $rsa->decrypt(),
             CipherBase::ALGORITHM_ENCRYPT => $rsa->encrypt()
         };
-
         dd($result);
 
         $time_elapsed_secs = microtime(true) - $timerStart;
         Session::flash('alert-info', trans('baseTexts.actionTook') . ' ' . $time_elapsed_secs . ' s');
         Session::flash('data', $data);
+        Session::flash('result', $result);
         return redirect('rsaCipher');
     }
 }
