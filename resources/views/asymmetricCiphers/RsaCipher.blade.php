@@ -37,19 +37,26 @@
                                     <input class="form-control" maxlength="40" minlength="1" required type="text"
                                            id="text" name="text"
                                            placeholder="@lang('baseTexts.inputText')"
-                                           @if(isset($data["text"]))value="{{$data["text"]}}"@endif>
+                                           @if(isset($data["text"]))value="{{$data["text"]}}"@endif />
+                                </div>
+                                <div class="col-lg-6">
+                                    <label class="form-label" for="text">@lang('baseTexts.privateKey')</label>
+                                    <input class="form-control disableOnEncrypt" min=1 required type="number"
+                                           id="key" name="key"
+                                           placeholder="@lang('baseTexts.inputPrivateKey')"
+                                           @if(isset($data["key"]))value="{{$data["key"]}}"@endif />
                                 </div>
                             </fieldset>
                             <fieldset class="row p-2">
                                 <div class="col-lg-6">
                                     <label class="form-label" for="primeNumber1">1. @lang('baseTexts.primeNumber')</label>
-                                    <input class="form-control primeNumber" min="1" type="number" id="primeNumber1" name="primeNumber1"
-                                           @if(isset($data["primeNumber1"]))value="{{$data["primeNumber1"]}}"@endif required>
+                                    <input class="form-control primeNumber" placeholder="@lang('baseTexts.insertPrimeNumber')" min="1" type="number" id="primeNumber1" name="primeNumber1"
+                                           @if(isset($data["primeNumber1"]))value="{{$data["primeNumber1"]}}"@endif required />
                                 </div>
                                 <div class="col-lg-6">
                                     <label class="form-label" for="primeNumber2">2. @lang('baseTexts.primeNumber')</label>
-                                    <input class="form-control primeNumber" min="1" type="number" id="primeNumber2" name="primeNumber2"
-                                           @if(isset($data["primeNumber2"]))value="{{$data["primeNumber2"]}}" @endif required>
+                                    <input class="form-control primeNumber" placeholder="@lang('baseTexts.insertPrimeNumber')" min="1" type="number" id="primeNumber2" name="primeNumber2"
+                                           @if(isset($data["primeNumber2"]))value="{{$data["primeNumber2"]}}" @endif required />
                                 </div>
                                 <div id="error-dialog" style="display: none;" class="text-danger">Error: Some input values are not prime numbers</div>
 
@@ -81,7 +88,7 @@
         </div>
     </section>
 
-    @if(isset($data))
+    @if(isset($result))
         <section class="m-5 shadow-lg border rounded-4 p-5">
             <div class="container text-break">
 
@@ -91,6 +98,10 @@
                         <div class="col-lg-5">
                             <h4>@lang('baseTexts.insertedText')</h4>
                             <p>{{$data["text"]}}</p>
+                        </div>
+                        <div class="col-lg-5">
+                            <h4>@lang('baseTexts.reformatedText')</h4>
+                            <p>{{$result->getInputValue()}}</p>
                         </div>
                     </div>
                     <div class="row align-items-start">

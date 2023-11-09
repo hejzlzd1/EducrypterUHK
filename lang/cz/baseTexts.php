@@ -36,6 +36,7 @@ return [
     'subkey' => 'Subklíč',
     'subkeys' => 'Subklíče',
     'primeNumber' => 'Prvočíslo',
+    'insertPrimeNumber' => 'Vlož prvočíslo',
     'keyLongerThan448' => 'Klíč nesmí být delší než 448 bitů',
     'encryptedText' => 'Zašifrovaný text',
     'plainText' => 'Otevřený text',

@@ -27,7 +27,7 @@ $(".close").click(function () {
         .fadeOut();
 });
 
-$(document).ready(function() {
+$(document).ready(function () {
     function clickToCopyText(textToCopy, elem) {
         navigator.clipboard.writeText(textToCopy);
         let iconElement = $(elem).find('i').first();
@@ -36,7 +36,7 @@ $(document).ready(function() {
         iconElement.addClass('fa-check wiggle');
         copyDoneElement.show();
 
-        setTimeout(function() {
+        setTimeout(function () {
             // After 3 seconds, remove the 'wiggle' class to stop the animation and add copy icon
             iconElement.removeClass('fa-check wiggle');
             iconElement.addClass('fa-copy');
@@ -44,7 +44,14 @@ $(document).ready(function() {
         }, 3000);
     }
 
-    $('.binaryValidation').on('input', function(event) {
+    $('#encrypt').on('change', function () {
+        $('.disableOnEncrypt').attr('disabled', true)
+    });
+    $('#decrypt').on('change', function () {
+        $('.disableOnEncrypt').removeAttr('disabled')
+    });
+
+    $('.binaryValidation').on('input', function (event) {
         const inputValue = $(this).val();
         const binaryPattern = /^[01]+$/;
 
@@ -55,8 +62,8 @@ $(document).ready(function() {
         }
     });
 
-    $('.primeNumber').each(function(){
-        $(this).on('change', function() {
+    $('.primeNumber').each(function () {
+        $(this).on('change', function () {
             checkPrimeInputs();
         });
     });
@@ -68,22 +75,18 @@ $(document).ready(function() {
         let firstResult = isPrime(primeNumber1.val());
         let secondResult = isPrime(primeNumber2.val());
 
-        if (!firstResult || !secondResult || primeNumber1.val() < 1 || primeNumber2.val() < 1 ) {
+        if (!firstResult || !secondResult) {
             showErrorDialog();
-            if (primeNumber1 < 1 || !firstResult) {
+            if (!firstResult) {
                 primeNumber1.css('color', 'red');
-            }
-
-            if (primeNumber2 < 1 || !secondResult) {
-                primeNumber2.css("color", "red");
-            }
-
-            if (primeNumber2 >= 1 && secondResult) {
-                primeNumber2.css('color', 'black');
-            }
-
-            if (primeNumber1 >= 1 && firstResult) {
+            } else {
                 primeNumber1.css('color', 'black');
+            }
+
+            if (!secondResult) {
+                primeNumber2.css("color", "red");
+            } else {
+                primeNumber2.css('color', 'black');
             }
 
             $("#submit").prop('disabled', true);
@@ -96,7 +99,7 @@ $(document).ready(function() {
     }
 
     function isPrime(number) {
-        if(isNaN(number)) {
+        if (isNaN(number)) {
             return false;
         }
         if (number <= 1) {

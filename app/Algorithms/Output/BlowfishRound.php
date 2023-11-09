@@ -7,29 +7,16 @@ namespace App\Algorithms\Output;
  */
 class BlowfishRound
 {
-    private string $inputLeft;
-    private string $inputRight;
-    private string $leftBlockAfterXor;
-    private string $rightBlockAfterXor;
-    private string $rightBlockAfterFeistel;
-    private string $subkey;
-
     /**
      * All attributes needs to be encoded to be in more 'human friendly' representation
-     * @param string $inputLeft
-     * @param string $inputRight
-     * @param string $leftBlockAfterXor
-     * @param string $rightBlockAfterXor
-     * @param string $rightBlockAfterFeistel
-     * @param string $subkey
      */
     public function __construct(
-        string $inputLeft,
-        string $inputRight,
-        string $leftBlockAfterXor,
-        string $rightBlockAfterXor,
-        string $rightBlockAfterFeistel,
-        string $subkey
+        private string $inputLeft,
+        private string $inputRight,
+        private string $leftBlockAfterXor,
+        private string $rightBlockAfterXor,
+        private string $rightBlockAfterFeistel,
+        private string $subkey
     ) {
         $this->inputLeft = base64_encode($inputLeft);
         $this->inputRight = base64_encode($inputRight);

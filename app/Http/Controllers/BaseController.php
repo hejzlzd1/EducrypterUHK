@@ -32,21 +32,22 @@ class BaseController extends Controller
 
     protected function isVariableSet(string|int|null $variable, int $type, string $variableName): void
     {
+        if(!isset($variable)) {
+            $this->validationFailedVariable[self::VALIDATION_EMPTY] = $variableName;
+            return;
+        }
         if ($type === self::TYPE_TEXT) {
             if (!is_string($variable) || empty($variable)) {
-                $this->validationFailed = true;
+                $this->validationFailedVariable[self::VALIDATION_EMPTY] = $variableName;
             }
         } elseif ($type === self::TYPE_NONZERO_NUMBER) {
             if (!is_numeric($variable) || empty($variable)) {
-                $this->validationFailed = true;
+                $this->validationFailedVariable[self::VALIDATION_EMPTY] = $variableName;
             }
         } elseif ($type === self::TYPE_NUMBER) {
             if (!is_numeric($variable)) {
-                $this->validationFailed = true;
+                $this->validationFailedVariable[self::VALIDATION_EMPTY] = $variableName;
             }
-        }
-        if ($this->validationFailed) {
-            $this->validationFailedVariable[self::VALIDATION_EMPTY] = $variableName;
         }
     }
 

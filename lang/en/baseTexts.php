@@ -36,6 +36,7 @@ return [
     'subkey' => 'Subkey',
     'subkeys' => 'Subkeys',
     'primeNumber' => 'Prime number',
+    'insertPrimeNumber' => 'Please insert prime number',
     'keyLongerThan448' => 'Key cannot be longer than 448-bits',
     'encryptedText' => 'Encrypted text',
     'plainText' => 'Plain text',

@@ -27,6 +27,9 @@ class RsaController extends BaseController
 
         $this->isVariableSet($data['text'], self::TYPE_TEXT, trans('baseTexts.text'));
         $this->isVariableSet($data['action'], self::TYPE_NUMBER, trans('baseTexts.action'));
+        if ($data['action'] === CipherBase::ALGORITHM_DECRYPT) {
+            $this->isVariableSet($data['key'], self::TYPE_NONZERO_NUMBER, trans('baseTexts.privateKey'));
+        }
         $this->isVariableSet((int)$data['primeNumber1'], self::TYPE_NONZERO_NUMBER, trans('baseTexts.primeNumber') . ' #1');
         $this->isVariableSet((int)$data['primeNumber2'], self::TYPE_NONZERO_NUMBER, trans('baseTexts.primeNumber') . ' #2');
         $firstInputNumber = $data['primeNumber1'];
@@ -40,7 +43,7 @@ class RsaController extends BaseController
         }
 
         try {
-            $rsa = new Rsa($data['text'], null, $data['action'], $firstInputNumber, $secondInputNumber);
+            $rsa = new Rsa($data['text'], $data['key'] ?? null, $data['action'], $firstInputNumber, $secondInputNumber);
         } catch (\Exception $e) {
             Session::flash('alert-error', $e->getMessage());
             return back();
@@ -50,7 +53,7 @@ class RsaController extends BaseController
             CipherBase::ALGORITHM_DECRYPT => $rsa->decrypt(),
             CipherBase::ALGORITHM_ENCRYPT => $rsa->encrypt()
         };
-        dd($result);
+
 
         $time_elapsed_secs = microtime(true) - $timerStart;
         Session::flash('alert-info', trans('baseTexts.actionTook') . ' ' . $time_elapsed_secs . ' s');
