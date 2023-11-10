@@ -9,11 +9,11 @@ use App\Algorithms\Output\Steps\RSAStep;
 
 class Rsa extends CipherBase
 {
-    public function __construct(string $text, ?int $key, int $operation, private int $p, private int $q)
+    public function __construct(string $text,private ?int $publicKey, private ?int $privateKey, int $operation, private ?int $p, private ?int $q)
     {
-        // For this case we convert input string into ascii, each character splitted by '|'
+        // For this case we convert input string into ascii, each character splitted by ' '
         $text = $operation === CipherBase::ALGORITHM_ENCRYPT ? $this->getAsciiFromString($text) : $text;
-        parent::__construct($text, $key, $operation);
+        parent::__construct($text, null, $operation);
     }
 
     /**
@@ -21,30 +21,27 @@ class Rsa extends CipherBase
      */
     public function decrypt(): BasicOutput
     {
-        $n = $this->p * $this->q;
+        $n = $this->publicKey;
         $result = '';
-        $c = 1;
         $steps = [];
-        $d = $this->key;
+        $d = $this->privateKey;
 
-        foreach (explode('|', $this->text) as $char) {
-            $c *= $char;
+        //TODO: fix decryption algorithm
+        foreach (explode(' ', $this->text) as $char) {
+            $c = pow($char,$d);
             $cBeforeModulo = $c;
-            $c %= $n;
+            $c = $c % $n;
             $result .= $c . ' ';
             $steps[] = new RSAStep(beforeModulo: $cBeforeModulo, inputChar: (int)$char, outputChar: $c);
-
-            $d--;
         }
-
 
        // Return the resulting output object
         return new RsaOutput(
             inputValue: $this->text, operation: $this->operation,
             outputValue: $result,
             steps: $steps,
-            d: $d,
-            phi: null,
+            n: $this->publicKey,
+            d: $d
         );
     }
 
@@ -70,6 +67,8 @@ class Rsa extends CipherBase
                 $e++;
             }
         }
+        $k = 2;
+        $d = (1 + ($k * $phi)) / $e;
 
         // Encryption process
         $result = '';
@@ -87,7 +86,7 @@ class Rsa extends CipherBase
             inputValue: $this->text, operation: $this->operation, outputValue: $result, steps: $steps,
             n: $n,
             e: $e,
-            d: null,
+            d: $d,
             phi: $phi,
         );
     }

@@ -17,7 +17,8 @@
 
                         <div class="col-lg-4 m-auto">
                             <a href="{{asset('img/rsaPage/rsaCipher.png')}}" target="_blank">
-                                <img width="100%" src="{{asset("img/rsaPage/rsaPageCipher.png")}}" class="rounded-4"></a>
+                                <img width="100%" src="{{asset("img/rsaPage/rsaPageCipher.png")}}"
+                                     class="rounded-4"></a>
                             <figure class="text-center">@lang("rsaPageTexts.schema")</figure>
                         </div>
                     </div>
@@ -39,28 +40,49 @@
                                            placeholder="@lang('baseTexts.inputText')"
                                            @if(isset($data["text"]))value="{{$data["text"]}}"@endif />
                                 </div>
-                                <div class="col-lg-6">
-                                    <label class="form-label" for="text">@lang('baseTexts.privateKey')</label>
-                                    <input class="form-control disableOnEncrypt" min=1 required type="number"
-                                           id="key" name="key"
-                                           placeholder="@lang('baseTexts.inputPrivateKey')"
-                                           @if(isset($data["key"]))value="{{$data["key"]}}"@endif />
-                                </div>
                             </fieldset>
-                            <fieldset class="row p-2">
-                                <div class="col-lg-6">
-                                    <label class="form-label" for="primeNumber1">1. @lang('baseTexts.primeNumber')</label>
-                                    <input class="form-control primeNumber" placeholder="@lang('baseTexts.insertPrimeNumber')" min="1" type="number" id="primeNumber1" name="primeNumber1"
-                                           @if(isset($data["primeNumber1"]))value="{{$data["primeNumber1"]}}"@endif required />
-                                </div>
-                                <div class="col-lg-6">
-                                    <label class="form-label" for="primeNumber2">2. @lang('baseTexts.primeNumber')</label>
-                                    <input class="form-control primeNumber" placeholder="@lang('baseTexts.insertPrimeNumber')" min="1" type="number" id="primeNumber2" name="primeNumber2"
-                                           @if(isset($data["primeNumber2"]))value="{{$data["primeNumber2"]}}" @endif required />
-                                </div>
-                                <div id="error-dialog" style="display: none;" class="text-danger">Error: Some input values are not prime numbers</div>
 
+                            <fieldset class="row p-2 disableOnEncrypt">
+                                <div class="col-lg-6">
+                                    <label class="form-label" for="text">@lang('baseTexts.privateKey') D</label>
+                                    <input class="form-control disableOnEncrypt" min=1 required type="number"
+                                           id="key" name="privateKey"
+                                           placeholder="@lang('baseTexts.inputPrivateKey')"
+                                           @if(isset($data["privateKey"]))value="{{$data["privateKey"]}}"@endif />
+                                </div>
+                                <div class="col-lg-6">
+                                    <label class="form-label" for="text">@lang('baseTexts.publicKey') N</label>
+                                    <input class="form-control disableOnEncrypt" min=1 required type="number"
+                                           id="key" name="publicKey"
+                                           placeholder="@lang('baseTexts.inputPublicKey')"
+                                           @if(isset($data["publicKey"]))value="{{$data["publicKey"]}}"@endif />
+                                </div>
                             </fieldset>
+
+                            <fieldset class="row p-2 disableOnDecrypt">
+                                <div class="col-lg-6">
+                                    <label class="form-label"
+                                           for="primeNumber1">1. @lang('rsa.primeNumber')</label>
+                                    <input class="form-control primeNumber disableOnDecrypt"
+                                           placeholder="@lang('rsa.insertPrimeNumber')" min="1" type="number"
+                                           id="primeNumber1" name="primeNumber1"
+                                           @if(isset($data["primeNumber1"]))value="{{$data["primeNumber1"]}}"
+                                           @endif required/>
+                                </div>
+                                <div class="col-lg-6">
+                                    <label class="form-label"
+                                           for="primeNumber2">2. @lang('rsa.primeNumber')</label>
+                                    <input class="form-control primeNumber disableOnDecrypt"
+                                           placeholder="@lang('rsa.insertPrimeNumber')" min="1" type="number"
+                                           id="primeNumber2" name="primeNumber2"
+                                           @if(isset($data["primeNumber2"]))value="{{$data["primeNumber2"]}}"
+                                           @endif required/>
+                                </div>
+                                <div id="error-dialog" style="display: none;"
+                                     class="text-danger">@lang('baseTexts.noPrimeNumbers')
+                                </div>
+                            </fieldset>
+
                             <div class="p-2">
                                 <fieldset>
                                     <label>@lang("baseTexts.action")</label>
@@ -69,7 +91,7 @@
                                         <label class="form-check-label" for="encrypt">@lang('baseTexts.encrypt')</label>
                                         <input class="form-check-input" required type="radio"
                                                id="encrypt" name="action"
-                                            value={{\App\Algorithms\CipherBase::ALGORITHM_ENCRYPT}}>
+                                               value={{\App\Algorithms\CipherBase::ALGORITHM_ENCRYPT}}>
                                     </div>
                                     <div class="form-check form-switch">
                                         <label class="form-check-label" for="decrypt">@lang('baseTexts.decrypt')</label>
@@ -89,46 +111,111 @@
     </section>
 
     @if(isset($result))
+        @php
+            /** @var App\Algorithms\Output\RsaOutput $result */
+            /** @var App\Algorithms\Output\Steps\RSAStep $step */
+        @endphp
         <section class="m-5 shadow-lg border rounded-4 p-5">
             <div class="container text-break">
 
-                    <h1 class=""><i class="fa-solid fa-comment"></i> @lang('baseTexts.cipherResult')</h1>
-                    <hr/>
-                    <div class="row align-items-start">
+                <h1 class="">
+                    <i class="fa-solid fa-comment"></i> @lang('baseTexts.cipherResult')
+                </h1>
+                <hr/>
+                <div class="row align-items-start">
+                    <div class="col-lg-5">
+                        <h4>@lang('baseTexts.insertedText')</h4>
+                        <p>{{$data["text"]}}</p>
+                    </div>
+
+                    @if($result->getOperation() === \App\Algorithms\CipherBase::ALGORITHM_ENCRYPT)
                         <div class="col-lg-5">
-                            <h4>@lang('baseTexts.insertedText')</h4>
-                            <p>{{$data["text"]}}</p>
-                        </div>
-                        <div class="col-lg-5">
-                            <h4>@lang('baseTexts.reformatedText')</h4>
+                            <h4>@lang('baseTexts.AsciiText')</h4>
                             <p>{{$result->getInputValue()}}</p>
                         </div>
-                    </div>
+                    @endif
+                </div>
+
+                @if($result->getOperation() === \App\Algorithms\CipherBase::ALGORITHM_ENCRYPT)
                     <div class="row align-items-start">
                         <div class="col-lg-5">
-                            <h4>1. @lang('baseTexts.primeNumber')</h4>
+                            <h4>1. @lang('rsa.primeNumber')</h4>
                             <p>{{$data["primeNumber1"]}}</p>
                         </div>
                         <div class="col-lg-5">
-                            <h4>2. @lang('baseTexts.primeNumber')</h4>
+                            <h4>2. @lang('rsa.primeNumber')</h4>
                             <p>{{$data["primeNumber2"]}}</p>
                         </div>
                     </div>
+                @endif
+
+                <div class="row align-items-start">
+                    <div class="col">
+                        @if($result->getOutputValue())
+                            <h4>@lang('baseTexts.outputText')</h4>
+                            <p>{{$result->getOutputValue()}}</p>
+                        @endif
+                    </div>
+                </div>
+
+                <h2>
+                    <i class="fa fa-calculator"></i>
+                    @lang('baseTexts.calculatedInfo')
+                </h2>
+                @if($result->getOperation() === \App\Algorithms\CipherBase::ALGORITHM_ENCRYPT)
+                    <h2>
+                        @lang('baseTexts.publicKey')
+                    </h2>
                     <div class="row align-items-start">
-                        <div class="col">
-                            @if(isset($data["finalText"]))
-                                <h4>@lang('baseTexts.outputText')</h4>
-                                <p>{{$data["finalText"]}}</p>
-                            @endif
+                        <div class="col-lg-5">
+                            <h4>n = p×q</h4>
+                            <p>{{$result->getN()}}</p>
+                        </div>
+                        <div class="col-lg-5">
+                            <h4>ϕ(n) = (p−1) × (q−1)</h4>
+                            <p>{{$result->getPhi()}}</p>
+                        </div>
+                        <div class="col-lg-5">
+                            <h4>e = gcd(e,ϕ(n))=1)</h4>
+                            <p>{{$result->getE()}}</p>
                         </div>
                     </div>
-
-                    <hr/>
-
-                    <div class="mt-4">
-                        <h1><i class="fa-solid fa-list-ol"></i> @lang('baseTexts.algorithmSteps')</h1>
-
+                    <h2>
+                        @lang('baseTexts.privateKey')
+                    </h2>
+                    <div class="row align-items-start">
+                        <div class="col-lg-5">
+                            <h4>e · d ≡ 1 mod φ(N)</h4>
+                            <p>{{$result->getD()}}</p>
+                        </div>
                     </div>
+                @endif
+
+
+                <hr/>
+
+                <div class="mt-4">
+                    <h1><i class="fa-solid fa-list-ol"></i> @lang('baseTexts.algorithmSteps')</h1>
+                    <div class="accordion" id="rsaSteps">
+                        @foreach($result->getSteps() as $step)
+                            <div class="accordion-item">
+                                <h2 class="accordion-header">
+                                    <button class="accordion-button" type="button" data-bs-toggle="collapse"
+                                            data-bs-target="#step{{$loop->index}}" aria-expanded="true"
+                                            aria-controls="step{{$loop->index}}">
+                                        {{$step->getInputChar()}} => {{$step->getOutputChar()}}
+                                    </button>
+                                </h2>
+                                <div id="step{{$loop->index}}" class="accordion-collapse collapse"
+                                     data-bs-parent="#rsaSteps">
+                                    <div class="accordion-body">
+
+                                    </div>
+                                </div>
+                            </div>
+                        @endforeach
+                    </div>
+                </div>
             </div>
         </section>
     @endif

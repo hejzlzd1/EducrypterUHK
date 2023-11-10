@@ -27,15 +27,17 @@ class RsaController extends BaseController
 
         $this->isVariableSet($data['text'], self::TYPE_TEXT, trans('baseTexts.text'));
         $this->isVariableSet($data['action'], self::TYPE_NUMBER, trans('baseTexts.action'));
-        if ($data['action'] === CipherBase::ALGORITHM_DECRYPT) {
-            $this->isVariableSet($data['key'], self::TYPE_NONZERO_NUMBER, trans('baseTexts.privateKey'));
+        if ($data['action'] == CipherBase::ALGORITHM_DECRYPT) {
+            $this->isVariableSet($data['publicKey'], self::TYPE_NONZERO_NUMBER, trans('baseTexts.publicKey'));
+            $this->isVariableSet($data['privateKey'], self::TYPE_NONZERO_NUMBER, trans('baseTexts.privateKey'));
+        } else {
+            $this->isVariableSet((int)$data['primeNumber1'], self::TYPE_NONZERO_NUMBER, trans('baseTexts.primeNumber') . ' #1');
+            $this->isVariableSet((int)$data['primeNumber2'], self::TYPE_NONZERO_NUMBER, trans('baseTexts.primeNumber') . ' #2');
+            $firstInputNumber = $data['primeNumber1'];
+            $secondInputNumber = $data['primeNumber2'];
+            $this->isPrimeNumber($firstInputNumber, trans('baseTexts.primeNumber') . ' #1');
+            $this->isPrimeNumber($secondInputNumber, trans('baseTexts.primeNumber') . ' #2');
         }
-        $this->isVariableSet((int)$data['primeNumber1'], self::TYPE_NONZERO_NUMBER, trans('baseTexts.primeNumber') . ' #1');
-        $this->isVariableSet((int)$data['primeNumber2'], self::TYPE_NONZERO_NUMBER, trans('baseTexts.primeNumber') . ' #2');
-        $firstInputNumber = $data['primeNumber1'];
-        $secondInputNumber = $data['primeNumber2'];
-        $this->isPrimeNumber($firstInputNumber, trans('baseTexts.primeNumber') . ' #1');
-        $this->isPrimeNumber($secondInputNumber, trans('baseTexts.primeNumber') . ' #2');
 
         if (!empty($this->validationFailedVariable)) {
             Session::flash('alert-error', $this->getValidationErrorTranslation());
@@ -43,7 +45,7 @@ class RsaController extends BaseController
         }
 
         try {
-            $rsa = new Rsa($data['text'], $data['key'] ?? null, $data['action'], $firstInputNumber, $secondInputNumber);
+            $rsa = new Rsa($data['text'], $data['publicKey'] ?? null, $data['privateKey'] ?? null, $data['action'], $firstInputNumber ?? null, $secondInputNumber ?? null);
         } catch (\Exception $e) {
             Session::flash('alert-error', $e->getMessage());
             return back();

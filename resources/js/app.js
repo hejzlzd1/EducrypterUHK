@@ -44,11 +44,16 @@ $(document).ready(function () {
         }, 3000);
     }
 
+    $('.disableOnEncrypt').hide();
+
     $('#encrypt').on('change', function () {
-        $('.disableOnEncrypt').attr('disabled', true)
+        $('.disableOnEncrypt').attr('disabled', true).hide(500)
+        $('.disableOnDecrypt').removeAttr('disabled').show(500)
     });
+
     $('#decrypt').on('change', function () {
-        $('.disableOnEncrypt').removeAttr('disabled')
+        $('.disableOnEncrypt').removeAttr('disabled').show(500)
+        $('.disableOnDecrypt').attr('disabled', true).hide(500)
     });
 
     $('.binaryValidation').on('input', function (event) {

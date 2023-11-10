@@ -4,7 +4,7 @@ namespace App\Algorithms\Output\Steps;
 
 class RSAStep extends Step
 {
-    public function __construct(private int $beforeModulo, private int $inputChar, private int $outputChar)
+    public function __construct(private float $beforeModulo, private int $inputChar, private int $outputChar)
     {
         parent::__construct();
     }
