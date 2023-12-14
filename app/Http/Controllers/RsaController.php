@@ -12,7 +12,7 @@ class RsaController extends BaseController
     function index()
     {
         if (Session::exists('result')) {
-            return view('asymmetricCiphers/RsaCipher')->with(
+            return view('asymmetricCiphers/rsaCipher')->with(
                 ['result' => Session::get('result'), 'data' => Session::get('data')]
             );
         }
