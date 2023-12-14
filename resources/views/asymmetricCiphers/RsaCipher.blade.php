@@ -185,7 +185,7 @@
                     </h2>
                     <div class="row align-items-start">
                         <div class="col-lg-5">
-                            <h4>e · d ≡ 1 mod φ(N)</h4>
+                            <h4>e · d ≡ 1 mod φ(n)</h4>
                             <p>{{$result->getD()}}</p>
                         </div>
                     </div>
@@ -209,7 +209,22 @@
                                 <div id="step{{$loop->index}}" class="accordion-collapse collapse"
                                      data-bs-parent="#rsaSteps">
                                     <div class="accordion-body">
-
+                                        <div class="row align-items-start">
+                                            <div class="col-lg-5">
+                                                <h4><i class="fa-solid fa-keyboard"></i> @lang('rsaTexts.inputChar')</h4>
+                                                <p>{{$step->getInputChar()}}</p>
+                                            </div>
+                                            <div class="col-lg-5">
+                                                <h4><i class="fa-solid fa-calculator"></i> @lang('rsaTexts.beforeModulo')</h4>
+                                                <p>{{$step->getBeforeModulo()}}</p>
+                                            </div>
+                                            <div class="col-lg-5">
+                                                <h4><i class="fa-solid fa-circle-down"></i> @lang('rsaTexts.outputChar')</h4>
+                                                <p>{{$step->getOutputChar()}}</p>
+                                            </div>
+                                        </div>
+                                        <div></div>
+                                        <div></div>
                                     </div>
                                 </div>
                             </div>
