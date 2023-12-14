@@ -5,6 +5,8 @@ RUN apt-get update && apt-get install -y \
     libgmp-dev \
     && rm -rf /var/lib/apt/lists/*
 
+RUN apt-get install git unzip -y
+
 # Compile and install the GMP extension
 RUN docker-php-ext-configure gmp \
     && docker-php-ext-install gmp
@@ -31,6 +33,7 @@ RUN a2enmod rewrite \
 
 RUN usermod -u 1000 www-data
 RUN groupmod -g 1000 www-data
-RUN /build.sh
+RUN bash ./build.sh
+
 EXPOSE 80
 
