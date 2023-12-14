@@ -7,5 +7,5 @@ services:
     ports:
       - "8080:80"
     volumes:
-      - .:/var/www/html/CryptographyApp
+      - .:/var/www/html/public/CryptographyApp
       - ./docker/php/php.ini:/usr/local/etc/php/php.ini
