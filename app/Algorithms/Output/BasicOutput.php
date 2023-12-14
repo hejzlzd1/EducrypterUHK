@@ -6,36 +6,24 @@ use App\Algorithms\Output\Steps\Step;
 
 class BasicOutput
 {
-    private string $inputValue;
-    private string $outputValue;
-    private int $operation;
-    private ?array $additionalInformation;
-    private ?string $key;
-    private ?array $steps;
     private ?int $keyStream;
+    public function __construct(
+        private readonly string $inputValue,
+        private readonly int $operation,
+        private ?string $key,
+        private ?string $outputValue = '',
+        private ?array $steps = null,
+        private ?array $additionalInformation = []
+    ) {
+        //
+    }
 
     /**
-     * @param string $inputValue
-     * @param string $outputValue
-     * @param int $operation
-     * @param array|string $key
-     * @param ?array<int,Step> $steps
-     * @param ?array<int,string> $additionalInformation
+     * @return int|null
      */
-    public function __construct(
-        string $inputValue,
-        int $operation,
-        array|string $key,
-        ?string $outputValue = '',
-        ?array $steps = null,
-        ?array $additionalInformation = []
-    ) {
-        $this->inputValue = $inputValue;
-        $this->outputValue = $outputValue;
-        $this->operation = $operation;
-        $this->key = $key;
-        $this->steps = $steps;
-        $this->additionalInformation = $additionalInformation;
+    public function getKeyStream(): ?int
+    {
+        return $this->keyStream;
     }
 
     /**
@@ -47,20 +35,30 @@ class BasicOutput
     }
 
     /**
-     * @param string $inputValue
+     * @return int
      */
-    public function setInputValue(string $inputValue): void
+    public function getOperation(): int
     {
-        $this->inputValue = $inputValue;
+        return $this->operation;
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getOutputValue(): string
+    public function getKey(): ?string
+    {
+        return $this->key;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getOutputValue(): ?string
     {
         return $this->outputValue;
     }
+
+
 
     /**
      * @param string $outputValue
@@ -71,33 +69,9 @@ class BasicOutput
     }
 
     /**
-     * @return int
+     * @param string $key
      */
-    public function getOperation(): int
-    {
-        return $this->operation;
-    }
-
-    /**
-     * @param int $operation
-     */
-    public function setOperation(int $operation): void
-    {
-        $this->operation = $operation;
-    }
-
-    /**
-     * @return array|string
-     */
-    public function getKey(): array|string
-    {
-        return $this->key;
-    }
-
-    /**
-     * @param array|string $key
-     */
-    public function setKey(array|string $key): void
+    public function setKey(string $key): void
     {
         $this->key = $key;
     }
@@ -147,14 +121,6 @@ class BasicOutput
     public function getStep(int $i): Step
     {
         return $this->steps[$i];
-    }
-
-    /**
-     * @return int|null
-     */
-    public function getKeyStream(): ?int
-    {
-        return $this->keyStream;
     }
 
     /**

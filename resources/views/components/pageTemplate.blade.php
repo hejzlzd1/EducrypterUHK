@@ -13,7 +13,6 @@
 
     @vite(['resources/sass/app.scss', 'resources/js/app.js'])
     <script src="{{asset('/resources/js/customFunctions.js')}}" defer></script>
-    <link rel="stylesheet" href="{{asset('/resources/css/customStyle.css')}}" />
 </head>
 
 <body>

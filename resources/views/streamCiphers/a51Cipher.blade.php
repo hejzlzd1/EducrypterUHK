@@ -84,6 +84,10 @@
     </section>
 
     @if(isset($result))
+        @php
+            /** @var App\Algorithms\Output\Steps\A5_1Step $step */
+            /** @var App\Algorithms\Output\BasicOutput $result */
+        @endphp
         <section class="m-5 shadow-lg border rounded-4 p-5">
             <div class="container text-break">
                 <h1 class="">

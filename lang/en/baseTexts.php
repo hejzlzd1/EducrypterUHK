@@ -36,6 +36,7 @@ return [
     'subkey' => 'Subkey',
     'subkeys' => 'Subkeys',
     'primeNumber' => 'Prime number',
+    'insertPrimeNumber' => 'Please insert prime number',
     'keyLongerThan448' => 'Key cannot be longer than 448-bits',
     'encryptedText' => 'Encrypted text',
     'plainText' => 'Plain text',
@@ -47,8 +48,8 @@ return [
     'binaryInputPrompt' => 'Fill in binary string',
     'binaryKeyInput' => 'Binary key',
     'binaryKeyInputPrompt' => 'Input key in binary',
-    'cannotBeEmpty' => 'Input values [:variableName] cannot be empty. ',
-    'notBinary' => 'Input values [:variableName] must be in binary. ',
+    'cannotBeEmpty' => 'Input value [:variableName] cannot be empty. ',
+    'notBinary' => 'Input value [:variableName] must be in binary. ',
 
     'initVector' => 'Initialization vector',
 

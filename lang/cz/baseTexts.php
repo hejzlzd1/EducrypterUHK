@@ -36,6 +36,7 @@ return [
     'subkey' => 'Subklíč',
     'subkeys' => 'Subklíče',
     'primeNumber' => 'Prvočíslo',
+    'insertPrimeNumber' => 'Vlož prvočíslo',
     'keyLongerThan448' => 'Klíč nesmí být delší než 448 bitů',
     'encryptedText' => 'Zašifrovaný text',
     'plainText' => 'Otevřený text',
@@ -44,8 +45,8 @@ return [
     'copy' => 'Kopírovat',
     'copyDone' => 'Vloženo do schránky',
 
-    'cannotBeEmpty' => 'Vstupní hodnoty [:variableName] musí být vyplněné. ',
-    'notBinary' => 'Vstupní hodnoty [:variableName] musí být v binární. ',
+    'cannotBeEmpty' => 'Vstupní hodnota :variableName musí být vyplněná. ',
+    'notBinary' => 'Vstupní hodnota :variableName musí být v binární soustavě. ',
 
     'binaryInputPrompt' => 'Vlož binární řetězec',
     'binaryInput' => 'Binarní vstup',

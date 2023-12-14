@@ -125,4 +125,12 @@ abstract class CipherBase
     {
         $this->operation = $operation;
     }
+
+    public function getAsciiFromString(string $input): string {
+        $asciiValues = [];
+        for ($i = 0; $i < strlen($input); $i++) {
+            $asciiValues[] = ord($input[$i]) . ($i !== strlen($input) - 1 ? ' ' : '');
+        }
+        return implode('', $asciiValues);
+    }
 }

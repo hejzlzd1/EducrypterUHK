@@ -2,24 +2,23 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\RedirectResponse;
 use Illuminate\Routing\Controller;
-use Illuminate\Support\Facades\Redirect;
 
 class BaseController extends Controller
 {
     const TYPE_TEXT = 0,
         TYPE_NUMBER = 1,
         TYPE_NONZERO_NUMBER = 2;
-    const VALIDATION_EMPTY = 'empty', VALIDATION_NOT_BINARY = 'notBinary';
+    const VALIDATION_EMPTY = 'empty', VALIDATION_NOT_BINARY = 'notBinary', VALIDATION_NOT_PRIME_NUMBER = 'notPrimeNumber';
+
     public array $validationFailedVariable;
+    private bool $validationFailed = false;
 
     protected function isBinary(string $text, string $inputVariable): bool
     {
-        foreach(str_split($text,1) as $char){
-            if($char !== '0' && $char !== '1'){
-                $this->validationFailedVariable[self::VALIDATION_NOT_BINARY] = $inputVariable;
-            }
+        if (preg_match('/^[01]+$/', $text) !== 1) {
+            $this->validationFailedVariable[self::VALIDATION_NOT_BINARY] = $inputVariable;
+            return false;
         }
         return true;
     }
@@ -33,45 +32,61 @@ class BaseController extends Controller
 
     protected function isVariableSet(string|int|null $variable, int $type, string $variableName): void
     {
-        $validationFailed = false;
+        if(!isset($variable)) {
+            $this->validationFailedVariable[self::VALIDATION_EMPTY] = $variableName;
+            return;
+        }
         if ($type === self::TYPE_TEXT) {
             if (!is_string($variable) || empty($variable)) {
-                $validationFailed = true;
+                $this->validationFailedVariable[self::VALIDATION_EMPTY] = $variableName;
             }
         } elseif ($type === self::TYPE_NONZERO_NUMBER) {
             if (!is_numeric($variable) || empty($variable)) {
-                $validationFailed = true;
+                $this->validationFailedVariable[self::VALIDATION_EMPTY] = $variableName;
             }
         } elseif ($type === self::TYPE_NUMBER) {
             if (!is_numeric($variable)) {
-                $validationFailed = true;
+                $this->validationFailedVariable[self::VALIDATION_EMPTY] = $variableName;
             }
-        }
-        if ($validationFailed) {
-            $this->validationFailedVariable[self::VALIDATION_EMPTY] = $variableName;
         }
     }
 
-    protected function getValidationErrorTranslation()
+    protected function isPrimeNumber(int $number,string $variableName): bool
     {
-        $validationTexts = '';
-        $emptyValues = [];
-        $notBinary = [];
-        foreach ($this->validationFailedVariable as $key => $failedValidation){
-            switch ($key) {
-                case self::VALIDATION_EMPTY: $emptyValues[] = $failedValidation;
-                break;
-                case self::VALIDATION_NOT_BINARY: $notBinary[] = $failedValidation;
-                break;
+        if ($number <= 1) {
+            $this->validationFailedVariable[self::VALIDATION_NOT_PRIME_NUMBER] = $variableName;
+            return false;
+        }
+
+        $sqrt = floor(sqrt($number));
+        for ($i = 2; $i <= $sqrt; $i++) {
+            if ($number % $i == 0) {
+                $this->validationFailedVariable[self::VALIDATION_NOT_PRIME_NUMBER] = $variableName;
+                return false;
             }
         }
-        if(!empty($emptyValues)) {
-            $validationTexts .= trans('baseTexts.cannotBeEmpty', implode(', ', $emptyValues));
+
+        return true;
+    }
+
+    protected function getValidationErrorTranslation(): string
+    {
+        $validationTexts = [];
+        foreach ($this->validationFailedVariable as $key => $failedValidation) {
+            switch ($key) {
+                case self::VALIDATION_EMPTY:
+                    $validationTexts[] = trans('baseTexts.cannotBeEmpty', ['variableName' => $failedValidation]);
+                    break;
+                case self::VALIDATION_NOT_BINARY:
+                    $validationTexts[] = trans('baseTexts.notBinary', ['variableName' => $failedValidation]);
+                    break;
+                case self::VALIDATION_NOT_PRIME_NUMBER:
+                    $validationTexts[] = trans('baseTexts.notPrime', ['variableName' => $failedValidation]);
+                    break;
+            }
         }
-        if(!empty($notBinary)){
-            $validationTexts .= trans('baseTexts.notBinary', implode(', ', $notBinary));
-        }
-        return $validationTexts;
+
+        return implode(" \n", $validationTexts);
     }
 
     protected function hextobin($hexstr)
