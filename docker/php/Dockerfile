@@ -5,7 +5,7 @@ RUN apt-get update && apt-get install -y \
     libgmp-dev \
     && rm -rf /var/lib/apt/lists/*
 
-RUN apt-get install git unzip -y
+RUN apt-get install git -y && apt-get install unzip -y
 
 # Compile and install the GMP extension
 RUN docker-php-ext-configure gmp \
