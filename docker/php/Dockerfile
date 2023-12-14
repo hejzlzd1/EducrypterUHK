@@ -23,6 +23,8 @@ RUN curl -o composer-installer --silent --show-error https://getcomposer.org/ins
     && php composer-installer --install-dir=/usr/bin --filename=composer \
     && rm composer-installer
 
+RUN composer update
+
 # Set document root
 ENV APACHE_DOCUMENT_ROOT=/var/www/html/public/
 RUN sed -ri -e 's!/var/www/html!${APACHE_DOCUMENT_ROOT}!g' /etc/apache2/sites-available/*.conf \
