@@ -1,6 +1,6 @@
 @extends("components/pageTemplate")
-@section("title",__('blowfishPageTexts.title'))
-@section("comment",__('blowfishPageTexts.metaComment'))
+@section("title",__('simpleDesPageTexts.title'))
+@section("comment",__('simpleDesPageTexts.metaComment'))
 @section("content")
 
     <div class="anchor" id="info"></div>
@@ -10,19 +10,18 @@
             <div>
                 <div class="container">
                     <div class="row align-items-start">
-                        <h1><i class="fa-solid fa-circle-info"></i> Blowfish</h1>
+                        <h1><i class="fa-solid fa-circle-info"></i> Simple DES</h1>
                         <hr/>
                         <div class="col-lg-8">
-                            <p>@lang('blowfishPageTexts.annotation')</p>
+                            <p>@lang('simpleDesPageTexts.annotation')</p>
                         </div>
 
                         <div class="col-lg-4 m-auto">
-                            <a href="{{asset("img/blowfishPage/blowfish_".App::getLocale().".png")}}" target="_blank">
+                            <a href="{{asset("img/simpleDesPage/simpleDes_".App::getLocale().".png")}}" target="_blank">
                                 <img width="100%"
-                                     src="{{asset("img/blowfishPage/blowfish_".App::getLocale().".png")}}"
-                                     class="rounded-4">
-                            </a>
-                            <figure class="text-center">@lang("blowfishPageTexts.blockSchema")</figure>
+                                     src="{{asset("img/simpleDesPage/simpleDes".App::getLocale().".png")}}"
+                                     class="rounded-4"></a>
+                            <figure class="text-center">@lang("simpleDesPageTexts.blockSchema")</figure>
                         </div>
                     </div>
                 </div>
@@ -37,20 +36,25 @@
                             @csrf
                             <fieldset class="row p-2">
                                 <div class="col-lg-6">
-                                    <label class="form-label" for="text">@lang('baseTexts.text')</label>
-                                    <input class="form-control" minlength="1" maxlength="400" required type="text"
+                                    <label class="form-label" for="text">
+                                        @lang('baseTexts.text')
+                                        <x-tooltipButton :tooltip="trans('baseTexts.binaryInputPrompt')"></x-tooltipButton>
+                                    </label>
+                                    <input class="form-control binaryValidation" minlength="1" maxlength="8" required
+                                           type="text"
                                            id="text"
                                            name="text"
-                                           placeholder="@lang('baseTexts.inputText')"
+                                           placeholder="@lang('baseTexts.insertInputData')"
                                            @if(isset($data['text']))value="{{$data['text']}}"@endif>
                                 </div>
                                 <div class="col-lg-6">
                                     <label class="form-label" for="key">
                                         @lang('baseTexts.key')
-                                        <x-tooltipButton :tooltip="trans('baseTexts.textInputOnly')"></x-tooltipButton>
+                                        <x-tooltipButton :tooltip="trans('baseTexts.binaryInputPrompt')"></x-tooltipButton>
                                     </label>
-                                    <input class="form-control" maxlength="30" type="text" id="key" name="key"
-                                           placeholder="@lang('baseTexts.insertKey')" pattern="^[a-zA-Z ]*$"
+                                    <input class="form-control binaryValidation" minlength="1" maxlength="10" type="text" id="key"
+                                           name="key"
+                                           placeholder="@lang('baseTexts.insertKey')"
                                            @if(isset($data['key'])) value="{{$data['key']}}" @else value="" @endif>
                                 </div>
                             </fieldset>
@@ -180,14 +184,18 @@
                                                                 <div class="col-md-5">
                                                                     <h3>
                                                                         <i class="fa-solid fa-file-lines"></i>
-                                                                        @lang('blowfishPageTexts.leftInput') (@lang('baseTexts.shortLeftSymbol'){{$loop->index + 1}})
+                                                                        @lang('blowfishPageTexts.leftInput')
+                                                                        (@lang('baseTexts.shortLeftSymbol'){{$loop->index + 1}}
+                                                                        )
                                                                     </h3>
                                                                     <p>{{$step->getInputLeft()}}</p>
                                                                 </div>
                                                                 <div class="col-md-5">
                                                                     <h3>
                                                                         <i class="fa-solid fa-file-lines"></i>
-                                                                        @lang('blowfishPageTexts.rightInput') (@lang('baseTexts.shortRightSymbol'){{$loop->index + 1}})
+                                                                        @lang('blowfishPageTexts.rightInput')
+                                                                        (@lang('baseTexts.shortRightSymbol'){{$loop->index + 1}}
+                                                                        )
                                                                     </h3>
                                                                     <p>{{$step->getInputRight()}}</p>
                                                                 </div>
@@ -235,7 +243,7 @@
                                                                     </div>
                                                                     <div class="flex-item">
                                                                         <h4>
-                                                                            <i class="fa-solid fa-calculator"></i> 
+                                                                            <i class="fa-solid fa-calculator"></i>
                                                                             F(@lang('baseTexts.shortLeftSymbol'){{$loop->index + 1}}
                                                                             ⊕ K{{$loop->index + 1}})
                                                                             ⊕ @lang('baseTexts.shortRightSymbol'){{$loop->index + 1}}

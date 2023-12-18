@@ -4,13 +4,18 @@ namespace App\Http\Controllers;
 
 use App\Algorithms\CipherBase;
 use App\Algorithms\Ciphers\A5_1;
+use Exception;
+use Illuminate\Contracts\Foundation\Application;
+use Illuminate\Contracts\View\Factory;
+use Illuminate\Contracts\View\View;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Session;
 
-class A5_1Controller extends BaseController
+class A5_1CipherController extends BaseController
 {
-    function index()
+    public function index(): Factory|View|Application
     {
         if (Session::exists('data')) {
             return view('streamCiphers/a51Cipher')->with(
@@ -20,7 +25,7 @@ class A5_1Controller extends BaseController
         return view('streamCiphers/a51Cipher');
     }
 
-    function compute(Request $request)
+    public function compute(Request $request): RedirectResponse
     {
         $timerStart = microtime(true);
         $data = $request->all();
@@ -36,7 +41,7 @@ class A5_1Controller extends BaseController
 
         try {
             $a51 = new A5_1($data['text'], $data['key'], $data['action'], $data['dataFrame']);
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             Session::flash('alert-error', $e->getMessage());
             return back();
         }

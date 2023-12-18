@@ -24,4 +24,4 @@ npm run build
 echo "Clearing laravel cache..."
 php artisan cache:clear
 
-echo "All done..."
+echo "All done... Website is ready!"

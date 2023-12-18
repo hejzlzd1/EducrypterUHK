@@ -55,6 +55,8 @@ return [
 
     'notReady' => 'This function is not ready yet.',
 
+    'insertInputData' => 'Insert input data',
+
     '404' => 'Page not found!',
     'notFound' => 'URL address does not exist on this website - content does not exist or page was not added.',
     '500' => 'An error occurred in the application!',

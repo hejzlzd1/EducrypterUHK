@@ -34,7 +34,10 @@
                             @csrf
                             <fieldset class="row p-2">
                                 <div class="col-lg-6">
-                                    <label class="form-label" for="text">@lang('baseTexts.binaryInput')</label>
+                                    <label class="form-label" for="text">
+                                        @lang('baseTexts.binaryInput')
+                                        <x-tooltipButton :tooltip="trans('baseTexts.binaryInputPrompt')"></x-tooltipButton>
+                                    </label>
                                     <input class="form-control binaryValidation" maxlength="114" minlength="1" required
                                            type="text"
                                            id="text" name="text"
@@ -42,7 +45,9 @@
                                            @if(isset($data['text']))value="{{$data['text']}}"@endif>
                                 </div>
                                 <div class="col-lg-6">
-                                    <label class="form-label" for="key">@lang('baseTexts.key')</label>
+                                    <label class="form-label" for="key">
+                                        @lang('baseTexts.key')
+                                    </label>
                                     <input class="form-control binaryValidation" min="1" max="64" type="text" id="key"
                                            name="key" placeholder="@lang('baseTexts.insertKey')" required
                                            @if(isset($data['key']))value="{{$data['key']}}" @else value="" @endif>

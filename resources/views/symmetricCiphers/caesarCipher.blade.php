@@ -18,9 +18,11 @@
                         </div>
 
                         <div class="col-lg-4 m-auto">
-                            <a href="{{asset('img/caesarPage/caesarCipher.png')}}" target="_blank"> <img width="100%"
-                                                                                                         src="{{asset("img/caesarPage/caesarCipher.png")}}"
-                                                                                                         class="rounded-4"></a>
+                            <a href="{{asset('img/caesarPage/caesarCipher.png')}}" target="_blank">
+                                <img width="100%"
+                                     src="{{asset("img/caesarPage/caesarCipher.png")}}"
+                                     class="rounded-4"/>
+                            </a>
                             <figure class="text-center">@lang("caesarPageTexts.alphabetShift")</figure>
                         </div>
                     </div>
@@ -36,14 +38,18 @@
                             @csrf
                             <fieldset class="row p-2">
                                 <div class="col-lg-6">
-                                    <label class="form-label" for="text">@lang('baseTexts.text')</label>
+                                    <label class="form-label" for="text">
+                                        @lang('baseTexts.text')
+                                    </label>
                                     <input class="form-control" maxlength="40" minlength="1" required type="text"
                                            id="text" name="text"
                                            placeholder="@lang('baseTexts.inputText')"
                                            @if(isset($data["text"]))value="{{$data["text"]}}"@endif>
                                 </div>
                                 <div class="col-lg-6">
-                                    <label class="form-label" for="shift">@lang('baseTexts.shift') - max 26</label>
+                                    <label class="form-label" for="shift">
+                                        @lang('baseTexts.shift') - max 26
+                                    </label>
                                     <input class="form-control" min="0" max="26" type="number" id="shift" name="shift"
                                            @if(isset($data["shift"]))value="{{$data["shift"]}}" @else value="0" @endif>
                                 </div>
@@ -189,7 +195,7 @@
                         </div>
                         @else
                             <h1 class="text-center"><i
-                                        class="fa-solid fa-comment"></i> @lang('baseTexts.bruteForceResult')</h1>
+                                    class="fa-solid fa-comment"></i> @lang('baseTexts.bruteForceResult')</h1>
                             <div class="d-flex p-4 flex-wrap gap-4 border border-2">
                                 @foreach($result as $data)
                                     <div><b>{{$loop->index}}.</b> {{$data->getOutputValue()}}</div>

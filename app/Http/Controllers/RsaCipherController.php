@@ -4,12 +4,18 @@ namespace App\Http\Controllers;
 
 use App\Algorithms\CipherBase;
 use App\Algorithms\Ciphers\Rsa;
+use Exception;
+use Illuminate\Contracts\Foundation\Application;
+use Illuminate\Contracts\View\Factory;
+use Illuminate\Contracts\View\View;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Routing\Redirector;
 use Illuminate\Support\Facades\Session;
 
-class RsaController extends BaseController
+class RsaCipherController extends BaseController
 {
-    function index()
+    public function index(): Factory|View|Application
     {
         if (Session::exists('result')) {
             return view('asymmetricCiphers/rsaCipher')->with(
@@ -20,7 +26,7 @@ class RsaController extends BaseController
         return view('asymmetricCiphers/rsaCipher');
     }
 
-    function compute(Request $request)
+    public function compute(Request $request): Redirector|Application|RedirectResponse
     {
         $timerStart = microtime(true);
         $data = $request->all();
@@ -35,6 +41,9 @@ class RsaController extends BaseController
             $this->isVariableSet((int)$data['primeNumber2'], self::TYPE_NONZERO_NUMBER, trans('baseTexts.primeNumber') . ' #2');
             $firstInputNumber = $data['primeNumber1'];
             $secondInputNumber = $data['primeNumber2'];
+            if ($firstInputNumber * $secondInputNumber < 256) {
+                $this->validationFailedVariable[BaseController::VALIDATION_CUSTOM_MESSAGE] = trans('rsaPageTexts.primeNumbersAreLow');
+            }
             $this->isPrimeNumber($firstInputNumber, trans('baseTexts.primeNumber') . ' #1');
             $this->isPrimeNumber($secondInputNumber, trans('baseTexts.primeNumber') . ' #2');
         }
@@ -46,7 +55,7 @@ class RsaController extends BaseController
 
         try {
             $rsa = new Rsa($data['text'], $data['publicKey'] ?? null, $data['privateKey'] ?? null, $data['action'], $firstInputNumber ?? null, $secondInputNumber ?? null);
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             Session::flash('alert-error', $e->getMessage());
             return back();
         }

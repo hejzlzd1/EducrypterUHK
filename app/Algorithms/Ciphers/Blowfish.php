@@ -6,7 +6,6 @@ use App\Algorithms\BlockCipher;
 use App\Algorithms\CipherBase;
 use App\Algorithms\Output\BasicOutput;
 use App\Algorithms\Output\BlowfishRound;
-use App\Algorithms\Output\BlowfishStep;
 use App\Algorithms\Output\Steps\BlowfishBlockStep;
 use Exception;
 
@@ -32,7 +31,7 @@ class Blowfish extends BlockCipher
     public function __construct(string $text, ?string $key, int $operation)
     {
         //init default sboxes and keys
-        $this->initDefaultKeys();
+        $this->initSboxes();
 
         //check key validity and convert to binary array
         if (empty($key)) {

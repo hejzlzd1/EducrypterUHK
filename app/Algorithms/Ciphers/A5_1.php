@@ -21,7 +21,7 @@ class A5_1 extends StreamCipher
     /*
      * Theoretical info:
      * http://koclab.cs.ucsb.edu/teaching/cren/project/2017/jensen+andersen.pdf
-     * This implementation is based on information in pdf above
+     * This implementation is based on pdf above
      */
     public function __construct(string $text, ?string $key, int $operation, int $dataFrame)
     {

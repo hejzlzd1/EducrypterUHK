@@ -29,7 +29,7 @@ class BlockCipher extends CipherBase
      * https://www.geeksforgeeks.org/blowfish-algorithm-with-examples/
      * @return void
      */
-    protected function initDefaultKeys() { //declare sboxes - initialized with the digits of pi - precalculated
+    protected function initSboxes() { //declare sboxes - initialized with the digits of pi - precalculated
         $this->sboxes = array( array(
             0xd1310ba6, 0x98dfb5ac, 0x2ffd72db, 0xd01adfb7, 0xb8e1afed, 0x6a267e96,
             0xba7c9045, 0xf12c7f99, 0x24a19947, 0xb3916cf7, 0x0801f2e2, 0x858efc16,

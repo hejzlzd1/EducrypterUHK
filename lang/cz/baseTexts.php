@@ -51,6 +51,8 @@ return [
     'binaryInputPrompt' => 'Vlož binární řetězec',
     'binaryInput' => 'Binarní vstup',
 
+    'insertInputData' => 'Zadejte vstupní data',
+
     'notReady' => 'Tato funkce není zatím připravena.',
     '404' => 'Stránka nenalezena!',
     'notFound' => 'Tato adresa na webu neexistuje - obsah buď neexistuje nebo nebyl přidán.',

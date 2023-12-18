@@ -27,14 +27,21 @@
             <div class="pt-2">
                 <div class="container">
                     <div class="row align-items-start">
-                        <h1 class=""><i class="fa-regular fa-file-lines"></i> @lang('baseTexts.cipherForm')</h1>
-                        <p class="text-black-50">@lang('baseTexts.formInfoDescription')</p>
+                        <h1 class="">
+                            <i class="fa-regular fa-file-lines"></i> @lang('baseTexts.cipherForm')
+                        </h1>
+                        <p class="text-black-50">
+                            @lang('baseTexts.formInfoDescription')
+                        </p>
                         <hr/>
                         <form action="" method="post">
                             @csrf
                             <fieldset class="row p-2">
                                 <div class="col-lg-6">
-                                    <label class="form-label" for="text">@lang('baseTexts.text')</label>
+                                    <label class="form-label" for="text">
+                                        @lang('baseTexts.text')
+                                        <x-tooltipButton :tooltip="trans('baseTexts.inputText')"></x-tooltipButton>
+                                    </label>
                                     <input class="form-control" maxlength="40" minlength="1" required type="text"
                                            id="text" name="text"
                                            placeholder="@lang('baseTexts.inputText')"
@@ -44,14 +51,20 @@
 
                             <fieldset class="row p-2 disableOnEncrypt">
                                 <div class="col-lg-6">
-                                    <label class="form-label" for="text">@lang('baseTexts.privateKey') D</label>
+                                    <label class="form-label" for="privateKey">
+                                        @lang('baseTexts.privateKey') D
+                                        <x-tooltipButton :tooltip="trans('baseTexts.inputPrivateKey')"></x-tooltipButton>
+                                    </label>
                                     <input class="form-control disableOnEncrypt" min=1 required type="number"
                                            id="key" name="privateKey"
                                            placeholder="@lang('baseTexts.inputPrivateKey')"
                                            @if(isset($data["privateKey"]))value="{{$data["privateKey"]}}"@endif />
                                 </div>
                                 <div class="col-lg-6">
-                                    <label class="form-label" for="text">@lang('baseTexts.publicKey') N</label>
+                                    <label class="form-label" for="publicKey">
+                                        @lang('baseTexts.publicKey') N
+                                        <x-tooltipButton :tooltip="trans('baseTexts.inputPrivateKey')"></x-tooltipButton>
+                                    </label>
                                     <input class="form-control disableOnEncrypt" min=1 required type="number"
                                            id="key" name="publicKey"
                                            placeholder="@lang('baseTexts.inputPublicKey')"
@@ -61,8 +74,10 @@
 
                             <fieldset class="row p-2 disableOnDecrypt">
                                 <div class="col-lg-6">
-                                    <label class="form-label"
-                                           for="primeNumber1">1. @lang('rsa.primeNumber')</label>
+                                    <label class="form-label" for="primeNumber1">
+                                        1. @lang('rsa.primeNumber')
+                                        <x-tooltipButton :tooltip="trans('baseTexts.insertPrimeNumber')"></x-tooltipButton>
+                                    </label>
                                     <input class="form-control primeNumber disableOnDecrypt"
                                            placeholder="@lang('rsa.insertPrimeNumber')" min="1" type="number"
                                            id="primeNumber1" name="primeNumber1"
@@ -70,8 +85,10 @@
                                            @endif required/>
                                 </div>
                                 <div class="col-lg-6">
-                                    <label class="form-label"
-                                           for="primeNumber2">2. @lang('rsa.primeNumber')</label>
+                                    <label class="form-label" for="primeNumber2">
+                                        2. @lang('rsa.primeNumber')
+                                        <x-tooltipButton :tooltip="trans('baseTexts.insertPrimeNumber')"></x-tooltipButton>
+                                    </label>
                                     <input class="form-control primeNumber disableOnDecrypt"
                                            placeholder="@lang('rsa.insertPrimeNumber')" min="1" type="number"
                                            id="primeNumber2" name="primeNumber2"

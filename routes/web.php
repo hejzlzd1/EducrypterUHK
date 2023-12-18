@@ -1,11 +1,12 @@
 <?php
 
-use App\Http\Controllers\A5_1Controller;
+use App\Http\Controllers\A5_1CipherController;
 use App\Http\Controllers\AesCipherController;
 use App\Http\Controllers\BlowfishCipherController;
 use App\Http\Controllers\CaesarCipherController;
 use App\Http\Controllers\MainPageController;
-use App\Http\Controllers\RsaController;
+use App\Http\Controllers\RsaCipherController;
+use App\Http\Controllers\SimpleDesCipherController;
 use App\Http\Controllers\VigenereCipherController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Session;
@@ -21,10 +22,10 @@ use Illuminate\Support\Facades\Session;
 |
 */
 
-//main page
+// Main page
 Route::get('/', [MainPageController::class,"index"])->name("mainPage");
 
-//language swap
+// Language swap
 Route::get('language/{locale}', function ($locale) {
     if($locale == "cz"){
         Session::flash("alert-success", "Úspěšně jsi změnil jazyk na češtinu");
@@ -38,29 +39,32 @@ Route::get('language/{locale}', function ($locale) {
     return redirect()->back();
 })->name("changeLang");
 
-//Symmetrical ciphers
+// Symmetrical ciphers
 
-//caesarCipher
+// CaesarCipher
 Route::get("caesarCipher",[CaesarCipherController::class,"index"])->name("caesarCipher");
 Route::post("caesarCipher",[CaesarCipherController::class,"compute"])->name("caesarCipherCompute");
 
-//vigenereCipher
+// VigenereCipher
 Route::get("vigenereCipher",[VigenereCipherController::class,"index"])->name("vigenereCipher");
 Route::post("vigenereCipher",[VigenereCipherController::class,"compute"])->name("vigenereCipherCompute");
 
-//blowfishCipher
+// BlowfishCipher
 Route::get("blowfishCipher",[BlowfishCipherController::class,"index"])->name("blowfishCipher");
 Route::post("blowfishCipher",[BlowfishCipherController::class,"compute"])->name("blowfishCipherCompute");
 
 Route::get("aesCipher",[AesCipherController::class,"index"])->name("aesCipher");
 Route::post("aesCipher",[AesCipherController::class,"compute"])->name("aesCipherCompute");
 
-//Asymmetrical ciphers
+Route::get("simpleDesCipher",[SimpleDesCipherController::class,"index"])->name("simpleDesCipher");
+Route::post("simpleDesCipher",[SimpleDesCipherController::class,"compute"])->name("simpleDesCipherCompute");
 
-Route::get("rsaCipher",[RsaController::class,"index"])->name("rsaCipher");
-Route::post("rsaCipher",[RsaController::class,"compute"])->name("rsaCipherCompute");
+// Asymmetrical ciphers
 
-Route::get("a51",[A5_1Controller::class,"index"])->name("a51");
-Route::post("a51",[A5_1Controller::class,"compute"])->name("a51Compute");
+Route::get("rsaCipher",[RsaCipherController::class,"index"])->name("rsaCipher");
+Route::post("rsaCipher",[RsaCipherController::class,"compute"])->name("rsaCipherCompute");
+
+Route::get("a51",[A5_1CipherController::class,"index"])->name("a51");
+Route::post("a51",[A5_1CipherController::class,"compute"])->name("a51Compute");
 
 
