@@ -21,6 +21,7 @@ class CaesarCipherController extends BaseController
                 ['result' => Session::get('result'), 'data' => Session::get('data')]
             );
         }
+
         return view('symmetricCiphers/caesarCipher');
     }
 
@@ -32,8 +33,9 @@ class CaesarCipherController extends BaseController
         $data['key'] = $data['action'] === CipherBase::ALGORITHM_DECRYPT_BRUTEFORCE ? 0 : $data['shift'] ?? null;
         $this->basicValidate($data);
 
-        if(!empty($this->validationFailedVariable)){
+        if (! empty($this->validationFailedVariable)) {
             Session::flash('alert-error', $this->getValidationErrorTranslation());
+
             return back()->withInput($data);
         }
 
@@ -46,9 +48,10 @@ class CaesarCipherController extends BaseController
         };
 
         $time_elapsed_secs = microtime(true) - $timerStart;
-        Session::flash('alert-info', trans('baseTexts.actionTook') . ' ' . $time_elapsed_secs . ' s');
+        Session::flash('alert-info', trans('baseTexts.actionTook').' '.$time_elapsed_secs.' s');
         Session::flash('result', $result);
         Session::flash('data', $data);
+
         return redirect('caesarCipher');
     }
 }

@@ -11,7 +11,6 @@ class Caesar extends CipherBase
 
     /**
      * Normalize input string to basic chars and set shifts
-     * @param int $shift
      */
     public function __construct(string $inputValue, int $shift, int $operation)
     {
@@ -21,24 +20,23 @@ class Caesar extends CipherBase
 
     /**
      * Get rotated alphabet
-     * @return array
      */
     public function rotateAlphabet(): array
     {
         $alphabet = [];
-        foreach (range("A", "Z") as $char) {
+        foreach (range('A', 'Z') as $char) {
             $alphabet[] = $char;
         }
         for ($i = 0; $i < $this->shift; $i++) {
             $temp = array_shift($alphabet);
             $alphabet[] = $temp;
         }
+
         return $alphabet;
     }
 
     /**
      * Show all 26 results of decryption, try moving alphabet 26 times
-     * @return array
      */
     public function bruteForce(): array
     {
@@ -47,36 +45,34 @@ class Caesar extends CipherBase
             $this->shift = $i;
             $bruteForceResults[] = $this->decrypt();
         }
+
         return $bruteForceResults;
     }
 
-    /**
-     * @return BasicOutput
-     */
     public function decrypt(): BasicOutput
     {
-        $result = "";
+        $result = '';
         $shift = 26 - $this->shift;
 
         // traverse text
         for ($i = 0; $i < strlen($this->text); $i++) {
-            if ($this->text[$i] != " ") {
+            if ($this->text[$i] != ' ') {
                 // apply transformation to each
                 // character Encrypt Uppercase letters
                 if (ctype_upper($this->text[$i])) {
-                    $result = $result . chr(
-                            (ord($this->text[$i]) +
-                                $shift - 65) % 26 + 65
-                        );
+                    $result = $result.chr(
+                        (ord($this->text[$i]) +
+                            $shift - 65) % 26 + 65
+                    );
                 } // Encrypt Lowercase letters
                 else {
-                    $result = $result . chr(
-                            (ord($this->text[$i]) +
-                                $shift - 97) % 26 + 97
-                        );
+                    $result = $result.chr(
+                        (ord($this->text[$i]) +
+                            $shift - 97) % 26 + 97
+                    );
                 }
             } else {
-                $result = $result . chr(32);
+                $result = $result.chr(32);
             }
         }
 
@@ -90,32 +86,29 @@ class Caesar extends CipherBase
         );
     }
 
-    /**
-     * @return BasicOutput
-     */
     public function encrypt(): BasicOutput
     {
-        $result = "";
+        $result = '';
 
         // traverse text
         for ($i = 0; $i < strlen($this->text); $i++) {
-            if ($this->text[$i] != " ") {
+            if ($this->text[$i] != ' ') {
                 // apply transformation to each
                 // character Encrypt Uppercase letters
                 if (ctype_upper($this->text[$i])) {
-                    $result = $result . chr(
-                            (ord($this->text[$i]) +
-                                $this->shift - 65) % 26 + 65
-                        );
+                    $result = $result.chr(
+                        (ord($this->text[$i]) +
+                            $this->shift - 65) % 26 + 65
+                    );
                 } // Encrypt Lowercase letters
                 else {
-                    $result = $result . chr(
-                            (ord($this->text[$i]) +
-                                $this->shift - 97) % 26 + 97
-                        );
+                    $result = $result.chr(
+                        (ord($this->text[$i]) +
+                            $this->shift - 97) % 26 + 97
+                    );
                 }
             } else {
-                $result = $result . chr(32);
+                $result = $result.chr(32);
             }
         }
 

@@ -22,6 +22,7 @@ class BlowfishCipherController extends BaseController
                 ['data' => Session::get('data'), 'result' => Session::get('result')]
             );
         }
+
         return view('symmetricCiphers/blowfishCipher');
     }
 
@@ -31,8 +32,9 @@ class BlowfishCipherController extends BaseController
         $data = $request->all();
         $this->basicValidate($data);
 
-        if(!empty($this->validationFailedVariable)){
+        if (! empty($this->validationFailedVariable)) {
             Session::flash('alert-error', $this->getValidationErrorTranslation());
+
             return back()->withInput($data);
         }
 
@@ -40,6 +42,7 @@ class BlowfishCipherController extends BaseController
             $blowfish = new Blowfish($data['text'], $data['key'], $data['action']);
         } catch (Exception $e) {
             Session::flash('alert-error', $e->getMessage());
+
             return redirect('blowfishCipher');
         }
 
@@ -49,10 +52,10 @@ class BlowfishCipherController extends BaseController
         };
 
         $time_elapsed_secs = microtime(true) - $timerStart;
-        Session::flash('alert-info', trans('baseTexts.actionTook') . ' ' . $time_elapsed_secs . ' s');
+        Session::flash('alert-info', trans('baseTexts.actionTook').' '.$time_elapsed_secs.' s');
         Session::flash('data', $data);
         Session::flash('result', $result);
+
         return redirect('blowfishCipher');
     }
-
 }

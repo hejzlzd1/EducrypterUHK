@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Http\Controllers;
 
 use Illuminate\Contracts\Foundation\Application;
@@ -13,7 +14,10 @@ class AesCipherController extends BaseController
 {
     public function index(): Factory|View|Application
     {
-        if (Session::exists('data')) return view('symmetricCiphers/aesCipher')->with(['data' => Session::get('data')]);
+        if (Session::exists('data')) {
+            return view('symmetricCiphers/aesCipher')->with(['data' => Session::get('data')]);
+        }
+
         return view('symmetricCiphers/aesCipher');
     }
 
@@ -24,8 +28,9 @@ class AesCipherController extends BaseController
 
         $this->basicValidate($data);
 
-        if(!empty($this->validationFailedVariable)){
+        if (! empty($this->validationFailedVariable)) {
             Session::flash('alert-error', $this->getValidationErrorTranslation());
+
             return back()->withInput($data);
         }
 
@@ -42,9 +47,9 @@ class AesCipherController extends BaseController
         }
 
         $time_elapsed_secs = microtime(true) - $timerStart;
-        Session::flash('alert-info',trans('baseTexts.actionTook') . ' '.$time_elapsed_secs . ' s');
-        Session::flash('data',$data);
+        Session::flash('alert-info', trans('baseTexts.actionTook').' '.$time_elapsed_secs.' s');
+        Session::flash('data', $data);
+
         return redirect('aesCipher');
     }
-
 }

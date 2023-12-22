@@ -12,8 +12,10 @@ trait DataValidationTrait
     {
         if (preg_match('/^[01]+$/', $text) !== 1) {
             $this->validationFailedVariable[BaseController::VALIDATION_NOT_BINARY] = $variableName;
+
             return false;
         }
+
         return true;
     }
 
@@ -26,29 +28,31 @@ trait DataValidationTrait
 
     protected function isVariableSet(string|int|null $variable, int $type, string $variableName): void
     {
-        if(!isset($variable)) {
+        if (! isset($variable)) {
             $this->validationFailedVariable[BaseController::VALIDATION_EMPTY] = $variableName;
+
             return;
         }
         if ($type === BaseController::TYPE_TEXT) {
-            if (!is_string($variable) || empty($variable)) {
+            if (! is_string($variable) || empty($variable)) {
                 $this->validationFailedVariable[BaseController::VALIDATION_EMPTY] = $variableName;
             }
         } elseif ($type === BaseController::TYPE_NONZERO_NUMBER) {
-            if (!is_numeric($variable) || empty($variable)) {
+            if (! is_numeric($variable) || empty($variable)) {
                 $this->validationFailedVariable[BaseController::VALIDATION_EMPTY] = $variableName;
             }
         } elseif ($type === BaseController::TYPE_NUMBER) {
-            if (!is_numeric($variable)) {
+            if (! is_numeric($variable)) {
                 $this->validationFailedVariable[BaseController::VALIDATION_EMPTY] = $variableName;
             }
         }
     }
 
-    protected function isPrimeNumber(int $number,string $variableName): bool
+    protected function isPrimeNumber(int $number, string $variableName): bool
     {
         if ($number <= 1) {
             $this->validationFailedVariable[BaseController::VALIDATION_NOT_PRIME_NUMBER] = $variableName;
+
             return false;
         }
 
@@ -56,6 +60,7 @@ trait DataValidationTrait
         for ($i = 2; $i <= $sqrt; $i++) {
             if ($number % $i == 0) {
                 $this->validationFailedVariable[BaseController::VALIDATION_NOT_PRIME_NUMBER] = $variableName;
+
                 return false;
             }
         }

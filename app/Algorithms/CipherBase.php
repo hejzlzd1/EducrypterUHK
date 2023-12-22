@@ -7,11 +7,15 @@ use App\Algorithms\Output\BasicOutput;
 abstract class CipherBase
 {
     public const ALGORITHM_ENCRYPT = 1;
+
     public const ALGORITHM_DECRYPT = 0;
+
     public const ALGORITHM_DECRYPT_BRUTEFORCE = 2;
 
     protected ?string $key;
+
     protected string $text;
+
     protected int $operation;
 
     public function __construct(string $text, ?string $key, int $operation)
@@ -38,7 +42,7 @@ abstract class CipherBase
 
     public function getStringAlgorithmOperation(int $operation): string
     {
-        return match ($operation){
+        return match ($operation) {
             self::ALGORITHM_ENCRYPT => 'encrypt',
             self::ALGORITHM_DECRYPT => 'decrypt',
             self::ALGORITHM_DECRYPT_BRUTEFORCE => 'bruteforce',
@@ -47,7 +51,7 @@ abstract class CipherBase
 
     public static function normalize($string): string
     {
-        $table = array(
+        $table = [
             'Š' => 'S', 'š' => 's', 'Đ' => 'Dj', 'đ' => 'dj', 'Ž' => 'Z', 'ž' => 'z', 'Č' => 'C', 'č' => 'c', 'Ć' => 'C', 'ć' => 'c',
             'À' => 'A', 'Á' => 'A', 'Â' => 'A', 'Ã' => 'A', 'Ä' => 'A', 'Å' => 'A', 'Æ' => 'A', 'Ç' => 'C', 'È' => 'E', 'É' => 'E',
             'Ê' => 'E', 'Ë' => 'E', 'Ì' => 'I', 'Í' => 'I', 'Î' => 'I', 'Ï' => 'I', 'Ñ' => 'N', 'Ò' => 'O', 'Ó' => 'O', 'Ô' => 'O',
@@ -56,81 +60,68 @@ abstract class CipherBase
             'ê' => 'e', 'ë' => 'e', 'ì' => 'i', 'í' => 'i', 'î' => 'i', 'ï' => 'i', 'ð' => 'o', 'ñ' => 'n', 'ò' => 'o', 'ó' => 'o',
             'ô' => 'o', 'õ' => 'o', 'ö' => 'o', 'ø' => 'o', 'ù' => 'u', 'ú' => 'u', 'û' => 'u', 'ý' => 'y', 'ě' => 'e', 'þ' => 'b',
             'ÿ' => 'y', 'Ŕ' => 'R', 'ŕ' => 'r',
-        );
+        ];
 
         return strtr($string, $table);
     }
 
     /**
      * Format key to match size of text
-     * @param string $key
-     * @param int $length
+     *
      * @return string
      */
     public function resizeKey(string $key, int $length)
     {
         $keyLen = strlen($key);
-        for ($i = 0; $i < $keyLen; ++$i) {
-            if (!ctype_alpha($key[$i]))
-                return ""; // Error
+        for ($i = 0; $i < $keyLen; $i++) {
+            if (! ctype_alpha($key[$i])) {
+                return '';
+            } // Error
         }
-        if (strlen($key) >= $length) $key = substr($key, 0, $length);
+        if (strlen($key) >= $length) {
+            $key = substr($key, 0, $length);
+        }
+
         return str_pad($key, $length, $key);
     }
 
-    /**
-     * @return string|null
-     */
     public function getKey(): ?string
     {
         return $this->key;
     }
 
-    /**
-     * @param string|null $key
-     */
     public function setKey(?string $key): void
     {
         $this->key = $key;
     }
 
-    /**
-     * @return string
-     */
     public function getText(): string
     {
         return $this->text;
     }
 
-    /**
-     * @param string $text
-     */
     public function setText(string $text): void
     {
         $this->text = $text;
     }
 
-    /**
-     * @return int
-     */
     public function getOperation(): int
     {
         return $this->operation;
     }
 
-    /**
-     * @param int $operation
-     */
     public function setOperation(int $operation): void
     {
         $this->operation = $operation;
     }
 
-    public function getAsciiFromString(string $input): string {
+    public function getAsciiFromString(string $input): string
+    {
         $asciiValues = [];
         for ($i = 0; $i < strlen($input); $i++) {
-            $asciiValues[] = ord($input[$i]) . ($i !== strlen($input) - 1 ? ' ' : '');
+            $asciiValues[] = ord($input[$i]).($i !== strlen($input) - 1 ? ' ' : '');
         }
+
         return implode('', $asciiValues);
     }
 }

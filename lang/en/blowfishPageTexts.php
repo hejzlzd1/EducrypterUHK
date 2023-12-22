@@ -1,4 +1,5 @@
 <?php
+
 return [
     'title' => 'Crypto application - Blowfish cipher',
     'metaComment' => 'This page contains theory and test form of blowfish cipher',

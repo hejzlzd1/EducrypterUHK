@@ -4,8 +4,8 @@ namespace App\Algorithms\Output\Steps;
 
 class A5_1Step extends Step
 {
-
     private string $majorityBit;
+
     private array $toBeClocked;
 
     private string $keyStreamBit;
@@ -21,18 +21,11 @@ class A5_1Step extends Step
         parent::__construct();
     }
 
-
-    /**
-     * @return string
-     */
     public function getRegisterA(): string
     {
         return $this->registerA;
     }
 
-    /**
-     * @return string
-     */
     public function getRegisterB(): string
     {
         return $this->registerB;
@@ -46,41 +39,26 @@ class A5_1Step extends Step
         return $this->registerC;
     }
 
-    /**
-     * @return string
-     */
     public function getRegisterAClocked(): string
     {
         return $this->registerAClocked;
     }
 
-    /**
-     * @return string
-     */
     public function getRegisterBClocked(): string
     {
         return $this->registerBClocked;
     }
 
-    /**
-     * @return string
-     */
     public function getRegisterCClocked(): string
     {
         return $this->registerCClocked;
     }
 
-    /**
-     * @return string
-     */
     public function getKeyStreamBit(): string
     {
         return $this->keyStreamBit;
     }
 
-    /**
-     * @param string $keyStreamBit
-     */
     public function setKeyStreamBit(string $keyStreamBit): void
     {
         $this->keyStreamBit = $keyStreamBit;
@@ -108,21 +86,15 @@ class A5_1Step extends Step
         return [
             'R1lastBit' => $this->registerAClocked[18],
             'R2lastBit' => $this->registerBClocked[21],
-            'R3lastBit' => $this->registerCClocked[22]
+            'R3lastBit' => $this->registerCClocked[22],
         ];
     }
 
-    /**
-     * @return string
-     */
     public function getMajorityBit(): string
     {
         return $this->majorityBit;
     }
 
-    /**
-     * @param string $majorityBit
-     */
     public function setMajorityBit(string $majorityBit): void
     {
         $this->majorityBit = $majorityBit;
@@ -130,7 +102,7 @@ class A5_1Step extends Step
 
     public function getToBeClocked(): string
     {
-        return implode(', ',array_filter($this->toBeClocked));
+        return implode(', ', array_filter($this->toBeClocked));
     }
 
     public function setToBeClocked(array $clockArray): void

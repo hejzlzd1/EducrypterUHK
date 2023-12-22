@@ -7,14 +7,20 @@ use Illuminate\Routing\Controller;
 
 class BaseController extends Controller
 {
-    const TYPE_TEXT = 0,
-        TYPE_NUMBER = 1,
-        TYPE_NONZERO_NUMBER = 2;
+    const TYPE_TEXT = 0;
 
-    const VALIDATION_EMPTY = 'empty',
-        VALIDATION_NOT_BINARY = 'notBinary',
-        VALIDATION_NOT_PRIME_NUMBER = 'notPrimeNumber',
-        VALIDATION_CUSTOM_MESSAGE = 'customMessage';
+    const TYPE_NUMBER = 1;
+
+    const TYPE_NONZERO_NUMBER = 2;
+
+    const VALIDATION_EMPTY = 'empty';
+
+    const VALIDATION_NOT_BINARY = 'notBinary';
+
+    const VALIDATION_NOT_PRIME_NUMBER = 'notPrimeNumber';
+
+    const VALIDATION_CUSTOM_MESSAGE = 'customMessage';
+
     use DataValidationTrait;
 
     protected function hextobin($hexstr): string
@@ -32,6 +38,7 @@ class BaseController extends Controller
             }
             $i += 2;
         }
+
         return $sbin;
     }
 }

@@ -51,7 +51,7 @@ class Handler extends ExceptionHandler
     }
 
     // make 404 & 500 to keep session
-    public function render ($request, Exception|Throwable $e)
+    public function render($request, Exception|Throwable $e)
     {
         if ($this->isHttpException($e)) {
             switch ($e->getStatusCode()) {
@@ -60,6 +60,7 @@ class Handler extends ExceptionHandler
                     \Route::any(request()->path(), function () use ($e, $request) {
                         return parent::render($request, $e);
                     })->middleware('web');
+
                     return app()->make(Kernel::class)->handle($request);
                     break;
                 default:

@@ -9,14 +9,17 @@ use App\Algorithms\StreamCipher;
 class A5_1 extends StreamCipher
 {
     private string $keyStream = '';
+
     private BasicOutput $output;
 
     /**
      * Registers for A5/1 cipher
      */
-    protected array $R1 = array();
-    protected array $R2 = array();
-    protected array $R3 = array();
+    protected array $R1 = [];
+
+    protected array $R2 = [];
+
+    protected array $R3 = [];
 
     /*
      * Theoretical info:
@@ -35,7 +38,6 @@ class A5_1 extends StreamCipher
         $this->output->addAdditionalInformation(['dataFrameBinary' => $this->dataFrame, 'dataFrame' => $dataFrameInteger]);
     }
 
-
     public function encrypt(): BasicOutput|string
     {
         $keystream = $this->generateKeystream(strlen($this->text)); // Generate keystream to encrypt input by xoring bits with it
@@ -45,9 +47,9 @@ class A5_1 extends StreamCipher
             $step = $this->output->getStep($i); // get step
             $step->setInput($this->text[$i]); // set input bit
 
-            $ciphertext .= ($this->text[$i] ^ (int)$keystream[$i]); // Perform encryption
+            $ciphertext .= ($this->text[$i] ^ (int) $keystream[$i]); // Perform encryption
 
-            $step->setOutput($this->text[$i] ^ (int)$keystream[$i]); // set output after xor with text
+            $step->setOutput($this->text[$i] ^ (int) $keystream[$i]); // set output after xor with text
         }
 
         $this->output->setOutputValue($ciphertext);
@@ -110,11 +112,14 @@ class A5_1 extends StreamCipher
             $this->keyStream .= $bit; // Append the output bit to the keystream
             $this->output->addStep($step);
         }
+
         return $this->keyStream; // Return the generated keystream
     }
 
-    private function getMajorityBit($a, $b, $c) {
+    private function getMajorityBit($a, $b, $c)
+    {
         $countOnes = $a + $b + $c;
+
         return ($countOnes >= 2) ? 1 : 0;
     }
 
@@ -141,7 +146,6 @@ class A5_1 extends StreamCipher
         }
     }
 
-
     private function clock(&$register, $taps): array
     {
         $feedback = 0;
@@ -162,5 +166,4 @@ class A5_1 extends StreamCipher
     {
         return $this->R1[18] ^ $this->R2[21] ^ $this->R3[22];
     }
-
 }

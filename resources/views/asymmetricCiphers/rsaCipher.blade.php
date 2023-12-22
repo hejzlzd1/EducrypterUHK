@@ -240,8 +240,6 @@
                                                 <p>{{$step->getOutputChar()}}</p>
                                             </div>
                                         </div>
-                                        <div></div>
-                                        <div></div>
                                     </div>
                                 </div>
                             </div>

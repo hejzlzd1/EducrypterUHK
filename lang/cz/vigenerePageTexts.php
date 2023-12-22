@@ -1,4 +1,5 @@
 <?php
+
 return [
     'title' => 'Krypto aplikace - Vigenèrova šifra',
     'metaComment' => 'Tato stránka obsahuje popis a zkušební formulář vigenère šifry',

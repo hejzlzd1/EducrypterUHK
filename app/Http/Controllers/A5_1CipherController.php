@@ -10,7 +10,6 @@ use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
-use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Session;
 
 class A5_1CipherController extends BaseController
@@ -22,6 +21,7 @@ class A5_1CipherController extends BaseController
                 ['data' => Session::get('data'), 'result' => Session::get('result')]
             );
         }
+
         return view('streamCiphers/a51Cipher');
     }
 
@@ -34,8 +34,9 @@ class A5_1CipherController extends BaseController
         $this->isBinary($data['key'], trans('baseTexts.key'));
         $this->isBinary($data['text'], trans('baseTexts.text'));
 
-        if (!empty($this->validationFailedVariable)) {
+        if (! empty($this->validationFailedVariable)) {
             Session::flash('alert-error', $this->getValidationErrorTranslation());
+
             return back()->withInput($data);
         }
 
@@ -43,6 +44,7 @@ class A5_1CipherController extends BaseController
             $a51 = new A5_1($data['text'], $data['key'], $data['action'], $data['dataFrame']);
         } catch (Exception $e) {
             Session::flash('alert-error', $e->getMessage());
+
             return back();
         }
 
@@ -52,10 +54,10 @@ class A5_1CipherController extends BaseController
         };
 
         $time_elapsed_secs = microtime(true) - $timerStart;
-        Session::flash('alert-info', trans('baseTexts.actionTook') . ' ' . $time_elapsed_secs . ' s');
+        Session::flash('alert-info', trans('baseTexts.actionTook').' '.$time_elapsed_secs.' s');
         Session::flash('data', $data);
         Session::flash('result', $result);
+
         return back();
     }
-
 }

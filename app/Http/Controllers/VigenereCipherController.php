@@ -20,10 +20,11 @@ class VigenereCipherController extends Controller
         if (Session::exists('data')) {
             return view('symmetricCiphers/vigenereCipher')->with(
                 [
-                    'data' => Session::get('data'), 'result' => Session::get('result')
+                    'data' => Session::get('data'), 'result' => Session::get('result'),
                 ]
             );
         }
+
         return view('symmetricCiphers/vigenereCipher');
     }
 
@@ -32,16 +33,19 @@ class VigenereCipherController extends Controller
         $timerStart = microtime(true);
         $data = $request->all();
 
-        if (!is_string($data['key']) || empty($data['key'])) {
+        if (! is_string($data['key']) || empty($data['key'])) {
             Session::flash('alert-error', trans('baseTexts.keyCannotBeEmpty'));
+
             return redirect('vigenereCipher');
         }
-        if (!is_string($data['text']) || empty($data['text'])) {
+        if (! is_string($data['text']) || empty($data['text'])) {
             Session::flash('alert-error', trans('baseTexts.textCannotBeEmpty'));
+
             return redirect('vigenereCipher');
         }
         if ($data['action'] === null) {
             Session::flash('alert-error', trans('baseTexts.actionCannotBeEmpty'));
+
             return redirect('vigenereCipher');
         }
 
@@ -53,11 +57,10 @@ class VigenereCipherController extends Controller
         };
 
         $time_elapsed_secs = microtime(true) - $timerStart;
-        Session::flash('alert-info', trans('baseTexts.actionTook') . ' ' . $time_elapsed_secs . ' s');
+        Session::flash('alert-info', trans('baseTexts.actionTook').' '.$time_elapsed_secs.' s');
         Session::flash('data', $data);
         Session::flash('result', $result);
+
         return redirect('vigenereCipher');
     }
-
-
 }

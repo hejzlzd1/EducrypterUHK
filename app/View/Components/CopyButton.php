@@ -13,7 +13,8 @@ class CopyButton extends Component
 {
     public function __construct(
         public string $textToCopy,
-    ) {}
+    ) {
+    }
 
     /**
      * Get the view / contents that represent the component.

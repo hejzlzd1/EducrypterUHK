@@ -13,7 +13,8 @@ class TooltipButton extends Component
 {
     public function __construct(
         public string $tooltip,
-    ) {}
+    ) {
+    }
 
     /**
      * Get the view / contents that represent the component.
