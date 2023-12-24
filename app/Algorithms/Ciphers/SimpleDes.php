@@ -43,7 +43,7 @@ class SimpleDes extends BlockCipher
      */
     public function __construct(string $text, string $key, int $operation)
     {
-        $this->output = new BasicOutput($text, $key, $operation);
+        $this->output = new BasicOutput(inputValue: $text, operation: $operation, key: $key);
         $this->output->setSteps([]); // TODO remove this after implementation of stepping
         if (mb_strlen($key) < 10) {
             $key = str_pad($key, 10, 0, STR_PAD_LEFT);
@@ -215,13 +215,12 @@ class SimpleDes extends BlockCipher
         [$leftHalf, $rightHalf] = $this->swap($leftHalf, $rightHalf);
 
         // Perform complex function again but with swapped sides
-        // TODO fix this
         $leftHalf = $this->complexFunction($leftHalf, $rightHalf, str_split($this->secondHalfKey));
 
         // Merge and perform inverse permutation
         $mergedOutputs = array_merge($leftHalf, $rightHalf);
         $output = $this->permutation($mergedOutputs, [4, 1, 3, 5, 7, 2, 8, 6]);
-        dd($output);
+
         $this->output->setOutputValue(implode('',$output));
         //TODO add steps
         return $this->output; //return full encrypted text with steps
@@ -233,22 +232,23 @@ class SimpleDes extends BlockCipher
     public function decrypt(): BasicOutput
     {
         // Init permutation
-        $permutedText = $this->permutation(str_split($this->text), [4, 1, 3, 5, 7, 2, 8, 6]);
+        $permutedText = $this->permutation(str_split($this->text), [2, 6, 3, 1, 4, 8, 5, 7]);
 
         [$leftHalf, $rightHalf] = array_chunk($permutedText,4);
 
         // Complex function
-        $leftHalf = $this->complexFunction($leftHalf, $rightHalf, str_split($this->firstHalfKey));
+        $leftHalf = $this->complexFunction($leftHalf, $rightHalf, str_split($this->secondHalfKey));
 
         // Swap half sides
         [$leftHalf, $rightHalf] = $this->swap($leftHalf, $rightHalf);
 
         // Perform complex function again but with swapped sides
-        $leftHalf = $this->complexFunction($leftHalf, $rightHalf, str_split($this->secondHalfKey));
+        $leftHalf = $this->complexFunction($leftHalf, $rightHalf, str_split($this->firstHalfKey));
 
         // Merge and perform inverse permutation
         $mergedOutputs = array_merge($leftHalf, $rightHalf);
-        $output = $this->permutation($mergedOutputs, [2, 6, 3, 1, 4, 8, 5, 7]);
+
+        $output = $this->permutation($mergedOutputs, [4, 1, 3, 5, 7, 2, 8, 6]);
 
         $this->output->setOutputValue(implode('',$output));
         //TODO add steps
