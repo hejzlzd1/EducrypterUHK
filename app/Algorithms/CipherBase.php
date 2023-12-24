@@ -40,12 +40,12 @@ abstract class CipherBase
         return redirect()->back()->with('alert-info', trans('baseTexts.nonImplementedMethod'));
     }
 
-    public function getStringAlgorithmOperation(int $operation): string
+    public static function getStringAlgorithmOperation(int $operation): string
     {
         return match ($operation) {
-            self::ALGORITHM_ENCRYPT => 'encrypt',
-            self::ALGORITHM_DECRYPT => 'decrypt',
-            self::ALGORITHM_DECRYPT_BRUTEFORCE => 'bruteforce',
+            self::ALGORITHM_ENCRYPT => trans('baseTexts.encrypt'),
+            self::ALGORITHM_DECRYPT => trans('baseTexts.decrypt'),
+            self::ALGORITHM_DECRYPT_BRUTEFORCE => trans('baseTexts.bruteforce'),
         };
     }
 

@@ -134,25 +134,41 @@
 
                 <div class="mt-4">
                     <h1><i class="fa-solid fa-list-ol"></i> @lang('baseTexts.algorithmSteps')</h1>
-                    <div class="accordion" id="rsaSteps">
-                        @foreach($result->getSteps() as $step)
+                    <div class="accordion" id="sdesSteps">
                             <div class="accordion-item">
                                 <h2 class="accordion-header">
                                     <button class="accordion-button" type="button" data-bs-toggle="collapse"
-                                            data-bs-target="#step{{$loop->index}}" aria-expanded="true"
-                                            aria-controls="step{{$loop->index}}">
-                                        {{$loop->index}}
+                                            data-bs-target="#keyGenSteps" aria-expanded="true"
+                                            aria-controls="stepKeygen">
+                                        @lang('simpleDesPageTexts.keygen')
                                     </button>
                                 </h2>
-                                <div id="step{{$loop->index}}" class="accordion-collapse collapse"
-                                     data-bs-parent="#rsaSteps">
+                                <div id="stepKeygen" class="accordion-collapse collapse"
+                                     data-bs-parent="#stepKeygen">
                                     <div class="accordion-body">
                                         <div class="row align-items-start">
+                                            :)
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                        @endforeach
+                            <div class="accordion-item">
+                                <h2 class="accordion-header">
+                                    <button class="accordion-button" type="button" data-bs-toggle="collapse"
+                                            data-bs-target="#steps" aria-expanded="true"
+                                            aria-controls="steps">
+                                        @lang('baseTexts.action'): {{\App\Algorithms\CipherBase::getStringAlgorithmOperation($result->getOperation())}}
+                                    </button>
+                                </h2>
+                                <div id="stepKeygen" class="accordion-collapse collapse"
+                                     data-bs-parent="#sdesSteps">
+                                    <div class="accordion-body">
+                                        <div class="row align-items-start">
+                                            :)
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                     </div>
                 </div>
 

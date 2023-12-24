@@ -43,7 +43,6 @@ class SimpleDesCipherController extends BaseController
         try {
             $simpleDes = new SimpleDes($data['text'], $data['key'], $data['action']);
         } catch (Exception $e) {
-            throw $e;
             Session::flash('alert-error', $e->getMessage());
 
             return redirect('simpleDesCipher');
