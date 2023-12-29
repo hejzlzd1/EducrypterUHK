@@ -22,16 +22,6 @@ class Step
         $this->input = $input;
     }
 
-    public function getInputInBinary(): string
-    {
-        return $this->inputInBinary;
-    }
-
-    public function setInputInBinary(string $inputInBinary): void
-    {
-        $this->inputInBinary = $inputInBinary;
-    }
-
     public function getOutput(): string
     {
         return $this->output;

@@ -43,8 +43,8 @@ abstract class CipherBase
     public static function getStringAlgorithmOperation(int $operation): string
     {
         return match ($operation) {
-            self::ALGORITHM_ENCRYPT => trans('baseTexts.encrypt'),
-            self::ALGORITHM_DECRYPT => trans('baseTexts.decrypt'),
+            self::ALGORITHM_ENCRYPT => trans('baseTexts.encryption'),
+            self::ALGORITHM_DECRYPT => trans('baseTexts.decryption'),
             self::ALGORITHM_DECRYPT_BRUTEFORCE => trans('baseTexts.bruteforce'),
         };
     }

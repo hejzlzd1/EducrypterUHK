@@ -15,14 +15,107 @@
                         <div class="col-lg-8">
                             <p>@lang('simpleDesPageTexts.annotation')</p>
                         </div>
-
                         <div class="col-lg-4 m-auto">
                             <a href="{{asset("img/simpleDesPage/simpleDes_".App::getLocale().".png")}}" target="_blank">
                                 <img width="100%"
-                                     src="{{asset("img/simpleDesPage/simpleDes".App::getLocale().".png")}}"
+                                     src="{{asset("img/simpleDesPage/simpleDes_".App::getLocale().".png")}}"
                                      class="rounded-4"></a>
                             <figure class="text-center">@lang("simpleDesPageTexts.blockSchema")</figure>
                         </div>
+                    </div>
+                    <div id="carouselControls" class="carousel col-lg-5" data-bs-ride="carousel" data-interval="20000">
+                        <div class="carousel-inner custom-carousel">
+                            <div class="carousel-item active">
+                                <a href="{{asset('img/simpleDesPage/complexFunction.png')}}" target="_blank">
+                                    <img src="{{asset('img/simpleDesPage/complexFunction.png')}}" class="d-block w-100">
+                                </a>
+                                <div class="label">
+                                    @lang('simpleDesPageTexts.complexFunction')
+                                </div>
+                            </div>
+                            <div class="carousel-item">
+                                <a href="{{asset('img/simpleDesPage/EP.png')}}" target="_blank">
+                                    <img src="{{asset('img/simpleDesPage/EP.png')}}" class="d-block w-100">
+                                </a>
+                                <div class="label">
+                                    @lang('simpleDesPageTexts.EP')
+                                </div>
+                            </div>
+                            <div class="carousel-item">
+                                <a href="{{asset('img/simpleDesPage/IP.png')}}" target="_blank">
+                                    <img src="{{asset('img/simpleDesPage/IP.png')}}" class="d-block w-100">
+                                </a>
+                                <div class="label">
+                                        @lang('simpleDesPageTexts.IP')
+                                </div>
+                            </div>
+                            <div class="carousel-item">
+                                <a href="{{asset('img/simpleDesPage/IIP.png')}}" target="_blank">
+                                    <img src="{{asset('img/simpleDesPage/IIP.png')}}" class="d-block w-100">
+                                </a>
+                                <div class="label">
+                                        @lang('simpleDesPageTexts.IIP')
+                                </div>
+                            </div>
+                            <div class="carousel-item">
+                                <a href="{{asset('img/simpleDesPage/LS.png')}}" target="_blank">
+                                    <img src="{{asset('img/simpleDesPage/LS.png')}}" class="d-block w-100">
+                                </a>
+                                <div class="label">
+                                        @lang('simpleDesPageTexts.shift')
+                                </div>
+                            </div>
+                            <div class="carousel-item">
+                                <a href="{{asset('img/simpleDesPage/P4.png')}}" target="_blank">
+                                    <img src="{{asset('img/simpleDesPage/P4.png')}}" class="d-block w-100">
+                                </a>
+                                <div class="label">
+                                        @lang('simpleDesPageTexts.P4')
+                                </div>
+                            </div>
+                            <div class="carousel-item">
+                                <a href="{{asset('img/simpleDesPage/P8.png')}}" target="_blank">
+                                    <img src="{{asset('img/simpleDesPage/P8.png')}}" class="d-block w-100">
+                                </a>
+                                <div class="label">
+                                        @lang('simpleDesPageTexts.P8')
+                                </div>
+                            </div>
+                            <div class="carousel-item">
+                                <a href="{{asset('img/simpleDesPage/P10.png')}}" target="_blank">
+                                    <img src="{{asset('img/simpleDesPage/P10.png')}}" class="d-block w-100">
+                                </a>
+                                <div class="label">
+                                        @lang('simpleDesPageTexts.P10')
+                                </div>
+                            </div>
+                            <div class="carousel-item">
+                                <a href="{{asset('img/simpleDesPage/sBoxes.png')}}" target="_blank">
+                                    <img src="{{asset('img/simpleDesPage/sBoxes.png')}}" class="d-block w-100">
+                                </a>
+                                <div class="label">
+                                        @lang('simpleDesPageTexts.sBoxes')
+                                </div>
+                            </div>
+                            <div class="carousel-item">
+                                <a href="{{asset('img/simpleDesPage/SW.png')}}" target="_blank">
+                                    <img src="{{asset('img/simpleDesPage/SW.png')}}" class="d-block w-100">
+                                </a>
+                                <div class="label">
+                                        @lang('simpleDesPageTexts.switch')
+                                </div>
+                            </div>
+                        </div>
+                        <button class="carousel-control-prev" type="button" data-bs-target="#carouselControls"
+                                data-bs-slide="prev">
+                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Previous</span>
+                        </button>
+                        <button class="carousel-control-next" type="button" data-bs-target="#carouselControls"
+                                data-bs-slide="next">
+                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Next</span>
+                        </button>
                     </div>
                 </div>
             </div>
@@ -91,7 +184,7 @@
 
     @if(isset($result))
         @php
-        /** @var App\Algorithms\Output\BasicOutput $result */
+            /** @var App\Algorithms\Output\SDESOutput $result */
         @endphp
         <section class="m-5 shadow-lg border rounded-4 p-5">
             <div class="container text-break">
@@ -134,41 +227,108 @@
 
                 <div class="mt-4">
                     <h1><i class="fa-solid fa-list-ol"></i> @lang('baseTexts.algorithmSteps')</h1>
-                    <div class="accordion" id="sdesSteps">
-                            <div class="accordion-item">
-                                <h2 class="accordion-header">
-                                    <button class="accordion-button" type="button" data-bs-toggle="collapse"
-                                            data-bs-target="#keyGenSteps" aria-expanded="true"
-                                            aria-controls="stepKeygen">
-                                        @lang('simpleDesPageTexts.keygen')
-                                    </button>
-                                </h2>
-                                <div id="stepKeygen" class="accordion-collapse collapse"
-                                     data-bs-parent="#stepKeygen">
-                                    <div class="accordion-body">
-                                        <div class="row align-items-start">
-                                            :)
-                                        </div>
+                    <div class="accordion" id="simpleDESSteps">
+                        <div class="accordion-item">
+                            <h2 class="accordion-header">
+                                <button class="accordion-button" type="button" data-bs-toggle="collapse"
+                                        data-bs-target="#keyGeneration" aria-expanded="false"
+                                        aria-controls="keyGeneration">
+                                    <i class="fa-solid fa-key"></i> 
+                                    @lang('simpleDesPageTexts.keyGeneration')
+                                </button>
+                            </h2>
+                            <div id="keyGeneration" class="accordion-collapse collapse">
+                                <div class="accordion-body">
+                                    <div class="accordion" id="keyGenerationStepsAccordion">
+                                        @foreach($result->getKeyGenerationSteps() as $keyGenerationStep)
+                                            <div class="accordion-item">
+                                                <h2 class="accordion-header">
+                                                    <button class="accordion-button collapsed" type="button"
+                                                            data-bs-toggle="collapse"
+                                                            data-bs-target="#keyGenerationStep{{$loop->index}}"
+                                                            aria-expanded="false"
+                                                            aria-controls="keyGenerationStep{{$loop->index}}">
+                                                        {{$loop->index + 1}}
+                                                        . {{$keyGenerationStep->getTranslatedActionName()}}
+                                                    </button>
+                                                </h2>
+                                                <div id="keyGenerationStep{{$loop->index}}"
+                                                     class="accordion-collapse collapse">
+                                                    <div class="accordion-body">
+                                                        <div class="d-flex flex-wrap">
+                                                            <div class="col-md-5">
+                                                                <h3>
+                                                                    <i class="fa-solid fa-file-lines"></i>
+                                                                    @lang('baseTexts.input')
+                                                                </h3>
+                                                                <p>{{$keyGenerationStep->getInput()}}</p>
+                                                            </div>
+                                                            <div class="col-md-5">
+                                                                <h3>
+                                                                    <i class="fa-solid fa-file-lines"></i>
+                                                                    @lang('baseTexts.output')
+                                                                </h3>
+                                                                {{$keyGenerationStep->getOutput()}}
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        @endforeach
                                     </div>
                                 </div>
                             </div>
-                            <div class="accordion-item">
-                                <h2 class="accordion-header">
-                                    <button class="accordion-button" type="button" data-bs-toggle="collapse"
-                                            data-bs-target="#steps" aria-expanded="true"
-                                            aria-controls="steps">
-                                        @lang('baseTexts.action'): {{\App\Algorithms\CipherBase::getStringAlgorithmOperation($result->getOperation())}}
-                                    </button>
-                                </h2>
-                                <div id="stepKeygen" class="accordion-collapse collapse"
-                                     data-bs-parent="#sdesSteps">
-                                    <div class="accordion-body">
-                                        <div class="row align-items-start">
-                                            :)
-                                        </div>
+                        </div>
+                        <div class="accordion-item">
+                            <h2 class="accordion-header">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                        data-bs-target="#operationsSteps" aria-expanded="false"
+                                        aria-controls="operationsSteps">
+                                    <i class="fa-solid fa-gear"></i> {{\App\Algorithms\CipherBase::getStringAlgorithmOperation($result->getOperation())}}
+                                </button>
+                            </h2>
+                            <div id="operationsSteps" class="accordion-collapse collapse">
+                                <div class="accordion-body">
+                                    <div class="accordion" id="stepsAccordion">
+                                        @foreach($result->getSteps() as $step)
+                                            <div class="accordion-item">
+                                                <h2 class="accordion-header">
+                                                    <button class="accordion-button collapsed" type="button"
+                                                            data-bs-toggle="collapse"
+                                                            data-bs-target="#step{{$loop->index}}"
+                                                            aria-expanded="false"
+                                                            aria-controls="step{{$loop->index}}">
+                                                        {{$loop->index + 1}}. {{$step->getTranslatedActionName()}}
+                                                    </button>
+                                                </h2>
+                                                <div id="step{{$loop->index}}"
+                                                     class="accordion-collapse collapse">
+                                                    <div class="accordion-body">
+                                                        <div class="d-flex flex-wrap">
+                                                            <div class="col-md-5">
+                                                                <h3>
+                                                                    <i class="fa-solid fa-file-lines"></i>
+                                                                    @lang('baseTexts.input')
+                                                                </h3>
+                                                                <p>{{$step->getInput()}}</p>
+                                                            </div>
+                                                            <div class="col-md-5">
+                                                                <h3>
+                                                                    <i class="fa-solid fa-file-lines"></i>
+                                                                    @lang('baseTexts.output')
+                                                                </h3>
+                                                                {{$step->getOutput()}}
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        @endforeach
                                     </div>
                                 </div>
                             </div>
+                        </div>
+
                     </div>
                 </div>
 

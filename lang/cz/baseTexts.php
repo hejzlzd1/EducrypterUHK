@@ -5,6 +5,8 @@ return [
     'cipherForm' => 'Zkušební formulář',
     'encrypt' => 'Šifrovat',
     'decrypt' => 'Dešifrovat',
+    'encryption' => 'Šifrování',
+    'decryption' => 'Dešifrování',
     'bruteforce' => 'Dešifrovat hrubou silou',
     'action' => 'Prováděná akce',
     'text' => 'Vstupní text',
@@ -32,6 +34,7 @@ return [
     'block' => 'Blok',
     'inputSize' => 'Velikost vstupu',
     'output' => 'Výstup',
+    'input' => 'Vstup',
     'finalOperation' => 'Finální operace',
     'round' => 'Runda',
     'subkey' => 'Subklíč',
@@ -58,6 +61,7 @@ return [
     '404' => 'Stránka nenalezena!',
     'notFound' => 'Tato adresa na webu neexistuje - obsah buď neexistuje nebo nebyl přidán.',
     '500' => 'Nastala chyba v aplikaci!',
-    'internalError' => 'V aplikaci se vyskytla neočekávaná chyba, prosím kontaktujte vývojáře na emailové adrese pomocí odkazu níže. Omlouváme se za způsobené komplikace!',
+    'internalError' => 'V aplikaci se vyskytla neočekávaná chyba, autor byl na chybu upozorněn. Omlouváme se za způsobené komplikace!',
     'reportException' => 'Nahlásit chybu aplikace',
+
 ];

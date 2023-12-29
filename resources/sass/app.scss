@@ -217,3 +217,14 @@ $c-purples: #532E62, #8E44AD, #9B59B6;
 .register-R1-18, .register-R1-17, .register-R1-16, .register-R1-13, .register-R2-21, .register-R2-20, .register-R3-22, .register-R3-21, .register-R3-20, .register-R3-7 {
     background-color: lightgray !important;
 }
+
+.custom-carousel .carousel-item img {
+    object-fit: contain;
+    height: 300px;
+}
+.custom-carousel {
+    height: 320px;
+}
+.custom-carousel .carousel-item .label {
+    text-align: center;
+}

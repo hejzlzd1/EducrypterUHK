@@ -6,7 +6,6 @@ use App\Algorithms\Output\Steps\Step;
 
 class BasicOutput
 {
-    private ?int $keyStream;
 
     public function __construct(
         private readonly string $inputValue,
@@ -17,11 +16,6 @@ class BasicOutput
         private ?array $additionalInformation = []
     ) {
         //
-    }
-
-    public function getKeyStream(): ?int
-    {
-        return $this->keyStream;
     }
 
     public function getInputValue(): string

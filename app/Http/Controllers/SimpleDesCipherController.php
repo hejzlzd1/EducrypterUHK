@@ -34,7 +34,7 @@ class SimpleDesCipherController extends BaseController
         $this->isBinary($data['text'], trans('baseTexts.text'));
         $this->isVariableSet($data['action'], BaseController::TYPE_NUMBER, trans('baseTexts.action'));
 
-        if (! empty($this->validationFailedVariable)) {
+        if (!empty($this->validationFailedVariable)) {
             Session::flash('alert-error', $this->getValidationErrorTranslation());
 
             return back()->withInput($data);
@@ -54,7 +54,7 @@ class SimpleDesCipherController extends BaseController
         };
 
         $time_elapsed_secs = microtime(true) - $timerStart;
-        Session::flash('alert-info', trans('baseTexts.actionTook').' '.$time_elapsed_secs.' s');
+        Session::flash('alert-info', trans('baseTexts.actionTook') . ' ' . $time_elapsed_secs . ' s');
         Session::flash('data', $data);
         Session::flash('result', $result);
 
