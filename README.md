@@ -1,10 +1,18 @@
 ## Developer info
-Webová aplikace prozatím není dockerizována, je potřeba si jednotlivé části zapnout manuálně:
+Webová aplikace je plně zdokerizovaná. 
+Pro start aplikace je nutno vytvořit platný .env soubor - lze zkopírovat .env.example a pojmenovat jako .env
 
-Start frontend -> npm run dev
+Nyní stačí mít nainstalovaný Docker a v adresáři projektu spustit následující příkazy:
 
-Start backend -> php artisan serve
+Vytvoření image a zapnutí kontejneru:
+docker-compose build
+docker-compose up -d
 
+Vytvoření šifrovací klíče a build aplikace (stažení a instalace závislostí) 
+docker-compose exec php php artisan key:generate
+docker-compose exec php bash build.sh
+
+Nyní by mělo být vše připraveno
 
 ## Použitý framework (vygenerovaný zbytek readme)
 <p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
