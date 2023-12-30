@@ -12,7 +12,6 @@
     <meta name="Author" content="Zdeněk Hejzlar">
 
     @vite(['resources/sass/app.scss', 'resources/js/app.js'])
-    <script src="{{asset('/resources/js/customFunctions.js')}}" defer></script>
 </head>
 
 <body>
