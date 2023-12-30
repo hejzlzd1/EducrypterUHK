@@ -14,11 +14,12 @@
     },
     "require-dev": {
         "fakerphp/faker": "^1.9.1",
-        "laravel/pint": "^1.0",
+        "laravel/pint": "^1.13",
         "laravel/sail": "^1.0.1",
         "mockery/mockery": "^1.4.4",
         "nunomaduro/collision": "^6.1",
         "phpunit/phpunit": "^9.5.10",
+        "psalm/plugin-laravel": "^2.8",
         "spatie/laravel-ignition": "^1.0"
     },
     "autoload": {
@@ -34,6 +35,9 @@
         }
     },
     "scripts": {
+        "cs": ["./vendor/bin/pint"],
+        "psalm": ["./vendor/bin/psalm"],
+        "completeCodeCheck": ["@cs, @psalm"],
         "post-autoload-dump": [
             "Illuminate\\Foundation\\ComposerScripts::postAutoloadDump",
             "@php artisan package:discover --ansi"

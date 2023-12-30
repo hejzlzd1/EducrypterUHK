@@ -1,3 +1,5 @@
+#!/bin/bash
+
 if [ -d "vendor" ]; then
   echo "Removing 'vendor' directory..."
   rm -rf vendor
@@ -8,6 +10,9 @@ if [ -d "node_modules" ]; then
   echo "Removing 'node_modules' directory..."
   rm -rf node_modules
 fi
+
+composer clear-cache
+npm cache verify
 
 # Run 'composer install'
 echo "Running 'composer install'..."
@@ -24,4 +29,4 @@ npm run build
 echo "Clearing laravel cache..."
 php artisan cache:clear
 
-echo "All done..."
+echo "All done... Website is ready!"

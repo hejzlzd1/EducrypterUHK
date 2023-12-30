@@ -10,14 +10,11 @@ use App\Algorithms\Output\Steps\RSAStep;
 class RsaOutput extends BasicOutput
 {
     /**
-     * @param ?int $n => first part of public key (n = p * q)
-     * @param ?int $e => second part of public key (co-prime number)
-     * @param ?int $d => private key d = (k*Φ(n) + 1) / e
-     * @param ?float $phi => Φ(n) = (P-1)(Q-1)
-     * @param string $inputValue
-     * @param int $operation
-     * @param string $outputValue
-     * @param array<RSAStep> $steps
+     * @param  ?int  $n => first part of public key (n = p * q)
+     * @param  ?int  $e => second part of public key (co-prime number)
+     * @param  ?int  $d => private key d = (k*Φ(n) + 1) / e
+     * @param  ?float  $phi => Φ(n) = (P-1)(Q-1)
+     * @param  array<RSAStep>  $steps
      */
     public function __construct(
         string $inputValue,
@@ -71,5 +68,4 @@ class RsaOutput extends BasicOutput
     {
         return $this->phi;
     }
-
 }

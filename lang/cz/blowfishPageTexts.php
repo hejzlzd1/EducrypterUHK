@@ -1,4 +1,5 @@
 <?php
+
 return [
     'title' => 'Krypto aplikace - Blowfish šifra',
     'metaComment' => 'Tato stránka obsahuje popis a zkušební formulář blowfish šifry',
@@ -22,4 +23,3 @@ Navzdory svému stáří zůstává Blowfish oblíbeným šifrovacím algoritmem
     'rightBlockXorOutput' => 'F funkce XOR pravý blok',
     'rightBlockXorKeyOutput' => 'Pravý blok XOR subklíč',
 ];
-

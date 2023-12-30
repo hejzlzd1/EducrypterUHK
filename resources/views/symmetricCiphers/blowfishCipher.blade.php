@@ -18,9 +18,10 @@
 
                         <div class="col-lg-4 m-auto">
                             <a href="{{asset("img/blowfishPage/blowfish_".App::getLocale().".png")}}" target="_blank">
-                                <img width="100%"
+                                <img title="@lang('baseTexts.clickToSeeInFullSize')" width="100%"
                                      src="{{asset("img/blowfishPage/blowfish_".App::getLocale().".png")}}"
-                                     class="rounded-4"></a>
+                                     class="rounded-4">
+                            </a>
                             <figure class="text-center">@lang("blowfishPageTexts.blockSchema")</figure>
                         </div>
                     </div>
@@ -44,10 +45,12 @@
                                            @if(isset($data['text']))value="{{$data['text']}}"@endif>
                                 </div>
                                 <div class="col-lg-6">
-                                    <label class="form-label" for="key">@lang('baseTexts.key')</label>
+                                    <label class="form-label" for="key">
+                                        @lang('baseTexts.key')
+                                        <x-tooltipButton :tooltip="trans('baseTexts.textInputOnly')"></x-tooltipButton>
+                                    </label>
                                     <input class="form-control" maxlength="30" type="text" id="key" name="key"
                                            placeholder="@lang('baseTexts.insertKey')" pattern="^[a-zA-Z ]*$"
-                                           title="@lang("baseTexts.textInputOnly")"
                                            @if(isset($data['key'])) value="{{$data['key']}}" @else value="" @endif>
                                 </div>
                             </fieldset>
@@ -164,7 +167,11 @@
                                                                 data-bs-target="#stepCollapse{{$loop->index}}{{$loop->parent->index}}"
                                                                 aria-expanded="true"
                                                                 aria-controls="stepCollapse{{$loop->index}}{{$loop->parent->index}}">
-                                                            @if(!$loop->last) @lang('baseTexts.round') {{$loop->index+1}} @else @lang('baseTexts.finalOperation') @endif
+                                                            @if(!$loop->last)
+                                                                @lang('baseTexts.round') {{$loop->index+1}}
+                                                            @else
+                                                                @lang('baseTexts.finalOperation')
+                                                            @endif
                                                         </button>
                                                     </h2>
 
@@ -177,14 +184,18 @@
                                                                 <div class="col-md-5">
                                                                     <h3>
                                                                         <i class="fa-solid fa-file-lines"></i>
-                                                                        @lang('blowfishPageTexts.leftInput') (@lang('baseTexts.shortLeftSymbol'){{$loop->index + 1}})
+                                                                        @lang('blowfishPageTexts.leftInput')
+                                                                        (@lang('baseTexts.shortLeftSymbol'){{$loop->index + 1}}
+                                                                        )
                                                                     </h3>
                                                                     <p>{{$step->getInputLeft()}}</p>
                                                                 </div>
                                                                 <div class="col-md-5">
                                                                     <h3>
                                                                         <i class="fa-solid fa-file-lines"></i>
-                                                                        @lang('blowfishPageTexts.rightInput') (@lang('baseTexts.shortRightSymbol'){{$loop->index + 1}})
+                                                                        @lang('blowfishPageTexts.rightInput')
+                                                                        (@lang('baseTexts.shortRightSymbol'){{$loop->index + 1}}
+                                                                        )
                                                                     </h3>
                                                                     <p>{{$step->getInputRight()}}</p>
                                                                 </div>
@@ -232,7 +243,7 @@
                                                                     </div>
                                                                     <div class="flex-item">
                                                                         <h4>
-                                                                            <i class="fa-solid fa-calculator"></i> 
+                                                                            <i class="fa-solid fa-calculator"></i>
                                                                             F(@lang('baseTexts.shortLeftSymbol'){{$loop->index + 1}}
                                                                             ⊕ K{{$loop->index + 1}})
                                                                             ⊕ @lang('baseTexts.shortRightSymbol'){{$loop->index + 1}}

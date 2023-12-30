@@ -1,9 +1,12 @@
 <?php
+
 return [
     'submit' => 'Odeslat',
     'cipherForm' => 'Zkušební formulář',
     'encrypt' => 'Šifrovat',
     'decrypt' => 'Dešifrovat',
+    'encryption' => 'Šifrování',
+    'decryption' => 'Dešifrování',
     'bruteforce' => 'Dešifrovat hrubou silou',
     'action' => 'Prováděná akce',
     'text' => 'Vstupní text',
@@ -24,13 +27,14 @@ return [
     'textInputOnly' => 'Toto pole může obsahovat pouze text (případně mezery)',
     'initVector' => 'Inicializační vektor',
     'keyBits' => 'Délka klíče v bitech',
-    'formatedKey'=> 'Formátovaný klíč',
+    'formatedKey' => 'Formátovaný klíč',
     'keyFormatted' => 'Klíč byl upraven aby odpovídal požadavkům algoritmu',
     'formInfoDescription' => 'Formulář slouží k ilustrativnímu vyzkoušení daného algoritmu. Výsledná data se nedoporučují k použití - jedná se pouze o edukativní ukázku výstupu!',
     'substitution' => 'Substituce',
     'block' => 'Blok',
     'inputSize' => 'Velikost vstupu',
     'output' => 'Výstup',
+    'input' => 'Vstup',
     'finalOperation' => 'Finální operace',
     'round' => 'Runda',
     'subkey' => 'Subklíč',
@@ -51,10 +55,14 @@ return [
     'binaryInputPrompt' => 'Vlož binární řetězec',
     'binaryInput' => 'Binarní vstup',
 
+    'insertInputData' => 'Zadejte vstupní data',
+
     'notReady' => 'Tato funkce není zatím připravena.',
     '404' => 'Stránka nenalezena!',
     'notFound' => 'Tato adresa na webu neexistuje - obsah buď neexistuje nebo nebyl přidán.',
     '500' => 'Nastala chyba v aplikaci!',
-    'internalError' => 'V aplikaci se vyskytla neočekávaná chyba, prosím kontaktujte vývojáře na emailové adrese pomocí odkazu níže. Omlouváme se za způsobené komplikace!',
+    'internalError' => 'V aplikaci se vyskytla neočekávaná chyba, autor byl na chybu upozorněn. Omlouváme se za způsobené komplikace!',
     'reportException' => 'Nahlásit chybu aplikace',
+    'clickToSeeInFullSize' => 'Kliknutím lze obrázek zobrazit v samostatném okně (zvětšeně)'
+
 ];

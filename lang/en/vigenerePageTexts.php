@@ -1,4 +1,5 @@
 <?php
+
 return [
     'title' => 'Crypto application - Vigenère cipher',
     'metaComment' => 'This page contains theory and test form of vigenère cipher',

@@ -1,4 +1,5 @@
 <?php
+
 return [
     'title' => 'Krypto aplikace - Caesarova šifra',
     'metaComment' => 'Tato stránka obsahuje popis a zkušební formulář caesarovi šifry',

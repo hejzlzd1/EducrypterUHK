@@ -3,7 +3,6 @@
 namespace App\Algorithms\Ciphers;
 
 use App\Algorithms\CipherBase;
-
 use App\Algorithms\Output\BasicOutput;
 
 use function ctype_alpha;
@@ -13,9 +12,6 @@ class Vigenere extends CipherBase
 {
     /**
      * Normalize input string to basic chars
-     * @param string $text
-     * @param string $key
-     * @param int $operation
      */
     public function __construct(string $text, string $key, int $operation)
     {
@@ -24,9 +20,6 @@ class Vigenere extends CipherBase
 
     /**
      * Modulo function
-     * @param $a
-     * @param $b
-     * @return int
      */
     public static function Mod($a, $b): int
     {
@@ -37,29 +30,29 @@ class Vigenere extends CipherBase
     {
         $keyLen = strlen($this->key); //length of key
 
-        for ($i = 0; $i < $keyLen; ++$i) {
-            if (!ctype_alpha($this->key[$i])) {
-                return "";
+        for ($i = 0; $i < $keyLen; $i++) {
+            if (! ctype_alpha($this->key[$i])) {
+                return '';
             }
         } // found non char in key
 
-        $output = "";
+        $output = '';
         $nonAlphaCharCount = 0;
         $inputLen = strlen($this->text); //length of input
 
-        for ($i = 0; $i < $inputLen; ++$i) {
+        for ($i = 0; $i < $inputLen; $i++) {
             if (ctype_alpha($this->text[$i])) { //is char at index?
                 $cIsUpper = ctype_upper($this->text[$i]); //is upper char?
                 $offset = ord($cIsUpper ? 'A' : 'a'); // convert to ascii
                 $keyIndex = ($i - $nonAlphaCharCount) % $keyLen; // get key index depending on key
                 $k = ord(
-                        $cIsUpper ? strtoupper($this->key[$keyIndex]) : strtolower($this->key[$keyIndex])
-                    ) - $offset; //get char
+                    $cIsUpper ? strtoupper($this->key[$keyIndex]) : strtolower($this->key[$keyIndex])
+                ) - $offset; //get char
                 $ch = chr(($this->mod(((ord($this->text[$i]) + $k) - $offset), 26)) + $offset); //get new char
                 $output .= $ch;
             } else {
                 $output .= $this->text[$i];
-                ++$nonAlphaCharCount;
+                $nonAlphaCharCount++;
             }
         }
 
@@ -75,30 +68,30 @@ class Vigenere extends CipherBase
     {
         $keyLen = strlen($this->key); //length of key
 
-        for ($i = 0; $i < $keyLen; ++$i) {
-            if (!ctype_alpha($this->key[$i])) {
-                return "";
+        for ($i = 0; $i < $keyLen; $i++) {
+            if (! ctype_alpha($this->key[$i])) {
+                return '';
             }
         } // found non char in key
 
-        $output = "";
+        $output = '';
         $nonAlphaCharCount = 0;
         $inputLen = strlen($this->text); //length of input
 
-        for ($i = 0; $i < $inputLen; ++$i) {
+        for ($i = 0; $i < $inputLen; $i++) {
             if (ctype_alpha($this->text[$i])) { //is char at index?
                 $cIsUpper = ctype_upper($this->text[$i]); //is upper char?
                 $offset = ord($cIsUpper ? 'A' : 'a'); // convert to ascii
                 $keyIndex = ($i - $nonAlphaCharCount) % $keyLen; // get key index depending on key
                 $k = ord(
-                        $cIsUpper ? strtoupper($this->key[$keyIndex]) : strtolower($this->key[$keyIndex])
-                    ) - $offset; //get char
+                    $cIsUpper ? strtoupper($this->key[$keyIndex]) : strtolower($this->key[$keyIndex])
+                ) - $offset; //get char
                 $k = -$k; //if decrypt do function reverse way
                 $ch = chr(($this->mod(((ord($this->text[$i]) + $k) - $offset), 26)) + $offset); //get new char
                 $output .= $ch;
             } else {
                 $output .= $this->text[$i];
-                ++$nonAlphaCharCount;
+                $nonAlphaCharCount++;
             }
         }
 

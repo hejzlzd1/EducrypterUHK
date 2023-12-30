@@ -9,16 +9,13 @@ use App\Algorithms\Output\Steps\RSAStep;
 
 class Rsa extends CipherBase
 {
-    public function __construct(string $text,private ?int $publicKey, private ?int $privateKey, int $operation, private ?int $p, private ?int $q)
+    public function __construct(string $text, private ?int $publicKey, private ?int $privateKey, int $operation, private ?int $p, private ?int $q)
     {
         // For this case we convert input string into ascii, each character splitted by ' '
         $text = $operation === CipherBase::ALGORITHM_ENCRYPT ? $this->getAsciiFromString($text) : $text;
         parent::__construct($text, null, $operation);
     }
 
-    /**
-     * @return BasicOutput
-     */
     public function decrypt(): BasicOutput
     {
         $n = $this->publicKey;
@@ -30,11 +27,11 @@ class Rsa extends CipherBase
             $c = gmp_pow(gmp_init($char), $d); // use first part of encryption key -> $e
             $cBeforeModulo = gmp_intval($c);
             $c = gmp_mod($c, $n); // use of second part of encryption key to generate encrypted char -> $n
-            $result .= $c . ' ';
-            $steps[] = new RSAStep(beforeModulo: $cBeforeModulo, inputChar: (int)$char, outputChar: gmp_intval($c));
+            $result .= $c.' ';
+            $steps[] = new RSAStep(beforeModulo: $cBeforeModulo, inputChar: (int) $char, outputChar: gmp_intval($c));
         }
 
-       // Return the resulting output object
+        // Return the resulting output object
         return new RsaOutput(
             inputValue: $this->text, operation: $this->operation,
             outputValue: $result,
@@ -44,9 +41,6 @@ class Rsa extends CipherBase
         );
     }
 
-    /**
-     * @return BasicOutput
-     */
     public function encrypt(): BasicOutput
     {
         // Encryption key generation -> calculate n from prime numbers
@@ -78,8 +72,8 @@ class Rsa extends CipherBase
             $c = gmp_pow(gmp_init($char), $e); // use first part of encryption key -> $e
             $cBeforeModulo = gmp_intval($c);
             $c = gmp_mod($c, $n); // use of second part of encryption key to generate encrypted char -> $n
-            $steps[] = new RSAStep(beforeModulo: $cBeforeModulo, inputChar: (int)$char, outputChar: gmp_intval($c));
-            $result .= $c . ' ';
+            $steps[] = new RSAStep(beforeModulo: $cBeforeModulo, inputChar: (int) $char, outputChar: gmp_intval($c));
+            $result .= $c.' ';
         }
 
         // Return the resulting output object

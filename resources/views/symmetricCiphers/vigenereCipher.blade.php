@@ -17,9 +17,12 @@
                         </div>
 
                         <div class="col-lg-4 m-auto">
-                            <a href="img/vigenerePage/vigenere.svg" target="_blank"> <img width="100%"
-                                                                                          src="{{asset("img/vigenerePage/vigenere.svg")}}"
-                                                                                          class="rounded-4"></a>
+                            <a href="img/vigenerePage/vigenere.svg" target="_blank">
+                                <img
+                                    title="@lang('baseTexts.clickToSeeInFullSize')" width="100%"
+                                    src="{{asset("img/vigenerePage/vigenere.svg")}}"
+                                    class="rounded-4">
+                            </a>
                             <figure class="text-center">@lang("vigenerePageTexts.table")</figure>
                         </div>
                     </div>
@@ -36,7 +39,9 @@
                             @csrf
                             <fieldset class="row p-2">
                                 <div class="col-lg-6">
-                                    <label class="form-label" for="text">@lang('baseTexts.text')</label>
+                                    <label class="form-label" for="text">
+                                        @lang('baseTexts.text')
+                                    </label>
                                     <input class="form-control" maxlength="40" minlength="1" required type="text"
                                            id="text"
                                            name="text"
@@ -44,11 +49,12 @@
                                            @if(isset($data["text"]))value="{{$data["text"]}}"@endif>
                                 </div>
                                 <div class="col-lg-6">
-                                    <label class="form-label" for="key">@lang('baseTexts.key')</label>
+                                    <label class="form-label" for="key">@lang('baseTexts.key')
+                                        <x-tooltipButton :tooltip="trans('baseTexts.textInputOnly')"></x-tooltipButton>
+                                    </label>
                                     <input class="form-control" maxlength="30"
                                            required type="text" id="key" name="key"
                                            placeholder="@lang('baseTexts.insertKey')" pattern="^[a-zA-Z]*$"
-                                           title="@lang("baseTexts.textInputOnly")"
                                            @if(isset($data["key"]))value="{{$data["key"]}}" @else value="" @endif>
                                 </div>
                             </fieldset>

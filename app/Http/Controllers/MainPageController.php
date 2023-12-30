@@ -14,11 +14,8 @@ class MainPageController extends BaseController
 {
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
 
-    /**
-     * @return Application|Factory|View
-     */
     public function index(): View|Factory|Application
     {
-        return view("mainPage");
+        return view('mainPage');
     }
 }

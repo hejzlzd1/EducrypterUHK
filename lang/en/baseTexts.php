@@ -1,4 +1,5 @@
 <?php
+
 return [
     'submit' => 'Submit data',
     'cipherForm' => 'Test form',
@@ -22,7 +23,7 @@ return [
     'algorithmSteps' => 'Algorithm steps',
     'column' => 'column',
     'row' => 'row',
-    'formatedKey'=> 'Formatted key',
+    'formatedKey' => 'Formatted key',
     'keyFormatted' => 'Key was formatted to meet criteria of algorithm',
     'textInputOnly' => 'This field can only contain text (possibly spaces)',
     'keyBits' => 'Délka klíče v bitech',
@@ -31,6 +32,7 @@ return [
     'block' => 'Block',
     'inputSize' => 'Input size',
     'output' => 'Output',
+    'input' => 'Input',
     'finalOperation' => 'Final operation',
     'round' => 'Round',
     'subkey' => 'Subkey',
@@ -55,9 +57,12 @@ return [
 
     'notReady' => 'This function is not ready yet.',
 
+    'insertInputData' => 'Insert input data',
+
     '404' => 'Page not found!',
     'notFound' => 'URL address does not exist on this website - content does not exist or page was not added.',
     '500' => 'An error occurred in the application!',
-    'internalError' => 'An unexpected error occurred in the application, please contact the developer at the email by link below. We apologize for the inconvenience!',
-    'reportException' => 'Report exception in application'
+    'internalError' => 'An unexpected error occurred in the application, author has been noticed about this incident. We apologize for the inconvenience!',
+    'reportException' => 'Report exception in application',
+
 ];

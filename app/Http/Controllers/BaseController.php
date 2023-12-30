@@ -2,94 +2,28 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Traits\DataValidationTrait;
 use Illuminate\Routing\Controller;
 
 class BaseController extends Controller
 {
-    const TYPE_TEXT = 0,
-        TYPE_NUMBER = 1,
-        TYPE_NONZERO_NUMBER = 2;
-    const VALIDATION_EMPTY = 'empty', VALIDATION_NOT_BINARY = 'notBinary', VALIDATION_NOT_PRIME_NUMBER = 'notPrimeNumber';
+    const TYPE_TEXT = 0;
 
-    public array $validationFailedVariable;
-    private bool $validationFailed = false;
+    const TYPE_NUMBER = 1;
 
-    protected function isBinary(string $text, string $inputVariable): bool
-    {
-        if (preg_match('/^[01]+$/', $text) !== 1) {
-            $this->validationFailedVariable[self::VALIDATION_NOT_BINARY] = $inputVariable;
-            return false;
-        }
-        return true;
-    }
+    const TYPE_NONZERO_NUMBER = 2;
 
-    protected function basicValidate(array $data)
-    {
-        $this->isVariableSet($data['text'], self::TYPE_TEXT, trans('baseTexts.text'));
-        $this->isVariableSet($data['key'], self::TYPE_TEXT, trans('baseTexts.key'));
-        $this->isVariableSet($data['action'], self::TYPE_NUMBER, trans('baseTexts.action'));
-    }
+    const VALIDATION_EMPTY = 'empty';
 
-    protected function isVariableSet(string|int|null $variable, int $type, string $variableName): void
-    {
-        if(!isset($variable)) {
-            $this->validationFailedVariable[self::VALIDATION_EMPTY] = $variableName;
-            return;
-        }
-        if ($type === self::TYPE_TEXT) {
-            if (!is_string($variable) || empty($variable)) {
-                $this->validationFailedVariable[self::VALIDATION_EMPTY] = $variableName;
-            }
-        } elseif ($type === self::TYPE_NONZERO_NUMBER) {
-            if (!is_numeric($variable) || empty($variable)) {
-                $this->validationFailedVariable[self::VALIDATION_EMPTY] = $variableName;
-            }
-        } elseif ($type === self::TYPE_NUMBER) {
-            if (!is_numeric($variable)) {
-                $this->validationFailedVariable[self::VALIDATION_EMPTY] = $variableName;
-            }
-        }
-    }
+    const VALIDATION_NOT_BINARY = 'notBinary';
 
-    protected function isPrimeNumber(int $number,string $variableName): bool
-    {
-        if ($number <= 1) {
-            $this->validationFailedVariable[self::VALIDATION_NOT_PRIME_NUMBER] = $variableName;
-            return false;
-        }
+    const VALIDATION_NOT_PRIME_NUMBER = 'notPrimeNumber';
 
-        $sqrt = floor(sqrt($number));
-        for ($i = 2; $i <= $sqrt; $i++) {
-            if ($number % $i == 0) {
-                $this->validationFailedVariable[self::VALIDATION_NOT_PRIME_NUMBER] = $variableName;
-                return false;
-            }
-        }
+    const VALIDATION_CUSTOM_MESSAGE = 'customMessage';
 
-        return true;
-    }
+    use DataValidationTrait;
 
-    protected function getValidationErrorTranslation(): string
-    {
-        $validationTexts = [];
-        foreach ($this->validationFailedVariable as $key => $failedValidation) {
-            switch ($key) {
-                case self::VALIDATION_EMPTY:
-                    $validationTexts[] = trans('baseTexts.cannotBeEmpty', ['variableName' => $failedValidation]);
-                    break;
-                case self::VALIDATION_NOT_BINARY:
-                    $validationTexts[] = trans('baseTexts.notBinary', ['variableName' => $failedValidation]);
-                    break;
-                case self::VALIDATION_NOT_PRIME_NUMBER:
-                    $validationTexts[] = trans('baseTexts.notPrime', ['variableName' => $failedValidation]);
-                    break;
-            }
-        }
-
-        return implode(" \n", $validationTexts);
-    }
-
-    protected function hextobin($hexstr)
+    protected function hextobin($hexstr): string
     {
         $n = strlen($hexstr);
         $sbin = '';
@@ -104,6 +38,7 @@ class BaseController extends Controller
             }
             $i += 2;
         }
+
         return $sbin;
     }
 }

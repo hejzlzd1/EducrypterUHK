@@ -24,5 +24,4 @@ The most well-known and most used cryptographic protocols by users are SSL, TLS,
     'certificates' => 'SSL/TLS Certificates',
     'certificatesInfo' => 'SSL/TLS certificates are a way to verify the security of a connection to a server. These certificates allow encryption of HTTP traffic, which is manifested by the familiar HTTPS prefix and lock icon in web browsers. The generated certificate contains the domain name, organization name, certificate issuer name, date of issuance, expiration date, digital signature, and public key. It may also contain any subdomains . <br/><br/> When connecting to a server under an encrypted port, this certificate is sent to the client in the \'handshake\' phase. The client verifies the received certificate on the issuer side before further communication. This check ensures that the server is who it claims to be. If the certificate is valid and its verification at the issuer side is also valid, then it proceeds to the next communication otherwise the handshake and connection is terminated.',
 
-
 ];

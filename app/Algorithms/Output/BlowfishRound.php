@@ -26,49 +26,31 @@ class BlowfishRound
         $this->subkey = base64_encode($subkey);
     }
 
-    /**
-     * @return string
-     */
     public function getInputLeft(): string
     {
         return $this->inputLeft;
     }
 
-    /**
-     * @return string
-     */
     public function getInputRight(): string
     {
         return $this->inputRight;
     }
 
-    /**
-     * @return string
-     */
     public function getLeftBlockAfterXor(): string
     {
         return $this->leftBlockAfterXor;
     }
 
-    /**
-     * @return string
-     */
     public function getRightBlockAfterXor(): string
     {
         return $this->rightBlockAfterXor;
     }
 
-    /**
-     * @return string
-     */
     public function getRightBlockAfterFeistel(): string
     {
         return $this->rightBlockAfterFeistel;
     }
 
-    /**
-     * @return string
-     */
     public function getSubkey(): string
     {
         return $this->subkey;

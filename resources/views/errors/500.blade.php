@@ -3,14 +3,13 @@
 @section("comment",__('baseTexts.internalError'))
 @section("content")
 
-
     <section class="m-5">
         <div class="container shadow-lg text-center border rounded-4 p-5">
             <h3>@lang('baseTexts.500')</h3>
             <p>@lang('baseTexts.internalError')</p>
-            <a href = "mailto: hejzlzd1@uhk.cz">@lang('baseTexts.reportException')</a>
+            <a href="mailto: hejzlzd1@uhk.cz">@lang('baseTexts.reportException')</a>
             <div>
-            <img class="shadow-lg m-2 rounded-4" src="{{asset("img/500.png")}}">
+                <img class="shadow-lg m-2 rounded-4" src="{{asset("img/500.png")}}">
             </div>
         </div>
     </section>

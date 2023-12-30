@@ -9,29 +9,18 @@ class RSAStep extends Step
         parent::__construct();
     }
 
-    /**
-     * @return int
-     */
     public function getBeforeModulo(): int
     {
         return $this->beforeModulo;
     }
 
-    /**
-     * @return int
-     */
     public function getInputChar(): int
     {
         return $this->inputChar;
     }
 
-    /**
-     * @return int
-     */
     public function getOutputChar(): int
     {
         return $this->outputChar;
     }
-
-
 }
