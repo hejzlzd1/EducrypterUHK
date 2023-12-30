@@ -40,14 +40,7 @@ class SimpleDesCipherController extends BaseController
             return back()->withInput($data);
         }
 
-        try {
-            $simpleDes = new SimpleDes($data['text'], $data['key'], $data['action']);
-        } catch (Exception $e) {
-            Session::flash('alert-error', $e->getMessage());
-
-            return redirect('simpleDesCipher');
-        }
-
+        $simpleDes = new SimpleDes($data['text'], $data['key'], $data['action']);
         $result = match ($simpleDes->getOperation()) {
             CipherBase::ALGORITHM_DECRYPT => $simpleDes->decrypt(),
             CipherBase::ALGORITHM_ENCRYPT => $simpleDes->encrypt()

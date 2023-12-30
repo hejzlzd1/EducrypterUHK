@@ -54,13 +54,7 @@ class RsaCipherController extends BaseController
             return back()->withInput($data);
         }
 
-        try {
-            $rsa = new Rsa($data['text'], $data['publicKey'] ?? null, $data['privateKey'] ?? null, $data['action'], $firstInputNumber ?? null, $secondInputNumber ?? null);
-        } catch (Exception $e) {
-            Session::flash('alert-error', $e->getMessage());
-
-            return back();
-        }
+        $rsa = new Rsa($data['text'], $data['publicKey'] ?? null, $data['privateKey'] ?? null, $data['action'], $firstInputNumber ?? null, $secondInputNumber ?? null);
 
         $result = match ($rsa->getOperation()) {
             CipherBase::ALGORITHM_DECRYPT => $rsa->decrypt(),
