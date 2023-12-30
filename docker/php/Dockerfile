@@ -8,6 +8,8 @@ RUN apt-get update && apt-get install -y \
 RUN apt-get update && apt install -y git
 RUN apt-get update && apt install -y unzip
 
+RUN pecl install excimer
+
 # Compile and install the GMP extension
 RUN docker-php-ext-configure gmp \
     && docker-php-ext-install gmp
