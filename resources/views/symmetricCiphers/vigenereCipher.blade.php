@@ -17,9 +17,12 @@
                         </div>
 
                         <div class="col-lg-4 m-auto">
-                            <a href="img/vigenerePage/vigenere.svg" target="_blank"> <img width="100%"
-                                                                                          src="{{asset("img/vigenerePage/vigenere.svg")}}"
-                                                                                          class="rounded-4"></a>
+                            <a href="img/vigenerePage/vigenere.svg" target="_blank">
+                                <img
+                                    title="@lang('baseTexts.clickToSeeInFullSize')" width="100%"
+                                    src="{{asset("img/vigenerePage/vigenere.svg")}}"
+                                    class="rounded-4">
+                            </a>
                             <figure class="text-center">@lang("vigenerePageTexts.table")</figure>
                         </div>
                     </div>

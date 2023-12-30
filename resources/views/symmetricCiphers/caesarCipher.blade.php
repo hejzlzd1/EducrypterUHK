@@ -19,7 +19,7 @@
 
                         <div class="col-lg-4 m-auto">
                             <a href="{{asset('img/caesarPage/caesarCipher.png')}}" target="_blank">
-                                <img width="100%"
+                                <img title="@lang('baseTexts.clickToSeeInFullSize')" width="100%"
                                      src="{{asset("img/caesarPage/caesarCipher.png")}}"
                                      class="rounded-4"/>
                             </a>

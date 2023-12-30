@@ -3,7 +3,6 @@
 @section("comment",__('aesPageTexts.metaComment'))
 @section("content")
 
-
     <div class="anchor" id="info"></div>
 
     <section class="m-5">
@@ -18,9 +17,10 @@
                         </div>
 
                         <div class="col-lg-4 m-auto">
-                            <a href="img/blowfishPage/blowfish.png" target="_blank"> <img width="100%"
-                                                                                          src="{{asset("img/aesPage/aesSchema.png")}}"
-                                                                                          class="rounded-4"></a>
+                            <a href="img/blowfishPage/blowfish.png" target="_blank"> <img
+                                    title="@lang('baseTexts.clickToSeeInFullSize')" width="100%"
+                                    src="{{asset("img/aesPage/aesSchema.png")}}"
+                                    class="rounded-4"></a>
                             <figure class="text-center">@lang("aesPageTexts.blockSchema")</figure>
                         </div>
                     </div>

@@ -63,5 +63,6 @@ return [
     '500' => 'Nastala chyba v aplikaci!',
     'internalError' => 'V aplikaci se vyskytla neočekávaná chyba, autor byl na chybu upozorněn. Omlouváme se za způsobené komplikace!',
     'reportException' => 'Nahlásit chybu aplikace',
+    'clickToSeeInFullSize' => 'Kliknutím lze obrázek zobrazit v samostatném okně (zvětšeně)'
 
 ];

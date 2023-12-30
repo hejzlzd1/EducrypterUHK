@@ -17,7 +17,7 @@
 
                         <div class="col-lg-4 m-auto">
                             <a href="{{asset('img/rsaPage/rsaCipher.png')}}" target="_blank">
-                                <img width="100%" src="{{asset("img/rsaPage/rsaPageCipher.png")}}"
+                                <img width="100%" title="@lang('baseTexts.clickToSeeInFullSize')" src="{{asset("img/rsaPage/rsaPageCipher.png")}}"
                                      class="rounded-4"></a>
                             <figure class="text-center">@lang("rsaPageTexts.schema")</figure>
                         </div>

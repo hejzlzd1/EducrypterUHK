@@ -14,20 +14,27 @@
                         <hr/>
                         <div class="col-lg-8">
                             <p>@lang('simpleDesPageTexts.annotation')</p>
+                            <h4>@lang('simpleDesPageTexts.keyGenerationInfoTitle')</h4>
+                            <p>@lang('simpleDesPageTexts.keyGenerationInfo')</p>
+                            <h4>@lang('simpleDesPageTexts.encryptionDecryptionInfoTitle')</h4>
+                            <p>@lang('simpleDesPageTexts.encryptionDecryptionInfo')</p>
+                            <h4>@lang('simpleDesPageTexts.differencesToDESTitle')</h4>
+                            <p>@lang('simpleDesPageTexts.differencesToDES')</p>
                         </div>
                         <div class="col-lg-4 m-auto">
-                            <a href="{{asset("img/simpleDesPage/simpleDes_".App::getLocale().".png")}}" target="_blank">
-                                <img width="100%"
-                                     src="{{asset("img/simpleDesPage/simpleDes_".App::getLocale().".png")}}"
+                            <a href="{{asset('img/simpleDesPage/simpleDes_'.App::getLocale().'.png')}}" target="_blank">
+                                <img width="100%" title="@lang('baseTexts.clickToSeeInFullSize')"
+                                     src="{{asset('img/simpleDesPage/simpleDes_'.App::getLocale().'.png')}}"
                                      class="rounded-4"></a>
-                            <figure class="text-center">@lang("simpleDesPageTexts.blockSchema")</figure>
+                            <figure class="text-center">@lang('simpleDesPageTexts.blockSchema')</figure>
                         </div>
                     </div>
-                    <div id="carouselControls" class="carousel col-lg-5" data-bs-ride="carousel" data-interval="20000">
+                    <h4>@lang('simpleDesPageTexts.additionalSchemas')</h4>
+                    <div id="carouselControls" class="carousel col-lg-5" data-bs-ride="carousel" data-bs-interval="10000">
                         <div class="carousel-inner custom-carousel">
                             <div class="carousel-item active">
                                 <a href="{{asset('img/simpleDesPage/complexFunction.png')}}" target="_blank">
-                                    <img src="{{asset('img/simpleDesPage/complexFunction.png')}}" class="d-block w-100">
+                                    <img src="{{asset('img/simpleDesPage/complexFunction.png')}}" class="d-block w-100" title="@lang('baseTexts.clickToSeeInFullSize')">
                                 </a>
                                 <div class="label">
                                     @lang('simpleDesPageTexts.complexFunction')
@@ -35,7 +42,7 @@
                             </div>
                             <div class="carousel-item">
                                 <a href="{{asset('img/simpleDesPage/EP.png')}}" target="_blank">
-                                    <img src="{{asset('img/simpleDesPage/EP.png')}}" class="d-block w-100">
+                                    <img src="{{asset('img/simpleDesPage/EP.png')}}" class="d-block w-100" title="@lang('baseTexts.clickToSeeInFullSize')">
                                 </a>
                                 <div class="label">
                                     @lang('simpleDesPageTexts.EP')
@@ -43,7 +50,7 @@
                             </div>
                             <div class="carousel-item">
                                 <a href="{{asset('img/simpleDesPage/IP.png')}}" target="_blank">
-                                    <img src="{{asset('img/simpleDesPage/IP.png')}}" class="d-block w-100">
+                                    <img src="{{asset('img/simpleDesPage/IP.png')}}" class="d-block w-100" title="@lang('baseTexts.clickToSeeInFullSize')">
                                 </a>
                                 <div class="label">
                                         @lang('simpleDesPageTexts.IP')
@@ -51,7 +58,7 @@
                             </div>
                             <div class="carousel-item">
                                 <a href="{{asset('img/simpleDesPage/IIP.png')}}" target="_blank">
-                                    <img src="{{asset('img/simpleDesPage/IIP.png')}}" class="d-block w-100">
+                                    <img src="{{asset('img/simpleDesPage/IIP.png')}}" class="d-block w-100" title="@lang('baseTexts.clickToSeeInFullSize')">
                                 </a>
                                 <div class="label">
                                         @lang('simpleDesPageTexts.IIP')
@@ -59,7 +66,7 @@
                             </div>
                             <div class="carousel-item">
                                 <a href="{{asset('img/simpleDesPage/LS.png')}}" target="_blank">
-                                    <img src="{{asset('img/simpleDesPage/LS.png')}}" class="d-block w-100">
+                                    <img src="{{asset('img/simpleDesPage/LS.png')}}" class="d-block w-100" title="@lang('baseTexts.clickToSeeInFullSize')">
                                 </a>
                                 <div class="label">
                                         @lang('simpleDesPageTexts.shift')
@@ -67,7 +74,7 @@
                             </div>
                             <div class="carousel-item">
                                 <a href="{{asset('img/simpleDesPage/P4.png')}}" target="_blank">
-                                    <img src="{{asset('img/simpleDesPage/P4.png')}}" class="d-block w-100">
+                                    <img src="{{asset('img/simpleDesPage/P4.png')}}" class="d-block w-100" title="@lang('baseTexts.clickToSeeInFullSize')">
                                 </a>
                                 <div class="label">
                                         @lang('simpleDesPageTexts.P4')
@@ -75,7 +82,7 @@
                             </div>
                             <div class="carousel-item">
                                 <a href="{{asset('img/simpleDesPage/P8.png')}}" target="_blank">
-                                    <img src="{{asset('img/simpleDesPage/P8.png')}}" class="d-block w-100">
+                                    <img src="{{asset('img/simpleDesPage/P8.png')}}" class="d-block w-100" title="@lang('baseTexts.clickToSeeInFullSize')">
                                 </a>
                                 <div class="label">
                                         @lang('simpleDesPageTexts.P8')
@@ -83,7 +90,7 @@
                             </div>
                             <div class="carousel-item">
                                 <a href="{{asset('img/simpleDesPage/P10.png')}}" target="_blank">
-                                    <img src="{{asset('img/simpleDesPage/P10.png')}}" class="d-block w-100">
+                                    <img src="{{asset('img/simpleDesPage/P10.png')}}" class="d-block w-100" title="@lang('baseTexts.clickToSeeInFullSize')">
                                 </a>
                                 <div class="label">
                                         @lang('simpleDesPageTexts.P10')
@@ -91,7 +98,7 @@
                             </div>
                             <div class="carousel-item">
                                 <a href="{{asset('img/simpleDesPage/sBoxes.png')}}" target="_blank">
-                                    <img src="{{asset('img/simpleDesPage/sBoxes.png')}}" class="d-block w-100">
+                                    <img src="{{asset('img/simpleDesPage/sBoxes.png')}}" class="d-block w-100" title="@lang('baseTexts.clickToSeeInFullSize')">
                                 </a>
                                 <div class="label">
                                         @lang('simpleDesPageTexts.sBoxes')
@@ -99,10 +106,10 @@
                             </div>
                             <div class="carousel-item">
                                 <a href="{{asset('img/simpleDesPage/SW.png')}}" target="_blank">
-                                    <img src="{{asset('img/simpleDesPage/SW.png')}}" class="d-block w-100">
+                                    <img src="{{asset('img/simpleDesPage/SW.png')}}" class="d-block w-100" title="@lang('baseTexts.clickToSeeInFullSize')">
                                 </a>
                                 <div class="label">
-                                        @lang('simpleDesPageTexts.switch')
+                                        @lang('simpleDesPageTexts.swap')
                                 </div>
                             </div>
                         </div>
@@ -119,7 +126,7 @@
                     </div>
                 </div>
             </div>
-            <div class="">
+            <div class="mt-3">
                 <div class="container">
                     <div class="row align-items-start">
                         <h1 class=""><i class="fa-regular fa-file-lines"></i> @lang('baseTexts.cipherForm')</h1>
@@ -231,13 +238,13 @@
                         <div class="accordion-item">
                             <h2 class="accordion-header">
                                 <button class="accordion-button" type="button" data-bs-toggle="collapse"
-                                        data-bs-target="#keyGeneration" aria-expanded="false"
+                                        data-bs-target="#keyGeneration" aria-expanded="true"
                                         aria-controls="keyGeneration">
                                     <i class="fa-solid fa-key"></i> 
                                     @lang('simpleDesPageTexts.keyGeneration')
                                 </button>
                             </h2>
-                            <div id="keyGeneration" class="accordion-collapse collapse">
+                            <div id="keyGeneration" class="accordion-collapse collapse show">
                                 <div class="accordion-body">
                                     <div class="accordion" id="keyGenerationStepsAccordion">
                                         @foreach($result->getKeyGenerationSteps() as $keyGenerationStep)

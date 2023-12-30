@@ -1,21 +1,14 @@
 #!/bin/bash
 
-# Function to remove a directory if it exists
-remove_directory() {
-  if [ -d "$1" ]; then
-    echo "Removing '$1' directory..."
-    rm -rf "$1"
-  fi
-}
-
-# Check if the command-line parameter is true before removing 'vendor' directory
-if [ "$1" == "true" ]; then
-  remove_directory "vendor"
+if [ -d "vendor" ]; then
+  echo "Removing 'vendor' directory..."
+  rm -rf vendor
 fi
 
-# Check if the command-line parameter is true before removing 'node_modules' directory
-if [ "$1" == "true" ]; then
-  remove_directory "node_modules"
+# Remove the 'node_modules' directory if it exists
+if [ -d "node_modules" ]; then
+  echo "Removing 'node_modules' directory..."
+  rm -rf node_modules
 fi
 
 composer clear-cache

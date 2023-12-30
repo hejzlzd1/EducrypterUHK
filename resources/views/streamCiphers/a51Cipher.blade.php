@@ -17,7 +17,7 @@
 
                         <div class="col-lg-4 m-auto">
                             <a href="{{asset('img/a51Page/a51_' . App::getLocale() . '.png')}}" target="_blank">
-                                <img width="100%" src="{{asset('img/a51Page/a51_' . App::getLocale() . '.png')}}" class="rounded-4">
+                                <img title="@lang('baseTexts.clickToSeeInFullSize')" width="100%" src="{{asset('img/a51Page/a51_' . App::getLocale() . '.png')}}" class="rounded-4">
                             </a>
                             <figure class="text-center">@lang("a51PageTexts.imageDescription")</figure>
                         </div>
