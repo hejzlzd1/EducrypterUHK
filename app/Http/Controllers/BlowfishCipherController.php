@@ -38,13 +38,7 @@ class BlowfishCipherController extends BaseController
             return back()->withInput($data);
         }
 
-        try {
-            $blowfish = new Blowfish($data['text'], $data['key'], $data['action']);
-        } catch (Exception $e) {
-            Session::flash('alert-error', $e->getMessage());
-
-            return redirect('blowfishCipher');
-        }
+        $blowfish = new Blowfish($data['text'], $data['key'], $data['action']);
 
         $result = match ($blowfish->getOperation()) {
             CipherBase::ALGORITHM_DECRYPT => $blowfish->decrypt(),

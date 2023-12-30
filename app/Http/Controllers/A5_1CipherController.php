@@ -39,14 +39,7 @@ class A5_1CipherController extends BaseController
 
             return back()->withInput($data);
         }
-
-        try {
-            $a51 = new A5_1($data['text'], $data['key'], $data['action'], $data['dataFrame']);
-        } catch (Exception $e) {
-            Session::flash('alert-error', $e->getMessage());
-
-            return back();
-        }
+        $a51 = new A5_1($data['text'], $data['key'], $data['action'], $data['dataFrame']);
 
         $result = match ($a51->getOperation()) {
             CipherBase::ALGORITHM_DECRYPT => $a51->decrypt(),
