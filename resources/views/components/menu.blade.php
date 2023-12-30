@@ -11,7 +11,7 @@
         <div class="collapse navbar-collapse justify-content-end" id="navbarToggle" style="padding-right: 20px;">
             <ul class="navbar-nav">
                 <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="/" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    <a class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                         @lang("menuTexts.mainPage")
                     </a>
                     <ul class="dropdown-menu">
@@ -26,7 +26,7 @@
                     </ul>
                 </li>
                 <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="/" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    <a class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                         @lang("menuTexts.symetricAlgo")
                     </a>
                     <ul class="dropdown-menu">
@@ -49,7 +49,7 @@
                 </li>
 
                 <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="/" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    <a class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                         @lang('menuTexts.asymetricAlgo')
                     </a>
                     <ul class="dropdown-menu">
@@ -59,7 +59,7 @@
                 </li>
 
                 <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="/" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    <a class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                         @lang('menuTexts.cipherInformation')
                     </a>
                     <ul class="dropdown-menu">
