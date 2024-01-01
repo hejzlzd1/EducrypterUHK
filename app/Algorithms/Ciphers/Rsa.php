@@ -43,15 +43,18 @@ class Rsa extends CipherBase
 
     public function encrypt(): BasicOutput
     {
+        $p = gmp_init($this->p);
+        $q = gmp_init($this->q);
+
         // Encryption key generation -> calculate n from prime numbers
-        $n = $this->p * $this->q;
+        $n = gmp_mul($p,$q);
 
         // fermat number
         $e = 257;
         // declaring phi
-        $phi = ($this->p - 1) * ($this->q - 1);
+        $phi = gmp_mul(gmp_sub($p,1), gmp_sub($q, 1));
         // searching for co-prime number
-        while ($e < $phi) {
+        while ($e < gmp_intval($phi)) {
             /*
              * e must be co-prime to phi and
              * smaller than phi.
@@ -79,10 +82,10 @@ class Rsa extends CipherBase
         // Return the resulting output object
         return new RsaOutput(
             inputValue: $this->text, operation: $this->operation, outputValue: $result, steps: $steps,
-            n: $n,
+            n: gmp_intval($n),
             e: $e,
             d: $d,
-            phi: $phi,
+            phi: gmp_intval($phi),
         );
     }
 }

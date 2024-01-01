@@ -13,7 +13,7 @@ return [
     'shift' => 'Počet posunutí',
     'inputText' => 'Zadej vstupní text',
     'insertedText' => 'Vložený text',
-    'cipherResult' => 'Výsledky formuláře',
+    'cipherResult' => 'Výsledky',
     'outputText' => 'Výsledek funkce',
     'stepNum' => 'Krok č.',
     'actualResult' => 'Aktuální výsledek funkce:',
@@ -63,6 +63,7 @@ return [
     '500' => 'Nastala chyba v aplikaci!',
     'internalError' => 'V aplikaci se vyskytla neočekávaná chyba, autor byl na chybu upozorněn. Omlouváme se za způsobené komplikace!',
     'reportException' => 'Nahlásit chybu aplikace',
-    'clickToSeeInFullSize' => 'Kliknutím lze obrázek zobrazit v samostatném okně (zvětšeně)'
-
+    'clickToSeeInFullSize' => 'Kliknutím lze obrázek zobrazit v samostatném okně (zvětšeně)',
+    'privateKey' => 'Soukromý klíč',
+    'publicKey' => 'Veřejný klíč',
 ];

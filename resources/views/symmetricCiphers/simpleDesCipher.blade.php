@@ -22,9 +22,9 @@
                             <p>@lang('simpleDesPageTexts.differencesToDES')</p>
                         </div>
                         <div class="col-lg-4 m-auto">
-                            <a href="{{asset('img/simpleDesPage/simpleDes_'.App::getLocale().'.png')}}" target="_blank">
-                                <img width="100%" title="@lang('baseTexts.clickToSeeInFullSize')"
-                                     src="{{asset('img/simpleDesPage/simpleDes_'.App::getLocale().'.png')}}"
+                            <a href="{{asset('img/simpleDesPage/simpleDes_' . App::getLocale() . '.png')}}" target="_blank">
+                                <img alt="" width="100%" title="@lang('baseTexts.clickToSeeInFullSize')"
+                                     src="{{asset('img/simpleDesPage/simpleDes_' . App::getLocale() . '.png')}}"
                                      class="rounded-4"></a>
                             <figure class="text-center">@lang('simpleDesPageTexts.blockSchema')</figure>
                         </div>
@@ -34,7 +34,7 @@
                         <div class="carousel-inner custom-carousel">
                             <div class="carousel-item active">
                                 <a href="{{asset('img/simpleDesPage/complexFunction.png')}}" target="_blank">
-                                    <img src="{{asset('img/simpleDesPage/complexFunction.png')}}" class="d-block w-100" title="@lang('baseTexts.clickToSeeInFullSize')">
+                                    <img alt="" src="{{asset('img/simpleDesPage/complexFunction.png')}}" class="d-block w-100" title="@lang('baseTexts.clickToSeeInFullSize')">
                                 </a>
                                 <div class="label">
                                     @lang('simpleDesPageTexts.complexFunction')
@@ -42,7 +42,7 @@
                             </div>
                             <div class="carousel-item">
                                 <a href="{{asset('img/simpleDesPage/EP.png')}}" target="_blank">
-                                    <img src="{{asset('img/simpleDesPage/EP.png')}}" class="d-block w-100" title="@lang('baseTexts.clickToSeeInFullSize')">
+                                    <img alt="" src="{{asset('img/simpleDesPage/EP.png')}}" class="d-block w-100" title="@lang('baseTexts.clickToSeeInFullSize')">
                                 </a>
                                 <div class="label">
                                     @lang('simpleDesPageTexts.EP')
@@ -50,7 +50,7 @@
                             </div>
                             <div class="carousel-item">
                                 <a href="{{asset('img/simpleDesPage/IP.png')}}" target="_blank">
-                                    <img src="{{asset('img/simpleDesPage/IP.png')}}" class="d-block w-100" title="@lang('baseTexts.clickToSeeInFullSize')">
+                                    <img alt="" src="{{asset('img/simpleDesPage/IP.png')}}" class="d-block w-100" title="@lang('baseTexts.clickToSeeInFullSize')">
                                 </a>
                                 <div class="label">
                                         @lang('simpleDesPageTexts.IP')
@@ -58,7 +58,7 @@
                             </div>
                             <div class="carousel-item">
                                 <a href="{{asset('img/simpleDesPage/IIP.png')}}" target="_blank">
-                                    <img src="{{asset('img/simpleDesPage/IIP.png')}}" class="d-block w-100" title="@lang('baseTexts.clickToSeeInFullSize')">
+                                    <img alt="" src="{{asset('img/simpleDesPage/IIP.png')}}" class="d-block w-100" title="@lang('baseTexts.clickToSeeInFullSize')">
                                 </a>
                                 <div class="label">
                                         @lang('simpleDesPageTexts.IIP')
@@ -66,7 +66,7 @@
                             </div>
                             <div class="carousel-item">
                                 <a href="{{asset('img/simpleDesPage/LS.png')}}" target="_blank">
-                                    <img src="{{asset('img/simpleDesPage/LS.png')}}" class="d-block w-100" title="@lang('baseTexts.clickToSeeInFullSize')">
+                                    <img alt="" src="{{asset('img/simpleDesPage/LS.png')}}" class="d-block w-100" title="@lang('baseTexts.clickToSeeInFullSize')">
                                 </a>
                                 <div class="label">
                                         @lang('simpleDesPageTexts.shift')
@@ -74,7 +74,7 @@
                             </div>
                             <div class="carousel-item">
                                 <a href="{{asset('img/simpleDesPage/P4.png')}}" target="_blank">
-                                    <img src="{{asset('img/simpleDesPage/P4.png')}}" class="d-block w-100" title="@lang('baseTexts.clickToSeeInFullSize')">
+                                    <img alt="" src="{{asset('img/simpleDesPage/P4.png')}}" class="d-block w-100" title="@lang('baseTexts.clickToSeeInFullSize')">
                                 </a>
                                 <div class="label">
                                         @lang('simpleDesPageTexts.P4')
@@ -82,7 +82,7 @@
                             </div>
                             <div class="carousel-item">
                                 <a href="{{asset('img/simpleDesPage/P8.png')}}" target="_blank">
-                                    <img src="{{asset('img/simpleDesPage/P8.png')}}" class="d-block w-100" title="@lang('baseTexts.clickToSeeInFullSize')">
+                                    <img alt="" src="{{asset('img/simpleDesPage/P8.png')}}" class="d-block w-100" title="@lang('baseTexts.clickToSeeInFullSize')">
                                 </a>
                                 <div class="label">
                                         @lang('simpleDesPageTexts.P8')
@@ -90,7 +90,7 @@
                             </div>
                             <div class="carousel-item">
                                 <a href="{{asset('img/simpleDesPage/P10.png')}}" target="_blank">
-                                    <img src="{{asset('img/simpleDesPage/P10.png')}}" class="d-block w-100" title="@lang('baseTexts.clickToSeeInFullSize')">
+                                    <img alt="" src="{{asset('img/simpleDesPage/P10.png')}}" class="d-block w-100" title="@lang('baseTexts.clickToSeeInFullSize')">
                                 </a>
                                 <div class="label">
                                         @lang('simpleDesPageTexts.P10')
@@ -98,7 +98,7 @@
                             </div>
                             <div class="carousel-item">
                                 <a href="{{asset('img/simpleDesPage/sBoxes.png')}}" target="_blank">
-                                    <img src="{{asset('img/simpleDesPage/sBoxes.png')}}" class="d-block w-100" title="@lang('baseTexts.clickToSeeInFullSize')">
+                                    <img alt="" src="{{asset('img/simpleDesPage/sBoxes.png')}}" class="d-block w-100" title="@lang('baseTexts.clickToSeeInFullSize')">
                                 </a>
                                 <div class="label">
                                         @lang('simpleDesPageTexts.sBoxes')
@@ -106,7 +106,7 @@
                             </div>
                             <div class="carousel-item">
                                 <a href="{{asset('img/simpleDesPage/SW.png')}}" target="_blank">
-                                    <img src="{{asset('img/simpleDesPage/SW.png')}}" class="d-block w-100" title="@lang('baseTexts.clickToSeeInFullSize')">
+                                    <img alt="" src="{{asset('img/simpleDesPage/SW.png')}}" class="d-block w-100" title="@lang('baseTexts.clickToSeeInFullSize')">
                                 </a>
                                 <div class="label">
                                         @lang('simpleDesPageTexts.swap')
