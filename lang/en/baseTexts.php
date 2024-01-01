@@ -12,7 +12,7 @@ return [
     'shift' => 'Number of alphabet rotations',
     'inputText' => 'Enter the input text',
     'insertedText' => 'Input text',
-    'cipherResult' => 'Result of form',
+    'cipherResult' => 'Results',
     'outputText' => 'Result of action:',
     'stepNum' => 'Step',
     'actualResult' => 'Result for this step:',
