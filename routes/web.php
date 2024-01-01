@@ -7,6 +7,7 @@ use App\Http\Controllers\CaesarCipherController;
 use App\Http\Controllers\MainPageController;
 use App\Http\Controllers\RsaCipherController;
 use App\Http\Controllers\SimpleDesCipherController;
+use App\Http\Controllers\TripleSimpleDesCipherController;
 use App\Http\Controllers\VigenereCipherController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Session;
@@ -59,6 +60,9 @@ Route::post('aesCipher', [AesCipherController::class, 'compute'])->name('aesCiph
 
 Route::get('simpleDesCipher', [SimpleDesCipherController::class, 'index'])->name('simpleDesCipher');
 Route::post('simpleDesCipher', [SimpleDesCipherController::class, 'compute'])->name('simpleDesCipherCompute');
+
+Route::get('tripleDesCipher', [TripleSimpleDesCipherController::class, 'index'])->name('tripleSimpleDesCipher');
+Route::post('tripleDesCipher', [TripleSimpleDesCipherController::class, 'compute'])->name('tripleSimpleDesCipherCompute');
 
 // Asymmetrical ciphers
 
