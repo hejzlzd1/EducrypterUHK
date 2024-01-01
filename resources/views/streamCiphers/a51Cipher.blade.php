@@ -17,7 +17,7 @@
 
                         <div class="col-lg-4 m-auto">
                             <a href="{{asset('img/a51Page/a51_' . App::getLocale() . '.png')}}" target="_blank">
-                                <img title="@lang('baseTexts.clickToSeeInFullSize')" width="100%" src="{{asset('img/a51Page/a51_' . App::getLocale() . '.png')}}" class="rounded-4">
+                                <img alt="" title="@lang('baseTexts.clickToSeeInFullSize')" width="100%" src="{{asset('img/a51Page/a51_' . App::getLocale() . '.png')}}" class="rounded-4">
                             </a>
                             <figure class="text-center">@lang("a51PageTexts.imageDescription")</figure>
                         </div>
@@ -47,6 +47,7 @@
                                 <div class="col-lg-6">
                                     <label class="form-label" for="key">
                                         @lang('baseTexts.key')
+                                        <x-tooltipButton :tooltip="trans('baseTexts.binaryInputPrompt')"></x-tooltipButton>
                                     </label>
                                     <input class="form-control binaryValidation" min="1" max="64" type="text" id="key"
                                            name="key" placeholder="@lang('baseTexts.insertKey')" required
@@ -55,7 +56,10 @@
                             </fieldset>
                             <fieldset class="row p-2">
                                 <div class="col-lg-6">
-                                    <label class="form-label" for="key">@lang('a51PageTexts.dataFrame')</label>
+                                    <label class="form-label" for="dataFrame">
+                                        @lang('a51PageTexts.dataFrame')
+                                        <x-tooltipButton :tooltip="trans('a51PageTexts.dataFrameNumberExplanation')"></x-tooltipButton>
+                                    </label>
                                     <input class="form-control" type="number" max="4194304" min="0" id="dataFrame"
                                            name="dataFrame" placeholder="@lang('a51PageTexts.inputDataFrame')" required
                                            @if(isset($data['dataFrame']))value="{{$data['dataFrame']}}"
