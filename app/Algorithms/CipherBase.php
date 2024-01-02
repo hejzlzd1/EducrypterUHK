@@ -3,6 +3,8 @@
 namespace App\Algorithms;
 
 use App\Algorithms\Output\BasicOutput;
+use App\Algorithms\Output\Steps\Step;
+use Exception;
 
 abstract class CipherBase
 {
@@ -123,5 +125,33 @@ abstract class CipherBase
         }
 
         return implode('', $asciiValues);
+    }
+
+    /**
+     * Takes two binary arrays and performs XOR between them
+     * @param array<string> $firstInput
+     * @param array<string> $secondInput
+     * @return array<string>| array{output: array<string>, steps: array<Step>}
+     * @throws Exception
+     */
+    protected function xor(array $firstInput, array $secondInput, bool $returnSteps = false): array
+    {
+        if (count($firstInput) !== count($secondInput)) {
+            throw new Exception(trans('Cannot xor two different sized inputs'));
+        }
+        $steps = [];
+        $output = [];
+        foreach ($firstInput as $index => $binaryValue) {
+            $output[] = $binaryValue === $secondInput[$index] ? '0' : '1';
+            if ($returnSteps) {
+                $steps[] = new Step($binaryValue, $output[$index]);
+            }
+        }
+
+        if ($returnSteps) {
+            return ['output' => $output, 'steps' => $steps];
+        }
+
+        return $output;
     }
 }

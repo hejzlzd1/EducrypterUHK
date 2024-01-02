@@ -23,9 +23,13 @@
                         </div>
                         <div class="col-lg-4 m-auto">
                             <a href="{{asset('img/simpleDesPage/simpleDes_' . App::getLocale() . '.png')}}" target="_blank">
-                                <img alt="" width="100%" title="@lang('baseTexts.clickToSeeInFullSize')"
-                                     src="{{asset('img/simpleDesPage/simpleDes_' . App::getLocale() . '.png')}}"
-                                     class="rounded-4"></a>
+                                <img
+                                    alt=""
+                                    width="100%"
+                                    title="@lang('baseTexts.clickToSeeInFullSize')"
+                                    src="{{asset('img/simpleDesPage/simpleDes_' . App::getLocale() . '.png')}}"
+                                />
+                            </a>
                             <figure class="text-center">@lang('simpleDesPageTexts.blockSchema')</figure>
                         </div>
                     </div>

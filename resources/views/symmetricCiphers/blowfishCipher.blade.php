@@ -1,3 +1,8 @@
+@php
+    use App\Algorithms\Output\BasicOutput;
+    use App\Algorithms\Output\BlowfishRound;
+    use App\Algorithms\Output\Steps\BlowfishBlockStep;
+@endphp
 @extends("components/pageTemplate")
 @section("title",__('blowfishPageTexts.title'))
 @section("comment",__('blowfishPageTexts.metaComment'))
@@ -18,9 +23,11 @@
 
                         <div class="col-lg-4 m-auto">
                             <a href="{{asset("img/blowfishPage/blowfish_".App::getLocale().".png")}}" target="_blank">
-                                <img title="@lang('baseTexts.clickToSeeInFullSize')" width="100%"
+                                <img alt=""
+                                     title="@lang('baseTexts.clickToSeeInFullSize')"
+                                     width="100%"
                                      src="{{asset("img/blowfishPage/blowfish_".App::getLocale().".png")}}"
-                                     class="rounded-4">
+                                />
                             </a>
                             <figure class="text-center">@lang("blowfishPageTexts.blockSchema")</figure>
                         </div>
@@ -82,6 +89,7 @@
     </section>
 
     @if(isset($data))
+        @php /** @var BasicOutput $result */ @endphp
         <section class="m-5 shadow-lg border rounded-4 p-5">
             <div class="container text-break">
 
@@ -142,6 +150,7 @@
                     </p>
                     <div class="accordion" id="blockAccordion">
                         <!-- blocks cycle -->
+                        @php /** @var BlowfishBlockStep $block */ @endphp
                         @foreach($result->getSteps() as $block)
                             <div class="accordion-item">
                                 <h2 class="accordion-header" id="blockHeading{{$loop->index}}">
@@ -157,6 +166,7 @@
                                     <div class="accordion-body">
                                         <!-- nested accordion round steps cycle-->
                                         <div class="accordion" id="stepAccordion{{$loop->index}}">
+                                            @php /** @var BlowfishRound $step */ @endphp
                                             @foreach($block->getRounds() as $step)
 
                                                 <div class="accordion-item">

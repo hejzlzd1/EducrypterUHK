@@ -1,3 +1,4 @@
+@php use App\Algorithms\Output\BasicOutput; @endphp
 @extends("components/pageTemplate")
 @section("title",__('aesPageTexts.title'))
 @section("comment",__('aesPageTexts.metaComment'))
@@ -17,10 +18,13 @@
                         </div>
 
                         <div class="col-lg-4 m-auto">
-                            <a href="img/blowfishPage/blowfish.png" target="_blank"> <img
-                                    title="@lang('baseTexts.clickToSeeInFullSize')" width="100%"
-                                    src="{{asset("img/aesPage/aesSchema.png")}}"
-                                    class="rounded-4"></a>
+                            <a href="{{ asset('img/blowfishPage/blowfish.png') }}" target="_blank">
+                                <img title="@lang('baseTexts.clickToSeeInFullSize')"
+                                     width="100%"
+                                     src="{{asset('img/aesPage/aesSchema.png')}}"
+                                     alt=""
+                                />
+                            </a>
                             <figure class="text-center">@lang("aesPageTexts.blockSchema")</figure>
                         </div>
                     </div>
@@ -104,6 +108,7 @@
     </section>
 
     @if(isset($data))
+        @php /** @var BasicOutput $result */ @endphp
         <section class="m-5 shadow-lg border rounded-4 p-5">
             <div class="container text-break">
 

@@ -1,3 +1,4 @@
+@php use App\Algorithms\CipherBase; @endphp
 @extends("components/pageTemplate")
 @section("title",__('a51PageTexts.title'))
 @section("comment",__('a51PageTexts.metaComment'))
@@ -16,8 +17,9 @@
                         </div>
 
                         <div class="col-lg-4 m-auto">
-                            <a href="{{asset('img/a51Page/a51_' . App::getLocale() . '.png')}}" target="_blank">
-                                <img alt="" title="@lang('baseTexts.clickToSeeInFullSize')" width="100%" src="{{asset('img/a51Page/a51_' . App::getLocale() . '.png')}}" class="rounded-4">
+                            <a href="{{ asset('img/a51Page/a51_' . App::getLocale() . '.png')}}" target="_blank">
+                                <img alt="" title="@lang('baseTexts.clickToSeeInFullSize')" width="100%"
+                                     src="{{ asset('img/a51Page/a51_' . App::getLocale() . '.png') }}">
                             </a>
                             <figure class="text-center">@lang("a51PageTexts.imageDescription")</figure>
                         </div>
@@ -36,34 +38,37 @@
                                 <div class="col-lg-6">
                                     <label class="form-label" for="text">
                                         @lang('baseTexts.binaryInput')
-                                        <x-tooltipButton :tooltip="trans('baseTexts.binaryInputPrompt')"></x-tooltipButton>
+                                        <x-tooltipButton
+                                            :tooltip="trans('baseTexts.binaryInputPrompt')"></x-tooltipButton>
                                     </label>
                                     <input class="form-control binaryValidation" maxlength="114" minlength="1" required
                                            type="text"
                                            id="text" name="text"
                                            placeholder="@lang('baseTexts.binaryInputPrompt')"
-                                           @if(isset($data['text']))value="{{$data['text']}}"@endif>
+                                           @if(isset($data['text'])) value="{{ $data['text'] }}" @endif />
                                 </div>
                                 <div class="col-lg-6">
                                     <label class="form-label" for="key">
                                         @lang('baseTexts.key')
-                                        <x-tooltipButton :tooltip="trans('baseTexts.binaryInputPrompt')"></x-tooltipButton>
+                                        <x-tooltipButton
+                                            :tooltip="trans('baseTexts.binaryInputPrompt')"></x-tooltipButton>
                                     </label>
                                     <input class="form-control binaryValidation" min="1" max="64" type="text" id="key"
                                            name="key" placeholder="@lang('baseTexts.insertKey')" required
-                                           @if(isset($data['key']))value="{{$data['key']}}" @else value="" @endif>
+                                           @if(isset($data['key'])) value="{{ $data['key'] }}" @else value="" @endif />
                                 </div>
                             </fieldset>
                             <fieldset class="row p-2">
                                 <div class="col-lg-6">
                                     <label class="form-label" for="dataFrame">
                                         @lang('a51PageTexts.dataFrame')
-                                        <x-tooltipButton :tooltip="trans('a51PageTexts.dataFrameNumberExplanation')"></x-tooltipButton>
+                                        <x-tooltipButton
+                                            :tooltip="trans('a51PageTexts.dataFrameNumberExplanation')"></x-tooltipButton>
                                     </label>
                                     <input class="form-control" type="number" max="4194304" min="0" id="dataFrame"
                                            name="dataFrame" placeholder="@lang('a51PageTexts.inputDataFrame')" required
-                                           @if(isset($data['dataFrame']))value="{{$data['dataFrame']}}"
-                                           @else value="" @endif>
+                                           @if(isset($data['dataFrame'])) value="{{ $data['dataFrame'] }}"
+                                           @else value="" @endif />
                                 </div>
                             </fieldset>
                             <div class="p-2">
@@ -74,13 +79,13 @@
                                         <label class="form-check-label" for="encrypt">@lang('baseTexts.encrypt')</label>
                                         <input class="form-check-input" required type="radio"
                                                id="encrypt" name="action"
-                                               value={{\App\Algorithms\CipherBase::ALGORITHM_ENCRYPT}}>
+                                               value={{CipherBase::ALGORITHM_ENCRYPT}}>
                                     </div>
                                     <div class="form-check form-switch">
                                         <label class="form-check-label" for="decrypt">@lang('baseTexts.decrypt')</label>
                                         <input class="form-check-input" required type="radio"
                                                id="decrypt" name="action"
-                                               value={{\App\Algorithms\CipherBase::ALGORITHM_DECRYPT}}>
+                                               value={{CipherBase::ALGORITHM_DECRYPT}}>
                                     </div>
                                 </fieldset>
                             </div>
@@ -106,23 +111,23 @@
                 <div class="row align-items-start">
                     <div class="col-lg-5">
                         <h4><i class="fa-solid fa-keyboard"></i> @lang('baseTexts.insertedText')</h4>
-                        <p>{{$result->getInputValue()}}</p>
+                        <p>{{ $result->getInputValue() }}</p>
                     </div>
                     <div class="col-lg-5">
                         <h4><i class="fa-solid fa-key"></i> @lang('baseTexts.key')</h4>
-                        <p>{{$result->getKey()}}</p>
+                        <p>{{ $result->getKey() }}</p>
                     </div>
                     <div class="col-lg-5">
                         <h4><i class="fa-solid fa-key"></i> @lang('a51PageTexts.dataFrame')</h4>
-                        <p>{{$result->getAdditionalInformation()['dataFrame']}}
-                            => {{$result->getAdditionalInformation()['dataFrameBinary']}}</p>
+                        <p>{{ $result->getAdditionalInformation()['dataFrame'] }}
+                            => {{ $result->getAdditionalInformation()['dataFrameBinary'] }}</p>
                     </div>
                     <div class="col-lg-5">
                         <h4>
                             <i class="fa-solid fa-key"></i>
                             @lang('a51PageTexts.keyStream')
                         </h4>
-                        <p>{{$result->getAdditionalInformation()['keyStream']}}</p>
+                        <p>{{ $result->getAdditionalInformation()['keyStream'] }}</p>
                     </div>
                 </div>
                 <div class="row align-items-start">
@@ -132,7 +137,7 @@
                             @lang('baseTexts.outputText')
                             <x-copyButton :textToCopy="$result->getOutputValue()"></x-copyButton>
                         </h4>
-                        <p>{{$result->getOutputValue()}}</p>
+                        <p>{{ $result->getOutputValue() }}</p>
                     </div>
                 </div>
                 <hr/>
@@ -144,22 +149,22 @@
                             <div class="accordion-item">
                                 <h2 class="accordion-header">
                                     <button class="accordion-button" type="button" data-bs-toggle="collapse"
-                                            data-bs-target="#step{{$loop->index}}" aria-expanded="true"
-                                            aria-controls="step{{$loop->index}}">
-                                        @lang('baseTexts.stepNum') {{$loop->index + 1}}:
-                                        {{substr($result->getOutputValue(), 0, $loop->index)}}
-                                        <b>{{$result->getOutputValue()[$loop->index]}}</b>
+                                            data-bs-target="#step{{ $loop->index }}" aria-expanded="true"
+                                            aria-controls="step{{ $loop->index }}">
+                                        @lang('baseTexts.stepNum') {{ $loop->index + 1 }}:
+                                        {{ substr($result->getOutputValue(), 0, $loop->index) }}
+                                        <b>{{ $result->getOutputValue()[$loop->index] }}</b>
                                     </button>
                                 </h2>
-                                <div id="step{{$loop->index}}"
+                                <div id="step{{ $loop->index }}"
                                      class="accordion-collapse collapse @if($loop->first) show @endif">
                                     <div class="accordion-body">
                                         <div class="majorityBit">
                                             <h5>
                                                 <i class="fa-solid fa-gears"></i> @lang('a51PageTexts.majorityBit'):
                                             </h5>
-                                            <p>{{$step->getMajorityBit()}} => @lang('a51PageTexts.toBeClocked')
-                                                [{{$step->getToBeClocked()}}]</p>
+                                            <p>{{ $step->getMajorityBit() }} => @lang('a51PageTexts.toBeClocked')
+                                                [{{ $step->getToBeClocked() }}]</p>
                                         </div>
                                         <hr>
                                         <div class="d-flex flex-wrap justify-content-lg-between registers">
@@ -168,15 +173,15 @@
                                                     <i class="fa-solid fa-layer-group"></i> @lang('a51PageTexts.registersBeforeClock')
                                                 </h4>
                                                 @foreach($step->getRegistersBeforeClock() as $key => $register)
-                                                    <div class="register-{{$key}} m-1">
+                                                    <div class="register-{{ $key }} m-1">
                                                         <h5>
-                                                            {{$key}}
+                                                            {{ $key }}
                                                         </h5>
                                                         <table class="table-sm overflow-scroll">
                                                             <tr>
                                                                 @foreach(str_split($register) as $char)
-                                                                    <td class="register-{{$key}}-{{$loop->index}} border-1 border">
-                                                                        {{$char}}
+                                                                    <td class="register-{{ $key }}-{{ $loop->index }} border-1 border">
+                                                                        {{ $char }}
                                                                     </td>
                                                                 @endforeach
                                                             </tr>
@@ -189,15 +194,15 @@
                                                     <i class="fa-solid fa-layer-group"></i> @lang('a51PageTexts.registersAfterClock')
                                                 </h4>
                                                 @foreach($step->getRegistersAfterClock() as $key => $register)
-                                                    <div class="register-{{$key}}">
+                                                    <div class="register-{{ $key }}">
                                                         <h5>
-                                                            {{$key}}
+                                                            {{ $key }}
                                                         </h5>
                                                         <table class="table-sm">
                                                             <tr>
                                                                 @foreach(str_split($register) as $char)
-                                                                    <td class="register-{{$key}}-{{$loop->index}} border-1 border">
-                                                                        {{$char}}
+                                                                    <td class="register-{{ $key }}-{{ $loop->index }} border-1 border">
+                                                                        {{ $char }}
                                                                     </td>
                                                                 @endforeach
                                                             </tr>
@@ -214,8 +219,8 @@
                                                     <i class="fa-solid fa-gears"></i> KB
                                                     - @lang('a51PageTexts.keystreamBit') (R1[18] ⊕ R2[21] ⊕ R3[22])
                                                 </h5>
-                                                <p>{{substr($result->getAdditionalInformation()['keyStream'], 0, $loop->index)}}
-                                                    <b>{{$step->getKeystreamBit()}}</b></p>
+                                                <p>{{ substr($result->getAdditionalInformation()['keyStream'], 0, $loop->index) }}
+                                                    <b>{{ $step->getKeystreamBit() }}</b></p>
                                             </div>
                                             <div class="col-lg-6">
                                                 <h5>
@@ -223,8 +228,8 @@
                                                     - @lang('a51PageTexts.inputBit')
                                                 </h5>
                                                 <p>
-                                                    {{substr($result->getInputValue(), 0, $loop->index)}}
-                                                    <b>{{$result->getInputValue()[$loop->index]}}</b>
+                                                    {{ substr($result->getInputValue(), 0, $loop->index) }}
+                                                    <b>{{ $result->getInputValue()[$loop->index] }}</b>
                                                 </p>
                                             </div>
                                             <div class="col-lg-6">
@@ -233,12 +238,12 @@
                                                     (KB ⊕ IB)
                                                 </h5>
                                                 <p>
-                                                    {{substr($result->getAdditionalInformation()['keyStream'], 0, $loop->index)}}
-                                                    <b>{{$step->getKeystreamBit()}}</b>
-                                                    ⊕ {{substr($result->getOutputValue(), 0, $loop->index)}}
-                                                    <b>{{$result->getInputValue()[$loop->index]}}</b>
-                                                    => {{substr($result->getOutputValue(), 0, $loop->index)}}
-                                                    <b>{{$result->getOutputValue()[$loop->index]}}</b>
+                                                    {{ substr($result->getAdditionalInformation()['keyStream'], 0, $loop->index) }}
+                                                    <b>{{ $step->getKeystreamBit() }}</b>
+                                                    ⊕ {{ substr($result->getOutputValue(), 0, $loop->index) }}
+                                                    <b>{{ $result->getInputValue()[$loop->index] }}</b>
+                                                    => {{ substr($result->getOutputValue(), 0, $loop->index) }}
+                                                    <b>{{ $result->getOutputValue()[$loop->index] }}</b>
                                                 </p>
                                             </div>
                                         </div>

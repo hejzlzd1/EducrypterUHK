@@ -6,6 +6,6 @@
                 alt="Logo" class="logoimg"/>
         </a>
         </div>
-        <p class="">@lang("footerTexts.credits") ©{{date("Y")}} <br /> @lang("footerTexts.usage")</p>
+        <p class="">@lang("footerTexts.credits") ©{{ date("Y") }} <br /> @lang("footerTexts.usage")</p>
     </div>
 </footer>

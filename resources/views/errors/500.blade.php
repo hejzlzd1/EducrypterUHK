@@ -9,7 +9,7 @@
             <p>@lang('baseTexts.internalError')</p>
             <a href="mailto: hejzlzd1@uhk.cz">@lang('baseTexts.reportException')</a>
             <div>
-                <img class="shadow-lg m-2 rounded-4" src="{{asset("img/500.png")}}">
+                <img alt="" class="shadow-lg m-2 rounded-4" src="{{ asset('img/500.png') }}">
             </div>
         </div>
     </section>

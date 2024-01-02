@@ -139,26 +139,6 @@ class SimpleDes extends BlockCipher
     }
 
     /**
-     * Takes two binary arrays and performs XOR between them
-     * @param array<string> $firstInput
-     * @param array<string> $secondInput
-     * @return array<string>
-     * @throws Exception
-     */
-    private function xor(array $firstInput, array $secondInput): array
-    {
-        if (count($firstInput) !== count($secondInput)) {
-            throw new Exception(trans('Cannot xor two different sized inputs'));
-        }
-        $output = [];
-        foreach ($firstInput as $index => $binaryValue) {
-            $output[] = $binaryValue === $secondInput[$index] ? '0' : '1';
-        }
-
-        return $output;
-    }
-
-    /**
      * Takes binary array and performs sbox permutation depending on specified sbox number
      * Returns permuted array
      * @param array<string> $input

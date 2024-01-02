@@ -1,7 +1,7 @@
 <div class="flash-message" id="flash-messages">
     @foreach (['error', 'warning', 'success', 'info'] as $msg)
         @if(Session::has('alert-' . $msg))
-            <div class="Message js-timer Message--{{$msg}}">
+            <div class="Message js-timer Message--{{ $msg }}">
             <div class="Message-icon">
                 @switch($msg)
                     @case ("error")
@@ -19,7 +19,7 @@
                 @endswitch
             </div>
             <div class="Message-body shadow-lg">
-                <p>{{Session::get('alert-'.$msg)}}</p>
+                <p>{{ Session::get('alert-'.$msg) }}</p>
             </div>
             <button class="Message-close js-messageClose"><i class="fa fa-times"></i></button>
             </div>

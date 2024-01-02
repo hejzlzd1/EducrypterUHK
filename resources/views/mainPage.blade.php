@@ -17,7 +17,7 @@
                     </div>
 
                     <div class="col-lg-3 m-auto">
-                        <img alt="" width="100%" src="{{asset("img/mainPage/cryptoInNutshell.jpg")}}" class="rounded-4">
+                        <img alt="" width="100%" src="{{ asset('img/mainPage/cryptoInNutshell.jpg') }}" class="rounded-4">
                     </div>
                 </div>
             </div>
@@ -33,7 +33,9 @@
                     <h1>@lang('mainPageTexts.symmetric')</h1>
                     <hr />
                     <div class="col-lg-4 m-auto">
-                        <a href="{{"img/mainPage/symmetric_".App::getLocale().".png"}}" target="_blank"><img alt="" width="100%" title="@lang('baseTexts.clickToSeeInFullSize')" src="{{asset("img/mainPage/symmetric_".App::getLocale().".png")}}" class="rounded-4"></a>
+                        <a href="{{ 'img/mainPage/symmetric_' . App::getLocale() . '.png'}}" target="_blank">
+                            <img alt="" width="100%" title="@lang('baseTexts.clickToSeeInFullSize')" src="{{ asset('img/mainPage/symmetric_' . App::getLocale() . '.png') }}" class="rounded-4">
+                        </a>
                     </div>
                     <div class="col-lg-8">
                         <p>@lang('mainPageTexts.symmetricInfo')</p>
@@ -56,7 +58,9 @@
                     </div>
 
                     <div class="col-lg-4 m-auto">
-                        <a href="{{"img/mainPage/asymmetric_".App::getLocale().".png"}}" target="_blank"><img alt="" title="@lang('baseTexts.clickToSeeInFullSize')" width="100%" src="{{asset("img/mainPage/asymmetric_".App::getLocale().".png")}}" class="rounded-4"></a>
+                        <a href="{{ 'img/mainPage/asymmetric_' . App::getLocale() . '.png' }}" target="_blank">
+                            <img alt="" title="@lang('baseTexts.clickToSeeInFullSize')" width="100%" src="{{ asset('img/mainPage/asymmetric_' . App::getLocale() . '.png') }}" class="rounded-4">
+                        </a>
                     </div>
                 </div>
             </div>
@@ -72,7 +76,7 @@
                     <h1>@lang('mainPageTexts.usage')</h1>
                     <hr />
                     <div class="col-lg-3 m-auto">
-                        <img width="100%" alt="" src="{{asset("img/mainPage/personalInfo.jpg")}}" class="rounded-4">
+                        <img width="100%" alt="" src="{{ asset('img/mainPage/personalInfo.jpg') }}" class="rounded-4">
                     </div>
                     <div class="col-lg-9">
                         <p>@lang('mainPageTexts.usageInfo')</p>
@@ -95,7 +99,7 @@
                     </div>
 
                     <div class="col-lg-3 m-auto">
-                        <img width="100%" alt="" src="{{asset("img/mainPage/protocols.webp")}}" class="rounded-4">
+                        <img width="100%" alt="" src="{{ asset('img/mainPage/protocols.webp') }}" class="rounded-4">
                     </div>
                 </div>
             </div>
@@ -111,7 +115,9 @@
                     <h1>SSL vs TLS</h1>
                     <hr />
                     <div class="col-lg-4 m-auto">
-                        <a href="{{asset('img/mainPage/handshake.png')}}" target="_blank"><img alt="" title="@lang('baseTexts.clickToSeeInFullSize')" width="100%" src="{{asset("img/mainPage/handshake.png")}}" class="rounded-4"></a>
+                        <a href="{{ asset('img/mainPage/handshake.png') }}" target="_blank">
+                            <img alt="" title="@lang('baseTexts.clickToSeeInFullSize')" width="100%" src="{{ asset('img/mainPage/handshake.png') }}" class="rounded-4">
+                        </a>
                         <figure class="text-center">Handshake</figure>
                     </div>
                     <div class="col-lg-8">
@@ -135,7 +141,7 @@
                     </div>
 
                     <div class="col-lg-3 m-auto">
-                        <img width="100%" alt="" src="{{asset("img/mainPage/sslcert.webp")}}" class="rounded-4">
+                        <img width="100%" alt="" src="{{ asset('img/mainPage/sslcert.webp') }}" class="rounded-4">
                     </div>
                 </div>
             </div>

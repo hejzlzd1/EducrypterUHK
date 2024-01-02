@@ -8,6 +8,7 @@ use App\Http\Controllers\MainPageController;
 use App\Http\Controllers\RsaCipherController;
 use App\Http\Controllers\SimpleDesCipherController;
 use App\Http\Controllers\TripleSimpleDesCipherController;
+use App\Http\Controllers\VernamCipherController;
 use App\Http\Controllers\VigenereCipherController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Session;
@@ -51,13 +52,23 @@ Route::post('caesarCipher', [CaesarCipherController::class, 'compute'])->name('c
 Route::get('vigenereCipher', [VigenereCipherController::class, 'index'])->name('vigenereCipher');
 Route::post('vigenereCipher', [VigenereCipherController::class, 'compute'])->name('vigenereCipherCompute');
 
+// Vernam
+Route::get('vernamCipher', [VernamCipherController::class, 'index'])->name('vernamCipher');
+Route::post('vernamCipher', [VernamCipherController::class, 'compute'])->name('vernamCipherCompute');
+
+// A5/1
+Route::get('a51', [A5_1CipherController::class, 'index'])->name('a51');
+Route::post('a51', [A5_1CipherController::class, 'compute'])->name('a51Compute');
+
 // BlowfishCipher
 Route::get('blowfishCipher', [BlowfishCipherController::class, 'index'])->name('blowfishCipher');
 Route::post('blowfishCipher', [BlowfishCipherController::class, 'compute'])->name('blowfishCipherCompute');
 
+// AES
 Route::get('aesCipher', [AesCipherController::class, 'index'])->name('aesCipher');
 Route::post('aesCipher', [AesCipherController::class, 'compute'])->name('aesCipherCompute');
 
+// S-DES
 Route::get('simpleDesCipher', [SimpleDesCipherController::class, 'index'])->name('simpleDesCipher');
 Route::post('simpleDesCipher', [SimpleDesCipherController::class, 'compute'])->name('simpleDesCipherCompute');
 
@@ -65,9 +76,7 @@ Route::get('tripleDesCipher', [TripleSimpleDesCipherController::class, 'index'])
 Route::post('tripleDesCipher', [TripleSimpleDesCipherController::class, 'compute'])->name('tripleSimpleDesCipherCompute');
 
 // Asymmetrical ciphers
-
+// RSA
 Route::get('rsaCipher', [RsaCipherController::class, 'index'])->name('rsaCipher');
 Route::post('rsaCipher', [RsaCipherController::class, 'compute'])->name('rsaCipherCompute');
 
-Route::get('a51', [A5_1CipherController::class, 'index'])->name('a51');
-Route::post('a51', [A5_1CipherController::class, 'compute'])->name('a51Compute');
