@@ -1,8 +1,11 @@
+@php
+    use App\Algorithms\CipherBase;
+    use App\Algorithms\Output\BasicOutput;
+@endphp
 @extends("components/pageTemplate")
 @section("title",__('caesarPageTexts.title'))
 @section("comment",__('caesarPageTexts.metaComment'))
 @section("content")
-
 
     <div class="anchor" id="info"></div>
 
@@ -19,9 +22,12 @@
 
                         <div class="col-lg-4 m-auto">
                             <a href="{{asset('img/caesarPage/caesarCipher.png')}}" target="_blank">
-                                <img title="@lang('baseTexts.clickToSeeInFullSize')" width="100%"
-                                     src="{{asset("img/caesarPage/caesarCipher.png")}}"
-                                     class="rounded-4"/>
+                                <img
+                                    title="@lang('baseTexts.clickToSeeInFullSize')"
+                                    width="100%"
+                                    src="{{asset("img/caesarPage/caesarCipher.png")}}"
+                                    alt=""
+                                />
                             </a>
                             <figure class="text-center">@lang("caesarPageTexts.alphabetShift")</figure>
                         </div>
@@ -62,20 +68,20 @@
                                         <label class="form-check-label" for="encrypt">@lang('baseTexts.encrypt')</label>
                                         <input class="form-check-input" onclick="flipShiftInput()" required type="radio"
                                                id="encrypt" name="action"
-                                               value={{\App\Algorithms\CipherBase::ALGORITHM_ENCRYPT}}>
+                                               value={{CipherBase::ALGORITHM_ENCRYPT}}>
                                     </div>
                                     <div class="form-check form-switch">
                                         <label class="form-check-label" for="decrypt">@lang('baseTexts.decrypt')</label>
                                         <input class="form-check-input" onclick="flipShiftInput()" required type="radio"
                                                id="decrypt" name="action"
-                                               value={{\App\Algorithms\CipherBase::ALGORITHM_DECRYPT}}>
+                                               value={{CipherBase::ALGORITHM_DECRYPT}}>
                                     </div>
                                     <div class="form-check form-switch">
                                         <label class="form-check-label"
                                                for="bruteforce">@lang('baseTexts.bruteforce')</label>
                                         <input class="form-check-input" onclick="flipShiftInput()" required type="radio"
                                                id="bruteforce" name="action"
-                                               value={{\App\Algorithms\CipherBase::ALGORITHM_DECRYPT_BRUTEFORCE}}>
+                                               value={{CipherBase::ALGORITHM_DECRYPT_BRUTEFORCE}}>
                                     </div>
                                     <script>
                                         function flipShiftInput() {
@@ -99,9 +105,10 @@
     </section>
 
     @if(isset($result))
+        @php /** @var BasicOutput $result */ @endphp
         <section class="m-5 shadow-lg border rounded-4 p-5">
             <div class="container text-break">
-                @if((int)$data['action'] !== \App\Algorithms\CipherBase::ALGORITHM_DECRYPT_BRUTEFORCE)
+                @if((int)$data['action'] !== CipherBase::ALGORITHM_DECRYPT_BRUTEFORCE)
                     <h1 class="">
                         <i class="fa-solid fa-comment"></i> @lang('baseTexts.cipherResult')
                     </h1>
@@ -134,7 +141,7 @@
                         <div class="table-responsive-lg">
                             <table class="table table-bordered">
                                 <tr>
-                                    @if($result->getOperation() === \App\Algorithms\CipherBase::ALGORITHM_ENCRYPT)
+                                    @if($result->getOperation() === CipherBase::ALGORITHM_ENCRYPT)
                                         @foreach(range('A','Z') as $char)
                                             <td class="">{{$char}}</td>
                                         @endforeach
@@ -150,7 +157,7 @@
                                     @endforeach
                                 </tr>
                                 <tr>
-                                    @if($result->getOperation() === \App\Algorithms\CipherBase::ALGORITHM_ENCRYPT)
+                                    @if($result->getOperation() === CipherBase::ALGORITHM_ENCRYPT)
                                         @foreach($result->getAdditionalInformation()['shiftedAlphabet'] as $char)
                                             <td class=""><b>{{$char}}</b></td>
                                         @endforeach

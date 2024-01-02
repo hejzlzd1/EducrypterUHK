@@ -23,7 +23,7 @@ return [
     'algorithmSteps' => 'Algorithm steps',
     'column' => 'column',
     'row' => 'row',
-    'formatedKey' => 'Formatted key',
+    'formattedKey' => 'Formatted key',
     'keyFormatted' => 'Key was formatted to meet criteria of algorithm',
     'textInputOnly' => 'This field can only contain text (possibly spaces)',
     'keyBits' => 'Délka klíče v bitech',

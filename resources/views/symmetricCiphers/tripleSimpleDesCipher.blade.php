@@ -18,9 +18,13 @@
                         <div class="col-lg-4 m-auto">
                             <a href="{{asset('img/tripleDesPage/tripleDes_' . App::getLocale() . '.png')}}"
                                target="_blank">
-                                <img alt="" width="100%" title="@lang('baseTexts.clickToSeeInFullSize')"
-                                     src="{{asset('img/tripleDesPage/tripleDes_' . App::getLocale() . '.png')}}"
-                                     class="rounded-4"></a>
+                                <img
+                                    alt=""
+                                    width="100%"
+                                    title="@lang('baseTexts.clickToSeeInFullSize')"
+                                    src="{{asset('img/tripleDesPage/tripleDes_' . App::getLocale() . '.png')}}"
+                                />
+                            </a>
                             <figure class="text-center">@lang('tripleDesPageTexts.blockSchema')</figure>
                         </div>
                     </div>

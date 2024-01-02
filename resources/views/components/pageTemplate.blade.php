@@ -10,7 +10,10 @@
     <meta name="robots" content="index,follow">
     <meta name="googlebot" content="snippet,archive">
     <meta name="Author" content="Zdeněk Hejzlar">
-
+    <script src="{{ asset('messages.js') }}" defer></script>
+    <script defer>
+        Lang.setLocale('{{ App::getLocale() }}');
+    </script>
     @vite(['resources/sass/app.scss', 'resources/js/app.js'])
 </head>
 
@@ -22,13 +25,15 @@
 
     <div>
         @if(App::getLocale() == "cz")
-            <a href="{{route("changeLang", ['locale' => "en"])}}"
-               class="back-to-top d-flex align-items-center justify-content-center"><img width="40px"
-                                                                                         src="{{asset('/img/en.png')}}"/></a>
+            <a href="{{ route("changeLang", ['locale' => "en"]) }}"
+               class="back-to-top d-flex align-items-center justify-content-center">
+                <img width="40px" alt="EN switch" src="{{ asset('/img/en.png') }}"/>
+            </a>
         @else
-            <a href="{{route("changeLang", ['locale' => "cz"])}}"
-               class="back-to-top d-flex align-items-center justify-content-center"><img width="40px"
-                                                                                         src="{{asset("/img/cz.png")}}"/></a>
+            <a href="{{ route("changeLang", ['locale' => "cz"]) }}"
+               class="back-to-top d-flex align-items-center justify-content-center">
+                <img width="40px" alt="CZ switch" src="{{ asset("/img/cz.png") }}"/>
+            </a>
         @endif
     </div>
 </div>

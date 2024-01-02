@@ -2,10 +2,12 @@
     <div class="container-fluid">
         <div class="logo" style="padding-left: 20px">
             <a class="navbar-brand" href="https://www.uhk.cz">
-                <img src="https://www.uhk.cz/img/svg/logo/uhk-uhk-cs_hor.svg" height="40px" alt="Logo uhk" class="logoimg">
+                <img src="https://www.uhk.cz/img/svg/logo/uhk-uhk-cs_hor.svg" height="40px" alt="Logo uhk"
+                     class="logoimg">
             </a>
         </div>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarToggle" aria-controls="navbarToggle" aria-expanded="false" aria-label="Menu">
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarToggle"
+                aria-controls="navbarToggle" aria-expanded="false" aria-label="Menu">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse justify-content-end" id="navbarToggle" style="padding-right: 20px;">
@@ -19,7 +21,9 @@
                         <li><a class="dropdown-item" href="/#symmetric">@lang("menuTexts.symmetricAlgo")</a></li>
                         <li><a class="dropdown-item" href="/#asymmetric">@lang("menuTexts.asymmetricAlgo")</a></li>
                         <li><a class="dropdown-item" href="/#usage">@lang("menuTexts.cryptoUsage")</a></li>
-                        <li><hr class="dropdown-divider"></li>
+                        <li>
+                            <hr class="dropdown-divider">
+                        </li>
                         <li><a class="dropdown-item" href="/#protocols">@lang("menuTexts.protocols")</a></li>
                         <li><a class="dropdown-item" href="/#sslvstls">SSL vs TLS</a></li>
                         <li><a class="dropdown-item" href="/#certificates">@lang("menuTexts.tscertificates")</a></li>
@@ -31,20 +35,27 @@
                     </a>
                     <ul class="dropdown-menu">
                         <li class="dropdown-item disabled">@lang('menuTexts.classicCiphers')</li>
-                        <li><a class="dropdown-item" href="{{route('caesarCipher')}}">@lang('menuTexts.caesarCipher')</a></li>
-                        <li><a class="dropdown-item" href="/todo">@lang('menuTexts.vernamCipher')</a></li>
-                        <li><a class="dropdown-item" href="{{route('vigenereCipher')}}">@lang('menuTexts.vigenereCipher')</a></li>
+                        <li><a class="dropdown-item"
+                               href="{{ route('caesarCipher') }}">@lang('menuTexts.caesarCipher')</a></li>
+                        <li><a class="dropdown-item"
+                               href="{{ route('vernamCipher') }}">@lang('menuTexts.vernamCipher')</a></li>
+                        <li><a class="dropdown-item"
+                               href="{{ route('vigenereCipher') }}">@lang('menuTexts.vigenereCipher')</a></li>
 
-                        <li><hr class="dropdown-divider"></li>
+                        <li>
+                            <hr class="dropdown-divider">
+                        </li>
                         <li class="dropdown-item disabled">@lang('menuTexts.blockCiphers')</li>
-                        <li><a class="dropdown-item" href="{{route('aesCipher')}}">AES</a></li>
-                        <li><a class="dropdown-item" href="{{route('blowfishCipher')}}">Blowfish</a></li>
-                        <li><a class="dropdown-item" href="{{route('simpleDesCipher')}}">Simple DES</a></li>
-                        <li><a class="dropdown-item" href="{{route('tripleSimpleDesCipher')}}">TripleDES</a></li>
+                        <li><a class="dropdown-item" href="{{ route('aesCipher') }}">AES</a></li>
+                        <li><a class="dropdown-item" href="{{ route('blowfishCipher') }}">Blowfish</a></li>
+                        <li><a class="dropdown-item" href="{{ route('simpleDesCipher') }}">Simple DES</a></li>
+                        <li><a class="dropdown-item" href="{{ route('tripleSimpleDesCipher') }}">TripleDES</a></li>
 
-                        <li><hr class="dropdown-divider"></li>
+                        <li>
+                            <hr class="dropdown-divider">
+                        </li>
                         <li class="dropdown-item disabled">@lang("menuTexts.streamCiphers")</li>
-                        <li><a class="dropdown-item" href="{{route('a51')}}">A5/1</a></li>
+                        <li><a class="dropdown-item" href="{{ route('a51') }}">A5/1</a></li>
                     </ul>
                 </li>
 
@@ -54,7 +65,7 @@
                     </a>
                     <ul class="dropdown-menu">
                         <li><a class="dropdown-item" href="/todo">DSA</a></li>
-                        <li><a class="dropdown-item" href="{{route('rsaCipher')}}">RSA</a></li>
+                        <li><a class="dropdown-item" href="{{ route('rsaCipher') }}">RSA</a></li>
                     </ul>
                 </li>
 

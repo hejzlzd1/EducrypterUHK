@@ -4,10 +4,9 @@ namespace App\Algorithms\Output\Steps;
 
 class Step
 {
-    private string $output;
-
     public function __construct(
-        private string $input = ''
+        private string $input = '',
+        private string $output = ''
     ) {
         //
     }

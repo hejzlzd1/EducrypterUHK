@@ -8,7 +8,7 @@
             <h3>@lang('baseTexts.404')</h3>
             <p>@lang('baseTexts.notFound')</p>
             <div>
-                <img class="shadow-lg m-2 rounded-4" src="{{asset("img/404.png")}}">
+                <img alt="" class="shadow-lg m-2 rounded-4" src="{{ asset('img/404.png') }}">
             </div>
         </div>
     </section>

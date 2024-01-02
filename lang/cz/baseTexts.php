@@ -27,7 +27,7 @@ return [
     'textInputOnly' => 'Toto pole může obsahovat pouze text (případně mezery)',
     'initVector' => 'Inicializační vektor',
     'keyBits' => 'Délka klíče v bitech',
-    'formatedKey' => 'Formátovaný klíč',
+    'formattedKey' => 'Formátovaný klíč',
     'keyFormatted' => 'Klíč byl upraven aby odpovídal požadavkům algoritmu',
     'formInfoDescription' => 'Formulář slouží k ilustrativnímu vyzkoušení daného algoritmu. Výsledná data se nedoporučují k použití - jedná se pouze o edukativní ukázku výstupu!',
     'substitution' => 'Substituce',

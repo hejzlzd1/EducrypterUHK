@@ -1,3 +1,8 @@
+@php
+    use App\Algorithms\CipherBase;
+    use App\Algorithms\Output\Steps\RSAStep;
+    use App\Algorithms\Output\RsaOutput;
+@endphp
 @extends("components/pageTemplate")
 @section("title",__('rsaPageTexts.title'))
 @section("comment",__('rsaPageTexts.metaComment'))
@@ -16,10 +21,11 @@
                         </div>
 
                         <div class="col-lg-4 m-auto">
-                            <a href="{{asset('img/rsaPage/rsa_' . App::getLocale() . '.png')}}" target="_blank">
+                            <a href="{{ asset('img/rsaPage/rsa_' . App::getLocale() . '.png') }}" target="_blank">
                                 <img alt="" width="100%" title="@lang('baseTexts.clickToSeeInFullSize')"
-                                     src="{{asset('img/rsaPage/rsa_' . App::getLocale() . '.png')}}"
-                                     class="rounded-4"></a>
+                                     src="{{ asset('img/rsaPage/rsa_' . App::getLocale() . '.png') }}"
+                                />
+                            </a>
                             <figure class="text-center">@lang("rsaPageTexts.schema")</figure>
                         </div>
                     </div>
@@ -46,7 +52,8 @@
                                     <input class="form-control" maxlength="40" minlength="1" required type="text"
                                            id="text" name="text"
                                            placeholder="@lang('baseTexts.inputText')"
-                                           @if(isset($data["text"]))value="{{$data["text"]}}"@endif />
+                                           @if(isset($data['text'])) value="{{ $data['text'] }}" @endif
+                                    />
                                 </div>
                             </fieldset>
 
@@ -60,7 +67,8 @@
                                     <input class="form-control disableOnEncrypt" min=1 required type="number"
                                            id="publicKey" name="publicKey"
                                            placeholder="@lang('rsaPageTexts.inputPublicKey')"
-                                @if(isset($data["publicKey"]))value="{{$data["publicKey"]}}"@endif />
+                                           @if(isset($data['publicKey'])) value="{{ $data['publicKey'] }}" @endif
+                                    />
                                 </div>
                                 <div class="col-lg-6">
                                     <label class="form-label" for="privateKey">
@@ -71,7 +79,7 @@
                                     <input class="form-control disableOnEncrypt" min=1 required type="number"
                                            id="privateKey" name="privateKey"
                                            placeholder="@lang('rsaPageTexts.inputPrivateKey')"
-                                           @if(isset($data['privateKey'])) value="{{$data['privateKey']}}" @endif />
+                                           @if(isset($data['privateKey'])) value="{{ $data['privateKey'] }}" @endif />
                                 </div>
                             </fieldset>
 
@@ -85,7 +93,7 @@
                                     <input class="form-control primeNumber disableOnDecrypt"
                                            placeholder="@lang('rsaPageTexts.insertPrimeNumber')" min="1" type="number"
                                            id="primeNumber1" name="primeNumber1"
-                                           @if(isset($data["primeNumber1"]))value="{{$data["primeNumber1"]}}"
+                                           @if(isset($data['primeNumber1'])) value="{{ $data['primeNumber1'] }}"
                                            @endif required/>
                                 </div>
                                 <div class="col-lg-6">
@@ -97,7 +105,7 @@
                                     <input class="form-control primeNumber disableOnDecrypt"
                                            placeholder="@lang('rsaPageTexts.insertPrimeNumber')" min="1" type="number"
                                            id="primeNumber2" name="primeNumber2"
-                                           @if(isset($data["primeNumber2"]))value="{{$data["primeNumber2"]}}"
+                                           @if(isset($data['primeNumber2'])) value="{{ $data['primeNumber2'] }}"
                                            @endif required/>
                                 </div>
                                 <div id="error-dialog" style="display: none;"
@@ -113,13 +121,13 @@
                                         <label class="form-check-label" for="encrypt">@lang('baseTexts.encrypt')</label>
                                         <input class="form-check-input" required type="radio"
                                                id="encrypt" name="action"
-                                               value={{\App\Algorithms\CipherBase::ALGORITHM_ENCRYPT}}>
+                                               value={{ CipherBase::ALGORITHM_ENCRYPT }}>
                                     </div>
                                     <div class="form-check form-switch">
                                         <label class="form-check-label" for="decrypt">@lang('baseTexts.decrypt')</label>
                                         <input class="form-check-input" required type="radio"
                                                id="decrypt" name="action"
-                                               value={{\App\Algorithms\CipherBase::ALGORITHM_DECRYPT}}>
+                                               value={{ CipherBase::ALGORITHM_DECRYPT }}>
                                     </div>
                                 </fieldset>
                             </div>
@@ -134,8 +142,8 @@
 
     @if(isset($result))
         @php
-            /** @var App\Algorithms\Output\RsaOutput $result */
-            /** @var App\Algorithms\Output\Steps\RSAStep $step */
+            /** @var RsaOutput $result */
+            /** @var RSAStep $step */
         @endphp
         <section class="m-5 shadow-lg border rounded-4 p-5">
             <div class="container text-break">
@@ -150,29 +158,29 @@
                             <i class="fa-solid fa-keyboard"></i>
                             @lang('baseTexts.insertedText')
                         </h4>
-                        <p>{{$data["text"]}}</p>
+                        <p>{{ $data['text'] }}</p>
                     </div>
 
-                    @if($result->getOperation() === \App\Algorithms\CipherBase::ALGORITHM_ENCRYPT)
+                    @if($result->getOperation() === CipherBase::ALGORITHM_ENCRYPT)
                         <div class="col-lg-5">
                             <h4>
                                 <i class="fa-solid fa-keyboard"></i>
                                 @lang('rsaPageTexts.asciiText')
                             </h4>
-                            <p>{{$result->getInputValue()}}</p>
+                            <p>{{ $result->getInputValue() }}</p>
                         </div>
                     @endif
                 </div>
 
-                @if($result->getOperation() === \App\Algorithms\CipherBase::ALGORITHM_ENCRYPT)
+                @if($result->getOperation() === CipherBase::ALGORITHM_ENCRYPT)
                     <div class="row align-items-start">
                         <div class="col-lg-5">
                             <h4>1. @lang('rsaPageTexts.primeNumber')</h4>
-                            <p>{{$data["primeNumber1"]}}</p>
+                            <p>{{ $data['primeNumber1'] }}</p>
                         </div>
                         <div class="col-lg-5">
                             <h4>2. @lang('rsaPageTexts.primeNumber')</h4>
-                            <p>{{$data["primeNumber2"]}}</p>
+                            <p>{{ $data['primeNumber2'] }}</p>
                         </div>
                     </div>
                 @endif
@@ -185,12 +193,12 @@
                                 @lang('baseTexts.outputText')
                                 <x-copyButton :textToCopy="$result->getOutputValue()"></x-copyButton>
                             </h4>
-                            <p>{{$result->getOutputValue()}}</p>
+                            <p>{{ $result->getOutputValue() }}</p>
                         @endif
                     </div>
                 </div>
 
-                @if($result->getOperation() === \App\Algorithms\CipherBase::ALGORITHM_ENCRYPT)
+                @if($result->getOperation() === CipherBase::ALGORITHM_ENCRYPT)
                     <div class="mt-3">
                         <h2>
                             <i class="fa fa-calculator"></i>
@@ -203,15 +211,15 @@
                                     n = p×q
                                     <x-copyButton :textToCopy="$result->getN()"></x-copyButton>
                                 </h4>
-                                <p><b>{{$result->getN()}}</b></p>
+                                <p><b>{{ $result->getN() }}</b></p>
                             </div>
                             <div class="col-lg-5">
                                 <h4>ϕ(n) = (p−1) × (q−1)</h4>
-                                <p>{{$result->getPhi()}}</p>
+                                <p>{{ $result->getPhi() }}</p>
                             </div>
                             <div class="col-lg-5">
                                 <h4>e = gcd(e,ϕ(n))=1)</h4>
-                                <p>{{$result->getE()}}</p>
+                                <p>{{ $result->getE() }}</p>
                             </div>
                         </div>
                         <div class="mt-2 row align-items-start">
@@ -221,7 +229,7 @@
                                     e · d ≡ 1 mod φ(n)
                                     <x-copyButton :textToCopy="$result->getD()"></x-copyButton>
                                 </h4>
-                                <p><b>{{$result->getD()}}</b></p>
+                                <p><b>{{ $result->getD() }}</b></p>
                             </div>
                         </div>
                     </div>
@@ -237,31 +245,31 @@
                             <div class="accordion-item">
                                 <h2 class="accordion-header">
                                     <button class="accordion-button" type="button" data-bs-toggle="collapse"
-                                            data-bs-target="#step{{$loop->index}}" aria-expanded="true"
-                                            aria-controls="step{{$loop->index}}">
-                                        {{$step->getInputChar()}} => {{$step->getOutputChar()}}
+                                            data-bs-target="#step{{ $loop->index }}" aria-expanded="true"
+                                            aria-controls="step{{ $loop->index }}">
+                                        {{ $step->getInputChar() }} => {{ $step->getOutputChar() }}
                                     </button>
                                 </h2>
-                                <div id="step{{$loop->index}}" class="accordion-collapse collapse"
+                                <div id="step{{ $loop->index }}" class="accordion-collapse collapse"
                                      data-bs-parent="#rsaSteps">
                                     <div class="accordion-body">
                                         <div class="row align-items-start">
                                             <div class="col-lg-5">
                                                 <h4><i class="fa-solid fa-keyboard"></i> @lang('rsaPageTexts.inputChar')
                                                 </h4>
-                                                <p>{{$step->getInputChar()}}</p>
+                                                <p>{{ $step->getInputChar() }}</p>
                                             </div>
                                             <div class="col-lg-5">
                                                 <h4>
                                                     <i class="fa-solid fa-calculator"></i> @lang('rsaPageTexts.beforeModulo')
                                                 </h4>
-                                                <p>{{$step->getBeforeModulo()}}</p>
+                                                <p>{{ $step->getBeforeModulo() }}</p>
                                             </div>
                                             <div class="col-lg-5">
                                                 <h4>
                                                     <i class="fa-solid fa-circle-down"></i> @lang('rsaPageTexts.outputChar')
                                                 </h4>
-                                                <p>{{$step->getOutputChar()}}</p>
+                                                <p>{{ $step->getOutputChar() }}</p>
                                             </div>
                                         </div>
                                     </div>

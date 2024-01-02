@@ -66,7 +66,7 @@ $(document).ready(function () {
         const binaryPattern = /^[01]+$/;
 
         if (!binaryPattern.test(inputValue)) {
-            event.target.setCustomValidity('Invalid input. Only 0 and 1 are allowed.');
+            event.target.setCustomValidity(Lang.get('jsErrors.inputCanBeOnlyBinary'));
         } else {
             event.target.setCustomValidity('');
         }
