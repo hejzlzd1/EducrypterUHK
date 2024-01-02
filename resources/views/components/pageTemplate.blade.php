@@ -10,8 +10,8 @@
     <meta name="robots" content="index,follow">
     <meta name="googlebot" content="snippet,archive">
     <meta name="Author" content="Zdeněk Hejzlar">
-    <script src="{{ asset('messages.js') }}" defer></script>
-    <script defer>
+    <script src="{{ asset('messages.js') }}"></script>
+    <script>
         Lang.setLocale('{{ App::getLocale() }}');
     </script>
     @vite(['resources/sass/app.scss', 'resources/js/app.js'])
