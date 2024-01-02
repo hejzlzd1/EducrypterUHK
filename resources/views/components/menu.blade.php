@@ -40,7 +40,7 @@
                         <li><a class="dropdown-item" href="{{route('aesCipher')}}">AES</a></li>
                         <li><a class="dropdown-item" href="{{route('blowfishCipher')}}">Blowfish</a></li>
                         <li><a class="dropdown-item" href="{{route('simpleDesCipher')}}">Simple DES</a></li>
-                        <li><a class="dropdown-item" href="/todo">TripleDES</a></li>
+                        <li><a class="dropdown-item" href="{{route('tripleSimpleDesCipher')}}">TripleDES</a></li>
 
                         <li><hr class="dropdown-divider"></li>
                         <li class="dropdown-item disabled">@lang("menuTexts.streamCiphers")</li>
