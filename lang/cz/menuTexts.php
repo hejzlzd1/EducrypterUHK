@@ -3,8 +3,8 @@
 return [
     'mainPage' => 'Úvodní stránka',
     'introInfo' => 'Úvodní informace',
-    'symetricAlgo' => 'Symetrické algoritmy',
-    'asymetricAlgo' => 'Asymetrické algoritmy',
+    'symmetricAlgo' => 'Symetrické algoritmy',
+    'asymmetricAlgo' => 'Asymetrické algoritmy',
     'cryptoUsage' => 'Využití kryptografie',
     'protocols' => 'Protokoly',
     'tscertificates' => 'Certifikáty SSL/TLS',

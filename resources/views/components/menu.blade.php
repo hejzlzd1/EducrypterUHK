@@ -16,8 +16,8 @@
                     </a>
                     <ul class="dropdown-menu">
                         <li><a class="dropdown-item" href="/#intro">@lang("menuTexts.introInfo")</a></li>
-                        <li><a class="dropdown-item" href="/#symetric">@lang("menuTexts.symetricAlgo")</a></li>
-                        <li><a class="dropdown-item" href="/#asymetric">@lang("menuTexts.asymetricAlgo")</a></li>
+                        <li><a class="dropdown-item" href="/#symmetric">@lang("menuTexts.symmetricAlgo")</a></li>
+                        <li><a class="dropdown-item" href="/#asymmetric">@lang("menuTexts.asymmetricAlgo")</a></li>
                         <li><a class="dropdown-item" href="/#usage">@lang("menuTexts.cryptoUsage")</a></li>
                         <li><hr class="dropdown-divider"></li>
                         <li><a class="dropdown-item" href="/#protocols">@lang("menuTexts.protocols")</a></li>
@@ -27,7 +27,7 @@
                 </li>
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        @lang("menuTexts.symetricAlgo")
+                        @lang("menuTexts.symmetricAlgo")
                     </a>
                     <ul class="dropdown-menu">
                         <li class="dropdown-item disabled">@lang('menuTexts.classicCiphers')</li>
@@ -50,7 +50,7 @@
 
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        @lang('menuTexts.asymetricAlgo')
+                        @lang('menuTexts.asymmetricAlgo')
                     </a>
                     <ul class="dropdown-menu">
                         <li><a class="dropdown-item" href="/todo">DSA</a></li>
