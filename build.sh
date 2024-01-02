@@ -31,4 +31,6 @@ php artisan cache:clear
 
 php artisan lang:js -c -s ./lang
 
+php artisan optimize
+
 echo "All done... Website is ready!"
