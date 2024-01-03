@@ -21,7 +21,16 @@ class TripleSimpleDes
 
     public function __construct(private string $text, private string $key, private string $key2, private int $operation)
     {
-        $this->output = new TSDESOutput($this->text, $this->operation, $this->key, $key2);
+        if (mb_strlen($key) < 10) {
+            $key = str_pad($key, 10, 0, STR_PAD_LEFT);
+        }
+        if (mb_strlen($key2) < 10) {
+            $key2 = str_pad($key2, 10, 0, STR_PAD_LEFT);
+        }
+        if (mb_strlen($text) < 8) {
+            $text = str_pad($text, 8, 0, STR_PAD_LEFT);
+        }
+        $this->output = new TSDESOutput(inputValue: $text, operation: $operation, key: $key, key2: $key2);
     }
 
     public function decrypt(): TSDESOutput
