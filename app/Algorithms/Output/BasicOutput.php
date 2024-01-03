@@ -10,7 +10,7 @@ class BasicOutput
     public function __construct(
         private readonly string $inputValue,
         private readonly int $operation,
-        private ?string $key,
+        private string|int|null $key,
         private ?string $outputValue = '',
         private ?array $steps = null,
         private ?array $additionalInformation = []
@@ -28,7 +28,7 @@ class BasicOutput
         return $this->operation;
     }
 
-    public function getKey(): ?string
+    public function getKey(): string|int|null
     {
         return $this->key;
     }

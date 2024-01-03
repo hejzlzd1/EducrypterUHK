@@ -41,7 +41,7 @@
                             <fieldset class="row p-2">
                                 <div class="col-lg-6">
                                     <label class="form-label" for="text">
-                                        @lang('baseTexts.text')
+                                        @lang('simpleDesPageTexts.binaryInput')
                                         <x-tooltipButton
                                             :tooltip="trans('baseTexts.binaryInputPrompt')"></x-tooltipButton>
                                     </label>
@@ -54,26 +54,26 @@
                                 </div>
                                 <div class="col-lg-6">
                                     <label class="form-label" for="key">
-                                        @lang('baseTexts.key') K1 & K3
+                                        @lang('simpleDesPageTexts.binaryKey') K1 & K3
                                         <x-tooltipButton
                                             :tooltip="trans('baseTexts.binaryInputPrompt')"></x-tooltipButton>
                                     </label>
                                     <input class="form-control binaryValidation" minlength="1" maxlength="10"
                                            type="text" id="key"
                                            name="key"
-                                           placeholder="@lang('baseTexts.insertKey')"
+                                           placeholder="@lang('baseTexts.binaryInputPrompt')"
                                            @if(isset($data['key'])) value="{{$data['key']}}" @else value="" @endif>
                                 </div>
                                 <div class="col-lg-6 mt-2">
                                     <label class="form-label" for="key2">
-                                        @lang('baseTexts.key') K2
+                                        @lang('simpleDesPageTexts.binaryKey') K2
                                         <x-tooltipButton
-                                            :tooltip="trans('baseTexts.binaryInputPrompt')"></x-tooltipButton>
+                                            :tooltip="trans('simpleDesPageTexts.binaryKey')"></x-tooltipButton>
                                     </label>
                                     <input class="form-control binaryValidation" minlength="1" maxlength="10"
                                            type="text" id="key2"
                                            name="key2"
-                                           placeholder="@lang('baseTexts.insertKey')"
+                                           placeholder="@lang('baseTexts.binaryInputPrompt')"
                                            @if(isset($data['key2'])) value="{{$data['key2']}}" @else value="" @endif>
                                 </div>
                             </fieldset>
@@ -124,15 +124,15 @@
                                 @lang('baseTexts.encryptedText')
                             @endif
                         </h4>
-                        <p>{{$result->getInputValue()}}</p>
+                        <p>{{ $result->getInputValue() }}</p>
                     </div>
                     <div class="col-lg-5">
                         <h4><i class="fa-solid fa-key"></i> @lang('baseTexts.key') K1 & K3</h4>
-                        <p>{{$result->getKey()}}</p>
+                        <p>{{ $result->getKey() }}</p>
                     </div>
                     <div class="col-lg-5">
                         <h4><i class="fa-solid fa-key"></i> @lang('baseTexts.key') K2</h4>
-                        <p>{{$result->getKey2()}}</p>
+                        <p>{{ $result->getKey2() }}</p>
                     </div>
                 </div>
                 <div class="row align-items-start">
@@ -237,20 +237,25 @@
                                                                         class="accordion-collapse collapse">
                                                                         <div class="accordion-body">
                                                                             <div class="d-flex flex-wrap">
-                                                                                <div class="col-md-5">
+                                                                                <div class="col-md-6">
                                                                                     <h3>
                                                                                         <i class="fa-solid fa-file-lines"></i>
                                                                                         @lang('baseTexts.input')
                                                                                     </h3>
                                                                                     <p>{{$keyGenerationStep->getInput()}}</p>
                                                                                 </div>
-                                                                                <div class="col-md-5">
+                                                                                <div class="col-md-6">
                                                                                     <h3>
                                                                                         <i class="fa-solid fa-file-lines"></i>
                                                                                         @lang('baseTexts.output')
                                                                                     </h3>
                                                                                     {{$keyGenerationStep->getOutput()}}
                                                                                 </div>
+                                                                                @if ($keyGenerationStep->getImageUrl() !== null)
+                                                                                    <div class="col-md-6">
+                                                                                        <img src="{{ $keyGenerationStep->getImageUrl() }}" alt="" width="100%" />
+                                                                                    </div>
+                                                                                @endif
                                                                             </div>
                                                                         </div>
                                                                     </div>
@@ -292,20 +297,25 @@
                                                                         class="accordion-collapse collapse">
                                                                         <div class="accordion-body">
                                                                             <div class="d-flex flex-wrap">
-                                                                                <div class="col-md-5">
+                                                                                <div class="col-md-6">
                                                                                     <h3>
                                                                                         <i class="fa-solid fa-file-lines"></i>
                                                                                         @lang('baseTexts.input')
                                                                                     </h3>
                                                                                     <p>{{$step->getInput()}}</p>
                                                                                 </div>
-                                                                                <div class="col-md-5">
+                                                                                <div class="col-md-6">
                                                                                     <h3>
                                                                                         <i class="fa-solid fa-file-lines"></i>
                                                                                         @lang('baseTexts.output')
                                                                                     </h3>
                                                                                     {{$step->getOutput()}}
                                                                                 </div>
+                                                                                @if ($step->getImageUrl() !== null)
+                                                                                    <div class="col-md-6">
+                                                                                        <img src="{{ $step->getImageUrl() }}" alt="" width="100%"/>
+                                                                                    </div>
+                                                                                @endif
                                                                             </div>
                                                                         </div>
                                                                     </div>
