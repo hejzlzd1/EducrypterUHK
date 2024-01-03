@@ -16,29 +16,31 @@ return [
     ',
     'encryptionDecryptionInfoTitle' => 'Šifrování/dešifrování',
     'encryptionDecryptionInfo' => '
-        10-bitové data jsou v první fázi permutovány pomocí inicializační permutace. V další fázi se data rozdělí na dvě poloviny a s vygenerovanou částí klíče vchází do tzv. komplexní funkce (rundy). Ta se skládá z rozšířené permutace (EP), XOR operací, permutace P4 a permutací na dvou sboxech. Výsledkem těchto funkcí jsou dvě části dat - na konci rundy se prohodí (strany dat). Po průchodu všemi rundami jsou data spojeny a provede se inverze inicializační permutace čímž vznikne šifrovaný výstup. Dešifrování probíhá prakticky ve stejném duchu - avšak je otočeno pořadí částí klíčů. Tzn. do první rundy vstupuje poslední část šifrovacího klíče. <br /><br />
+        10-bitové data jsou v první fázi permutovány pomocí inicializační permutace. V další fázi se data rozdělí na dvě poloviny a s vygenerovanou částí klíče vchází do tzv. rundovní funkce. Ta se skládá z rozšířené permutace (EP), XOR operací, permutace P4 a permutací na dvou sboxech. Výsledkem těchto funkcí jsou dvě části dat - na konci rundy se prohodí (strany dat). Po průchodu všemi rundami jsou data spojeny a provede se inverze inicializační permutace čímž vznikne šifrovaný výstup. Dešifrování probíhá prakticky ve stejném duchu - avšak je otočeno pořadí částí klíčů. Tzn. do první rundy vstupuje poslední část šifrovacího klíče. <br /><br />
         Schéma tohoto algoritmu je přiliš komplexní na to aby se vešlo do jednoho obrázku. Struktura všech využitých operací je proto zobrazena v obrázcích níže.
     ',
     'differencesToDESTitle' => 'Implementační rozdíly S-DES proti DES',
-    'differencesToDES' => 'Oproti DES je S-DES upraven v několika aspektech. V první řadě se jedná o délku zpracovávaných dat - DES pracuje s 64-bitovými bloky a 56-bitovým klíčem. Další zásadní rozdíl je v počtu rund. V této implementaci využívá S-DES pouze 2 rundy oproti původním 16 rundám. Taktéž je zde odlišnost v komplexních funkcí - v této implementaci jsou operace zjednodušeny (permutace sboxy například).',
+    'differencesToDES' => 'Oproti DES je S-DES upraven v několika aspektech. V první řadě se jedná o délku zpracovávaných dat - DES pracuje s 64-bitovými bloky a 56-bitovým klíčem. Další zásadní rozdíl je v počtu rund. V této implementaci využívá S-DES pouze 2 rundy oproti původním 16 rundám. Taktéž je zde odlišnost v rundovních funkcích - v této implementaci jsou operace zjednodušeny (permutace sboxy například).',
     'blockSchema' => 'Blokové schéma Simple DES',
 
     'keyGeneration' => 'Generování klíčů',
     'P10' => 'Permutace P10',
-    'split' => 'Rozdělení na dvě části',
-    'leftShiftLeftKey' => 'Posunutí registru levého klíče',
-    'leftShiftRightKey' => 'Posunutí registru pravého klíče',
+    'split' => 'Rozdělení na dva bloky',
+    'leftShiftLeftKey' => 'Posunutí registru levého bloku',
+    'leftShiftRightKey' => 'Posunutí registru pravého bloku',
     'shift' => 'Posun',
-    'P8KeyOutput' => 'Permutace P8 - vytvoření klíče K:keyNumber',
-    'IP' => 'Úvodní permutace (IP)',
-    'EP' => 'Rozšířená permutace (EP)',
+    'P8KeyOutput' => 'P8 - vytvoření bloku K:keyNumber',
+    'IP' => 'IP',
+    'EP' => 'EP',
     'xor' => 'Operace XOR',
-    'SBoxPermutation' => 'Permutace SBoxem #:boxNumber',
+    'SBoxPermutation' => 'Permutace s-boxem S:boxNumber',
     'P4' => 'Permutace P4',
     'P8' => 'Permutace P8',
-    'swap' => 'Prohození stran',
-    'IIP' => 'Inverze úvodní permutace (IIP)',
-    'sBoxes' => 'Předdefinované sboxy',
-    'complexFunction' => 'Komplexní funkce (runda)',
-    'additionalSchemas' => 'Doplňující schémata'
+    'swap' => 'Prohození bloků',
+    'IIP' => 'IP⁻¹',
+    'sBoxes' => 'Předdefinované s-boxy',
+    'roundFunction' => 'Rundovní funkce',
+    'additionalSchemas' => 'Doplňující schémata',
+    'binaryInput' => 'Binární vstup o délce 8 bitů',
+    'binaryKey' => 'Binární klíč o délce 10 bitů'
 ];

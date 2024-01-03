@@ -19,7 +19,7 @@ class SDESOutput extends BasicOutput
         int    $operation,
         string $outputValue = null,
         array  $steps = [],
-        ?int   $key = null,
+        ?string $key = null,
     )
     {
         parent::__construct(
