@@ -4,10 +4,9 @@ namespace App\Algorithms\Output\Steps;
 
 class NamedStep extends Step
 {
-    public function __construct(string $input, string $output = '', private string $translatedActionName = '')
+    public function __construct(string $input, string $output = '', private string $translatedActionName = '', private ?string $imageUrl = null)
     {
-        $this->setOutput($output);
-        parent::__construct($input);
+        parent::__construct($input, $output);
     }
 
     /**
@@ -25,4 +24,10 @@ class NamedStep extends Step
     {
         return $this->translatedActionName;
     }
+
+    public function getImageUrl(): ?string
+    {
+        return $this->imageUrl;
+    }
+
 }

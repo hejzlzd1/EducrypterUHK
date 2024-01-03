@@ -35,21 +35,24 @@
                     </a>
                     <ul class="dropdown-menu">
                         <li class="dropdown-item disabled">@lang('menuTexts.classicCiphers')</li>
-                        <li><a class="dropdown-item"
-                               href="{{ route('caesarCipher') }}">@lang('menuTexts.caesarCipher')</a></li>
-                        <li><a class="dropdown-item"
-                               href="{{ route('vernamCipher') }}">@lang('menuTexts.vernamCipher')</a></li>
-                        <li><a class="dropdown-item"
-                               href="{{ route('vigenereCipher') }}">@lang('menuTexts.vigenereCipher')</a></li>
+                        <li>
+                            <a class="dropdown-item" href="{{ route('caesarCipher') }}">@lang('menuTexts.caesarCipher')</a>
+                        </li>
+                        <li>
+                            <a class="dropdown-item" href="{{ route('vigenereCipher') }}">@lang('menuTexts.vigenereCipher')</a>
+                        </li>
+                        <li>
+                            <a class="dropdown-item" href="{{ route('vernamCipher') }}">@lang('menuTexts.vernamCipher')</a>
+                        </li>
 
                         <li>
                             <hr class="dropdown-divider">
                         </li>
                         <li class="dropdown-item disabled">@lang('menuTexts.blockCiphers')</li>
-                        <li><a class="dropdown-item" href="{{ route('aesCipher') }}">AES</a></li>
-                        <li><a class="dropdown-item" href="{{ route('blowfishCipher') }}">Blowfish</a></li>
                         <li><a class="dropdown-item" href="{{ route('simpleDesCipher') }}">Simple DES</a></li>
                         <li><a class="dropdown-item" href="{{ route('tripleSimpleDesCipher') }}">TripleDES</a></li>
+                        <li><a class="dropdown-item" href="{{ route('blowfishCipher') }}">Blowfish</a></li>
+                        <li><a class="dropdown-item" href="{{ route('aesCipher') }}">AES</a></li>
 
                         <li>
                             <hr class="dropdown-divider">

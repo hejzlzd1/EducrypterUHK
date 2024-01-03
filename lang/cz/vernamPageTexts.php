@@ -14,5 +14,5 @@ return [
         <br />
         Tato implementace využívá binárních vstupů a poskytuje binární výstup. Pokud je binární klíč příliš krátký pak je doplněn o 0 z levé strany. V případě větší délky je klíč oříznut z levé strany. Kroky algoritmu zobrazují jednotlivé XOR operace nad vstupem.
     ',
-    'scheme' => 'Schéma binarního šifrování Vernamovou šifrou',
+    'schema' => 'Schéma binarního šifrování Vernamovou šifrou',
 ];
