@@ -8,9 +8,10 @@ Vytvoření image a zapnutí kontejneru:
 docker-compose build
 docker-compose up -d
 
-Vytvoření šifrovací klíče a build aplikace (stažení a instalace závislostí) 
-docker-compose exec php php artisan key:generate
+Vytvoření šifrovací klíče a build aplikace (stažení a instalace závislostí)
 docker-compose exec php bash build.sh
+docker-compose exec php php artisan key:generate
+docker-compose exec php php artisan cache:clear
 
 Nyní by mělo být vše připraveno
 

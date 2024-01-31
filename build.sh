@@ -8,7 +8,7 @@ fi
 # Remove the 'node_modules' directory if it exists
 if [ -d "node_modules" ]; then
   echo "Removing 'node_modules' directory..."
-  rm -rf node_modules
+  rm -rf node_module
 fi
 
 composer clear-cache
