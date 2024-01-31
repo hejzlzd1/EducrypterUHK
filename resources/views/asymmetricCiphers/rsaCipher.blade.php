@@ -47,11 +47,11 @@
                                 <div class="col-lg-6">
                                     <label class="form-label" for="text">
                                         @lang('baseTexts.text')
-                                        <x-tooltipButton :tooltip="trans('baseTexts.inputText')"></x-tooltipButton>
+                                        <x-tooltipButton :tooltip="trans('rsaPageTexts.inputTextTooltip')"></x-tooltipButton>
                                     </label>
                                     <input class="form-control" maxlength="40" minlength="1" required type="text"
                                            id="text" name="text"
-                                           placeholder="@lang('baseTexts.inputText')"
+                                           placeholder="@lang('baseTexts.text')"
                                            @if(isset($data['text'])) value="{{ $data['text'] }}" @endif
                                     />
                                 </div>
@@ -86,24 +86,24 @@
                             <fieldset class="row p-2 disableOnDecrypt">
                                 <div class="col-lg-6">
                                     <label class="form-label" for="primeNumber1">
-                                        1. @lang('rsaPageTexts.primeNumber')
+                                        @lang('rsaPageTexts.primeNumber') p
                                         <x-tooltipButton
                                             :tooltip="trans('rsaPageTexts.insertPrimeNumberTooltip')"></x-tooltipButton>
                                     </label>
                                     <input class="form-control primeNumber disableOnDecrypt"
-                                           placeholder="@lang('rsaPageTexts.insertPrimeNumber')" min="1" type="number"
+                                           placeholder="@lang('rsaPageTexts.insertPrimeNumber')" min="13" type="number"
                                            id="primeNumber1" name="primeNumber1"
                                            @if(isset($data['primeNumber1'])) value="{{ $data['primeNumber1'] }}"
                                            @endif required/>
                                 </div>
                                 <div class="col-lg-6">
                                     <label class="form-label" for="primeNumber2">
-                                        2. @lang('rsaPageTexts.primeNumber')
+                                        @lang('rsaPageTexts.primeNumber') q
                                         <x-tooltipButton
                                             :tooltip="trans('rsaPageTexts.insertPrimeNumberTooltip')"></x-tooltipButton>
                                     </label>
                                     <input class="form-control primeNumber disableOnDecrypt"
-                                           placeholder="@lang('rsaPageTexts.insertPrimeNumber')" min="1" type="number"
+                                           placeholder="@lang('rsaPageTexts.insertPrimeNumber')" min="23" type="number"
                                            id="primeNumber2" name="primeNumber2"
                                            @if(isset($data['primeNumber2'])) value="{{ $data['primeNumber2'] }}"
                                            @endif required/>
@@ -258,12 +258,6 @@
                                                 <h4><i class="fa-solid fa-keyboard"></i> @lang('rsaPageTexts.inputChar')
                                                 </h4>
                                                 <p>{{ $step->getInputChar() }}</p>
-                                            </div>
-                                            <div class="col-lg-5">
-                                                <h4>
-                                                    <i class="fa-solid fa-calculator"></i> @lang('rsaPageTexts.beforeModulo')
-                                                </h4>
-                                                <p>{{ $step->getBeforeModulo() }}</p>
                                             </div>
                                             <div class="col-lg-5">
                                                 <h4>

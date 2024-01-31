@@ -1,6 +1,6 @@
-<mxfile host="Electron" modified="2024-01-01T17:11:58.779Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/22.1.16 Chrome/120.0.6099.109 Electron/28.1.0 Safari/537.36" etag="GiXZ5FVBYW_xMrX-w7Em" version="22.1.16" type="device">
+<mxfile host="app.diagrams.net" modified="2024-01-31T15:33:16.083Z" agent="Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/121.0.0.0 Safari/537.36" etag="DmkcEIVSAWu6z5fB8JWe" version="23.0.2" type="device">
   <diagram id="C5RBs43oDa-KdzZeNtuy" name="Page-1">
-    <mxGraphModel dx="1671" dy="496" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+    <mxGraphModel dx="2261" dy="759" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
         <mxCell id="WIyWlLk6GJQsqaUBKTNV-0" />
         <mxCell id="WIyWlLk6GJQsqaUBKTNV-1" parent="WIyWlLk6GJQsqaUBKTNV-0" />
@@ -57,14 +57,14 @@
         <mxCell id="RHyhjcAiuvz86e3YybD6-12" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" parent="WIyWlLk6GJQsqaUBKTNV-1" source="RHyhjcAiuvz86e3YybD6-9" target="RHyhjcAiuvz86e3YybD6-11" edge="1">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="RHyhjcAiuvz86e3YybD6-9" value="(φ(n), e) = 1 &amp;lt; e &amp;lt; φ(n)" style="whiteSpace=wrap;html=1;rounded=0;" parent="WIyWlLk6GJQsqaUBKTNV-1" vertex="1">
-          <mxGeometry x="260" y="240" width="120" height="60" as="geometry" />
+        <mxCell id="RHyhjcAiuvz86e3YybD6-9" value="Volba e pomocí GCD&lt;br&gt;(φ(n), e) = 1 &amp;lt; e &amp;lt; φ(n)" style="whiteSpace=wrap;html=1;rounded=0;" parent="WIyWlLk6GJQsqaUBKTNV-1" vertex="1">
+          <mxGeometry x="260" y="240" width="140" height="60" as="geometry" />
         </mxCell>
         <mxCell id="RHyhjcAiuvz86e3YybD6-28" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="WIyWlLk6GJQsqaUBKTNV-1" source="RHyhjcAiuvz86e3YybD6-11" target="RHyhjcAiuvz86e3YybD6-16" edge="1">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="RHyhjcAiuvz86e3YybD6-11" value="d -&amp;gt; e * d mod φ(n) = 1" style="whiteSpace=wrap;html=1;rounded=0;" parent="WIyWlLk6GJQsqaUBKTNV-1" vertex="1">
-          <mxGeometry x="460" y="240" width="120" height="60" as="geometry" />
+        <mxCell id="RHyhjcAiuvz86e3YybD6-11" value="Výpočet d&lt;br&gt;&amp;nbsp;e * d mod φ(n) = 1" style="whiteSpace=wrap;html=1;rounded=0;" parent="WIyWlLk6GJQsqaUBKTNV-1" vertex="1">
+          <mxGeometry x="460" y="240" width="140" height="60" as="geometry" />
         </mxCell>
         <mxCell id="RHyhjcAiuvz86e3YybD6-13" value="" style="endArrow=classic;html=1;rounded=0;entryX=0;entryY=0.25;entryDx=0;entryDy=0;jumpStyle=arc;" parent="WIyWlLk6GJQsqaUBKTNV-1" target="RHyhjcAiuvz86e3YybD6-1" edge="1">
           <mxGeometry width="50" height="50" relative="1" as="geometry">
@@ -107,8 +107,8 @@
         <mxCell id="RHyhjcAiuvz86e3YybD6-30" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="WIyWlLk6GJQsqaUBKTNV-1" source="RHyhjcAiuvz86e3YybD6-19" target="RHyhjcAiuvz86e3YybD6-29" edge="1">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="RHyhjcAiuvz86e3YybD6-19" value="Šifrování&lt;br&gt;C = Pᵉ&lt;br&gt;&amp;nbsp;mod n" style="rounded=0;whiteSpace=wrap;html=1;" parent="WIyWlLk6GJQsqaUBKTNV-1" vertex="1">
-          <mxGeometry x="707" y="70" width="120" height="60" as="geometry" />
+        <mxCell id="RHyhjcAiuvz86e3YybD6-19" value="Šifrování&lt;br&gt;C = Pᵉ&amp;nbsp;mod n" style="rounded=0;whiteSpace=wrap;html=1;" parent="WIyWlLk6GJQsqaUBKTNV-1" vertex="1">
+          <mxGeometry x="707" y="70" width="153" height="60" as="geometry" />
         </mxCell>
         <mxCell id="RHyhjcAiuvz86e3YybD6-20" value="" style="endArrow=classic;html=1;rounded=0;entryX=0;entryY=0.75;entryDx=0;entryDy=0;jumpStyle=arc;" parent="WIyWlLk6GJQsqaUBKTNV-1" target="RHyhjcAiuvz86e3YybD6-19" edge="1">
           <mxGeometry width="50" height="50" relative="1" as="geometry">
