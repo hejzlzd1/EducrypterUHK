@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Algorithms\CipherBase;
+use App\Algorithms\Ciphers\SimpleAes;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
@@ -15,41 +17,39 @@ class AesCipherController extends BaseController
     public function index(): Factory|View|Application
     {
         if (Session::exists('data')) {
-            return view('symmetricCiphers/aesCipher')->with(['data' => Session::get('data')]);
+            return view('symmetricCiphers/simpleAesCipher')->with(
+                ['data' => Session::get('data'), 'result' => Session::get('result')]
+            );
         }
 
-        return view('symmetricCiphers/aesCipher');
+        return view('symmetricCiphers/simpleAesCipher');
     }
 
     public function compute(Request $request): Redirector|Application|RedirectResponse
     {
         $timerStart = microtime(true);
         $data = $request->all();
+        $this->isBinary($data['key'], trans('baseTexts.key'));
+        $this->isBinary($data['text'], trans('baseTexts.text'));
+        $this->isVariableSet($data['action'], BaseController::TYPE_NUMBER, trans('baseTexts.action'));
 
-        $this->basicValidate($data);
-
-        if (! empty($this->validationFailedVariable)) {
+        if (!empty($this->validationFailedVariable)) {
             Session::flash('alert-error', $this->getValidationErrorTranslation());
 
             return back()->withInput($data);
         }
 
-        //TODO implement AES or Simple AES
-        $ivText = 'LHG0xiZoQHusxqsdwadLQe';
-        $iv = base64_decode($ivText);
-        $bits = $data['bits'];
-
-        $data['iv'] = $ivText;
-        if ($data['action'] == 'encrypt') {
-            $data['finalText'] = base64_encode(openssl_encrypt(bin2hex($data['text']), 'aes'.$bits, bin2hex($data['key']), 1, $iv));
-        } else {
-            $data['finalText'] = $this->hextobin(openssl_decrypt(base64_decode($data['text']), 'aes'.$bits, bin2hex($data['key']), 1, $iv));
-        }
+        $simpleAes = new SimpleAes($data['text'], $data['key'], $data['action']);
+        $result = match ($simpleAes->getOperation()) {
+            CipherBase::ALGORITHM_DECRYPT => $simpleAes->decrypt(),
+            CipherBase::ALGORITHM_ENCRYPT => $simpleAes->encrypt()
+        };
 
         $time_elapsed_secs = microtime(true) - $timerStart;
-        Session::flash('alert-info', trans('baseTexts.actionTook').' '.$time_elapsed_secs.' s');
+        Session::flash('alert-info', trans('baseTexts.actionTook') . ' ' . $time_elapsed_secs . ' s');
         Session::flash('data', $data);
+        Session::flash('result', $result);
 
-        return redirect('aesCipher');
+        return redirect('simpleAesCipher');
     }
 }
