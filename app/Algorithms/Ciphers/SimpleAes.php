@@ -49,15 +49,41 @@ class SimpleAes extends BlockCipher
         parent::__construct($text, $key, $operation);
     }
 
-    private function generateRoundKeys($key) {
+    private function generateRoundKeys(string $key) {
         $roundKeys = [];
 
-        /*
-        $w0 = str_split();
-        $w1 = str_split();
-        */
+        // Initial round key is the original key
+        $roundKeys[] = $key;
+
+        $key = str_split($key);
+        // Split key into two 8-bit words
+        $w0 = array_slice($key, 8);
+        $w1 = array_slice($key, 8);
+
+        // Perform key expansion
+        $w2 = $this->xor($w0, str_split('10000000'));
+        $w2 = $this->xor($w2, $this->substituteNibbles($this->rotateKey($w1), $this->sBox));
+        $w3 = $this->xor($w2, $w1);
+        $w4 = $this->xor($w2, str_split('00110000'));
+        $w4 = $this->xor($w4, $w3);
+        $w5 = $this->xor($w4, $w3);
+
+        $roundKeys[] = array_merge($w2,$w3);
+        $roundKeys[] = array_merge($w3, $w4);
+        $roundKeys[] = array_merge($w4, $w5);
 
         return $roundKeys;
+    }
+
+    private function rotateKey($key): array
+    {
+        return array_merge(array_slice($key, 4), array_slice($key, 0, 4));
+    }
+
+    private function substituteNibbles($nibble, $sBox): array
+    {
+        //implement
+        return $nibble;
     }
 
     /**
