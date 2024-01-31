@@ -12,7 +12,7 @@ return [
     ',
     'title' => 'Crypto application - RSA',
     'metaComment' => 'This page contains a description and test form of RSA cipher',
-    'schema' => 'Block diagram of RSA',
+    'schema' => 'Diagram of RSA',
 
     'primeNumber' => 'Prime number',
     'inputTextTooltip' => 'For encryption, enter plain text. For decryption, enter text in ASCII numeric values, each letter separated by a space',

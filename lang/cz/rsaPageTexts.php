@@ -12,7 +12,7 @@ return [
     ',
     'title' => 'Krypto aplikace - RSA',
     'metaComment' => 'Tato stránka obsahuje popis a zkušební formulář RSA šifry',
-    'schema' => 'Blokové schéma RSA',
+    'schema' => 'Schéma RSA',
 
     'primeNumber' => 'Prvočíslo',
     'inputTextTooltip' => 'V případě šifrování vlož běžný text, pro dešifrování vlož text v ASCII číselných hodnotách každé písmeno odděleno mezerou',
