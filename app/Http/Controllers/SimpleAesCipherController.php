@@ -12,7 +12,7 @@ use Illuminate\Http\Request;
 use Illuminate\Routing\Redirector;
 use Illuminate\Support\Facades\Session;
 
-class AesCipherController extends BaseController
+class SimpleAesCipherController extends BaseController
 {
     public function index(): Factory|View|Application
     {

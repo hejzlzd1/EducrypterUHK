@@ -2,6 +2,7 @@
 
 return [
     'annotation' => '',
-    'title' => 'Krypto aplikace - AES',
+    'title' => 'Krypto aplikace - S-AES',
     'metaComment' => '',
+
 ];

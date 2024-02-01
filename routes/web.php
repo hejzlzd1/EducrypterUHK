@@ -1,7 +1,7 @@
 <?php
 
 use App\Http\Controllers\A5_1CipherController;
-use App\Http\Controllers\AesCipherController;
+use App\Http\Controllers\SimpleAesCipherController;
 use App\Http\Controllers\BlowfishCipherController;
 use App\Http\Controllers\CaesarCipherController;
 use App\Http\Controllers\MainPageController;
@@ -65,8 +65,8 @@ Route::get('blowfishCipher', [BlowfishCipherController::class, 'index'])->name('
 Route::post('blowfishCipher', [BlowfishCipherController::class, 'compute'])->name('blowfishCipherCompute');
 
 // AES
-Route::get('aesCipher', [AesCipherController::class, 'index'])->name('aesCipher');
-Route::post('aesCipher', [AesCipherController::class, 'compute'])->name('aesCipherCompute');
+Route::get('simpleAesCipher', [SimpleAesCipherController::class, 'index'])->name('simpleAesCipher');
+Route::post('simpleAesCipher', [SimpleAesCipherController::class, 'compute'])->name('simpleAesCipherCompute');
 
 // S-DES
 Route::get('simpleDesCipher', [SimpleDesCipherController::class, 'index'])->name('simpleDesCipher');
