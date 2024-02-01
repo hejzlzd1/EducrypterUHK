@@ -17,17 +17,41 @@ class SimpleAes extends BlockCipher
     // Predefined sboxes
 
     private $sBox = [
-        '1001', '0100', '1010', '1011',
-        '1101', '0001', '1000', '0101',
-        '0110', '0010', '0000', '0011',
-        '1100', '1111', '1110', '0111',
+        '1001',
+        '0100',
+        '1010',
+        '1011',
+        '1101',
+        '0001',
+        '1000',
+        '0101',
+        '0110',
+        '0010',
+        '0000',
+        '0011',
+        '1100',
+        '1111',
+        '1110',
+        '0111',
     ];
 
     private $sBoxInverse = [
-        '1010', '0101', '1001', '1011',
-        '0001', '0111', '1000', '1111',
-        '0110', '0000', '0010', '0011',
-        '1100', '0100', '1101', '1110'
+        '1010',
+        '0101',
+        '1001',
+        '1011',
+        '0001',
+        '0111',
+        '1000',
+        '1111',
+        '0110',
+        '0000',
+        '0010',
+        '0011',
+        '1100',
+        '0100',
+        '1101',
+        '1110'
     ];
 
     private array $roundKeys = [];
@@ -37,7 +61,6 @@ class SimpleAes extends BlockCipher
      */
     public function __construct(string $text, string $key, int $operation)
     {
-
         if (mb_strlen($key) < 16) {
             $key = str_pad($key, 16, 0, STR_PAD_LEFT);
         }
@@ -49,27 +72,29 @@ class SimpleAes extends BlockCipher
         parent::__construct($text, $key, $operation);
     }
 
-    private function generateRoundKeys(string $key) {
+    private function generateRoundKeys(string $key)
+    {
         $roundKeys = [];
 
         // Initial round key is the original key
         $roundKeys[] = $key;
 
+        // Make array from key
         $key = str_split($key);
-        // Split key into two 8-bit words
+
+        // Split key array into two 8-bit words
         $w0 = array_slice($key, 0, 8);
         $w1 = array_slice($key, 8);
 
         // Perform key expansion
         $w2 = $this->xor($w0, str_split('10000000'));
-        $subNib = $this->substituteNibbles($this->rotateKey($w1));
-        $w2 = $this->xor($w2, $subNib);
+        $w2 = $this->xor($w2, $this->substituteNibbles($this->rotateKey($w1)));
         $w3 = $this->xor($w2, $w1);
         $w4 = $this->xor($w2, str_split('00110000'));
         $w4 = $this->xor($w4, $this->substituteNibbles($this->rotateKey($w3)));
         $w5 = $this->xor($w4, $w3);
 
-        $roundKeys[] = implode('', array_merge($w2,$w3));
+        $roundKeys[] = implode('', array_merge($w2, $w3));
         $roundKeys[] = implode('', array_merge($w4, $w5));
 
         return $roundKeys;
@@ -87,7 +112,8 @@ class SimpleAes extends BlockCipher
         return array_merge($this->getSubstitutionValue($w0), $this->getSubstitutionValue($w1));
     }
 
-    private function getSubstitutionValue(array $value) {
+    private function getSubstitutionValue(array $value)
+    {
         $value = bindec(implode($value));
         return str_split($this->sBox[$value]);
     }
@@ -112,7 +138,6 @@ class SimpleAes extends BlockCipher
      */
     public function encrypt(): BasicOutput
     {
-
         return new BasicOutput('test', 1, 1);
         //return $this->output; //return full encrypted text with steps
     }
