@@ -129,9 +129,9 @@ abstract class CipherBase
 
     /**
      * Takes two binary arrays and performs XOR between them
-     * @param array<string> $firstInput
-     * @param array<string> $secondInput
-     * @return array<string>| array{output: array<string>, steps: array<Step>}
+     * @param String[] $firstInput
+     * @param String[] $secondInput
+     * @return String[]| array{output: array<string>, steps: array<Step>}
      * @throws Exception
      */
     protected function xor(array $firstInput, array $secondInput, bool $returnSteps = false): array
