@@ -131,7 +131,7 @@ abstract class CipherBase
      * Takes two binary arrays and performs XOR between them
      * @param String[] $firstInput
      * @param String[] $secondInput
-     * @return String[]| array{output: array<string>, steps: array<Step>}
+     * @return String[] | array{output: array<string>, steps: array<Step>}
      * @throws Exception
      */
     protected function xor(array $firstInput, array $secondInput, bool $returnSteps = false): array
