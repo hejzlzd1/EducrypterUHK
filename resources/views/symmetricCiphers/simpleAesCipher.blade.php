@@ -241,7 +241,7 @@
                                         data-bs-target="#operationsSteps" aria-expanded="false"
                                         aria-controls="operationsSteps">
                                     <i class="fa-solid fa-gear"></i> {{CipherBase::getStringAlgorithmOperation($result->getOperation())}}
-                                    - @lang('simpleDesPageTexts.binaryInput')
+                                    - @lang('simpleAesPageTexts.binaryInput')
                                 </button>
                             </h2>
                             <div id="operationsSteps" class="accordion-collapse collapse">
