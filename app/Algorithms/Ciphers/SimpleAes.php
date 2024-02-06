@@ -3,12 +3,9 @@
 namespace App\Algorithms\Ciphers;
 
 use App\Algorithms\BlockCipher;
-use App\Algorithms\CipherBase;
-use App\Algorithms\Output\BasicOutput;
 use App\Algorithms\Output\SAESOutput;
 use App\Algorithms\Output\Steps\NamedStep;
 use Exception;
-use Faker\Guesser\Name;
 
 /**
  * Implementation of SimpleAES algorithm
@@ -368,7 +365,7 @@ class SimpleAes extends BlockCipher {
 
         // Mix columns if required
         if ($performMix) {
-            $step = new NamedStep(input: sprintf('S00 - %s, S01 - %s, S10 - %s, S11 - %s', $nibbles[0], $nibbles[1], $nibbles[2], $nibbles[3]), translatedActionName: trans('simpleAesPageTexts.encryptMixNibbles'));
+            $step = new NamedStep(input: sprintf('S00 - %s, S01 - %s, S10 - %s, S11 - %s', $nibbles[0], $nibbles[1], $nibbles[2], $nibbles[3]), translatedActionName: trans('simpleAesPageTexts.decryptMixNibbles'));
 
             $nibbles = [[bindec($nibbles[0]), bindec($nibbles[1])], [bindec($nibbles[2]), bindec($nibbles[3])]];
             $nibbles = str_split(implode(array_merge($this->mixColumns($nibbles, false))));
