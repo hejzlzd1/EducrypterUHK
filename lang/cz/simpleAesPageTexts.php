@@ -1,7 +1,7 @@
 <?php
 
 return [
-    'title' => 'Krypto aplikace - S-AES',
+    'title' => 'Krypto aplikace - Simplified AES',
     'annotation' => 'Simplified AES (Advanced Encryption Standard) je zjednodušená verze algoritmu AES navržená pro výukové účely. Algoritmus AES je široce používaný symetrický šifrovací standard, který je přijat vládou Spojených států a běžně používaný po celém světě k šifrování citlivých dat.
         Ve zjednodušeném AES jsou obvykle použity menší blokové a klíčové velikosti (16-bitů) ve srovnání s plnou verzí AES (128, 192 či 256 bitů). Zahrnuje také méně rund - tj. substitucí, prohození řádků matice, kombinování sloupců.
         <br /><br />
