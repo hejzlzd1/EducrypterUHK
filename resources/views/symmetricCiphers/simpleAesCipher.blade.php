@@ -185,7 +185,7 @@
                                         data-bs-target="#keyGeneration" aria-expanded="true"
                                         aria-controls="keyGeneration">
                                     <i class="fa-solid fa-key"></i> 
-                                    @lang('simpleDesPageTexts.keyGeneration') - @lang('simpleDesPageTexts.binaryKey')
+                                    @lang('simpleAesPageTexts.keyGeneration') - @lang('simpleAesPageTexts.binaryKey')
                                 </button>
                             </h2>
                             <div id="keyGeneration" class="accordion-collapse collapse show">
