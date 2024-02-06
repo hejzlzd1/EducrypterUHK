@@ -5,6 +5,8 @@ namespace App\Algorithms\Ciphers;
 use App\Algorithms\BlockCipher;
 use App\Algorithms\CipherBase;
 use App\Algorithms\Output\BasicOutput;
+use App\Algorithms\Output\SAESOutput;
+use App\Algorithms\Output\Steps\NamedStep;
 use Exception;
 
 /**
@@ -18,6 +20,7 @@ class SimpleAes extends BlockCipher {
     private $sBox = ['1001', '0100', '1010', '1011', '1101', '0001', '1000', '0101', '0110', '0010', '0000', '0011', '1100', '1110', '1111', '0111'];
     private $sBoxInverse = ['1010', '0101', '1001', '1011', '0001', '0111', '1000', '1111', '0110', '0000', '0010', '0011', '1100', '0100', '1101', '1110'];
     private array $roundKeys = [];
+    private SAESOutput $output;
 
     /**
      * SimpleAes constructor.
@@ -32,8 +35,10 @@ class SimpleAes extends BlockCipher {
     {
         $key = str_pad($key, 16, '0', STR_PAD_LEFT);
         $text = str_pad($text, 16, '0', STR_PAD_LEFT);
+        $this->output = new SAESOutput(inputValue: $text, operation: $operation, key: $key);
 
         $this->roundKeys = $this->generateRoundKeys($key);
+        $this->output->setRoundKeys($this->roundKeys);
         parent::__construct($text, $key, $operation);
     }
 
@@ -43,6 +48,7 @@ class SimpleAes extends BlockCipher {
      * @param string $key
      *
      * @return array
+     * @throws Exception
      */
     private function generateRoundKeys(string $key): array
     {
@@ -58,17 +64,31 @@ class SimpleAes extends BlockCipher {
         $w0 = array_slice($key, 0, 8);
         $w1 = array_slice($key, 8);
 
+        $roundKeysSteps[] = new NamedStep(implode($key), implode($w0) . ' | ' . implode($w1), trans('simpleAesPageTexts.splitKey'));
+
         // Perform key expansion
         $w2 = $this->xor($w0, str_split('10000000'));
-        $w2 = $this->xor($w2, $this->substituteNibbles($this->rotateKey($w1)));
+        $roundKeysSteps[] = new NamedStep(implode($w0), implode($w2), implode($w0) . ' ⊕ ' . '10000000');
+
+        $w1 = $this->rotateKey($w1);
+        $w1 = $this->substituteNibbles($w1);
+        $w2 = $this->xor($w2, $w1);
+
         $w3 = $this->xor($w2, $w1);
+
         $w4 = $this->xor($w2, str_split('00110000'));
-        $w4 = $this->xor($w4, $this->substituteNibbles($this->rotateKey($w3)));
+
+        $w3 = $this->rotateKey($w3);
+        $w3 = $this->substituteNibbles($w3);
+        $w4 = $this->xor($w4, $w3);
+
         $w5 = $this->xor($w4, $w3);
 
         // Add the expanded round keys
         $roundKeys[] = implode('', array_merge($w2, $w3));
         $roundKeys[] = implode('', array_merge($w4, $w5));
+
+        $this->output->setGenerationSteps($roundKeysSteps);
 
         return $roundKeys;
     }
