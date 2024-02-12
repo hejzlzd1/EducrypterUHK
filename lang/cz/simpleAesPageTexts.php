@@ -7,7 +7,7 @@ return [
         <br /><br />
         Generování rundovních klíčů probíhá pomocí několika operací. Mezi hlavní prováděné operace patří bitový XOR, substituce bitů pomocí s-box hodnot či prohazování bitových řetězců. Výsledky operací se následně spojí a vytvoří rundovní klíče.
         <br /><br />
-        V počáteční rundě je vstupní text kombinován s počátečním klíčem rundy pomocí jednoduché operace XOR. Následují hlavní rundy algoritmu (1x - S-AES, 9x | 11x | 13 (dle délky klíče) - AES), které obvykle zahrnují sekvenci operací substitucí, prohození řádků matice a kombinování sloupců (v poslední rundě přeskočeno - postup lze najít pod pojmem "Rijndael MixColumns"). V zjednodušeném AES jsou tyto operace značně zjednodušeny, aby byly snazší k pochopení a implementaci. Ve srovnání s původním algoritmem AES jsou operace prováděny na menším datovém vstupu, což značně zjednodušuje postup algoritmu.
+        V počáteční rundě je vstupní text kombinován s počátečním klíčem rundy pomocí jednoduché operace XOR. Následují hlavní rundy algoritmu 1x v S-AES. V AES je tato runda opakována 9x, 11x či 13x (dle délky klíče), které obvykle zahrnují sekvenci operací substitucí, prohození řádků matice a kombinování sloupců (v poslední rundě přeskočeno - postup lze najít pod pojmem "Rijndael MixColumns"). V zjednodušeném AES jsou tyto operace značně zjednodušeny, aby byly snazší k pochopení a implementaci. Ve srovnání s původním algoritmem AES jsou operace prováděny na menším datovém vstupu, což značně zjednodušuje postup algoritmu.
         Na konci každé rundy je datový výstup zkombinován s klíčem rundy pomocí operace XOR.
         <br /><br />
         Dešifrování v zjednodušeném AES zahrnuje obrácení šifrovacích kroků. Toto platí i pro použití rundovních klíčů - tzn. rundovní klíče se využijí v obráceném pořadí K2 -> K1 -> K0
@@ -26,5 +26,5 @@ return [
     'substituteNibbles' => 'Nahrazení po 4 bitech pomocí s-boxu',
     'shiftRow' => 'Prohození S01 s S11',
     'encryptMixNibbles' => 'Pronásobení (S00, S01, S10, S11) s (1, 4, 4, 1) - Galois multiplication',
-    'encryptMixNibbles' => 'Pronásobení (S00, S01, S10, S11) s (9, 2, 2, 9) - Galois multiplication'
+    'decryptMixNibbles' => 'Pronásobení (S00, S01, S10, S11) s (9, 2, 2, 9) - Galois multiplication'
 ];

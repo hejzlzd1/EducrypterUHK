@@ -63,33 +63,35 @@ class SimpleAes extends BlockCipher {
         $w0 = array_slice($key, 0, 8);
         $w1 = array_slice($key, 8);
 
+        $w1Plain = $w1;
+
         $roundKeysSteps[] = new NamedStep(implode($key), sprintf('W0 = %s, W1 = %s', implode($w0), implode($w1)), trans('simpleAesPageTexts.splitKey'));
 
         // Perform key expansion
         $w2 = $this->xor($w0, str_split('10000000'));
-        $roundKeysSteps[] = new NamedStep(sprintf('W0 - %s', implode($w0)), sprintf('W2 = %s', implode($w2)), 'W2 = W0 ⊕ 10000000');
+        $roundKeysSteps[] = new NamedStep(sprintf('W0 - %s', implode($w0)), sprintf('W0 = %s', implode($w2)), 'W0 = W0 ⊕ 10000000');
 
         $step = new NamedStep(input: sprintf('W1 - %s', implode($w1)), translatedActionName: 'W1 - ' . trans('simpleAesPageTexts.rotateKey')); // create step
         $w1 = $this->rotateKey($w1); // rotate key
-        $step->setOutput(sprintf('W1 = %s', implode($w1))); // set output of action
+        $step->setOutput(sprintf('rot(W1) = %s', implode($w1))); // set output of action
         $roundKeysSteps[] = $step; // add to steps - output
 
         $step = new NamedStep(input: sprintf('W1 - %s', implode($w1)), translatedActionName: 'W1 - ' . trans('simpleAesPageTexts.substituteNibbles')); // create step
         $w1 = $this->substituteNibbles($w1); // substitute nibble
-        $step->setOutput(sprintf('W1 = %s', implode($w1))); // set output of action
+        $step->setOutput(sprintf('sub(rot(W1)) = %s', implode($w1))); // set output of action
         $roundKeysSteps[] = $step; // add to steps - output
 
-        $step = new NamedStep(input: sprintf('W1 - %s, W2 - %s', implode($w1), implode($w2)), translatedActionName: 'W2 = W2 ⊕ W1'); // create step
+        $step = new NamedStep(input: sprintf('W1 - %s, W2 - %s', implode($w1), implode($w2)), translatedActionName: 'W2 = W0 ⊕ sub(rot(W1))'); // create step
         $w2 = $this->xor($w2, $w1); // xor
         $step->setOutput(sprintf('W2 = %s', implode($w2))); // set output of action
         $roundKeysSteps[] = $step; // add to steps - output
 
 
-        $w3 = $this->xor($w2, $w1);
-        $roundKeysSteps[] = new NamedStep(sprintf('W1 - %s, W2 - %s', implode($w1), implode($w2)), sprintf('W3 = %s', implode($w3)), 'W3 = W2 ⊕ W1');
+        $w3 = $this->xor($w2, $w1Plain);
+        $roundKeysSteps[] = new NamedStep(sprintf('W1 - %s, W2 - %s', implode($w1Plain), implode($w2)), sprintf('W3 = %s', implode($w3)), 'W3 = W2 ⊕ W1');
 
         $w4 = $this->xor($w2, str_split('00110000'));
-        $roundKeysSteps[] = new NamedStep(sprintf('W2 - %s', implode($w2)), sprintf('W4 = %s', implode($w4)), 'W4 = W2 ⊕ 00110000');
+        $roundKeysSteps[] = new NamedStep(sprintf('W2 - %s', implode($w2Plain)), sprintf('W4 = %s', implode($w4)), 'W4 = W2 ⊕ 00110000');
 
         $step = new NamedStep(input: sprintf('W3 - %s', implode($w3)), translatedActionName: 'W3 - ' . trans('simpleAesPageTexts.rotateKey')); // create step
         $w3 = $this->rotateKey($w3); // rotate key
@@ -175,19 +177,19 @@ class SimpleAes extends BlockCipher {
         $nibbles = array_map(function (array $chunk): string {
             return implode('', $this->getSubstitutionValue($chunk));
         }, $chunks);
-        $this->output->addStep(new NamedStep(implode($value), implode($nibbles), trans('simpleAesPageTexts.substituteNibbles')));
+        $this->output->addStep(new NamedStep(chunk_split(implode($value), 4, ' '), chunk_split(implode($nibbles), 4, ' '), trans('simpleAesPageTexts.substituteNibbles')));
 
-        $step = new NamedStep(input: sprintf('S00 - %s, S01 - %s, S10 - %s, S11 - %s', $nibbles[0], $nibbles[1], $nibbles[2], $nibbles[3]), translatedActionName: trans('simpleAesPageTexts.shiftRow'));
+        $step = new NamedStep(input: sprintf('S00 - %s, S01 - %s, S10 - %s, S11 - %s', $nibbles[0], $nibbles[2], $nibbles[1], $nibbles[3]), translatedActionName: trans('simpleAesPageTexts.shiftRow'));
         // Shift row function (swap two array elements)
         $nibbles = [$nibbles[0], $nibbles[3], $nibbles[2], $nibbles[1]];
-        $step->setOutput(sprintf('S00 - %s, S01 - %s, S10 - %s, S11 - %s', $nibbles[0], $nibbles[1], $nibbles[2], $nibbles[3]));
+        $step->setOutput(sprintf('S00 - %s, S01 - %s, S10 - %s, S11 - %s', $nibbles[0], $nibbles[2], $nibbles[1], $nibbles[3]));
         $this->output->addStep($step);
 
         // Mix columns if required
         if ($performMix) {
-            $step = new NamedStep(input: sprintf('S00 - %s, S01 - %s, S10 - %s, S11 - %s', $nibbles[0], $nibbles[1], $nibbles[2], $nibbles[3]), translatedActionName: trans('simpleAesPageTexts.encryptMixNibbles'));
+            $step = new NamedStep(input: sprintf('S00 - %s, S01 - %s, S10 - %s, S11 - %s', $nibbles[0], $nibbles[2], $nibbles[1], $nibbles[3]), translatedActionName: trans('simpleAesPageTexts.encryptMixNibbles'));
 
-            $nibbles = [[bindec($nibbles[0]), bindec($nibbles[1])], [bindec($nibbles[2]), bindec($nibbles[3])]];
+            $nibbles = [[bindec($nibbles[0]), bindec($nibbles[2])], [bindec($nibbles[1]), bindec($nibbles[3])]];
             $nibbles = $this->mixColumns($nibbles, true); // mix nibbles
 
             $step->setOutput(implode($nibbles));
@@ -198,7 +200,7 @@ class SimpleAes extends BlockCipher {
         $step = new NamedStep(input: sprintf('IN - %s, K%d - %s', implode($nibbles), $keyNum, $roundKey), translatedActionName: 'IN ⊕ K' . $keyNum); // Not nice code - check if first round (mixColumn) was called => set key according to that (wouldn't work on real AES)
         $nibbles = $this->addRoundKey(str_split(implode('',$nibbles)), str_split($roundKey));
 
-        $step->setOutput(sprintf('IN = %s', implode($nibbles)));
+        $step->setOutput(sprintf('OUT = %s', implode($nibbles)));
         $this->output->addStep($step);
 
         return $nibbles;
@@ -343,10 +345,10 @@ class SimpleAes extends BlockCipher {
     {
         $nibbles = array_chunk($value, 4);
 
-        $step = new NamedStep(input: sprintf('S00 - %s, S01 - %s, S10 - %s, S11 - %s', implode($nibbles[0]), implode($nibbles[1]), implode($nibbles[2]), implode($nibbles[3])), translatedActionName: trans('simpleAesPageTexts.shiftRow'));
+        $step = new NamedStep(input: sprintf('S00 - %s, S01 - %s, S10 - %s, S11 - %s', implode($nibbles[0]), implode($nibbles[2]), implode($nibbles[1]), implode($nibbles[3])), translatedActionName: trans('simpleAesPageTexts.shiftRow'));
         // Shift row function (swap two array elements)
         $nibbles = [$nibbles[0], $nibbles[3], $nibbles[2], $nibbles[1]];
-        $step->setOutput(sprintf('S00 - %s, S01 - %s, S10 - %s, S11 - %s', implode($nibbles[0]), implode($nibbles[1]), implode($nibbles[2]), implode($nibbles[3])));
+        $step->setOutput(sprintf('S00 - %s, S01 - %s, S10 - %s, S11 - %s', implode($nibbles[0]), implode($nibbles[2]), implode($nibbles[1]), implode($nibbles[3])));
         $this->output->addStep($step);
 
         $nibbles = array_map(function (array $chunk): string {
@@ -358,19 +360,19 @@ class SimpleAes extends BlockCipher {
         $step = new NamedStep(input: sprintf('IN - %s, K%d - %s', implode($nibbles), $keyNum, $roundKey), translatedActionName: 'IN ⊕ K' . $keyNum); // Not nice code - check if first round (mixColumn) was called => set key according to that (wouldn't work on real AES)
         $nibbles = $this->addRoundKey(str_split(implode('', $nibbles)), str_split($roundKey));
 
-        $step->setOutput(sprintf('IN = %s', implode($nibbles)));
+        $step->setOutput(sprintf('OUT = %s', implode($nibbles)));
         $this->output->addStep($step);
 
         $nibbles = str_split(implode(array_merge($nibbles)), 4);
 
         // Mix columns if required
         if ($performMix) {
-            $step = new NamedStep(input: sprintf('S00 - %s, S01 - %s, S10 - %s, S11 - %s', $nibbles[0], $nibbles[1], $nibbles[2], $nibbles[3]), translatedActionName: trans('simpleAesPageTexts.decryptMixNibbles'));
+            $step = new NamedStep(input: sprintf('S00 - %s, S01 - %s, S10 - %s, S11 - %s', $nibbles[0], $nibbles[2], $nibbles[1], $nibbles[3]), translatedActionName: trans('simpleAesPageTexts.decryptMixNibbles'));
 
-            $nibbles = [[bindec($nibbles[0]), bindec($nibbles[1])], [bindec($nibbles[2]), bindec($nibbles[3])]];
+            $nibbles = [[bindec($nibbles[0]), bindec($nibbles[2])], [bindec($nibbles[1]), bindec($nibbles[3])]];
             $nibbles = str_split(implode(array_merge($this->mixColumns($nibbles, false))));
 
-            $step->setOutput(implode($nibbles));
+            $step->setOutput(chunk_split(implode($nibbles), 4, ' '));
             $this->output->addStep($step);
         }
 
