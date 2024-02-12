@@ -23,21 +23,57 @@
                             <div id="carouselControls" class="carousel col-lg-8 mb-5" data-bs-ride="carousel" data-bs-interval="10000">
                                 <div class="carousel-inner custom-carousel">
                                     <div class="carousel-item active">
-                                        <a href="{{ asset('img/simpleAesPage/addKey.png' )}}" target="_blank">
-                                            <img alt="" src="{{ asset('img/simpleAesPage/addKey.png') }}"
+                                        <a href="{{ asset('img/simpleAesPage/simpleAesGaloisMultiplication.png' )}}" target="_blank">
+                                            <img alt="" src="{{ asset('img/simpleAesPage/simpleAesGaloisMultiplication.png') }}"
                                                  class="d-block w-100" title="@lang('baseTexts.clickToSeeInFullSize')">
                                         </a>
                                         <div class="label">
-                                            @lang('simpleAesPageTexts.addKey')
+                                            @lang('simpleAesPageTexts.encryptMixNibbles')
                                         </div>
                                     </div>
                                     <div class="carousel-item">
-                                        <a href="{{ asset('img/simpleAesPage/addKey.png') }}" target="_blank">
-                                            <img alt="" src="{{ asset('img/simpleAesPage/addKey.png') }}"
+                                        <a href="{{ asset('img/simpleAesPage/simpleAesGaloisMultiplicationInverse.png') }}" target="_blank">
+                                            <img alt="" src="{{ asset('img/simpleAesPage/simpleAesGaloisMultiplicationInverse.png') }}"
                                                  class="d-block w-100" title="@lang('baseTexts.clickToSeeInFullSize')">
                                         </a>
                                         <div class="label">
-                                            @lang('simpleAesPageTexts.addKey')
+                                            @lang('simpleAesPageTexts.decryptMixNibbles')
+                                        </div>
+                                    </div>
+                                    <div class="carousel-item">
+                                        <a href="{{ asset('img/simpleAesPage/simpleAesRowShift.png') }}" target="_blank">
+                                            <img alt="" src="{{ asset('img/simpleAesPage/simpleAesRowShift.png') }}"
+                                                 class="d-block w-100" title="@lang('baseTexts.clickToSeeInFullSize')">
+                                        </a>
+                                        <div class="label">
+                                            @lang('simpleAesPageTexts.shiftRow')
+                                        </div>
+                                    </div>
+                                    <div class="carousel-item">
+                                        <a href="{{ asset('img/simpleAesPage/simpleAesRowShiftInverse.png') }}" target="_blank">
+                                            <img alt="" src="{{ asset('img/simpleAesPage/simpleAesRowShiftInverse.png') }}"
+                                                 class="d-block w-100" title="@lang('baseTexts.clickToSeeInFullSize')">
+                                        </a>
+                                        <div class="label">
+                                            @lang('simpleAesPageTexts.shiftRow')
+                                        </div>
+                                    </div>
+                                    <div class="carousel-item">
+                                        <a href="{{ asset('img/simpleAesPage/simpleAesSbox.png') }}" target="_blank">
+                                            <img alt="" src="{{ asset('img/simpleAesPage/simpleAesSbox.png') }}"
+                                                 class="d-block w-100" title="@lang('baseTexts.clickToSeeInFullSize')">
+                                        </a>
+                                        <div class="label">
+                                            @lang('simpleAesPageTexts.sbox')
+                                        </div>
+                                    </div>
+                                    <div class="carousel-item">
+                                        <a href="{{ asset('img/simpleAesPage/simpleAesSboxInverse.png') }}" target="_blank">
+                                            <img alt="" src="{{ asset('img/simpleAesPage/simpleAesSboxInverse.png') }}"
+                                                 class="d-block w-100" title="@lang('baseTexts.clickToSeeInFullSize')">
+                                        </a>
+                                        <div class="label">
+                                            @lang('simpleAesPageTexts.sboxInverse')
                                         </div>
                                     </div>
                                 </div>
@@ -263,14 +299,14 @@
                                                      class="accordion-collapse collapse">
                                                     <div class="accordion-body">
                                                         <div class="d-flex flex-wrap">
-                                                            <div class="col-md-6">
+                                                            <div class="row">
                                                                 <h3>
                                                                     <i class="fa-solid fa-file-lines"></i>
                                                                     @lang('baseTexts.input')
                                                                 </h3>
                                                                 <p>{{ $step->getInput() }}</p>
                                                             </div>
-                                                            <div class="col-md-6">
+                                                            <div class="row">
                                                                 <h3>
                                                                     <i class="fa-solid fa-file-lines"></i>
                                                                     @lang('baseTexts.output')

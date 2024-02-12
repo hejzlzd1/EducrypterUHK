@@ -30,4 +30,6 @@ return [
     'decryptMixNibbles' => 'Multiply (S₀₀, S₀₁, S₁₀, S₁₁) by (9, 2, 2, 9) - Galois multiplication',
     'startOfRound' => 'Start of the round',
     'endOfRound' => 'End of the round',
+    'sbox' => 'S-box',
+    'sboxInverse' => 'S-box⁻¹',
 ];

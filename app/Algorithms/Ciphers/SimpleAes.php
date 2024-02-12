@@ -318,7 +318,7 @@ class SimpleAes extends BlockCipher
                 translatedActionName: trans('simpleAesPageTexts.encryptMixNibbles')
             );
 
-            $nibbles = [[bindec($nibbles[0]), bindec($nibbles[2])], [bindec($nibbles[1]), bindec($nibbles[3])]];
+            $nibbles = [[bindec($nibbles[0]), bindec($nibbles[1])], [bindec($nibbles[2]), bindec($nibbles[3])]];
             $nibbles = $this->mixColumns($nibbles, true); // mix nibbles
 
             $step->setOutput(
@@ -401,7 +401,7 @@ class SimpleAes extends BlockCipher
         $this->output->addStep(
             new NamedStep(
                 $this->chunkSplitArray($value),
-                implode($nibbles),
+                $this->chunkSplitArray($nibbles),
                 trans('simpleAesPageTexts.inverseSubstituteNibbles')
             )
         );

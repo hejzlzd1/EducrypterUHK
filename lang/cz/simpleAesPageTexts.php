@@ -25,9 +25,11 @@ return [
     'rotateKey' => 'Prohození částí klíče',
     'substituteNibbles' => 'Nahrazení po 4 bitech pomocí s-boxu',
     'inverseSubstituteNibbles' => 'Nahrazení po 4 bitech pomocí inverzního s-boxu',
-    'shiftRow' => 'Prohození S01 s S11',
+    'shiftRow' => 'Prohození S₀₁ s S₁₁',
     'encryptMixNibbles' => 'Pronásobení (S₀₀, S₀₁, S₁₀, S₁₁) s (1, 4, 4, 1) - Galois multiplication',
     'decryptMixNibbles' => 'Pronásobení (S₀₀, S₀₁, S₁₀, S₁₁) s (9, 2, 2, 9) - Galois multiplication',
     'startOfRound' => 'Začátek rundy',
     'endOfRound' => 'Konec rundy',
+    'sbox' => 'S-box',
+    'sboxInverse' => 'S-box⁻¹',
 ];
