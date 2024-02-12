@@ -1,6 +1,7 @@
 @php
     use App\Algorithms\CipherBase;
     use App\Algorithms\Output\BasicOutput;
+    use App\View\Components\GenerateInputButton;
 @endphp
 @extends("components/pageTemplate")
 @section("title",__('caesarPageTexts.title'))
@@ -47,17 +48,33 @@
                                     <label class="form-label" for="text">
                                         @lang('baseTexts.text')
                                     </label>
-                                    <input class="form-control" maxlength="40" minlength="1" required type="text"
-                                           id="text" name="text"
-                                           placeholder="@lang('baseTexts.inputText')"
-                                           @if(isset($data["text"]))value="{{$data["text"]}}"@endif>
+                                    <div class="input-group">
+                                        <input class="form-control" maxlength="40" minlength="1" required type="text"
+                                               id="text" name="text"
+                                               placeholder="@lang('baseTexts.inputText')"
+                                               @if(isset($data["text"]))value="{{$data["text"]}}"@endif>
+                                        <x-generateInputButton
+                                            type="{{ GenerateInputButton::TYPE_TEXT }}"
+                                            size="40"
+                                            target="#text">
+                                        </x-generateInputButton>
+                                    </div>
                                 </div>
                                 <div class="col-lg-6">
                                     <label class="form-label" for="shift">
                                         @lang('baseTexts.shift') - max 26
                                     </label>
-                                    <input class="form-control" min="0" max="26" type="number" id="shift" name="shift"
-                                           @if(isset($data["shift"]))value="{{$data["shift"]}}" @else value="0" @endif>
+                                    <div class="input-group">
+                                        <input class="form-control" min="0" max="26" type="number" id="shift"
+                                               name="shift"
+                                               @if(isset($data["shift"]))value="{{$data["shift"]}}"
+                                               @else value="0" @endif>
+                                        <x-generateInputButton
+                                            type="{{ GenerateInputButton::TYPE_NUMBER }}"
+                                            size="26"
+                                            target="#shift">
+                                        </x-generateInputButton>
+                                    </div>
                                 </div>
                             </fieldset>
                             <div class="p-2">

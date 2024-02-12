@@ -1,3 +1,7 @@
+@php
+    use App\Algorithms\CipherBase;
+    use App\View\Components\GenerateInputButton;
+@endphp
 @extends("components/pageTemplate")
 @section("title",__('tripleDesPageTexts.title'))
 @section("comment",__('tripleDesPageTexts.metaComment'))
@@ -45,12 +49,20 @@
                                         <x-tooltipButton
                                             :tooltip="trans('baseTexts.binaryInputPrompt')"></x-tooltipButton>
                                     </label>
-                                    <input class="form-control binaryValidation" minlength="1" maxlength="8" required
-                                           type="text"
-                                           id="text"
-                                           name="text"
-                                           placeholder="@lang('baseTexts.insertInputData')"
-                                           @if(isset($data['text']))value="{{$data['text']}}"@endif>
+                                    <div class="input-group">
+                                        <input class="form-control binaryValidation" minlength="1" maxlength="8"
+                                               required
+                                               type="text"
+                                               id="text"
+                                               name="text"
+                                               placeholder="@lang('baseTexts.insertInputData')"
+                                               @if(isset($data['text']))value="{{$data['text']}}"@endif>
+                                        <x-generateInputButton
+                                            type="{{ GenerateInputButton::TYPE_BINARY }}"
+                                            size="8"
+                                            target="#text">
+                                        </x-generateInputButton>
+                                    </div>
                                 </div>
                                 <div class="col-lg-6">
                                     <label class="form-label" for="key">
@@ -58,11 +70,19 @@
                                         <x-tooltipButton
                                             :tooltip="trans('baseTexts.binaryInputPrompt')"></x-tooltipButton>
                                     </label>
-                                    <input class="form-control binaryValidation" minlength="1" maxlength="10"
-                                           type="text" id="key"
-                                           name="key"
-                                           placeholder="@lang('baseTexts.binaryInputPrompt')"
-                                           @if(isset($data['key'])) value="{{$data['key']}}" @else value="" @endif>
+                                    <div class="input-group">
+                                        <input class="form-control binaryValidation" minlength="1" maxlength="10"
+                                               type="text" id="key"
+                                               name="key"
+                                               placeholder="@lang('baseTexts.binaryInputPrompt')"
+                                               @if(isset($data['key'])) value="{{$data['key']}}" @else value="" @endif>
+                                        <x-generateInputButton
+                                            type="{{ GenerateInputButton::TYPE_BINARY }}"
+                                            size="10"
+                                            target="#key">
+                                        </x-generateInputButton>
+                                    </div>
+
                                 </div>
                                 <div class="col-lg-6 mt-2">
                                     <label class="form-label" for="key2">
@@ -70,11 +90,19 @@
                                         <x-tooltipButton
                                             :tooltip="trans('simpleDesPageTexts.binaryKey')"></x-tooltipButton>
                                     </label>
-                                    <input class="form-control binaryValidation" minlength="1" maxlength="10"
-                                           type="text" id="key2"
-                                           name="key2"
-                                           placeholder="@lang('baseTexts.binaryInputPrompt')"
-                                           @if(isset($data['key2'])) value="{{$data['key2']}}" @else value="" @endif>
+                                    <div class="input-group">
+                                        <input class="form-control binaryValidation" minlength="1" maxlength="10"
+                                               type="text" id="key2"
+                                               name="key2"
+                                               placeholder="@lang('baseTexts.binaryInputPrompt')"
+                                               @if(isset($data['key2'])) value="{{$data['key2']}}"
+                                               @else value="" @endif>
+                                        <x-generateInputButton
+                                            type="{{ GenerateInputButton::TYPE_BINARY }}"
+                                            size="10"
+                                            target="#key2">
+                                        </x-generateInputButton>
+                                    </div>
                                 </div>
                             </fieldset>
                             <div class="p-2">
@@ -85,13 +113,13 @@
                                         <label class="form-check-label" for="encrypt">@lang('baseTexts.encrypt')</label>
                                         <input class="form-check-input" required type="radio"
                                                id="encrypt" name="action"
-                                               value={{\App\Algorithms\CipherBase::ALGORITHM_ENCRYPT}}>
+                                               value={{CipherBase::ALGORITHM_ENCRYPT}}>
                                     </div>
                                     <div class="form-check form-switch">
                                         <label class="form-check-label" for="decrypt">@lang('baseTexts.decrypt')</label>
                                         <input class="form-check-input" required type="radio"
                                                id="decrypt" name="action"
-                                               value={{\App\Algorithms\CipherBase::ALGORITHM_DECRYPT}}>
+                                               value={{CipherBase::ALGORITHM_DECRYPT}}>
                                     </div>
                                 </fieldset>
                             </div>

@@ -373,7 +373,6 @@ class SimpleDes extends BlockCipher
                     $leftHalf
                 ) . ' | ' . implode('', $rightHalf),
                 translatedActionName: trans('simpleDesPageTexts.swap'),
-                imageUrl: asset('img/simpleDesPage/switch.png')
             )
         );
 
@@ -442,7 +441,7 @@ class SimpleDes extends BlockCipher
                     $leftHalf
                 ) . ' | ' . implode('', $rightHalf),
                 translatedActionName: trans('simpleDesPageTexts.swap'),
-                imageUrl: asset('img/simpleDesPage/switch.png')
+                imageUrl: asset('img/simpleDesPage/SW.png')
             )
         );
 

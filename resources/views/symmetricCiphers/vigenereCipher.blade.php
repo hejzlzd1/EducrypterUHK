@@ -1,5 +1,6 @@
 @php
     use App\Algorithms\CipherBase;
+    use App\View\Components\GenerateInputButton;
 @endphp
 @extends("components/pageTemplate")
 @section("title",__('vigenerePageTexts.title'))
@@ -47,20 +48,34 @@
                                     <label class="form-label" for="text">
                                         @lang('baseTexts.text')
                                     </label>
-                                    <input class="form-control" maxlength="40" minlength="1" required type="text"
-                                           id="text"
-                                           name="text"
-                                           placeholder="@lang('baseTexts.inputText')"
-                                           @if(isset($data["text"]))value="{{$data["text"]}}"@endif>
+                                    <div class="input-group">
+                                        <input class="form-control" maxlength="40" minlength="1" required type="text"
+                                               id="text"
+                                               name="text"
+                                               placeholder="@lang('baseTexts.inputText')"
+                                               @if(isset($data["text"]))value="{{$data["text"]}}"@endif>
+                                        <x-generateInputButton
+                                            type="{{ GenerateInputButton::TYPE_TEXT }}"
+                                            size="40"
+                                            target="#text">
+                                        </x-generateInputButton>
+                                    </div>
                                 </div>
                                 <div class="col-lg-6">
                                     <label class="form-label" for="key">@lang('baseTexts.key')
                                         <x-tooltipButton :tooltip="trans('baseTexts.textInputOnly')"></x-tooltipButton>
                                     </label>
-                                    <input class="form-control" maxlength="30"
-                                           required type="text" id="key" name="key"
-                                           placeholder="@lang('baseTexts.insertKey')" pattern="^[a-zA-Z]*$"
-                                           @if(isset($data["key"]))value="{{$data["key"]}}" @else value="" @endif>
+                                    <div class="input-group">
+                                        <input class="form-control" maxlength="30"
+                                               required type="text" id="key" name="key"
+                                               placeholder="@lang('baseTexts.insertKey')" pattern="^[a-zA-Z]*$"
+                                               @if(isset($data["key"]))value="{{$data["key"]}}" @else value="" @endif>
+                                        <x-generateInputButton
+                                            type="{{ GenerateInputButton::TYPE_TEXT }}"
+                                            size="30"
+                                            target="#key">
+                                        </x-generateInputButton>
+                                    </div>
                                 </div>
                             </fieldset>
                             <div class="p-2">
