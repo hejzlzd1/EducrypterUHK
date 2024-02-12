@@ -34,7 +34,7 @@ class A5_1CipherController extends BaseController
         $this->isBinary($data['key'], trans('baseTexts.key'));
         $this->isBinary($data['text'], trans('baseTexts.text'));
 
-        if (! empty($this->validationFailedVariable)) {
+        if (!empty($this->validationFailedVariable)) {
             Session::flash('alert-error', $this->getValidationErrorTranslation());
 
             return back()->withInput($data);
@@ -47,7 +47,7 @@ class A5_1CipherController extends BaseController
         };
 
         $time_elapsed_secs = microtime(true) - $timerStart;
-        Session::flash('alert-info', trans('baseTexts.actionTook').' '.$time_elapsed_secs.' s');
+        Session::flash('alert-info', trans('baseTexts.actionTook') . ' ' . $time_elapsed_secs . ' s');
         Session::flash('data', $data);
         Session::flash('result', $result);
 

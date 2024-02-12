@@ -60,19 +60,19 @@ class Caesar extends CipherBase
                 // apply transformation to each
                 // character Encrypt Uppercase letters
                 if (ctype_upper($this->text[$i])) {
-                    $result = $result.chr(
+                    $result = $result . chr(
                         (ord($this->text[$i]) +
-                            $shift - 65) % 26 + 65
+                                $shift - 65) % 26 + 65
                     );
                 } // Encrypt Lowercase letters
                 else {
-                    $result = $result.chr(
+                    $result = $result . chr(
                         (ord($this->text[$i]) +
-                            $shift - 97) % 26 + 97
+                                $shift - 97) % 26 + 97
                     );
                 }
             } else {
-                $result = $result.chr(32);
+                $result = $result . chr(32);
             }
         }
 
@@ -96,19 +96,19 @@ class Caesar extends CipherBase
                 // apply transformation to each
                 // character Encrypt Uppercase letters
                 if (ctype_upper($this->text[$i])) {
-                    $result = $result.chr(
+                    $result = $result . chr(
                         (ord($this->text[$i]) +
-                            $this->shift - 65) % 26 + 65
+                                $this->shift - 65) % 26 + 65
                     );
                 } // Encrypt Lowercase letters
                 else {
-                    $result = $result.chr(
+                    $result = $result . chr(
                         (ord($this->text[$i]) +
-                            $this->shift - 97) % 26 + 97
+                                $this->shift - 97) % 26 + 97
                     );
                 }
             } else {
-                $result = $result.chr(32);
+                $result = $result . chr(32);
             }
         }
 

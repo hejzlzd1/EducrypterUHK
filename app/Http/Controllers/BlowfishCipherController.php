@@ -32,7 +32,7 @@ class BlowfishCipherController extends BaseController
         $data = $request->all();
         $this->basicValidate($data);
 
-        if (! empty($this->validationFailedVariable)) {
+        if (!empty($this->validationFailedVariable)) {
             Session::flash('alert-error', $this->getValidationErrorTranslation());
 
             return back()->withInput($data);
@@ -46,7 +46,7 @@ class BlowfishCipherController extends BaseController
         };
 
         $time_elapsed_secs = microtime(true) - $timerStart;
-        Session::flash('alert-info', trans('baseTexts.actionTook').' '.$time_elapsed_secs.' s');
+        Session::flash('alert-info', trans('baseTexts.actionTook') . ' ' . $time_elapsed_secs . ' s');
         Session::flash('data', $data);
         Session::flash('result', $result);
 

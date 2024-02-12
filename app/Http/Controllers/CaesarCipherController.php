@@ -30,10 +30,14 @@ class CaesarCipherController extends BaseController
         $timerStart = microtime(true);
         $data = $request->all();
 
-        $data['key'] = $data['action'] === CipherBase::ALGORITHM_DECRYPT_BRUTEFORCE ? 0 : $data['shift'] ?? null;
-        $this->basicValidate($data);
+        $this->isVariableSet($data['text'], self::TYPE_TEXT, trans('baseTexts.text'));
+        $this->isVariableSet(
+            $data['shift'] ?? 0,
+            $data['action'] === CipherBase::ALGORITHM_DECRYPT_BRUTEFORCE ? self::TYPE_NONZERO_NUMBER : self::TYPE_NUMBER,
+            trans('baseTexts.shift')
+        );
 
-        if (! empty($this->validationFailedVariable)) {
+        if (!empty($this->validationFailedVariable)) {
             Session::flash('alert-error', $this->getValidationErrorTranslation());
 
             return back()->withInput($data);
@@ -48,7 +52,7 @@ class CaesarCipherController extends BaseController
         };
 
         $time_elapsed_secs = microtime(true) - $timerStart;
-        Session::flash('alert-info', trans('baseTexts.actionTook').' '.$time_elapsed_secs.' s');
+        Session::flash('alert-info', trans('baseTexts.actionTook') . ' ' . $time_elapsed_secs . ' s');
         Session::flash('result', $result);
         Session::flash('data', $data);
 

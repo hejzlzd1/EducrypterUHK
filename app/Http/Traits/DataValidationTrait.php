@@ -28,21 +28,20 @@ trait DataValidationTrait
 
     protected function isVariableSet(string|int|null $variable, int $type, string $variableName): void
     {
-        if (! isset($variable)) {
+        if (!isset($variable)) {
             $this->validationFailedVariable[BaseController::VALIDATION_EMPTY] = $variableName;
-
             return;
         }
         if ($type === BaseController::TYPE_TEXT) {
-            if (! is_string($variable) || empty($variable)) {
+            if (!is_string($variable) || empty($variable)) {
                 $this->validationFailedVariable[BaseController::VALIDATION_EMPTY] = $variableName;
             }
         } elseif ($type === BaseController::TYPE_NONZERO_NUMBER) {
-            if (! is_numeric($variable) || empty($variable)) {
+            if (!is_numeric($variable) || empty($variable)) {
                 $this->validationFailedVariable[BaseController::VALIDATION_EMPTY] = $variableName;
             }
         } elseif ($type === BaseController::TYPE_NUMBER) {
-            if (! is_numeric($variable)) {
+            if (!is_numeric($variable)) {
                 $this->validationFailedVariable[BaseController::VALIDATION_EMPTY] = $variableName;
             }
         }

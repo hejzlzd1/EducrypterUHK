@@ -14,7 +14,8 @@ class Vernam extends CipherBase
         $textSize = mb_strlen($text);
         $keySize = mb_strlen($key);
         if ($keySize > $textSize) {
-            $key = substr($key, $textSize-$keySize, $textSize);
+            $textSize = $keySize - $textSize;
+            $key = substr($key, $textSize, $keySize);
         } elseif ($keySize < $textSize) {
             $key = str_pad($key, $textSize, 0, STR_PAD_LEFT);
         }
