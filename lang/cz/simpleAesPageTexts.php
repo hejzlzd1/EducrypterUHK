@@ -25,6 +25,6 @@ return [
     'rotateKey' => 'Prohození částí klíče',
     'substituteNibbles' => 'Nahrazení po 4 bitech pomocí s-boxu',
     'shiftRow' => 'Prohození S01 s S11',
-    'encryptMixNibbles' => 'Pronásobení (S00, S01, S10, S11) s (1, 4, 4, 1) - Galois multiplication',
-    'decryptMixNibbles' => 'Pronásobení (S00, S01, S10, S11) s (9, 2, 2, 9) - Galois multiplication'
+    'encryptMixNibbles' => 'Pronásobení (S₀₀, S₀₁, S₁₀, S₁₁) s (1, 4, 4, 1) - Galois multiplication',
+    'decryptMixNibbles' => 'Pronásobení (S₀₀, S₀₁, S₁₀, S₁₁) s (9, 2, 2, 9) - Galois multiplication'
 ];

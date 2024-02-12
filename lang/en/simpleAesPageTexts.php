@@ -24,7 +24,7 @@ return [
     'splitKey' => 'Splitting the inputted key into two parts (8 bits)',
     'rotateKey' => 'Swapping key parts',
     'substituteNibbles' => '4-bit replacement using s-box',
-    'shiftRow' => 'Swapping S01 with S11',
-    'encryptMixNibbles' => 'Multiply (S00, S01, S10, S11) by (1, 4, 4, 1) - Galois multiplication',
-    'decryptMixNibbles' => 'Multiply (S00, S01, S10, S11) by (9, 2, 2, 9) - Galois multiplication'
+    'shiftRow' => 'Swapping S₀₁ with S₁₁',
+    'encryptMixNibbles' => 'Multiply (S₀₀, S₀₁, S₁₀, S₁₁) by (1, 4, 4, 1) - Galois multiplication',
+    'decryptMixNibbles' => 'Multiply (S₀₀, S₀₁, S₁₀, S₁₁) by (9, 2, 2, 9) - Galois multiplication'
 ];
