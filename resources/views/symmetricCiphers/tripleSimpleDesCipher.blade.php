@@ -206,7 +206,7 @@
                                         <div class="accordion" id="simpleDESSteps">
                                             <div class="accordion-item">
                                                 <h2 class="accordion-header">
-                                                    <button class="accordion-button" type="button"
+                                                    <button class="accordion-button collapsed" type="button"
                                                             data-bs-toggle="collapse"
                                                             data-bs-target="#keyGeneration{{$loop->index}}"
                                                             aria-expanded="false"

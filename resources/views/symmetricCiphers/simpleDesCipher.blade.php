@@ -258,8 +258,8 @@
                     <div class="accordion" id="simpleDESSteps">
                         <div class="accordion-item">
                             <h2 class="accordion-header">
-                                <button class="accordion-button" type="button" data-bs-toggle="collapse"
-                                        data-bs-target="#keyGeneration" aria-expanded="true"
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                        data-bs-target="#keyGeneration" aria-expanded="false"
                                         aria-controls="keyGeneration">
                                     <i class="fa-solid fa-key"></i> 
                                     @lang('simpleDesPageTexts.keyGeneration') - @lang('simpleDesPageTexts.binaryKey')

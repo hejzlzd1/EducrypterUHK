@@ -181,14 +181,14 @@
                     <div class="accordion" id="simpleAESSteps">
                         <div class="accordion-item">
                             <h2 class="accordion-header">
-                                <button class="accordion-button" type="button" data-bs-toggle="collapse"
-                                        data-bs-target="#keyGeneration" aria-expanded="true"
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                        data-bs-target="#keyGeneration" aria-expanded="false"
                                         aria-controls="keyGeneration">
                                     <i class="fa-solid fa-key"></i> 
                                     @lang('simpleAesPageTexts.keyGeneration') - @lang('simpleAesPageTexts.binaryKey')
                                 </button>
                             </h2>
-                            <div id="keyGeneration" class="accordion-collapse collapse show">
+                            <div id="keyGeneration" class="accordion-collapse collapse">
                                 <div class="accordion-body">
                                     <div class="accordion" id="keyGenerationStepsAccordion">
                                         @foreach($result->getKeyGenerationSteps() as $keyGenerationStep)
@@ -253,10 +253,10 @@
                                                 <h2 class="accordion-header">
                                                     <button class="accordion-button collapsed" type="button"
                                                             data-bs-toggle="collapse"
-                                                            data-bs-target="#step{{$loop->index}}"
+                                                            data-bs-target="#step{{ $loop->index }}"
                                                             aria-expanded="false"
-                                                            aria-controls="step{{$loop->index}}">
-                                                        {{$loop->index + 1}}. {{$step->getTranslatedActionName()}}
+                                                            aria-controls="step{{ $loop->index }}">
+                                                        {{ $loop->index + 1 }}. {{ $step->getTranslatedActionName() }}
                                                     </button>
                                                 </h2>
                                                 <div id="step{{$loop->index}}"
@@ -268,7 +268,7 @@
                                                                     <i class="fa-solid fa-file-lines"></i>
                                                                     @lang('baseTexts.input')
                                                                 </h3>
-                                                                <p>{{$step->getInput()}}</p>
+                                                                <p>{{ $step->getInput() }}</p>
                                                             </div>
                                                             <div class="col-md-6">
                                                                 <h3>
