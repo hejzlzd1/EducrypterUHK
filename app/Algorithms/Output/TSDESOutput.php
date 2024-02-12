@@ -15,6 +15,7 @@ class TSDESOutput extends BasicOutput
     private array $desOutputs;
 
     private string $key2;
+
     public function __construct(
         string $inputValue,
         int $operation,
@@ -38,7 +39,8 @@ class TSDESOutput extends BasicOutput
         return $this->key2;
     }
 
-    public function addDesStep(SDESOutput $output): void {
+    public function addDesStep(SDESOutput $output): void
+    {
         $this->desOutputs[] = $output;
     }
 }

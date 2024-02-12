@@ -49,7 +49,7 @@ class VernamCipherController extends BaseController
         };
 
         $time_elapsed_secs = microtime(true) - $timerStart;
-        Session::flash('alert-info', trans('baseTexts.actionTook').' '.$time_elapsed_secs.' s');
+        Session::flash('alert-info', trans('baseTexts.actionTook') . ' ' . $time_elapsed_secs . ' s');
         Session::flash('result', $result);
         Session::flash('data', $data);
 

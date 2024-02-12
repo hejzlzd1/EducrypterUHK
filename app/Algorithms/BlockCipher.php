@@ -207,9 +207,24 @@ class BlockCipher extends CipherBase
 
         // Subkey values initialisation with digits of pi.
         $this->parr = [
-            0x243F6A88, 0x85A308D3, 0x13198A2E, 0x03707344, 0xA4093822, 0x299F31D0,
-            0x082EFA98, 0xEC4E6C89, 0x452821E6, 0x38D01377, 0xBE5466CF, 0x34E90C6C,
-            0xC0AC29B7, 0xC97C50DD, 0x3F84D5B5, 0xB5470917, 0x9216D5D9, 0x8979FB1B,
+            0x243F6A88,
+            0x85A308D3,
+            0x13198A2E,
+            0x03707344,
+            0xA4093822,
+            0x299F31D0,
+            0x082EFA98,
+            0xEC4E6C89,
+            0x452821E6,
+            0x38D01377,
+            0xBE5466CF,
+            0x34E90C6C,
+            0xC0AC29B7,
+            0xC97C50DD,
+            0x3F84D5B5,
+            0xB5470917,
+            0x9216D5D9,
+            0x8979FB1B,
         ];
     }
 
@@ -242,7 +257,11 @@ class BlockCipher extends CipherBase
     {
         $bytes = array_values(unpack('C*', $str)); // unpack binary string to array (each byte as unsigned integers)
 
-        $finalArray = array_fill(0, ceil(count($bytes) / 4.0), 0); // fill array with 0 (bytes/4 = 32bit words) -> zeros to pad array to fixed size
+        $finalArray = array_fill(
+            0,
+            ceil(count($bytes) / 4.0),
+            0
+        ); // fill array with 0 (bytes/4 = 32bit words) -> zeros to pad array to fixed size
 
         for ($i = 0; $i < count($bytes); $i++) {
             $finalArray[$i / 4] += $bytes[$i] << 8 * ($i % 4); // combine unpacked input with array with zeros

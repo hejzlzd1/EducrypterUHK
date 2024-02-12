@@ -34,50 +34,50 @@ class TripleSimpleDes
     }
 
     public function decrypt(): TSDESOutput
-   {
-       // Decrypt, encrypt, decrypt (key1 === key3)
-       $decryption = new SimpleDes($this->text, $this->key, CipherBase::ALGORITHM_DECRYPT);
-       $result = $decryption->decrypt();
+    {
+        // Decrypt, encrypt, decrypt (key1 === key3)
+        $decryption = new SimpleDes($this->text, $this->key, CipherBase::ALGORITHM_DECRYPT);
+        $result = $decryption->decrypt();
 
-       $decryptedBinary = $result->getOutputValue();
-       $this->output->addDesStep($result);
+        $decryptedBinary = $result->getOutputValue();
+        $this->output->addDesStep($result);
 
-       $encryption = new SimpleDes($decryptedBinary, $this->key2, CipherBase::ALGORITHM_ENCRYPT);
-       $result = $encryption->encrypt();
+        $encryption = new SimpleDes($decryptedBinary, $this->key2, CipherBase::ALGORITHM_ENCRYPT);
+        $result = $encryption->encrypt();
 
-       $encryptedBinary = $result->getOutputValue();
-       $this->output->addDesStep($result);
+        $encryptedBinary = $result->getOutputValue();
+        $this->output->addDesStep($result);
 
-       $decryptedBinary = new SimpleDes($encryptedBinary, $this->key, CipherBase::ALGORITHM_DECRYPT);
-       $result = $decryptedBinary->decrypt();
+        $decryptedBinary = new SimpleDes($encryptedBinary, $this->key, CipherBase::ALGORITHM_DECRYPT);
+        $result = $decryptedBinary->decrypt();
 
-       $this->output->addDesStep($result);
-       $this->output->setOutputValue($result->getOutputValue());
-       return $this->output;
-   }
+        $this->output->addDesStep($result);
+        $this->output->setOutputValue($result->getOutputValue());
+        return $this->output;
+    }
 
-   public function encrypt(): TSDESOutput
-   {
-       // Encrypt, decrypt, encrypt (key1 === key3)
-       $encryption = new SimpleDes($this->text, $this->key, CipherBase::ALGORITHM_ENCRYPT);
-       $result = $encryption->encrypt();
+    public function encrypt(): TSDESOutput
+    {
+        // Encrypt, decrypt, encrypt (key1 === key3)
+        $encryption = new SimpleDes($this->text, $this->key, CipherBase::ALGORITHM_ENCRYPT);
+        $result = $encryption->encrypt();
 
-       $encryptedBinary = $result->getOutputValue();
-       $this->output->addDesStep($result);
+        $encryptedBinary = $result->getOutputValue();
+        $this->output->addDesStep($result);
 
-       $decryption = new SimpleDes($encryptedBinary, $this->key2, CipherBase::ALGORITHM_DECRYPT);
-       $result = $decryption->decrypt();
+        $decryption = new SimpleDes($encryptedBinary, $this->key2, CipherBase::ALGORITHM_DECRYPT);
+        $result = $decryption->decrypt();
 
-       $decryptedBinary = $result->getOutputValue();
-       $this->output->addDesStep($result);
+        $decryptedBinary = $result->getOutputValue();
+        $this->output->addDesStep($result);
 
-       $encryption = new SimpleDes($decryptedBinary, $this->key, CipherBase::ALGORITHM_ENCRYPT);
-       $result = $encryption->encrypt();
+        $encryption = new SimpleDes($decryptedBinary, $this->key, CipherBase::ALGORITHM_ENCRYPT);
+        $result = $encryption->encrypt();
 
-       $this->output->addDesStep($result);
-       $this->output->setOutputValue($result->getOutputValue());
-       return $this->output;
-   }
+        $this->output->addDesStep($result);
+        $this->output->setOutputValue($result->getOutputValue());
+        return $this->output;
+    }
 
     public function getOperation(): int
     {

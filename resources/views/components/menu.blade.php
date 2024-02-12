@@ -36,13 +36,16 @@
                     <ul class="dropdown-menu">
                         <li class="dropdown-item disabled">@lang('menuTexts.classicCiphers')</li>
                         <li>
-                            <a class="dropdown-item" href="{{ route('caesarCipher') }}">@lang('menuTexts.caesarCipher')</a>
+                            <a class="dropdown-item"
+                               href="{{ route('caesarCipher') }}">@lang('menuTexts.caesarCipher')</a>
                         </li>
                         <li>
-                            <a class="dropdown-item" href="{{ route('vigenereCipher') }}">@lang('menuTexts.vigenereCipher')</a>
+                            <a class="dropdown-item"
+                               href="{{ route('vigenereCipher') }}">@lang('menuTexts.vigenereCipher')</a>
                         </li>
                         <li>
-                            <a class="dropdown-item" href="{{ route('vernamCipher') }}">@lang('menuTexts.vernamCipher')</a>
+                            <a class="dropdown-item"
+                               href="{{ route('vernamCipher') }}">@lang('menuTexts.vernamCipher')</a>
                         </li>
 
                         <li>

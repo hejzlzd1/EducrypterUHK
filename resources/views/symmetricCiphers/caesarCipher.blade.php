@@ -213,6 +213,4 @@
             </div>
         </section>
     @endif
-
-    @include("components/footer")
 @endsection

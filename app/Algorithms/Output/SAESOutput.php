@@ -18,12 +18,11 @@ class SAESOutput extends BasicOutput
 
     public function __construct(
         string $inputValue,
-        int    $operation,
+        int $operation,
         string $outputValue = null,
-        array  $steps = [],
+        array $steps = [],
         ?string $key = null,
-    )
-    {
+    ) {
         parent::__construct(
             inputValue: $inputValue,
             operation: $operation,

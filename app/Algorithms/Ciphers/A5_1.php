@@ -35,21 +35,25 @@ class A5_1 extends StreamCipher
 
         $this->initializeRegisters(); // Initialize the A5/1 registers
         $this->output = new BasicOutput(inputValue: $text, operation: $operation, key: $key);
-        $this->output->addAdditionalInformation(['dataFrameBinary' => $this->dataFrame, 'dataFrame' => $dataFrameInteger]);
+        $this->output->addAdditionalInformation(
+            ['dataFrameBinary' => $this->dataFrame, 'dataFrame' => $dataFrameInteger]
+        );
     }
 
     public function encrypt(): BasicOutput|string
     {
-        $keystream = $this->generateKeystream(strlen($this->text)); // Generate keystream to encrypt input by xoring bits with it
+        $keystream = $this->generateKeystream(
+            strlen($this->text)
+        ); // Generate keystream to encrypt input by xoring bits with it
         $this->output->addAdditionalInformation(['keyStream' => $keystream]);
         $ciphertext = '';
         for ($i = 0; $i < strlen($this->text); $i++) {
             $step = $this->output->getStep($i); // get step
             $step->setInput($this->text[$i]); // set input bit
 
-            $ciphertext .= ($this->text[$i] ^ (int) $keystream[$i]); // Perform encryption
+            $ciphertext .= ($this->text[$i] ^ (int)$keystream[$i]); // Perform encryption
 
-            $step->setOutput($this->text[$i] ^ (int) $keystream[$i]); // set output after xor with text
+            $step->setOutput($this->text[$i] ^ (int)$keystream[$i]); // set output after xor with text
         }
 
         $this->output->setOutputValue($ciphertext);
@@ -99,7 +103,13 @@ class A5_1 extends StreamCipher
             );
             $majorityBit = $this->getMajorityBit($this->R1[8], $this->R2[10], $this->R3[10]);
             $step->setMajorityBit($majorityBit);
-            $step->setToBeClocked([$this->R1[8] === $majorityBit ? 'R1' : '', $this->R2[10] === $majorityBit ? 'R2' : '', $this->R3[10] === $majorityBit ? 'R3' : '']);
+            $step->setToBeClocked(
+                [
+                    $this->R1[8] === $majorityBit ? 'R1' : '',
+                    $this->R2[10] === $majorityBit ? 'R2' : '',
+                    $this->R3[10] === $majorityBit ? 'R3' : ''
+                ]
+            );
             $this->clockAllRegisters(); // Clock all registers depending on majority bit
 
             $step->setClockedRegisters(

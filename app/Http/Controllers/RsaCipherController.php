@@ -37,15 +37,25 @@ class RsaCipherController extends BaseController
             $this->isVariableSet($data['publicKey'], self::TYPE_NONZERO_NUMBER, trans('baseTexts.publicKey'));
             $this->isVariableSet($data['privateKey'], self::TYPE_NONZERO_NUMBER, trans('baseTexts.privateKey'));
         } else {
-            $this->isVariableSet((int) $data['primeNumber1'], self::TYPE_NONZERO_NUMBER, trans('baseTexts.primeNumber').' #1');
-            $this->isVariableSet((int) $data['primeNumber2'], self::TYPE_NONZERO_NUMBER, trans('baseTexts.primeNumber').' #2');
+            $this->isVariableSet(
+                (int)$data['primeNumber1'],
+                self::TYPE_NONZERO_NUMBER,
+                trans('baseTexts.primeNumber') . ' #1'
+            );
+            $this->isVariableSet(
+                (int)$data['primeNumber2'],
+                self::TYPE_NONZERO_NUMBER,
+                trans('baseTexts.primeNumber') . ' #2'
+            );
             $firstInputNumber = $data['primeNumber1'];
             $secondInputNumber = $data['primeNumber2'];
             if ($firstInputNumber * $secondInputNumber < 256) {
-                $this->validationFailedVariable[BaseController::VALIDATION_CUSTOM_MESSAGE] = trans('rsaPageTexts.primeNumbersAreLow');
+                $this->validationFailedVariable[BaseController::VALIDATION_CUSTOM_MESSAGE] = trans(
+                    'rsaPageTexts.primeNumbersAreLow'
+                );
             }
-            $this->isPrimeNumber($firstInputNumber, trans('baseTexts.primeNumber').' #1');
-            $this->isPrimeNumber($secondInputNumber, trans('baseTexts.primeNumber').' #2');
+            $this->isPrimeNumber($firstInputNumber, trans('baseTexts.primeNumber') . ' #1');
+            $this->isPrimeNumber($secondInputNumber, trans('baseTexts.primeNumber') . ' #2');
         }
 
         if (!empty($this->validationFailedVariable)) {
@@ -53,7 +63,14 @@ class RsaCipherController extends BaseController
             return back()->withInput($data);
         }
 
-        $rsa = new Rsa($data['text'], $data['publicKey'] ?? null, $data['privateKey'] ?? null, $data['action'], $firstInputNumber ?? null, $secondInputNumber ?? null);
+        $rsa = new Rsa(
+            $data['text'],
+            $data['publicKey'] ?? null,
+            $data['privateKey'] ?? null,
+            $data['action'],
+            $firstInputNumber ?? null,
+            $secondInputNumber ?? null
+        );
 
         $result = match ($rsa->getOperation()) {
             CipherBase::ALGORITHM_DECRYPT => $rsa->decrypt(),
@@ -61,7 +78,7 @@ class RsaCipherController extends BaseController
         };
 
         $time_elapsed_secs = microtime(true) - $timerStart;
-        Session::flash('alert-info', trans('baseTexts.actionTook').' '.$time_elapsed_secs.' s');
+        Session::flash('alert-info', trans('baseTexts.actionTook') . ' ' . $time_elapsed_secs . ' s');
         Session::flash('data', $data);
         Session::flash('result', $result);
 

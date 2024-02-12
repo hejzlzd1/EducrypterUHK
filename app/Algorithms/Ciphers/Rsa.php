@@ -9,8 +9,14 @@ use App\Algorithms\Output\Steps\RSAStep;
 
 class Rsa extends CipherBase
 {
-    public function __construct(string $text, private ?int $publicKey, private ?int $privateKey, int $operation, private ?int $p, private ?int $q)
-    {
+    public function __construct(
+        string $text,
+        private ?int $publicKey,
+        private ?int $privateKey,
+        int $operation,
+        private ?int $p,
+        private ?int $q
+    ) {
         // For this case we convert input string into ascii, each character separated by ' '
         $text = $operation === CipherBase::ALGORITHM_ENCRYPT ? $this->getAsciiFromString($text) : $text;
         parent::__construct($text, null, $operation);
@@ -25,13 +31,14 @@ class Rsa extends CipherBase
 
         foreach (explode(' ', $this->text) as $char) {
             $c = gmp_powm(gmp_init($char), $d, $n); // uses binary exponentiation (CORM09)
-            $result .= $c.' ';
-            $steps[] = new RSAStep(inputChar: (int) $char, outputChar: gmp_intval($c));
+            $result .= $c . ' ';
+            $steps[] = new RSAStep(inputChar: (int)$char, outputChar: gmp_intval($c));
         }
 
         // Return the resulting output object
         return new RsaOutput(
-            inputValue: $this->text, operation: $this->operation,
+            inputValue: $this->text,
+            operation: $this->operation,
             outputValue: $result,
             steps: $steps,
             n: $this->publicKey,
@@ -45,12 +52,12 @@ class Rsa extends CipherBase
         $q = gmp_init($this->q);
 
         // Encryption key generation -> calculate n from prime numbers
-        $n = gmp_mul($p,$q);
+        $n = gmp_mul($p, $q);
 
         // fermat number
         $e = 65537;
         // declaring phi
-        $phi = gmp_mul(gmp_sub($p,1), gmp_sub($q, 1));
+        $phi = gmp_mul(gmp_sub($p, 1), gmp_sub($q, 1));
         // searching for co-prime number
         while ($e < gmp_intval($phi)) {
             /*
@@ -71,13 +78,16 @@ class Rsa extends CipherBase
         $steps = [];
         foreach (explode(' ', $this->text) as $char) {
             $c = gmp_powm(gmp_init($char), $e, $n); // uses binary exponentiation (CORM09)
-            $steps[] = new RSAStep(inputChar: (int) $char, outputChar: gmp_intval($c));
-            $result .= $c.' ';
+            $steps[] = new RSAStep(inputChar: (int)$char, outputChar: gmp_intval($c));
+            $result .= $c . ' ';
         }
 
         // Return the resulting output object
         return new RsaOutput(
-            inputValue: $this->text, operation: $this->operation, outputValue: $result, steps: $steps,
+            inputValue: $this->text,
+            operation: $this->operation,
+            outputValue: $result,
+            steps: $steps,
             n: gmp_intval($n),
             e: $e,
             d: $d,

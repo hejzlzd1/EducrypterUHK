@@ -31,7 +31,7 @@ class Vigenere extends CipherBase
         $keyLen = strlen($this->key); //length of key
 
         for ($i = 0; $i < $keyLen; $i++) {
-            if (! ctype_alpha($this->key[$i])) {
+            if (!ctype_alpha($this->key[$i])) {
                 return '';
             }
         } // found non char in key
@@ -69,7 +69,7 @@ class Vigenere extends CipherBase
         $keyLen = strlen($this->key); //length of key
 
         for ($i = 0; $i < $keyLen; $i++) {
-            if (! ctype_alpha($this->key[$i])) {
+            if (!ctype_alpha($this->key[$i])) {
                 return '';
             }
         } // found non char in key
