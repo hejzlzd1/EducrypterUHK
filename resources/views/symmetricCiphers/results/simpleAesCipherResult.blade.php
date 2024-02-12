@@ -129,14 +129,14 @@
                                              class="accordion-collapse collapse">
                                             <div class="accordion-body">
                                                 <div class="d-flex flex-wrap">
-                                                    <div class="row">
+                                                    <div class="row col-lg-6 p-2">
                                                         <h3>
                                                             <i class="fa-solid fa-file-lines"></i>
                                                             @lang('baseTexts.input')
                                                         </h3>
                                                         <p>{{ $step->getInput() }}</p>
                                                     </div>
-                                                    <div class="row">
+                                                    <div class="row col-lg-6 p-2">
                                                         <h3>
                                                             <i class="fa-solid fa-file-lines"></i>
                                                             @lang('baseTexts.output')
@@ -144,7 +144,7 @@
                                                         {{$step->getOutput()}}
                                                     </div>
                                                     @if ($step->getImageUrl() !== null)
-                                                        <div class="col-md-6">
+                                                        <div class="col-lg-6 p-2">
                                                             <img src="{{ $step->getImageUrl() }}" alt="" width="100%"/>
                                                         </div>
                                                     @endif

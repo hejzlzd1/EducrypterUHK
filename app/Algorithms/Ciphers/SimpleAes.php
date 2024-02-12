@@ -116,7 +116,7 @@ class SimpleAes extends BlockCipher
 
         $step = new NamedStep(
             input: sprintf('w₁ - %s', $this->chunkSplitArray($w1)),
-            translatedActionName: 'rot(w₁) - ' . trans('simpleAesPageTexts.rotateKey')
+            translatedActionName: 'rot(w₁) - ' . trans('simpleAesPageTexts.rotateKey'),
         ); // create step
         $w1 = $this->rotateKey($w1); // rotate key
         $step->setOutput(sprintf('rot(w₁) = %s', $this->chunkSplitArray($w1))); // set output of action
@@ -124,7 +124,8 @@ class SimpleAes extends BlockCipher
 
         $step = new NamedStep(
             input: sprintf('rot(w₁) - %s', $this->chunkSplitArray($w1)),
-            translatedActionName: 'sub(rot(w₁)) - ' . trans('simpleAesPageTexts.substituteNibbles')
+            translatedActionName: 'sub(rot(w₁)) - ' . trans('simpleAesPageTexts.substituteNibbles'),
+            imageUrl: asset('img/simpleAesPage/simpleAesSbox.png')
         ); // create step
         $w1 = $this->substituteNibbles($w1); // substitute nibble
         $step->setOutput(sprintf('sub(rot(w₁)) = %s', $this->chunkSplitArray($w1))); // set output of action
@@ -169,7 +170,8 @@ class SimpleAes extends BlockCipher
 
         $step = new NamedStep(
             input: sprintf('rot(w₃) - %s', $this->chunkSplitArray($w3)),
-            translatedActionName: 'sub(rot(w₃)) - ' . trans('simpleAesPageTexts.substituteNibbles')
+            translatedActionName: 'sub(rot(w₃)) - ' . trans('simpleAesPageTexts.substituteNibbles'),
+            imageUrl: asset('img/simpleAesPage/simpleAesSbox.png')
         ); // create step
         $w3 = $this->substituteNibbles($w3); // substitute nibble
         $step->setOutput(sprintf('w₃ = %s', $this->chunkSplitArray($w3))); // set output of action
@@ -284,7 +286,8 @@ class SimpleAes extends BlockCipher
             new NamedStep(
                 $this->chunkSplitArray($value),
                 $this->chunkSplitArray($nibbles),
-                trans('simpleAesPageTexts.substituteNibbles')
+                trans('simpleAesPageTexts.substituteNibbles'),
+                imageUrl: asset('img/simpleAesPage/simpleAesSbox.png')
             )
         );
 
@@ -292,11 +295,12 @@ class SimpleAes extends BlockCipher
             input: sprintf(
                 'S₀₀ - %s, S₀₁ - %s, S₁₀ - %s, S₁₁ - %s',
                 $nibbles[0],
-                $nibbles[2],
                 $nibbles[1],
+                $nibbles[2],
                 $nibbles[3]
             ),
-            translatedActionName: trans('simpleAesPageTexts.shiftRow')
+            translatedActionName: trans('simpleAesPageTexts.shiftRow'),
+            imageUrl: asset('img/simpleAesPage/simpleAesRowShift.png')
         );
         // Shift row function (swap two array elements)
         $nibbles = [$nibbles[0], $nibbles[3], $nibbles[2], $nibbles[1]];
@@ -311,11 +315,12 @@ class SimpleAes extends BlockCipher
                 input: sprintf(
                     'S₀₀ - %s, S₀₁ - %s, S₁₀ - %s, S₁₁ - %s',
                     $nibbles[0],
-                    $nibbles[2],
                     $nibbles[1],
+                    $nibbles[2],
                     $nibbles[3]
                 ),
-                translatedActionName: trans('simpleAesPageTexts.encryptMixNibbles')
+                translatedActionName: trans('simpleAesPageTexts.encryptMixNibbles'),
+                imageUrl: asset('img/simpleAesPage/simpleAesGaloisMultiplication.png')
             );
 
             $nibbles = [[bindec($nibbles[0]), bindec($nibbles[1])], [bindec($nibbles[2]), bindec($nibbles[3])]];
@@ -325,8 +330,8 @@ class SimpleAes extends BlockCipher
                 output: sprintf(
                     'S₀₀ - %s, S₀₁ - %s, S₁₀ - %s, S₁₁ - %s',
                     $nibbles[0],
-                    $nibbles[2],
                     $nibbles[1],
+                    $nibbles[2],
                     $nibbles[3]
                 )
             );
@@ -371,11 +376,12 @@ class SimpleAes extends BlockCipher
             input: sprintf(
                 'S₀₀ - %s, S₀₁ - %s, S₁₀ - %s, S₁₁ - %s',
                 $nibbles[0],
-                $nibbles[2],
                 $nibbles[1],
+                $nibbles[2],
                 $nibbles[3]
             ),
-            translatedActionName: trans('simpleAesPageTexts.shiftRow')
+            translatedActionName: trans('simpleAesPageTexts.shiftRow'),
+            imageUrl: asset('img/simpleAesPage/simpleAesRowShiftInverse.png')
         );
         // Shift row function (swap two array elements)
         $nibbles = [$nibbles[0], $nibbles[3], $nibbles[2], $nibbles[1]];
@@ -383,8 +389,8 @@ class SimpleAes extends BlockCipher
             sprintf(
                 'S₀₀ - %s, S₀₁ - %s, S₁₀ - %s, S₁₁ - %s',
                 $nibbles[0],
-                $nibbles[2],
                 $nibbles[1],
+                $nibbles[2],
                 $nibbles[3]
             )
         );
@@ -402,7 +408,8 @@ class SimpleAes extends BlockCipher
             new NamedStep(
                 $this->chunkSplitArray($value),
                 $this->chunkSplitArray($nibbles),
-                trans('simpleAesPageTexts.inverseSubstituteNibbles')
+                trans('simpleAesPageTexts.inverseSubstituteNibbles'),
+                imageUrl: asset('img/simpleAesPage/simpleAesSboxInverse.png')
             )
         );
 
@@ -429,11 +436,12 @@ class SimpleAes extends BlockCipher
                 input: sprintf(
                     'S₀₀ - %s, S₀₁ - %s, S₁₀ - %s, S₁₁ - %s',
                     $nibbles[0],
-                    $nibbles[2],
                     $nibbles[1],
+                    $nibbles[2],
                     $nibbles[3]
                 ),
-                translatedActionName: trans('simpleAesPageTexts.decryptMixNibbles')
+                translatedActionName: trans('simpleAesPageTexts.decryptMixNibbles'),
+                imageUrl: asset('img/simpleAesPage/simpleAesGaloisMultiplicationInverse.png')
             );
 
             $nibbles = [[bindec($nibbles[0]), bindec($nibbles[1])], [bindec($nibbles[2]), bindec($nibbles[3])]];
@@ -443,8 +451,8 @@ class SimpleAes extends BlockCipher
                 output: sprintf(
                     'S₀₀ - %s, S₀₁ - %s, S₁₀ - %s, S₁₁ - %s',
                     $nibbles[0],
-                    $nibbles[2],
                     $nibbles[1],
+                    $nibbles[2],
                     $nibbles[3]
                 )
             );
