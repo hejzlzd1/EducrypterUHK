@@ -343,10 +343,115 @@ class SimpleAes extends BlockCipher
             ),
             translatedActionName: 'in ⊕ K' . $keyNum
         ); // Not nice code - check if first round (mixColumn) was called => set key according to that (wouldn't work on real AES)
+        $nibbles = $this->addRoundKey(str_split(implode($nibbles)), str_split($roundKey));
+
+        $step->setOutput(sprintf('out = %s', $this->chunkSplitArray($nibbles)));
+        $this->output->addStep($step);
+
+        return $nibbles;
+    }
+
+    /**
+     * Perform a single round of decryption.
+     *
+     * @param array $value
+     * @param bool $performMix
+     * @param string $roundKey
+     *
+     * @return array
+     */
+    private function performDecryptionRound(array $value, string $roundKey, bool $performMix = false): array
+    {
+        $nibbles = array_chunk($value, 4);
+        $nibbles = array_map(function (array $chunk): string {
+            return implode($chunk);
+        }, $nibbles);
+
+        $step = new NamedStep(
+            input: sprintf(
+                'S₀₀ - %s, S₀₁ - %s, S₁₀ - %s, S₁₁ - %s',
+                $nibbles[0],
+                $nibbles[2],
+                $nibbles[1],
+                $nibbles[3]
+            ),
+            translatedActionName: trans('simpleAesPageTexts.shiftRow')
+        );
+        // Shift row function (swap two array elements)
+        $nibbles = [$nibbles[0], $nibbles[3], $nibbles[2], $nibbles[1]];
+        $step->setOutput(
+            sprintf(
+                'S₀₀ - %s, S₀₁ - %s, S₁₀ - %s, S₁₁ - %s',
+                $nibbles[0],
+                $nibbles[2],
+                $nibbles[1],
+                $nibbles[3]
+            )
+        );
+        $this->output->addStep($step);
+
+        $nibbles = array_map(function (string $chunk): array {
+            return $this->getSubstitutionValue(explode(',', $chunk), true);
+        }, $nibbles);
+
+        $nibbles = array_map(function (array $chunk): string {
+            return implode($chunk);
+        }, $nibbles);
+
+        $this->output->addStep(
+            new NamedStep(
+                $this->chunkSplitArray($value),
+                implode($nibbles),
+                trans('simpleAesPageTexts.inverseSubstituteNibbles')
+            )
+        );
+
+        $keyNum = ($performMix ? '₁' : '₀');
+        $step = new NamedStep(
+            input: sprintf(
+                'in - %s, K%s - %s',
+                $this->chunkSplitArray($nibbles),
+                $keyNum,
+                chunk_split($roundKey, 4, ' ')
+            ),
+            translatedActionName: 'in ⊕ K' . $keyNum
+        ); // Not nice code - check if first round (mixColumn) was called => set key according to that (wouldn't work on real AES)
         $nibbles = $this->addRoundKey(str_split(implode('', $nibbles)), str_split($roundKey));
 
         $step->setOutput(sprintf('out = %s', $this->chunkSplitArray($nibbles)));
         $this->output->addStep($step);
+
+        $nibbles = str_split(implode(array_merge($nibbles)), 4);
+
+        // Mix columns if required
+        if ($performMix) {
+            $step = new NamedStep(
+                input: sprintf(
+                    'S₀₀ - %s, S₀₁ - %s, S₁₀ - %s, S₁₁ - %s',
+                    $nibbles[0],
+                    $nibbles[2],
+                    $nibbles[1],
+                    $nibbles[3]
+                ),
+                translatedActionName: trans('simpleAesPageTexts.decryptMixNibbles')
+            );
+
+            $nibbles = [[bindec($nibbles[0]), bindec($nibbles[1])], [bindec($nibbles[2]), bindec($nibbles[3])]];
+            $nibbles = $this->mixColumns($nibbles, false);
+
+            $step->setOutput(
+                output: sprintf(
+                    'S₀₀ - %s, S₀₁ - %s, S₁₀ - %s, S₁₁ - %s',
+                    $nibbles[0],
+                    $nibbles[2],
+                    $nibbles[1],
+                    $nibbles[3]
+                )
+            );
+            $this->output->addStep($step);
+        }
+
+        $nibbles = str_split(implode($nibbles));
 
         return $nibbles;
     }
@@ -384,7 +489,9 @@ class SimpleAes extends BlockCipher
         $coefficients = $isEncrypt ? [1, 4] : [9, 2];
 
         $mixedColumn[0] = str_pad(
-            decbin($this->gfMultiply($column[0], $coefficients[0]) ^ $this->gfMultiply($column[1], $coefficients[1])),
+            decbin(
+                ($this->gfMultiply($column[0], $coefficients[0])) ^ ($this->gfMultiply($column[1], $coefficients[1]))
+            ),
             4,
             '0',
             STR_PAD_LEFT
@@ -488,7 +595,13 @@ class SimpleAes extends BlockCipher
     {
         $text = str_split($this->text);
         $value = $this->addRoundKey($text, str_split($this->roundKeys[2]));
-        $this->output->addStep(new NamedStep(implode($text), implode($value), 'in ⊕ K₂'));
+        $this->output->addStep(
+            new NamedStep(
+                sprintf('in - %s, K₂ - %s', chunk_split($this->text, 4, ' '), chunk_split($this->roundKeys[0], 4, ' ')),
+                $this->chunkSplitArray($value),
+                'in ⊕ K₂'
+            )
+        );
 
         // Perform decryption rounds
         for ($i = 2; $i > 0; $i--) {
@@ -503,100 +616,5 @@ class SimpleAes extends BlockCipher
         $this->output->setOutputValue(implode($value));
 
         return $this->output;
-    }
-
-    /**
-     * Perform a single round of decryption.
-     *
-     * @param array $value
-     * @param bool $performMix
-     * @param string $roundKey
-     *
-     * @return array
-     */
-    private function performDecryptionRound(array $value, string $roundKey, bool $performMix = false): array
-    {
-        $nibbles = array_chunk($value, 4);
-
-        $step = new NamedStep(
-            input: sprintf(
-                'S₀₀ - %s, S₀₁ - %s, S₁₀ - %s, S₁₁ - %s',
-                implode($nibbles[0]),
-                implode($nibbles[2]),
-                implode($nibbles[1]),
-                implode($nibbles[3])
-            ),
-            translatedActionName: trans('simpleAesPageTexts.shiftRow')
-        );
-        // Shift row function (swap two array elements)
-        $nibbles = [$nibbles[0], $nibbles[3], $nibbles[2], $nibbles[1]];
-        $step->setOutput(
-            sprintf(
-                'S₀₀ - %s, S₀₁ - %s, S₁₀ - %s, S₁₁ - %s',
-                implode($nibbles[0]),
-                implode($nibbles[2]),
-                implode($nibbles[1]),
-                implode($nibbles[3])
-            )
-        );
-        $this->output->addStep($step);
-
-        $nibbles = array_map(function (array $chunk): string {
-            return implode('', $this->getSubstitutionValue($chunk, true));
-        }, $nibbles);
-        $this->output->addStep(
-            new NamedStep(
-                $this->chunkSplitArray($value),
-                $this->chunkSplitArray($nibbles),
-                trans('simpleAesPageTexts.substituteNibbles')
-            )
-        );
-
-        $keyNum = ($performMix ? '₁' : '₀');
-        $step = new NamedStep(
-            input: sprintf(
-                'in - %s, K%s - %s',
-                $this->chunkSplitArray($nibbles),
-                $keyNum,
-                chunk_split($roundKey, 4, ' ')
-            ),
-            translatedActionName: 'in ⊕ K' . $keyNum
-        ); // Not nice code - check if first round (mixColumn) was called => set key according to that (wouldn't work on real AES)
-        $nibbles = $this->addRoundKey(str_split(implode('', $nibbles)), str_split($roundKey));
-
-        $step->setOutput(sprintf('out = %s', $this->chunkSplitArray($nibbles)));
-        $this->output->addStep($step);
-
-        $nibbles = str_split(implode(array_merge($nibbles)), 4);
-
-        // Mix columns if required
-        if ($performMix) {
-            $step = new NamedStep(
-                input: sprintf(
-                    'S₀₀ - %s, S₀₁ - %s, S₁₀ - %s, S₁₁ - %s',
-                    $nibbles[0],
-                    $nibbles[2],
-                    $nibbles[1],
-                    $nibbles[3]
-                ),
-                translatedActionName: trans('simpleAesPageTexts.decryptMixNibbles')
-            );
-
-            $nibbles = [[bindec($nibbles[0]), bindec($nibbles[2])], [bindec($nibbles[1]), bindec($nibbles[3])]];
-            $nibbles = str_split(implode(array_merge($this->mixColumns($nibbles, false))));
-
-            $step->setOutput(
-                output: sprintf(
-                    'S₀₀ - %s, S₀₁ - %s, S₁₀ - %s, S₁₁ - %s',
-                    $nibbles[0],
-                    $nibbles[2],
-                    $nibbles[1],
-                    $nibbles[3]
-                )
-            );
-            $this->output->addStep($step);
-        }
-
-        return $nibbles;
     }
 }
