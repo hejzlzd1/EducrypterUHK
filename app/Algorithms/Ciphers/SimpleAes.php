@@ -54,7 +54,7 @@ class SimpleAes extends BlockCipher {
 
         // Initial round key is the original key
         $roundKeys[] = $key;
-        $roundKeysSteps[] = new NamedStep('-', $key, trans('simpleAesPageTexts.addRoundKey') . ' K0');
+        $roundKeysSteps[] = new NamedStep('-', $key, trans('simpleAesPageTexts.addRoundKey') . ' K₀');
 
         // Make array from key
         $key = str_split($key);
@@ -65,62 +65,72 @@ class SimpleAes extends BlockCipher {
 
         $w1Plain = $w1;
 
-        $roundKeysSteps[] = new NamedStep(implode($key), sprintf('W0 = %s, W1 = %s', implode($w0), implode($w1)), trans('simpleAesPageTexts.splitKey'));
+        $roundKeysSteps[] = new NamedStep(implode($key), sprintf('w₀ = %s, w₁ = %s', $this->chunkSplitArray($w0), $this->chunkSplitArray($w1)), trans('simpleAesPageTexts.splitKey'));
 
         // Perform key expansion
         $w2 = $this->xor($w0, str_split('10000000'));
-        $roundKeysSteps[] = new NamedStep(sprintf('W0 - %s', implode($w0)), sprintf('W0 = %s', implode($w2)), 'W0 = W0 ⊕ 10000000');
+        $roundKeysSteps[] = new NamedStep(sprintf('w₀ - %s', $this->chunkSplitArray($w0)), sprintf('w₂ = %s', $this->chunkSplitArray($w2)), 'w₂ = w₀ ⊕ 10000000');
 
-        $step = new NamedStep(input: sprintf('W1 - %s', implode($w1)), translatedActionName: 'W1 - ' . trans('simpleAesPageTexts.rotateKey')); // create step
+        $step = new NamedStep(input: sprintf('w₁ - %s', $this->chunkSplitArray($w1)), translatedActionName: 'rot(w₁) - ' . trans('simpleAesPageTexts.rotateKey')); // create step
         $w1 = $this->rotateKey($w1); // rotate key
-        $step->setOutput(sprintf('rot(W1) = %s', implode($w1))); // set output of action
+        $step->setOutput(sprintf('rot(w₁) = %s', $this->chunkSplitArray($w1))); // set output of action
         $roundKeysSteps[] = $step; // add to steps - output
 
-        $step = new NamedStep(input: sprintf('W1 - %s', implode($w1)), translatedActionName: 'W1 - ' . trans('simpleAesPageTexts.substituteNibbles')); // create step
+        $step = new NamedStep(input: sprintf('rot(w₁) - %s', $this->chunkSplitArray($w1)), translatedActionName: 'sub(rot(w₁)) - ' . trans('simpleAesPageTexts.substituteNibbles')); // create step
         $w1 = $this->substituteNibbles($w1); // substitute nibble
-        $step->setOutput(sprintf('sub(rot(W1)) = %s', implode($w1))); // set output of action
+        $step->setOutput(sprintf('sub(rot(w₁)) = %s', $this->chunkSplitArray($w1))); // set output of action
         $roundKeysSteps[] = $step; // add to steps - output
 
-        $step = new NamedStep(input: sprintf('W1 - %s, W2 - %s', implode($w1), implode($w2)), translatedActionName: 'W2 = W0 ⊕ sub(rot(W1))'); // create step
+        $step = new NamedStep(input: sprintf('w₁ - %s, w₂ - %s', $this->chunkSplitArray($w1), $this->chunkSplitArray($w2)), translatedActionName: 'w₂ = w₂ ⊕ sub(rot(w₁))'); // create step
         $w2 = $this->xor($w2, $w1); // xor
-        $step->setOutput(sprintf('W2 = %s', implode($w2))); // set output of action
+        $step->setOutput(sprintf('w₂ = %s', $this->chunkSplitArray($w2))); // set output of action
         $roundKeysSteps[] = $step; // add to steps - output
-
 
         $w3 = $this->xor($w2, $w1Plain);
-        $roundKeysSteps[] = new NamedStep(sprintf('W1 - %s, W2 - %s', implode($w1Plain), implode($w2)), sprintf('W3 = %s', implode($w3)), 'W3 = W2 ⊕ W1');
+        $w3Plain = $w3;
+        $roundKeysSteps[] = new NamedStep(sprintf('w₁ - %s, w₂ - %s', $this->chunkSplitArray($w1Plain), $this->chunkSplitArray($w2)), sprintf('w₃ = %s', $this->chunkSplitArray($w3)), 'w₃ = w₂ ⊕ w₁');
 
         $w4 = $this->xor($w2, str_split('00110000'));
-        $roundKeysSteps[] = new NamedStep(sprintf('W2 - %s', implode($w2Plain)), sprintf('W4 = %s', implode($w4)), 'W4 = W2 ⊕ 00110000');
+        $roundKeysSteps[] = new NamedStep(sprintf('w₂ - %s', $this->chunkSplitArray($w2)), sprintf('w₄ = %s', $this->chunkSplitArray($w4)), 'w₄ = w₂ ⊕ 00110000');
 
-        $step = new NamedStep(input: sprintf('W3 - %s', implode($w3)), translatedActionName: 'W3 - ' . trans('simpleAesPageTexts.rotateKey')); // create step
+        $step = new NamedStep(input: sprintf('w₃ - %s', $this->chunkSplitArray($w3)), translatedActionName: 'rot(w₃) - ' . trans('simpleAesPageTexts.rotateKey')); // create step
         $w3 = $this->rotateKey($w3); // rotate key
-        $step->setOutput(sprintf('W3 = %s', implode($w3))); // set output of action
+        $step->setOutput(sprintf('w₃ = %s', $this->chunkSplitArray($w3))); // set output of action
         $roundKeysSteps[] = $step; // add to steps - output
 
-        $step = new NamedStep(input: sprintf('W3 - %s', implode($w3)), translatedActionName: 'W3 - ' . trans('simpleAesPageTexts.substituteNibbles')); // create step
+        $step = new NamedStep(input: sprintf('rot(w₃) - %s', $this->chunkSplitArray($w3)), translatedActionName: 'sub(rot(w₃)) - ' . trans('simpleAesPageTexts.substituteNibbles')); // create step
         $w3 = $this->substituteNibbles($w3); // substitute nibble
-        $step->setOutput(sprintf('W3 = %s', implode($w3))); // set output of action
+        $step->setOutput(sprintf('w₃ = %s', $this->chunkSplitArray($w3))); // set output of action
         $roundKeysSteps[] = $step; // add to steps - output
 
-        $step = new NamedStep(input: sprintf('W3 - %s, W4 - %s', implode($w3), implode($w4)), translatedActionName: 'W4 = W4 ⊕ W3'); // create step
+        $step = new NamedStep(input: sprintf('sub(rot(w₃)) - %s, w₄ - %s', $this->chunkSplitArray($w3), $this->chunkSplitArray($w4)), translatedActionName: 'w₄ = w₄ ⊕ sub(rot(w₃))'); // create step
         $w4 = $this->xor($w4, $w3); // xor
-        $step->setOutput(sprintf('W4 = %s', implode($w4))); // set output of action
+        $step->setOutput(sprintf('w₄ = %s', $this->chunkSplitArray($w4))); // set output of action
         $roundKeysSteps[] = $step; // add to steps - output
 
-        $w5 = $this->xor($w4, $w3);
-        $roundKeysSteps[] = new NamedStep(sprintf('W3 - %s, W4 - %s', implode($w3), implode($w4)), sprintf('W5 = %s', implode($w5)), 'W5 = W2 ⊕ W1');
+        $w5 = $this->xor($w4, $w3Plain);
+        $roundKeysSteps[] = new NamedStep(sprintf('w₃ - %s, w₄ - %s', $this->chunkSplitArray($w3Plain), $this->chunkSplitArray($w4)), sprintf('w₅ = %s', $this->chunkSplitArray($w5)), 'w₅ = w₂ ⊕ w₁');
 
         // Add the expanded round keys and corresponding steps to output
-        $roundKeys[] = implode('', array_merge($w2, $w3));
-        $roundKeysSteps[] = new NamedStep(sprintf('W2 - %s, W3 - %s', implode($w2), implode($w3)), sprintf('K1 = %s', implode(array_merge($w2, $w3))), trans('simpleAesPageTexts.addRoundKey') . ' K1 = W2 + W3');
+        $roundKeys[] = implode('', array_merge($w2, $w3Plain));
+        $roundKeysSteps[] = new NamedStep(sprintf('W₂ - %s, w₃ - %s', $this->chunkSplitArray($w2), $this->chunkSplitArray($w3Plain)), sprintf('K₁ = %s', implode(array_merge($w2, $w3Plain))), trans('simpleAesPageTexts.addRoundKey') . ' K₁ = w₂ + w₃');
 
         $roundKeys[] = implode('', array_merge($w4, $w5));
-        $roundKeysSteps[] = new NamedStep(sprintf('W4 - %s, W5 - %s', implode($w4), implode($w5)), sprintf('K2 = %s', implode(array_merge($w4, $w5))), trans('simpleAesPageTexts.addRoundKey') . ' K2 = W4 + W5');
+        $roundKeysSteps[] = new NamedStep(sprintf("w₄ - %s, w₅ - %s", $this->chunkSplitArray($w4),10, $this->chunkSplitArray($w5)), sprintf('K₂ = %s', implode(array_merge($w4, $w5))), trans('simpleAesPageTexts.addRoundKey') . ' K₂ = w₄ + w₅');
 
         $this->output->setGenerationSteps($roundKeysSteps);
 
         return $roundKeys;
+    }
+
+    /**
+     * Takes binary array as parameter - returns binary string chunked by 1 byte
+     * @param $array
+     * @return string
+     */
+    private function chunkSplitArray($array): string
+    {
+        return trim(chunk_split(implode($array), 4, ' '));
     }
 
     /**
