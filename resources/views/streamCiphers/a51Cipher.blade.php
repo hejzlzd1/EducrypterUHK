@@ -1,4 +1,7 @@
-@php use App\Algorithms\CipherBase; @endphp
+@php
+    use App\Algorithms\CipherBase;
+    use App\View\Components\GenerateInputButton;
+@endphp
 @extends("components/pageTemplate")
 @section("title",__('a51PageTexts.title'))
 @section("comment",__('a51PageTexts.metaComment'))
@@ -41,11 +44,20 @@
                                         <x-tooltipButton
                                             :tooltip="trans('baseTexts.binaryInputPrompt')"></x-tooltipButton>
                                     </label>
-                                    <input class="form-control binaryValidation" maxlength="114" minlength="1" required
-                                           type="text"
-                                           id="text" name="text"
-                                           placeholder="@lang('baseTexts.binaryInputPrompt')"
-                                           @if(isset($data['text'])) value="{{ $data['text'] }}" @endif />
+                                    <div class="input-group">
+                                        <input class="form-control binaryValidation" maxlength="64" minlength="1"
+                                               required
+                                               type="text"
+                                               id="text" name="text"
+                                               placeholder="@lang('baseTexts.binaryInputPrompt')"
+                                               @if(isset($data['text'])) value="{{ $data['text'] }}" @endif />
+                                        <x-generateInputButton
+                                            type="{{ GenerateInputButton::TYPE_BINARY }}"
+                                            size="20"
+                                            target="#text">
+                                        </x-generateInputButton>
+                                    </div>
+
                                 </div>
                                 <div class="col-lg-6">
                                     <label class="form-label" for="key">
@@ -53,9 +65,18 @@
                                         <x-tooltipButton
                                             :tooltip="trans('baseTexts.binaryInputPrompt')"></x-tooltipButton>
                                     </label>
-                                    <input class="form-control binaryValidation" min="1" max="64" type="text" id="key"
-                                           name="key" placeholder="@lang('baseTexts.binaryInputPrompt')" required
-                                           @if(isset($data['key'])) value="{{ $data['key'] }}" @else value="" @endif />
+                                    <div class="input-group">
+                                        <input class="form-control binaryValidation" min="1" max="64" type="text"
+                                               id="key"
+                                               name="key" placeholder="@lang('baseTexts.binaryInputPrompt')" required
+                                               @if(isset($data['key'])) value="{{ $data['key'] }}"
+                                               @else value="" @endif />
+                                        <x-generateInputButton
+                                            type="{{ GenerateInputButton::TYPE_BINARY }}"
+                                            size="20"
+                                            target="#key">
+                                        </x-generateInputButton>
+                                    </div>
                                 </div>
                             </fieldset>
                             <fieldset class="row p-2">
@@ -65,10 +86,18 @@
                                         <x-tooltipButton
                                             :tooltip="trans('a51PageTexts.dataFrameNumberExplanation')"></x-tooltipButton>
                                     </label>
-                                    <input class="form-control" type="number" max="4194304" min="0" id="dataFrame"
-                                           name="dataFrame" placeholder="@lang('a51PageTexts.inputDataFrame')" required
-                                           @if(isset($data['dataFrame'])) value="{{ $data['dataFrame'] }}"
-                                           @else value="" @endif />
+                                    <div class="input-group">
+                                        <input class="form-control" type="number" max="4000" min="0" id="dataFrame"
+                                               name="dataFrame" placeholder="@lang('a51PageTexts.inputDataFrame')"
+                                               required
+                                               @if(isset($data['dataFrame'])) value="{{ $data['dataFrame'] }}"
+                                               @else value="" @endif />
+                                        <x-generateInputButton
+                                            type="{{ GenerateInputButton::TYPE_NUMBER }}"
+                                            size="4000"
+                                            target="#dataFrame">
+                                        </x-generateInputButton>
+                                    </div>
                                 </div>
                             </fieldset>
                             <div class="p-2">

@@ -1,5 +1,6 @@
 @php
     use App\Algorithms\CipherBase;
+    use App\View\Components\GenerateInputButton;
 @endphp
 @extends("components/pageTemplate")
 @section("title",__('simpleAesPageTexts.title'))
@@ -19,11 +20,14 @@
                             <p>@lang('simpleAesPageTexts.annotation')</p>
 
                             <h4>@lang('simpleAesPageTexts.additionalSchemas')</h4>
-                            <div id="carouselControls" class="carousel col-lg-8 mb-5" data-bs-ride="carousel" data-bs-interval="10000">
+                            <div id="carouselControls" class="carousel col-lg-8 mb-5" data-bs-ride="carousel"
+                                 data-bs-interval="10000">
                                 <div class="carousel-inner custom-carousel">
                                     <div class="carousel-item active">
-                                        <a href="{{ asset('img/simpleAesPage/simpleAesGaloisMultiplication.png' )}}" target="_blank">
-                                            <img alt="" src="{{ asset('img/simpleAesPage/simpleAesGaloisMultiplication.png') }}"
+                                        <a href="{{ asset('img/simpleAesPage/simpleAesGaloisMultiplication.png' )}}"
+                                           target="_blank">
+                                            <img alt=""
+                                                 src="{{ asset('img/simpleAesPage/simpleAesGaloisMultiplication.png') }}"
                                                  class="d-block w-100" title="@lang('baseTexts.clickToSeeInFullSize')">
                                         </a>
                                         <div class="label">
@@ -31,8 +35,10 @@
                                         </div>
                                     </div>
                                     <div class="carousel-item">
-                                        <a href="{{ asset('img/simpleAesPage/simpleAesGaloisMultiplicationInverse.png') }}" target="_blank">
-                                            <img alt="" src="{{ asset('img/simpleAesPage/simpleAesGaloisMultiplicationInverse.png') }}"
+                                        <a href="{{ asset('img/simpleAesPage/simpleAesGaloisMultiplicationInverse.png') }}"
+                                           target="_blank">
+                                            <img alt=""
+                                                 src="{{ asset('img/simpleAesPage/simpleAesGaloisMultiplicationInverse.png') }}"
                                                  class="d-block w-100" title="@lang('baseTexts.clickToSeeInFullSize')">
                                         </a>
                                         <div class="label">
@@ -40,7 +46,8 @@
                                         </div>
                                     </div>
                                     <div class="carousel-item">
-                                        <a href="{{ asset('img/simpleAesPage/simpleAesRowShift.png') }}" target="_blank">
+                                        <a href="{{ asset('img/simpleAesPage/simpleAesRowShift.png') }}"
+                                           target="_blank">
                                             <img alt="" src="{{ asset('img/simpleAesPage/simpleAesRowShift.png') }}"
                                                  class="d-block w-100" title="@lang('baseTexts.clickToSeeInFullSize')">
                                         </a>
@@ -49,8 +56,10 @@
                                         </div>
                                     </div>
                                     <div class="carousel-item">
-                                        <a href="{{ asset('img/simpleAesPage/simpleAesRowShiftInverse.png') }}" target="_blank">
-                                            <img alt="" src="{{ asset('img/simpleAesPage/simpleAesRowShiftInverse.png') }}"
+                                        <a href="{{ asset('img/simpleAesPage/simpleAesRowShiftInverse.png') }}"
+                                           target="_blank">
+                                            <img alt=""
+                                                 src="{{ asset('img/simpleAesPage/simpleAesRowShiftInverse.png') }}"
                                                  class="d-block w-100" title="@lang('baseTexts.clickToSeeInFullSize')">
                                         </a>
                                         <div class="label">
@@ -67,7 +76,8 @@
                                         </div>
                                     </div>
                                     <div class="carousel-item">
-                                        <a href="{{ asset('img/simpleAesPage/simpleAesSboxInverse.png') }}" target="_blank">
+                                        <a href="{{ asset('img/simpleAesPage/simpleAesSboxInverse.png') }}"
+                                           target="_blank">
                                             <img alt="" src="{{ asset('img/simpleAesPage/simpleAesSboxInverse.png') }}"
                                                  class="d-block w-100" title="@lang('baseTexts.clickToSeeInFullSize')">
                                         </a>
@@ -120,12 +130,20 @@
                                         <x-tooltipButton
                                             :tooltip="trans('baseTexts.binaryInputPrompt')"></x-tooltipButton>
                                     </label>
-                                    <input class="form-control binaryValidation" minlength="1" maxlength="16" required
-                                           type="text"
-                                           id="text"
-                                           name="text"
-                                           placeholder="@lang('baseTexts.binaryInputPrompt')"
-                                           @if(isset($data['text']))value="{{$data['text']}}"@endif>
+                                    <div class="input-group">
+                                        <input class="form-control binaryValidation" minlength="1" maxlength="16"
+                                               required
+                                               type="text"
+                                               id="text"
+                                               name="text"
+                                               placeholder="@lang('baseTexts.binaryInputPrompt')"
+                                               @if(isset($data['text']))value="{{$data['text']}}"@endif>
+                                        <x-generateInputButton
+                                            type="{{ GenerateInputButton::TYPE_BINARY }}"
+                                            size="16"
+                                            target="#text">
+                                        </x-generateInputButton>
+                                    </div>
                                 </div>
                                 <div class="col-lg-6">
                                     <label class="form-label" for="key">
@@ -133,11 +151,18 @@
                                         <x-tooltipButton
                                             :tooltip="trans('baseTexts.binaryInputPrompt')"></x-tooltipButton>
                                     </label>
-                                    <input class="form-control binaryValidation" minlength="1" maxlength="16"
-                                           type="text" id="key"
-                                           name="key"
-                                           placeholder="@lang('baseTexts.binaryInputPrompt')"
-                                           @if(isset($data['key'])) value="{{$data['key']}}" @else value="" @endif>
+                                    <div class="input-group">
+                                        <input class="form-control binaryValidation" minlength="1" maxlength="16"
+                                               type="text" id="key"
+                                               name="key"
+                                               placeholder="@lang('baseTexts.binaryInputPrompt')"
+                                               @if(isset($data['key'])) value="{{$data['key']}}" @else value="" @endif>
+                                        <x-generateInputButton
+                                            type="{{ GenerateInputButton::TYPE_BINARY }}"
+                                            size="16"
+                                            target="#key">
+                                        </x-generateInputButton>
+                                    </div>
                                 </div>
                             </fieldset>
                             <div class="p-2">

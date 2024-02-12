@@ -1,5 +1,6 @@
 @php
     use App\Algorithms\CipherBase;
+    use App\View\Components\GenerateInputButton;
 @endphp
 @extends("components/pageTemplate")
 @section("title",__('blowfishPageTexts.title'))
@@ -43,20 +44,34 @@
                             <fieldset class="row p-2">
                                 <div class="col-lg-6">
                                     <label class="form-label" for="text">@lang('baseTexts.text')</label>
+                                    <div class="input-group">
                                     <input class="form-control" minlength="1" maxlength="400" required type="text"
                                            id="text"
                                            name="text"
                                            placeholder="@lang('baseTexts.inputText')"
                                            @if(isset($data['text']))value="{{$data['text']}}"@endif>
+                                    <x-generateInputButton
+                                        type="{{ GenerateInputButton::TYPE_TEXT }}"
+                                        size="30"
+                                        target="#text">
+                                    </x-generateInputButton>
+                                    </div>
                                 </div>
                                 <div class="col-lg-6">
                                     <label class="form-label" for="key">
                                         @lang('baseTexts.key')
                                         <x-tooltipButton :tooltip="trans('baseTexts.textInputOnly')"></x-tooltipButton>
                                     </label>
+                                    <div class="input-group">
                                     <input class="form-control" maxlength="30" type="text" id="key" name="key"
                                            placeholder="@lang('baseTexts.insertKey')" pattern="^[a-zA-Z ]*$"
                                            @if(isset($data['key'])) value="{{$data['key']}}" @else value="" @endif>
+                                        <x-generateInputButton
+                                            type="{{ GenerateInputButton::TYPE_TEXT }}"
+                                            size="30"
+                                            target="#key">
+                                        </x-generateInputButton>
+                                </div>
                                 </div>
                             </fieldset>
                             <div class="p-2">

@@ -1,6 +1,5 @@
 @php
-    use App\Algorithms\Output\BasicOutput;
-    use App\Algorithms\Output\Steps\Step;
+    use App\View\Components\GenerateInputButton;
 @endphp
 @extends("components/pageTemplate")
 @section("title",__('vernamPageTexts.title'))
@@ -49,21 +48,36 @@
                                         @lang('baseTexts.text')
                                         <x-tooltipButton :tooltip="trans('baseTexts.binaryInput')"></x-tooltipButton>
                                     </label>
-                                    <input class="form-control binaryValidation" maxlength="30" minlength="1" required
-                                           type="text"
-                                           id="text"
-                                           name="text"
-                                           placeholder="@lang('baseTexts.binaryInputPrompt')"
-                                           @if(isset($data["text"]))value="{{$data["text"]}}"@endif>
+                                    <div class="input-group">
+                                        <input class="form-control binaryValidation" maxlength="30" minlength="1"
+                                               required
+                                               type="text"
+                                               id="text"
+                                               name="text"
+                                               placeholder="@lang('baseTexts.binaryInputPrompt')"
+                                               @if(isset($data["text"]))value="{{$data["text"]}}"@endif>
+                                        <x-generateInputButton
+                                            type="{{ GenerateInputButton::TYPE_BINARY }}"
+                                            size="30"
+                                            target="#text">
+                                        </x-generateInputButton>
+                                    </div>
                                 </div>
                                 <div class="col-lg-6">
                                     <label class="form-label" for="key">@lang('baseTexts.key')
                                         <x-tooltipButton :tooltip="trans('baseTexts.binaryInput')"></x-tooltipButton>
                                     </label>
-                                    <input class="form-control binaryValidation" minlength="1" maxlength="30"
-                                           required type="text" id="key" name="key"
-                                           placeholder="@lang('baseTexts.binaryInputPrompt')"
-                                           @if(isset($data["key"]))value="{{$data["key"]}}" @else value="" @endif>
+                                    <div class="input-group">
+                                        <input class="form-control binaryValidation" minlength="1" maxlength="30"
+                                               required type="text" id="key" name="key"
+                                               placeholder="@lang('baseTexts.binaryInputPrompt')"
+                                               @if(isset($data["key"]))value="{{$data["key"]}}" @else value="" @endif>
+                                        <x-generateInputButton
+                                            type="{{ GenerateInputButton::TYPE_BINARY }}"
+                                            size="30"
+                                            target="#key">
+                                        </x-generateInputButton>
+                                    </div>
                                 </div>
                             </fieldset>
                             <div class="p-2">

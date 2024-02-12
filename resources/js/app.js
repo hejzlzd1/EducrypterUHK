@@ -134,4 +134,53 @@ $(document).ready(function () {
         const errorDialog = $('#error-dialog');
         errorDialog.css('display', 'none');
     }
+
+    window.generateInput = function (type, size, target) {
+        const generators = {
+            1: generateRandomText,
+            2: generateRandomInteger,
+            3: generateRandomBinaryString,
+            4: generateRandomPrimeNumber
+        };
+
+        const generator = generators[type];
+        if (generator) {
+            $(target).val(generator(size));
+        }
+    }
+    function generateRandomBinaryString(size) {
+        let binaryString = '';
+        for (let i = 0; i <= size; i++) {
+            binaryString += Math.round(Math.random());
+        }
+        return binaryString;
+    }
+
+    function generateRandomInteger(size) {
+        return Math.floor(Math.random() * (size - 1 + 1)) + 1;
+    }
+
+    const englishWords = [
+        "apple", "banana", "carrot", "dog", "elephant", "fish", "giraffe",
+        "house", "igloo", "jacket", "kite", "lemon", "monkey", "nest", "orange",
+        "penguin", "queen", "rabbit", "sun", "tree", "umbrella", "violet", "whale",
+        "xylophone", "yacht", "zebra"
+    ];
+    function generateRandomText(size) {
+        const filteredWords = englishWords.filter(word => word.length <= size);
+        if (filteredWords.length === 0) {
+            return "randomword";
+        }
+        const randomIndex = Math.floor(Math.random() * filteredWords.length);
+        return filteredWords[randomIndex];
+    }
+
+    function generateRandomPrimeNumber(size) {
+        let randomNum = Math.floor(Math.random() * (size - 20)) + 20;
+        while (!isPrime(randomNum)) {
+            randomNum++;
+        }
+
+        return randomNum;
+    }
 });
