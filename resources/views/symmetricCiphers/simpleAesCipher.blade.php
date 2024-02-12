@@ -1,7 +1,10 @@
-@php use App\Algorithms\CipherBase;use App\Algorithms\Output\Steps\NamedStep; @endphp
+@php
+    use App\Algorithms\CipherBase;
+    use App\Algorithms\Output\Steps\NamedStep;
+@endphp
 @extends("components/pageTemplate")
-@section("title",__('simpleDesPageTexts.title'))
-@section("comment",__('simpleDesPageTexts.metaComment'))
+@section("title",__('simpleAesPageTexts.title'))
+@section("comment",__('simpleAesPageTexts.metaComment'))
 @section("content")
 
     <div class="anchor" id="info"></div>
@@ -11,100 +14,66 @@
             <div>
                 <div class="container">
                     <div class="row align-items-start">
-                        <h1><i class="fa-solid fa-circle-info"></i> Simple DES</h1>
+                        <h1><i class="fa-solid fa-circle-info"></i> Simple AES</h1>
                         <hr/>
                         <div class="col-lg-8">
-                            <p>@lang('simpleDesPageTexts.annotation')</p>
-                            <h4>@lang('simpleDesPageTexts.keyGenerationInfoTitle')</h4>
-                            <p>@lang('simpleDesPageTexts.keyGenerationInfo')</p>
-                            <h4>@lang('simpleDesPageTexts.encryptionDecryptionInfoTitle')</h4>
-                            <p>@lang('simpleDesPageTexts.encryptionDecryptionInfo')</p>
-                            <h4>@lang('simpleDesPageTexts.differencesToDESTitle')</h4>
-                            <p>@lang('simpleDesPageTexts.differencesToDES')</p>
+                            <p>@lang('simpleAesPageTexts.annotation')</p>
 
-                            <h4>@lang('simpleDesPageTexts.additionalSchemas')</h4>
-                            <div id="carouselControls" class="carousel col-lg-8 mb-5" data-bs-ride="carousel"
-                                 data-bs-interval="10000">
+                            <h4>@lang('simpleAesPageTexts.additionalSchemas')</h4>
+                            <div id="carouselControls" class="carousel col-lg-8 mb-5" data-bs-ride="carousel" data-bs-interval="10000">
                                 <div class="carousel-inner custom-carousel">
                                     <div class="carousel-item active">
-                                        <a href="{{ asset('img/simpleDesPage/EP.png' )}}" target="_blank">
-                                            <img alt="" src="{{ asset('img/simpleDesPage/EP.png') }}"
+                                        <a href="{{ asset('img/simpleAesPage/simpleAesGaloisMultiplication.png' )}}" target="_blank">
+                                            <img alt="" src="{{ asset('img/simpleAesPage/simpleAesGaloisMultiplication.png') }}"
                                                  class="d-block w-100" title="@lang('baseTexts.clickToSeeInFullSize')">
                                         </a>
                                         <div class="label">
-                                            @lang('simpleDesPageTexts.EP')
+                                            @lang('simpleAesPageTexts.encryptMixNibbles')
                                         </div>
                                     </div>
                                     <div class="carousel-item">
-                                        <a href="{{ asset('img/simpleDesPage/IP.png') }}" target="_blank">
-                                            <img alt="" src="{{ asset('img/simpleDesPage/IP.png') }}"
+                                        <a href="{{ asset('img/simpleAesPage/simpleAesGaloisMultiplicationInverse.png') }}" target="_blank">
+                                            <img alt="" src="{{ asset('img/simpleAesPage/simpleAesGaloisMultiplicationInverse.png') }}"
                                                  class="d-block w-100" title="@lang('baseTexts.clickToSeeInFullSize')">
                                         </a>
                                         <div class="label">
-                                            @lang('simpleDesPageTexts.IP')
+                                            @lang('simpleAesPageTexts.decryptMixNibbles')
                                         </div>
                                     </div>
                                     <div class="carousel-item">
-                                        <a href="{{ asset('img/simpleDesPage/IIP.png') }}" target="_blank">
-                                            <img alt="" src="{{ asset('img/simpleDesPage/IIP.png') }}"
+                                        <a href="{{ asset('img/simpleAesPage/simpleAesRowShift.png') }}" target="_blank">
+                                            <img alt="" src="{{ asset('img/simpleAesPage/simpleAesRowShift.png') }}"
                                                  class="d-block w-100" title="@lang('baseTexts.clickToSeeInFullSize')">
                                         </a>
                                         <div class="label">
-                                            @lang('simpleDesPageTexts.IIP')
+                                            @lang('simpleAesPageTexts.shiftRow')
                                         </div>
                                     </div>
                                     <div class="carousel-item">
-                                        <a href="{{ asset('img/simpleDesPage/LS.png') }}" target="_blank">
-                                            <img alt="" src="{{ asset('img/simpleDesPage/LS.png') }}"
+                                        <a href="{{ asset('img/simpleAesPage/simpleAesRowShiftInverse.png') }}" target="_blank">
+                                            <img alt="" src="{{ asset('img/simpleAesPage/simpleAesRowShiftInverse.png') }}"
                                                  class="d-block w-100" title="@lang('baseTexts.clickToSeeInFullSize')">
                                         </a>
                                         <div class="label">
-                                            @lang('simpleDesPageTexts.shift')
+                                            @lang('simpleAesPageTexts.shiftRow')
                                         </div>
                                     </div>
                                     <div class="carousel-item">
-                                        <a href="{{ asset('img/simpleDesPage/P4.png') }}" target="_blank">
-                                            <img alt="" src="{{asset('img/simpleDesPage/P4.png')}}"
+                                        <a href="{{ asset('img/simpleAesPage/simpleAesSbox.png') }}" target="_blank">
+                                            <img alt="" src="{{ asset('img/simpleAesPage/simpleAesSbox.png') }}"
                                                  class="d-block w-100" title="@lang('baseTexts.clickToSeeInFullSize')">
                                         </a>
                                         <div class="label">
-                                            @lang('simpleDesPageTexts.P4')
+                                            @lang('simpleAesPageTexts.sbox')
                                         </div>
                                     </div>
                                     <div class="carousel-item">
-                                        <a href="{{ asset('img/simpleDesPage/P8.png') }}" target="_blank">
-                                            <img alt="" src="{{ asset('img/simpleDesPage/P8.png') }}"
+                                        <a href="{{ asset('img/simpleAesPage/simpleAesSboxInverse.png') }}" target="_blank">
+                                            <img alt="" src="{{ asset('img/simpleAesPage/simpleAesSboxInverse.png') }}"
                                                  class="d-block w-100" title="@lang('baseTexts.clickToSeeInFullSize')">
                                         </a>
                                         <div class="label">
-                                            @lang('simpleDesPageTexts.P8')
-                                        </div>
-                                    </div>
-                                    <div class="carousel-item">
-                                        <a href="{{ asset('img/simpleDesPage/P10.png') }}" target="_blank">
-                                            <img alt="" src="{{ asset('img/simpleDesPage/P10.png') }}"
-                                                 class="d-block w-100" title="@lang('baseTexts.clickToSeeInFullSize')">
-                                        </a>
-                                        <div class="label">
-                                            @lang('simpleDesPageTexts.P10')
-                                        </div>
-                                    </div>
-                                    <div class="carousel-item">
-                                        <a href="{{ asset('img/simpleDesPage/sBoxes.png') }}" target="_blank">
-                                            <img alt="" src="{{ asset('img/simpleDesPage/sBoxes.png') }}"
-                                                 class="d-block w-100" title="@lang('baseTexts.clickToSeeInFullSize')">
-                                        </a>
-                                        <div class="label">
-                                            @lang('simpleDesPageTexts.sBoxes')
-                                        </div>
-                                    </div>
-                                    <div class="carousel-item">
-                                        <a href="{{ asset('img/simpleDesPage/SW.png') }}" target="_blank">
-                                            <img alt="" src="{{ asset('img/simpleDesPage/SW.png') }}"
-                                                 class="d-block w-100" title="@lang('baseTexts.clickToSeeInFullSize')">
-                                        </a>
-                                        <div class="label">
-                                            @lang('simpleDesPageTexts.swap')
+                                            @lang('simpleAesPageTexts.sboxInverse')
                                         </div>
                                     </div>
                                 </div>
@@ -121,28 +90,18 @@
                             </div>
                         </div>
                         <div class="col-lg-4 m-auto">
-                            <a href="{{asset('img/simpleDesPage/simpleDes_' . App::getLocale() . '.png')}}"
+                            <a href="{{asset('img/simpleAesPage/simpleAes_' . App::getLocale() . '.png')}}"
                                target="_blank">
                                 <img
                                     alt=""
                                     width="100%"
                                     title="@lang('baseTexts.clickToSeeInFullSize')"
-                                    src="{{asset('img/simpleDesPage/simpleDes_' . App::getLocale() . '.png')}}"
+                                    src="{{asset('img/simpleAesPage/simpleAes_' . App::getLocale() . '.png')}}"
                                 />
                             </a>
                             <figure class="text-center">
-                                @lang('simpleDesPageTexts.blockSchema')
+                                @lang('simpleAesPageTexts.blockSchema')
                             </figure>
-
-                            <div class="mt-5">
-                                <a href="{{ asset('img/simpleDesPage/roundFunction.png') }}" target="_blank">
-                                    <img alt="" src="{{ asset('img/simpleDesPage/roundFunction.png') }}" width="100%"
-                                         title="@lang('baseTexts.clickToSeeInFullSize')">
-                                </a>
-                                <figure class="text-center">
-                                    @lang('simpleDesPageTexts.roundFunction')
-                                </figure>
-                            </div>
                         </div>
                     </div>
                 </div>
@@ -158,11 +117,11 @@
                             <fieldset class="row p-2">
                                 <div class="col-lg-6">
                                     <label class="form-label" for="text">
-                                        @lang('simpleDesPageTexts.binaryInput')
+                                        @lang('simpleAesPageTexts.binaryInput')
                                         <x-tooltipButton
                                             :tooltip="trans('baseTexts.binaryInputPrompt')"></x-tooltipButton>
                                     </label>
-                                    <input class="form-control binaryValidation" minlength="1" maxlength="8" required
+                                    <input class="form-control binaryValidation" minlength="1" maxlength="16" required
                                            type="text"
                                            id="text"
                                            name="text"
@@ -171,11 +130,11 @@
                                 </div>
                                 <div class="col-lg-6">
                                     <label class="form-label" for="key">
-                                        @lang('simpleDesPageTexts.binaryKey')
+                                        @lang('simpleAesPageTexts.binaryKey')
                                         <x-tooltipButton
                                             :tooltip="trans('baseTexts.binaryInputPrompt')"></x-tooltipButton>
                                     </label>
-                                    <input class="form-control binaryValidation" minlength="1" maxlength="10"
+                                    <input class="form-control binaryValidation" minlength="1" maxlength="16"
                                            type="text" id="key"
                                            name="key"
                                            placeholder="@lang('baseTexts.binaryInputPrompt')"
@@ -212,7 +171,7 @@
 
     @if(isset($result))
         @php
-            /** @var App\Algorithms\Output\SDESOutput $result */
+            /** @var App\Algorithms\Output\BasicOutput $result */
         @endphp
         <section class="m-5 shadow-lg border rounded-4 p-5">
             <div class="container text-break">
@@ -255,17 +214,17 @@
 
                 <div class="mt-4">
                     <h1><i class="fa-solid fa-list-ol"></i> @lang('baseTexts.algorithmSteps')</h1>
-                    <div class="accordion" id="simpleDESSteps">
+                    <div class="accordion" id="simpleAESSteps">
                         <div class="accordion-item">
                             <h2 class="accordion-header">
                                 <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
                                         data-bs-target="#keyGeneration" aria-expanded="false"
                                         aria-controls="keyGeneration">
                                     <i class="fa-solid fa-key"></i> 
-                                    @lang('simpleDesPageTexts.keyGeneration') - @lang('simpleDesPageTexts.binaryKey')
+                                    @lang('simpleAesPageTexts.keyGeneration') - @lang('simpleAesPageTexts.binaryKey')
                                 </button>
                             </h2>
-                            <div id="keyGeneration" class="accordion-collapse collapse show">
+                            <div id="keyGeneration" class="accordion-collapse collapse">
                                 <div class="accordion-body">
                                     <div class="accordion" id="keyGenerationStepsAccordion">
                                         @foreach($result->getKeyGenerationSteps() as $keyGenerationStep)
@@ -318,7 +277,7 @@
                                         data-bs-target="#operationsSteps" aria-expanded="false"
                                         aria-controls="operationsSteps">
                                     <i class="fa-solid fa-gear"></i> {{CipherBase::getStringAlgorithmOperation($result->getOperation())}}
-                                    - @lang('simpleDesPageTexts.binaryInput')
+                                    - @lang('simpleAesPageTexts.binaryInput')
                                 </button>
                             </h2>
                             <div id="operationsSteps" class="accordion-collapse collapse">
@@ -330,24 +289,24 @@
                                                 <h2 class="accordion-header">
                                                     <button class="accordion-button collapsed" type="button"
                                                             data-bs-toggle="collapse"
-                                                            data-bs-target="#step{{$loop->index}}"
+                                                            data-bs-target="#step{{ $loop->index }}"
                                                             aria-expanded="false"
-                                                            aria-controls="step{{$loop->index}}">
-                                                        {{$loop->index + 1}}. {{$step->getTranslatedActionName()}}
+                                                            aria-controls="step{{ $loop->index }}">
+                                                        {{ $loop->index + 1 }}. {{ $step->getTranslatedActionName() }}
                                                     </button>
                                                 </h2>
                                                 <div id="step{{$loop->index}}"
                                                      class="accordion-collapse collapse">
                                                     <div class="accordion-body">
                                                         <div class="d-flex flex-wrap">
-                                                            <div class="col-md-6">
+                                                            <div class="row">
                                                                 <h3>
                                                                     <i class="fa-solid fa-file-lines"></i>
                                                                     @lang('baseTexts.input')
                                                                 </h3>
-                                                                <p>{{$step->getInput()}}</p>
+                                                                <p>{{ $step->getInput() }}</p>
                                                             </div>
-                                                            <div class="col-md-6">
+                                                            <div class="row">
                                                                 <h3>
                                                                     <i class="fa-solid fa-file-lines"></i>
                                                                     @lang('baseTexts.output')
