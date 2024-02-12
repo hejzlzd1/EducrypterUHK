@@ -48,9 +48,8 @@ class RsaCipherController extends BaseController
             $this->isPrimeNumber($secondInputNumber, trans('baseTexts.primeNumber').' #2');
         }
 
-        if (! empty($this->validationFailedVariable)) {
+        if (!empty($this->validationFailedVariable)) {
             Session::flash('alert-error', $this->getValidationErrorTranslation());
-
             return back()->withInput($data);
         }
 

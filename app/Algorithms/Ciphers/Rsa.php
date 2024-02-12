@@ -11,7 +11,7 @@ class Rsa extends CipherBase
 {
     public function __construct(string $text, private ?int $publicKey, private ?int $privateKey, int $operation, private ?int $p, private ?int $q)
     {
-        // For this case we convert input string into ascii, each character splitted by ' '
+        // For this case we convert input string into ascii, each character separated by ' '
         $text = $operation === CipherBase::ALGORITHM_ENCRYPT ? $this->getAsciiFromString($text) : $text;
         parent::__construct($text, null, $operation);
     }
@@ -24,11 +24,9 @@ class Rsa extends CipherBase
         $d = $this->privateKey;
 
         foreach (explode(' ', $this->text) as $char) {
-            $c = gmp_pow(gmp_init($char), $d); // use first part of encryption key -> $e
-            $cBeforeModulo = gmp_intval($c);
-            $c = gmp_mod($c, $n); // use of second part of encryption key to generate encrypted char -> $n
+            $c = gmp_powm(gmp_init($char), $d, $n); // uses binary exponentiation (CORM09)
             $result .= $c.' ';
-            $steps[] = new RSAStep(beforeModulo: $cBeforeModulo, inputChar: (int) $char, outputChar: gmp_intval($c));
+            $steps[] = new RSAStep(inputChar: (int) $char, outputChar: gmp_intval($c));
         }
 
         // Return the resulting output object
@@ -50,7 +48,7 @@ class Rsa extends CipherBase
         $n = gmp_mul($p,$q);
 
         // fermat number
-        $e = 257;
+        $e = 65537;
         // declaring phi
         $phi = gmp_mul(gmp_sub($p,1), gmp_sub($q, 1));
         // searching for co-prime number
@@ -72,10 +70,8 @@ class Rsa extends CipherBase
         $result = '';
         $steps = [];
         foreach (explode(' ', $this->text) as $char) {
-            $c = gmp_pow(gmp_init($char), $e); // use first part of encryption key -> $e
-            $cBeforeModulo = gmp_intval($c);
-            $c = gmp_mod($c, $n); // use of second part of encryption key to generate encrypted char -> $n
-            $steps[] = new RSAStep(beforeModulo: $cBeforeModulo, inputChar: (int) $char, outputChar: gmp_intval($c));
+            $c = gmp_powm(gmp_init($char), $e, $n); // uses binary exponentiation (CORM09)
+            $steps[] = new RSAStep(inputChar: (int) $char, outputChar: gmp_intval($c));
             $result .= $c.' ';
         }
 
