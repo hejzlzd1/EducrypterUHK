@@ -16,7 +16,8 @@ use Exception;
 class SimpleAes extends BlockCipher
 {
     // S-boxes for substitution
-    private $sBox = [
+    /** @var String[] $sBox */
+    private array $sBox = [
         '1001',
         '0100',
         '1010',
@@ -34,7 +35,11 @@ class SimpleAes extends BlockCipher
         '1111',
         '0111'
     ];
-    private $sBoxInverse = [
+
+    /**
+     * @var String[]
+     */
+    private array $sBoxInverse = [
         '1010',
         '0101',
         '1001',
@@ -140,7 +145,6 @@ class SimpleAes extends BlockCipher
             translatedActionName: 'w₂ = w₂ ⊕ sub(rot(w₁))'
         ); // create step
 
-        /** @var String[] $w1 */
         $w2 = $this->xor($w2, $w1); // xor
         $step->setOutput(sprintf('w₂ = %s', $this->chunkSplitArray($w2))); // set output of action
         $roundKeysSteps[] = $step; // add to steps - output
@@ -199,14 +203,14 @@ class SimpleAes extends BlockCipher
         );
 
         // Add the expanded round keys and corresponding steps to output
-        $roundKeys[] = implode('', array_merge($w2, $w3Plain));
+        $roundKeys[] = implode(array_merge($w2, $w3Plain));
         $roundKeysSteps[] = new NamedStep(
             sprintf('W₂ - %s, w₃ - %s', $this->chunkSplitArray($w2), $this->chunkSplitArray($w3Plain)),
             sprintf('K₁ = %s', implode(array_merge($w2, $w3Plain))),
             trans('simpleAesPageTexts.addRoundKey') . ' K₁ = w₂ + w₃'
         );
 
-        $roundKeys[] = implode('', array_merge($w4, $w5));
+        $roundKeys[] = implode(array_merge($w4, $w5));
         $roundKeysSteps[] = new NamedStep(
             sprintf("w₄ - %s, w₅ - %s", $this->chunkSplitArray($w4), $this->chunkSplitArray($w5)),
             sprintf('K₂ = %s', implode(array_merge($w4, $w5))),
@@ -280,7 +284,7 @@ class SimpleAes extends BlockCipher
     {
         $chunks = array_chunk($value, 4);
         $nibbles = array_map(function (array $chunk): string {
-            return implode('', $this->getSubstitutionValue($chunk));
+            return implode($this->getSubstitutionValue($chunk));
         }, $chunks);
         $this->output->addStep(
             new NamedStep(
@@ -423,7 +427,7 @@ class SimpleAes extends BlockCipher
             ),
             translatedActionName: 'in ⊕ K' . $keyNum
         ); // Not nice code - check if first round (mixColumn) was called => set key according to that (wouldn't work on real AES)
-        $nibbles = $this->addRoundKey(str_split(implode('', $nibbles)), str_split($roundKey));
+        $nibbles = $this->addRoundKey(str_split(implode($nibbles)), str_split($roundKey));
 
         $step->setOutput(sprintf('out = %s', $this->chunkSplitArray($nibbles)));
         $this->output->addStep($step);
@@ -459,9 +463,7 @@ class SimpleAes extends BlockCipher
             $this->output->addStep($step);
         }
 
-        $nibbles = str_split(implode($nibbles));
-
-        return $nibbles;
+        return str_split(implode($nibbles));
     }
 
     /**
@@ -551,6 +553,7 @@ class SimpleAes extends BlockCipher
      * @param array $key
      *
      * @return array
+     * @throws Exception
      */
     private function addRoundKey(array $input, array $key): array
     {
@@ -624,5 +627,23 @@ class SimpleAes extends BlockCipher
         $this->output->setOutputValue(implode($value));
 
         return $this->output;
+    }
+
+    /**
+     * Takes two binary arrays and performs XOR between them
+     * @return String[]
+     * @throws Exception
+     */
+    protected function xor(array $firstInput, array $secondInput, bool $returnSteps = false): array
+    {
+        if (count($firstInput) !== count($secondInput)) {
+            throw new Exception(trans('Cannot xor two different sized inputs'));
+        }
+        $output = [];
+        foreach ($firstInput as $index => $binaryValue) {
+            $output[] = $binaryValue === $secondInput[$index] ? '0' : '1';
+        }
+
+        return $output;
     }
 }
