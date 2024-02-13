@@ -11,11 +11,11 @@ class Rsa extends CipherBase
 {
     public function __construct(
         string $text,
-        private ?int $publicKey,
-        private ?int $privateKey,
+        private readonly ?int $publicKey,
+        private readonly ?int $privateKey,
         int $operation,
-        private ?int $p,
-        private ?int $q
+        private readonly ?int $p,
+        private readonly ?int $q
     ) {
         // For this case we convert input string into ascii, each character separated by ' '
         $text = $operation === CipherBase::ALGORITHM_ENCRYPT ? $this->getAsciiFromString($text) : $text;
@@ -31,7 +31,7 @@ class Rsa extends CipherBase
 
         foreach (explode(' ', $this->text) as $char) {
             $c = gmp_powm(gmp_init($char), $d, $n); // uses binary exponentiation (CORM09)
-            $result .= $c . ' ';
+            $result .= chr(intval($c));
             $steps[] = new RSAStep(inputChar: (int)$char, outputChar: gmp_intval($c));
         }
 
@@ -70,8 +70,8 @@ class Rsa extends CipherBase
                 $e++;
             }
         }
-        $d = gmp_invert(gmp_init($e), gmp_init($phi));
-        $d = gmp_strval($d);
+        $d = gmp_invert(gmp_init($e), $phi);
+        $d = gmp_intval($d);
 
         // Encryption process
         $result = '';

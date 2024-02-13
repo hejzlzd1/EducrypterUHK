@@ -36,7 +36,7 @@ class A5_1 extends StreamCipher
         $this->initializeRegisters(); // Initialize the A5/1 registers
         $this->output = new BasicOutput(inputValue: $text, operation: $operation, key: $key);
         $this->output->addAdditionalInformation(
-            ['dataFrameBinary' => $this->dataFrame, 'dataFrame' => $dataFrameInteger]
+            ['dataFrameBinary' => decbin($this->dataFrame), 'dataFrame' => $dataFrameInteger]
         );
     }
 
@@ -51,9 +51,9 @@ class A5_1 extends StreamCipher
             $step = $this->output->getStep($i); // get step
             $step->setInput($this->text[$i]); // set input bit
 
-            $ciphertext .= ($this->text[$i] ^ (int)$keystream[$i]); // Perform encryption
+            $ciphertext .= decbin((int)$this->text[$i] ^ (int)$keystream[$i]); // Perform encryption
 
-            $step->setOutput($this->text[$i] ^ (int)$keystream[$i]); // set output after xor with text
+            $step->setOutput(decbin(((int)$this->text[$i] ^ (int)$keystream[$i]))); // set output after xor with text
         }
 
         $this->output->setOutputValue($ciphertext);
@@ -97,9 +97,9 @@ class A5_1 extends StreamCipher
     {
         for ($i = 0; $i < $length; $i++) {
             $step = new A5_1Step(
-                registerA: implode('', $this->R1),
-                registerB: implode('', $this->R2),
-                registerC: implode('', $this->R3),
+                registerA: implode($this->R1),
+                registerB: implode($this->R2),
+                registerC: implode($this->R3),
             );
             $majorityBit = $this->getMajorityBit($this->R1[8], $this->R2[10], $this->R3[10]);
             $step->setMajorityBit($majorityBit);
@@ -113,9 +113,9 @@ class A5_1 extends StreamCipher
             $this->clockAllRegisters(); // Clock all registers depending on majority bit
 
             $step->setClockedRegisters(
-                a: implode('', $this->R1),
-                b: implode('', $this->R2),
-                c: implode('', $this->R3),
+                a: implode($this->R1),
+                b: implode($this->R2),
+                c: implode($this->R3),
             );
             $bit = $this->getOutputBit(); // Get the output bit
             $step->setKeyStreamBit($bit);

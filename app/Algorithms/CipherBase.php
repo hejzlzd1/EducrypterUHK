@@ -8,11 +8,9 @@ use Exception;
 
 abstract class CipherBase
 {
-    public const ALGORITHM_ENCRYPT = 1;
-
-    public const ALGORITHM_DECRYPT = 0;
-
-    public const ALGORITHM_DECRYPT_BRUTEFORCE = 2;
+    public const int ALGORITHM_ENCRYPT = 1,
+    ALGORITHM_DECRYPT = 0,
+    ALGORITHM_DECRYPT_BRUTEFORCE = 2;
 
     protected ?string $key;
 
@@ -44,11 +42,12 @@ abstract class CipherBase
 
     public static function getStringAlgorithmOperation(int $operation): string
     {
-        return match ($operation) {
+        $translatedOperation = match ($operation) {
             self::ALGORITHM_ENCRYPT => trans('baseTexts.encryption'),
             self::ALGORITHM_DECRYPT => trans('baseTexts.decryption'),
             self::ALGORITHM_DECRYPT_BRUTEFORCE => trans('baseTexts.bruteforce'),
         };
+        return (string) $translatedOperation;
     }
 
     public static function normalize($string): string
@@ -189,7 +188,7 @@ abstract class CipherBase
             $asciiValues[] = ord($input[$i]) . ($i !== strlen($input) - 1 ? ' ' : '');
         }
 
-        return implode('', $asciiValues);
+        return implode($asciiValues);
     }
 
     /**

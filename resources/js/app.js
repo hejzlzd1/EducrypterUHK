@@ -150,7 +150,7 @@ $(document).ready(function () {
     }
     function generateRandomBinaryString(size) {
         let binaryString = '';
-        for (let i = 0; i <= size; i++) {
+        for (let i = 0; i < size; i++) {
             binaryString += Math.round(Math.random());
         }
         return binaryString;

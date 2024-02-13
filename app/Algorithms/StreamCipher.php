@@ -4,7 +4,7 @@ namespace App\Algorithms;
 
 class StreamCipher extends CipherBase
 {
-    protected string $dataFrame;
+    protected int $dataFrame;
 
     public function getIv(): int
     {
@@ -16,7 +16,7 @@ class StreamCipher extends CipherBase
         $this->dataFrame = $dataFrame;
     }
 
-    protected function expandOrTrimToSpecificBits($data, $size, $isString = true)
+    protected function expandOrTrimToSpecificBits($data, $size)
     {
         $dataLength = mb_strlen($data);
         if ($dataLength < $size) {

@@ -58,4 +58,8 @@ class SAESOutput extends BasicOutput
     {
         $this->roundKeys = $roundKeys;
     }
+    public function getRoundKeys(): array
+    {
+        return $this->roundKeys;
+    }
 }

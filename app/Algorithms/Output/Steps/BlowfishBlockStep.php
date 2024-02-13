@@ -17,7 +17,6 @@ class BlowfishBlockStep extends Step
 
     private ?string $outputValue;
 
-    #[Pure]
     public function __construct(?string $outputValue = null, ?array $rounds = null)
     {
         $this->rounds = $rounds;
@@ -25,7 +24,7 @@ class BlowfishBlockStep extends Step
         parent::__construct();
     }
 
-    public function getOutputValue(): string
+    public function getOutputValue(): ?string
     {
         return $this->outputValue;
     }
@@ -35,7 +34,7 @@ class BlowfishBlockStep extends Step
         $this->outputValue = $outputValue;
     }
 
-    public function getRounds(): array
+    public function getRounds(): ?array
     {
         return $this->rounds;
     }

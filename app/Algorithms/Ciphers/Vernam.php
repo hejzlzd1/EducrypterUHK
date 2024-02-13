@@ -29,7 +29,7 @@ class Vernam extends CipherBase
     {
         $output = new BasicOutput(inputValue: $this->text, operation: $this->operation, key: $this->key);
         $xor = $this->xor(firstInput: str_split($this->text), secondInput: str_split($this->key), returnSteps: true);
-        $output->setOutputValue(implode('', $xor['output']));
+        $output->setOutputValue(implode($xor['output']));
         $output->setSteps($xor['steps']);
         return $output;
     }

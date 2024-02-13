@@ -6,6 +6,7 @@ use App\Algorithms\BlockCipher;
 use App\Algorithms\Output\BasicOutput;
 use App\Algorithms\Output\SDESOutput;
 use App\Algorithms\Output\Steps\NamedStep;
+use App\Algorithms\Output\Steps\Step;
 use Exception;
 
 /**
@@ -70,7 +71,7 @@ class SimpleDes extends BlockCipher
         $this->output->addKeyGenerationStep(
             new NamedStep(
                 input: $key,
-                output: implode('', $permutedKey),
+                output: implode($permutedKey),
                 translatedActionName: trans('simpleDesPageTexts.P10'),
                 imageUrl: asset('img/simpleDesPage/P10.png')
             )
@@ -80,8 +81,8 @@ class SimpleDes extends BlockCipher
         [$leftKey, $rightKey] = array_chunk($permutedKey, 5);
         $this->output->addKeyGenerationStep(
             new NamedStep(
-                input: implode('', $permutedKey),
-                output: implode('', $leftKey) . ' | ' . implode(
+                input: implode($permutedKey),
+                output: implode($leftKey) . ' | ' . implode(
                     '',
                     $rightKey
                 ),
@@ -93,8 +94,8 @@ class SimpleDes extends BlockCipher
         $firstHalfKey = $this->leftShift($leftKey);
         $this->output->addKeyGenerationStep(
             new NamedStep(
-                input: implode('', $leftKey),
-                output: implode('', $firstHalfKey),
+                input: implode($leftKey),
+                output: implode($firstHalfKey),
                 translatedActionName: trans(
                     'simpleDesPageTexts.leftShiftLeftKey'
                 ) . ' - 2b',
@@ -105,8 +106,8 @@ class SimpleDes extends BlockCipher
         $secondHalfKey = $this->leftShift($rightKey);
         $this->output->addKeyGenerationStep(
             new NamedStep(
-                input: implode('', $rightKey),
-                output: implode('', $secondHalfKey),
+                input: implode($rightKey),
+                output: implode($secondHalfKey),
                 translatedActionName: trans('simpleDesPageTexts.leftShiftRightKey') . ' - 2b',
                 imageUrl: asset('img/simpleDesPage/LS.png')
             )
@@ -119,7 +120,7 @@ class SimpleDes extends BlockCipher
         );
         $this->output->addKeyGenerationStep(
             new NamedStep(
-                input: implode('', array_merge($firstHalfKey, $secondHalfKey)),
+                input: implode(array_merge($firstHalfKey, $secondHalfKey)),
                 output: $this->firstHalfKey,
                 translatedActionName: trans(
                     'simpleDesPageTexts.P8KeyOutput',
@@ -130,21 +131,21 @@ class SimpleDes extends BlockCipher
         );
 
         $step = new NamedStep(
-            input: implode('', $firstHalfKey),
+            input: implode($firstHalfKey),
             translatedActionName: trans('simpleDesPageTexts.leftShiftLeftKey'),
             imageUrl: asset('img/simpleDesPage/LS.png')
         );
         $firstHalfKey = $this->leftShift($firstHalfKey, 2);
-        $step->setOutput(implode('', $firstHalfKey));
+        $step->setOutput(implode($firstHalfKey));
         $this->output->addKeyGenerationStep($step);
 
         $step = new NamedStep(
-            input: implode('', $secondHalfKey),
+            input: implode($secondHalfKey),
             translatedActionName: trans('simpleDesPageTexts.leftShiftRightKey'),
             imageUrl: asset('img/simpleDesPage/LS.png')
         );
         $secondHalfKey = $this->leftShift($secondHalfKey, 2);
-        $step->setOutput(implode('', $firstHalfKey));
+        $step->setOutput(implode($firstHalfKey));
         $this->output->addKeyGenerationStep($step);
 
         // Perform P8 on both parts of key (merged in method) -> this creates second part of 8bit key
@@ -154,7 +155,7 @@ class SimpleDes extends BlockCipher
         );
         $this->output->addKeyGenerationStep(
             new NamedStep(
-                input: implode('', array_merge($firstHalfKey, $secondHalfKey)),
+                input: implode(array_merge($firstHalfKey, $secondHalfKey)),
                 output: $this->secondHalfKey,
                 translatedActionName: trans(
                     'simpleDesPageTexts.P8KeyOutput',
@@ -230,7 +231,7 @@ class SimpleDes extends BlockCipher
      * @param array<string> $leftHalf
      * @param array<string> $rightHalf
      * @param array<string> $key
-     * @return string[]
+     * @return String[] | array{output: String[], steps: array<Step>}
      * @throws Exception
      */
     private function roundFunction(array $leftHalf, array $rightHalf, array $key): array
@@ -238,19 +239,19 @@ class SimpleDes extends BlockCipher
         $permutedSecondHalf = $this->permutation($rightHalf, [4, 1, 2, 3, 2, 3, 4, 1]);
         $this->output->addStep(
             new NamedStep(
-                input: implode('', $rightHalf),
-                output: implode('', $permutedSecondHalf),
+                input: implode($rightHalf),
+                output: implode($permutedSecondHalf),
                 translatedActionName: trans('simpleDesPageTexts.EP'),
                 imageUrl: asset('img/simpleDesPage/EP.png')
             )
         );
 
         $xorOutput = $this->xor($permutedSecondHalf, $key);
+
         $this->output->addStep(
             new NamedStep(
-                input: implode('', $permutedSecondHalf) . ' ⊕ ' . implode('', $key),
+                input: implode($permutedSecondHalf) . ' ⊕ ' . implode($key),
                 output: implode(
-                    '',
                     $xorOutput
                 ),
                 translatedActionName: trans('simpleDesPageTexts.xor')
@@ -260,30 +261,29 @@ class SimpleDes extends BlockCipher
         [$xorFirst, $xorSecond] = array_chunk($xorOutput, 4);
         $this->output->addStep(
             new NamedStep(
-                input: implode('', $xorOutput),
-                output: implode('', $xorFirst) . ' | ' . implode(
-                    '',
-                    $xorSecond
-                ),
+                input: implode($xorOutput),
+                output: implode($xorFirst) . ' | ' . implode($xorSecond),
                 translatedActionName: trans('simpleDesPageTexts.split')
             )
         );
 
+        /** @var array{array-key, string} $xorFirst */
         $xorFirstAfterSBox = $this->sboxPermutation($xorFirst, 0);
         $this->output->addStep(
             new NamedStep(
-                input: implode('', $xorOutput),
-                output: implode('', $xorFirstAfterSBox),
+                input: implode($xorOutput),
+                output: implode($xorFirstAfterSBox),
                 translatedActionName: trans('simpleDesPageTexts.SBoxPermutation', ['boxNumber' => 0]),
                 imageUrl: asset('img/simpleDesPage/sBoxes.png')
             )
         );
 
+        /** @var array{array-key, string} $xorSecond */
         $xorSecondAfterSBox = $this->sboxPermutation($xorSecond, 1);
         $this->output->addStep(
             new NamedStep(
-                input: implode('', $xorOutput),
-                output: implode('', $xorSecondAfterSBox),
+                input: implode($xorOutput),
+                output: implode($xorSecondAfterSBox),
                 translatedActionName: trans('simpleDesPageTexts.SBoxPermutation', ['boxNumber' => 1]),
                 imageUrl: asset('img/simpleDesPage/sBoxes.png')
             )
@@ -293,8 +293,8 @@ class SimpleDes extends BlockCipher
         $p4 = $this->permutation($mergedXor, [2, 4, 3, 1]);
         $this->output->addStep(
             new NamedStep(
-                input: implode('', $mergedXor),
-                output: implode('', $p4),
+                input: implode($mergedXor),
+                output: implode($p4),
                 translatedActionName: trans(
                     'simpleDesPageTexts.P4'
                 ),
@@ -305,8 +305,8 @@ class SimpleDes extends BlockCipher
         $xor = $this->xor($leftHalf, $p4);
         $this->output->addStep(
             new NamedStep(
-                input: implode('', $leftHalf) . ' ⊕ ' . implode('', $p4),
-                output: implode('', $xor),
+                input: implode($leftHalf) . ' ⊕ ' . implode($p4),
+                output: implode($xor),
                 translatedActionName: trans('simpleDesPageTexts.xor')
             )
         );
@@ -317,8 +317,8 @@ class SimpleDes extends BlockCipher
     /**
      * Simple array swap.
      * Left = Right && Right = Left
-     * @param array<string> $leftHalf
-     * @param array<string> $rightHalf
+     * @param String[] $leftHalf
+     * @param String[] $rightHalf
      * @return array
      */
     private function swap(array $leftHalf, array $rightHalf): array
@@ -332,6 +332,7 @@ class SimpleDes extends BlockCipher
 
     /**
      * Public function to encrypt plain string
+     * @throws Exception
      */
     public function encrypt(): SDESOutput
     {
@@ -340,7 +341,7 @@ class SimpleDes extends BlockCipher
         $this->output->addStep(
             new NamedStep(
                 input: $this->text,
-                output: implode('', $permutedText),
+                output: implode($permutedText),
                 translatedActionName: trans(
                     'simpleDesPageTexts.IP'
                 ),
@@ -351,8 +352,8 @@ class SimpleDes extends BlockCipher
         [$leftHalf, $rightHalf] = array_chunk($permutedText, 4);
         $this->output->addStep(
             new NamedStep(
-                input: implode('', $permutedText),
-                output: implode('', $leftHalf) . ' | ' . implode(
+                input: implode($permutedText),
+                output: implode($leftHalf) . ' | ' . implode(
                     '',
                     $rightHalf
                 ),
@@ -364,14 +365,15 @@ class SimpleDes extends BlockCipher
         $leftHalf = $this->roundFunction($leftHalf, $rightHalf, str_split($this->firstHalfKey));
 
         // Swap half sides
+        /** @var array{array-key, string} $leftHalf */
         [$leftHalf, $rightHalf] = $this->swap($leftHalf, $rightHalf);
         $this->output->addStep(
             new NamedStep(
-                input: implode('', $rightHalf) . ' | ' . implode('', $leftHalf),
+                input: implode($rightHalf) . ' | ' . implode($leftHalf),
                 output: implode(
                     '',
                     $leftHalf
-                ) . ' | ' . implode('', $rightHalf),
+                ) . ' | ' . implode($rightHalf),
                 translatedActionName: trans('simpleDesPageTexts.swap'),
             )
         );
@@ -381,11 +383,12 @@ class SimpleDes extends BlockCipher
 
         // Merge and perform inverse permutation
         $mergedOutputs = array_merge($leftHalf, $rightHalf);
+        /** @var array{array-key, string} $mergedOutputs */
         $output = $this->permutation($mergedOutputs, [4, 1, 3, 5, 7, 2, 8, 6]);
         $this->output->addStep(
             new NamedStep(
-                input: implode('', $mergedOutputs),
-                output: implode('', $output),
+                input: implode($mergedOutputs),
+                output: implode($output),
                 translatedActionName: trans(
                     'simpleDesPageTexts.IIP'
                 ),
@@ -393,13 +396,14 @@ class SimpleDes extends BlockCipher
             )
         );
 
-        $this->output->setOutputValue(implode('', $output));
+        $this->output->setOutputValue(implode($output));
 
         return $this->output; //return full encrypted text with steps
     }
 
     /**
      * Public function to decrypt text
+     * @throws Exception
      */
     public function decrypt(): SDESOutput
     {
@@ -408,7 +412,7 @@ class SimpleDes extends BlockCipher
         $this->output->addStep(
             new NamedStep(
                 input: $this->text,
-                output: implode('', $permutedText),
+                output: implode($permutedText),
                 translatedActionName: trans(
                     'simpleDesPageTexts.IP'
                 ),
@@ -419,8 +423,8 @@ class SimpleDes extends BlockCipher
         [$leftHalf, $rightHalf] = array_chunk($permutedText, 4);
         $this->output->addStep(
             new NamedStep(
-                input: implode('', $permutedText),
-                output: implode('', $leftHalf) . ' | ' . implode(
+                input: implode($permutedText),
+                output: implode($leftHalf) . ' | ' . implode(
                     '',
                     $rightHalf
                 ),
@@ -432,14 +436,15 @@ class SimpleDes extends BlockCipher
         $leftHalf = $this->roundFunction($leftHalf, $rightHalf, str_split($this->secondHalfKey));
 
         // Swap half sides
+        /**
+         * @var String[] $leftHalf
+         * @var String[] $rightHalf
+         */
         [$leftHalf, $rightHalf] = $this->swap($leftHalf, $rightHalf);
         $this->output->addStep(
             new NamedStep(
-                input: implode('', $rightHalf) . ' | ' . implode('', $leftHalf),
-                output: implode(
-                    '',
-                    $leftHalf
-                ) . ' | ' . implode('', $rightHalf),
+                input: implode($rightHalf) . ' | ' . implode($leftHalf),
+                output: implode($leftHalf) . ' | ' . implode($rightHalf),
                 translatedActionName: trans('simpleDesPageTexts.swap'),
                 imageUrl: asset('img/simpleDesPage/SW.png')
             )
@@ -450,11 +455,12 @@ class SimpleDes extends BlockCipher
 
         // Merge and perform inverse permutation
         $mergedOutputs = array_merge($leftHalf, $rightHalf);
+        /** @var String[] $mergedOutputs */
         $output = $this->permutation($mergedOutputs, [4, 1, 3, 5, 7, 2, 8, 6]);
         $this->output->addStep(
             new NamedStep(
-                input: implode('', $mergedOutputs),
-                output: implode('', $output),
+                input: implode($mergedOutputs),
+                output: implode($output),
                 translatedActionName: trans(
                     'simpleDesPageTexts.IIP'
                 ),
@@ -463,7 +469,7 @@ class SimpleDes extends BlockCipher
         );
 
 
-        $this->output->setOutputValue(implode('', $output));
+        $this->output->setOutputValue(implode($output));
         return $this->output; //return full encrypted text with steps
     }
 }
