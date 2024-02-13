@@ -205,7 +205,7 @@ class SimpleAes extends BlockCipher
         // Add the expanded round keys and corresponding steps to output
         $roundKeys[] = implode(array_merge($w2, $w3Plain));
         $roundKeysSteps[] = new NamedStep(
-            sprintf('W₂ - %s, w₃ - %s', $this->chunkSplitArray($w2), $this->chunkSplitArray($w3Plain)),
+            sprintf('w₂ - %s, w₃ - %s', $this->chunkSplitArray($w2), $this->chunkSplitArray($w3Plain)),
             sprintf('K₁ = %s', implode(array_merge($w2, $w3Plain))),
             trans('simpleAesPageTexts.addRoundKey') . ' K₁ = w₂ + w₃'
         );
