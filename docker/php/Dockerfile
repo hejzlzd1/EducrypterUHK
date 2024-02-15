@@ -49,4 +49,17 @@ RUN a2enmod rewrite \
 RUN usermod -u 1000 www-data
 RUN groupmod -g 1000 www-data
 
+# Copy SSL certificate and private key only if not running in localhost
+ARG ENVIRONMENT
+RUN if [ "${ENVIRONMENT}" != "localhost" ]; then \
+        a2enmod ssl && \
+        mkdir /etc/apache2/ssl/ && \
+        cp /etc/ssl/educrypter.uhk.cz.crt /etc/apache2/ssl/ && \
+        cp /etc/ssl/educrypter.uhk.cz.key /etc/apache2/ssl/ && \
+        chmod 600 /etc/apache2/ssl/educrypter.uhk.cz.key; \
+    fi
+
+# Expose ports
 EXPOSE 80
+EXPOSE 443
+
