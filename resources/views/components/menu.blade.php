@@ -52,8 +52,8 @@
                             <hr class="dropdown-divider">
                         </li>
                         <li class="dropdown-item disabled">@lang('menuTexts.blockCiphers')</li>
-                        <li><a class="dropdown-item" href="{{ route('simpleDesCipher') }}">Simple DES</a></li>
-                        <li><a class="dropdown-item" href="{{ route('tripleSimpleDesCipher') }}">TripleDES</a></li>
+                        <li><a class="dropdown-item" href="{{ route('simpleDesCipher') }}">S-DES</a></li>
+                        <li><a class="dropdown-item" href="{{ route('tripleSimpleDesCipher') }}">Triple S-DES</a></li>
                         <li><a class="dropdown-item" href="{{ route('blowfishCipher') }}">Blowfish</a></li>
                         <li><a class="dropdown-item" href="{{ route('simpleAesCipher') }}">S-AES</a></li>
 
@@ -72,18 +72,6 @@
                     <ul class="dropdown-menu">
                         <li><a class="dropdown-item" href="/todo">DSA</a></li>
                         <li><a class="dropdown-item" href="{{ route('rsaCipher') }}">RSA</a></li>
-                    </ul>
-                </li>
-
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        @lang('menuTexts.cipherInformation')
-                    </a>
-                    <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="/todo">@lang('menuTexts.classicCiphers')</a></li>
-                        <li><a class="dropdown-item" href="/todo">@lang("menuTexts.blockCiphers")</a></li>
-                        <li><a class="dropdown-item" href="/todo">@lang("menuTexts.blockCiphersModes")</a></li>
-                        <li><a class="dropdown-item" href="/todo">@lang("menuTexts.streamCiphers")</a></li>
                     </ul>
                 </li>
             </ul>

@@ -14,7 +14,7 @@
             <div>
                 <div class="container">
                     <div class="row align-items-start">
-                        <h1><i class="fa-solid fa-circle-info"></i> Simple DES</h1>
+                        <h1><i class="fa-solid fa-circle-info"></i> S-DES</h1>
                         <hr/>
                         <div class="col-lg-8">
                             <p>@lang('simpleDesPageTexts.annotation')</p>

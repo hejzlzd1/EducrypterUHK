@@ -1,8 +1,8 @@
 <?php
 
 return [
-    'title' => 'Krypto aplikace - Simple DES',
-    'metaComment' => 'Tato stránka obsahuje popis a zkušební formulář Simple DES šifry',
+    'title' => 'Krypto aplikace - S-DES',
+    'metaComment' => 'Tato stránka obsahuje popis a zkušební formulář S-DES šifry',
     'annotation' => '
        Simple DES (S-DES) je zjednodušená verze klasického šifrovacího algoritmu Data Encryption Standard (DES). Byl navržen pro výukové účely a poskytuje přehledný a snadno pochopitelný náhled na základy blokového šifrování a zjednodušený pohled na původní DES. Tento algoritmus není určen pro reálné zabezpečení aplikace, jelikož lze snadno prolomit kvůli krátké délce klíče. <br /> <br />
        Práce S-DES je rozdělena do několika částí, které jsou popsány níže.           
@@ -21,7 +21,7 @@ return [
     ',
     'differencesToDESTitle' => 'Implementační rozdíly S-DES proti DES',
     'differencesToDES' => 'Oproti DES je S-DES upraven v několika aspektech. V první řadě se jedná o délku zpracovávaných dat - DES pracuje s 64-bitovými bloky a 56-bitovým klíčem. Další zásadní rozdíl je v počtu rund. V této implementaci využívá S-DES pouze 2 rundy oproti původním 16 rundám. Taktéž je zde odlišnost v rundovních funkcích - v této implementaci jsou operace zjednodušeny (permutace sboxy například).',
-    'blockSchema' => 'Blokové schéma Simple DES',
+    'blockSchema' => 'Blokové schéma S-DES',
 
     'keyGeneration' => 'Generování klíčů',
     'P10' => 'Permutace P10',
