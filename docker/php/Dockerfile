@@ -53,9 +53,6 @@ RUN groupmod -g 1000 www-data
 ARG ENVIRONMENT
 RUN if [ "${ENVIRONMENT}" != "localhost" ]; then \
         a2enmod ssl && \
-        mkdir /etc/apache2/ssl/ && \
-        cp /etc/apache2/ssl/educrypter.uhk.cz.cert /etc/apache2/ssl/ && \
-        cp /etc/apache2/ssl/private/educrypter.uhk.cz.key /etc/apache2/ssl/ && \
         chmod 600 /etc/apache2/ssl/educrypter.uhk.cz.key; \
     fi
 
