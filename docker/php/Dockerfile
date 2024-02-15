@@ -53,7 +53,6 @@ RUN groupmod -g 1000 www-data
 COPY /ssl/educrypter.uhk.cz.cert /etc/ssl/certs/educrypter.uhk.cz.cert
 COPY /ssl/educrypter.uhk.cz.key /etc/ssl/private/educrypter.uhk.cz.key
 RUN a2enmod ssl && a2enmod socache_shmcb
-RUN chmod 600 /etc/apache2/ssl/educrypter.uhk.cz.key
 RUN sed -i '/SSLCertificateFile.*snakeoil\.pem/c\SSLCertificateFile \/etc\/ssl\/certs\/educrypter.uhk.cz.crt' /etc/apache2/sites-available/default-ssl.conf
 RUN sed -i '/SSLCertificateKeyFile.*snakeoil\.key/cSSLCertificateKeyFile /etc/ssl/private/educrypter.uhk.cz.key\' /etc/apache2/sites-available/default-ssl.conf
 RUN a2ensite default-ssl
