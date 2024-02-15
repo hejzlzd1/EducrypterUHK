@@ -10,5 +10,6 @@ services:
       - "443:443"
     volumes:
       - .:/var/www/html
+      - "$PWD/docker/log:/var/log/apache2"
       - ./docker/php/php.ini:/usr/local/etc/php/php.ini
     restart: always
