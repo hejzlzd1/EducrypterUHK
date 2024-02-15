@@ -7,11 +7,7 @@ services:
       context: ./docker/php
     ports:
       - "80:80"
-    environment:
-      ENVIRONMENT: "production"
     volumes:
       - .:/var/www/html
-      # This volume is for production - place key and cert in it
-      - ./docker/php/ssl:/etc/apache2/ssl
       - ./docker/php/php.ini:/usr/local/etc/php/php.ini
     restart: always
