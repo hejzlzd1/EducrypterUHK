@@ -16,7 +16,7 @@
                     <div class="row align-items-start">
                         <h1><i class="fa-solid fa-circle-info"></i> Simple DES</h1>
                         <hr/>
-                        <div class="col-lg-8">
+                        <div class="col-lg-7">
                             <p>@lang('simpleDesPageTexts.annotation')</p>
                             <h4>@lang('simpleDesPageTexts.keyGenerationInfoTitle')</h4>
                             <p>@lang('simpleDesPageTexts.keyGenerationInfo')</p>
@@ -123,7 +123,7 @@
                                 </button>
                             </div>
                         </div>
-                        <div class="col-lg-4 m-auto">
+                        <div class="col-lg-5 m-t-5">
                             <a href="{{asset('img/simpleDesPage/simpleDes_' . App::getLocale() . '.png')}}"
                                target="_blank">
                                 <img

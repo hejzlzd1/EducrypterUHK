@@ -16,8 +16,15 @@
                     <div class="row align-items-start">
                         <h1><i class="fa-solid fa-circle-info"></i> Simple AES</h1>
                         <hr/>
-                        <div class="col-lg-8">
+                        <div class="col-lg-6">
                             <p>@lang('simpleAesPageTexts.annotation')</p>
+                            <h4>@lang('simpleAesPageTexts.keyGenerationTitle')</h4>
+                            <p>@lang('simpleAesPageTexts.keyGenerationInfo')</p>
+                            <h4>@lang('simpleAesPageTexts.encryptionTitle')</h4>
+                            <p>@lang('simpleAesPageTexts.encryption')</p>
+                            <h4>@lang('simpleAesPageTexts.disclaimerTitle')</h4>
+                            <p>@lang('simpleAesPageTexts.disclaimer')</p>
+
 
                             <h4>@lang('simpleAesPageTexts.additionalSchemas')</h4>
                             <div id="carouselControls" class="carousel col-lg-8 mb-5" data-bs-ride="carousel"
@@ -98,7 +105,7 @@
                                 </button>
                             </div>
                         </div>
-                        <div class="col-lg-4 m-auto">
+                        <div class="col-lg-6 mt-5">
                             <a href="{{asset('img/simpleAesPage/simpleAes_' . App::getLocale() . '.png')}}"
                                target="_blank">
                                 <img

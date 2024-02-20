@@ -15,11 +15,10 @@
                     <div class="row align-items-start">
                         <h1><i class="fa-solid fa-circle-info"></i> A5/1</h1>
                         <hr/>
-                        <div class="col-lg-8">
+                        <div class="col-lg-6">
                             <p>@lang('a51PageTexts.annotation')</p>
                         </div>
-
-                        <div class="col-lg-4 m-auto">
+                        <div class="col-lg-6 m-t-5">
                             <a href="{{ asset('img/a51Page/a51_' . App::getLocale() . '.png')}}" target="_blank">
                                 <img alt="" title="@lang('baseTexts.clickToSeeInFullSize')" width="100%"
                                      src="{{ asset('img/a51Page/a51_' . App::getLocale() . '.png') }}">
