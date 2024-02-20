@@ -19,7 +19,7 @@
                             <p>@lang('rsaPageTexts.annotation')</p>
                         </div>
 
-                        <div class="col-lg-4 m-auto">
+                        <div class="col-lg-4 m-t-5">
                             <a href="{{ asset('img/rsaPage/rsa_' . App::getLocale() . '.png') }}" target="_blank">
                                 <img alt="" width="100%" title="@lang('baseTexts.clickToSeeInFullSize')"
                                      src="{{ asset('img/rsaPage/rsa_' . App::getLocale() . '.png') }}"

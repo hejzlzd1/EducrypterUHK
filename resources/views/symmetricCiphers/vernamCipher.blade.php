@@ -15,11 +15,11 @@
                     <div class="row align-items-start">
                         <h1><i class="fa-solid fa-circle-info"></i> @lang('menuTexts.vernamCipher')</h1>
                         <hr/>
-                        <div class="col-lg-8">
+                        <div class="col-lg-7">
                             <p>@lang('vernamPageTexts.annotation')</p>
                         </div>
 
-                        <div class="col-lg-4 m-auto">
+                        <div class="col-lg-5 m-auto">
                             <a href="{{asset('img/vernamPage/vernam_' . App::getLocale() . '.png')}}" target="_blank">
                                 <img
                                     alt=""

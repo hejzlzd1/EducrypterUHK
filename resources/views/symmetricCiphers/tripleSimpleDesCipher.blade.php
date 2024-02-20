@@ -16,10 +16,10 @@
                     <div class="row align-items-start">
                         <h1><i class="fa-solid fa-circle-info"></i> Triple DES</h1>
                         <hr/>
-                        <div class="col-lg-8">
+                        <div class="col-lg-6">
                             <p>@lang('tripleDesPageTexts.annotation')</p>
                         </div>
-                        <div class="col-lg-4 m-auto">
+                        <div class="col-lg-6 m-t-5">
                             <a href="{{asset('img/tripleDesPage/tripleDes_' . App::getLocale() . '.png')}}"
                                target="_blank">
                                 <img
