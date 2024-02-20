@@ -1,6 +1,6 @@
 @php
-    /** @var App\Algorithms\Output\BasicOutput $result */
     use App\Algorithms\CipherBase;
+    /** @var App\Algorithms\Output\SAESOutput $result */
 @endphp
 <section class="m-5 shadow-lg border rounded-4 p-5">
     <div class="container text-break">
@@ -22,6 +22,18 @@
             <div class="col-lg-5">
                 <h4><i class="fa-solid fa-key"></i> @lang('baseTexts.key')</h4>
                 <p>{{$result->getKey()}}</p>
+            </div>
+            <div class="col-lg-5">
+                <h4><i class="fa-solid fa-key"></i> @lang('baseTexts.key') - K₀</h4>
+                <p>{{$result->getRoundKeys()[0]}}</p>
+            </div>
+            <div class="col-lg-5">
+                <h4><i class="fa-solid fa-key"></i> @lang('baseTexts.key') - K₁</h4>
+                <p>{{$result->getRoundKeys()[1]}}</p>
+            </div>
+            <div class="col-lg-5">
+                <h4><i class="fa-solid fa-key"></i> @lang('baseTexts.key') - K₂</h4>
+                <p>{{$result->getRoundKeys()[2]}}</p>
             </div>
         </div>
         <div class="row align-items-start">

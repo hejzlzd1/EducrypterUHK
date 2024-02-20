@@ -31,25 +31,22 @@ class A5_1Step extends Step
         return $this->registerB;
     }
 
-    /**
-     * @return string
-     */
-    public function getRegisterC(): array
+    public function getRegisterC(): string
     {
         return $this->registerC;
     }
 
-    public function getRegisterAClocked(): string
+    public function getRegisterAClocked(): ?string
     {
         return $this->registerAClocked;
     }
 
-    public function getRegisterBClocked(): string
+    public function getRegisterBClocked(): ?string
     {
         return $this->registerBClocked;
     }
 
-    public function getRegisterCClocked(): string
+    public function getRegisterCClocked(): ?string
     {
         return $this->registerCClocked;
     }

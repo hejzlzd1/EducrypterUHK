@@ -252,6 +252,7 @@ class BlockCipher extends CipherBase
 
     /**
      * Function to make 32bit data blocks from string input
+     * @returns array<array-key, int>
      */
     public function stringToWordArray(string $str): array
     {
@@ -259,7 +260,7 @@ class BlockCipher extends CipherBase
 
         $finalArray = array_fill(
             0,
-            ceil(count($bytes) / 4.0),
+            (int)ceil(count($bytes) / 4.0),
             0
         ); // fill array with 0 (bytes/4 = 32bit words) -> zeros to pad array to fixed size
 
@@ -267,6 +268,7 @@ class BlockCipher extends CipherBase
             $finalArray[$i / 4] += $bytes[$i] << 8 * ($i % 4); // combine unpacked input with array with zeros
         }
 
+        /** @var array<array-key, int> $finalArray */
         return $finalArray;
     }
 

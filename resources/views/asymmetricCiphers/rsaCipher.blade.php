@@ -49,7 +49,7 @@
                                         <x-tooltipButton :tooltip="trans('rsaPageTexts.inputTextTooltip')"></x-tooltipButton>
                                     </label>
                                     <div class="input-group">
-                                    <input class="form-control" maxlength="40" minlength="1" required type="text"
+                                    <input class="form-control" maxlength="255" minlength="1" required type="text"
                                            id="text" name="text"
                                            placeholder="@lang('baseTexts.text')"
                                            @if(isset($data['text'])) value="{{ $data['text'] }}" @endif

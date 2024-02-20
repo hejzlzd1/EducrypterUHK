@@ -26,15 +26,15 @@ RUN curl -o composer-installer --silent --show-error https://getcomposer.org/ins
     && rm composer-installer
 
 # Configure xdebug
-RUN pecl install xdebug \
-        && docker-php-ext-enable xdebug \
-        && echo "error_reporting = E_ALL" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini \
-        && echo "display_startup_errors = On" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini \
-        && echo "display_errors = On" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini \
-        && echo "xdebug.mode=debug" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini \
-        && echo "xdebug.start_with_request=yes" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini \
-        && echo 'xdebug.client_host=host.docker.internal' >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini \
-        && echo 'xdebug.idekey=xdebug' >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini
+#RUN pecl install xdebug \
+#        && docker-php-ext-enable xdebug \
+#        && echo "error_reporting = E_ALL" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini \
+#        && echo "display_startup_errors = On" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini \
+#        && echo "display_errors = On" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini \
+#        && echo "xdebug.mode=debug" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini \
+#        && echo "xdebug.start_with_request=yes" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini \
+#        && echo 'xdebug.client_host=host.docker.internal' >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini \
+#        && echo 'xdebug.idekey=xdebug' >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini
 
 
 # Set document root
@@ -49,4 +49,17 @@ RUN a2enmod rewrite \
 RUN usermod -u 1000 www-data
 RUN groupmod -g 1000 www-data
 
+# Copy SSL certificate and private key - comment this section if you want to run on localhost
+COPY /ssl/educrypter.uhk.cz.cert /etc/ssl/certs/educrypter.uhk.cz.cert
+COPY /ssl/educrypter.uhk.cz.key /etc/ssl/private/educrypter.uhk.cz.key
+RUN a2enmod ssl && a2enmod socache_shmcb
+RUN sed -i '/SSLCertificateFile.*snakeoil\.pem/c\SSLCertificateFile \/etc\/ssl\/certs\/educrypter.uhk.cz.cert' /etc/apache2/sites-available/default-ssl.conf
+RUN sed -i '/SSLCertificateKeyFile.*snakeoil\.key/cSSLCertificateKeyFile /etc/ssl/private/educrypter.uhk.cz.key\' /etc/apache2/sites-available/default-ssl.conf
+RUN a2ensite default-ssl
+
+# Expose ports
 EXPOSE 80
+
+# comment this if you want localhost
+EXPOSE 443
+

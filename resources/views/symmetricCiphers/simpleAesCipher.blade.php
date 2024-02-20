@@ -14,7 +14,7 @@
             <div>
                 <div class="container">
                     <div class="row align-items-start">
-                        <h1><i class="fa-solid fa-circle-info"></i> Simple AES</h1>
+                        <h1><i class="fa-solid fa-circle-info"></i> S-AES</h1>
                         <hr/>
                         <div class="col-lg-6">
                             <p>@lang('simpleAesPageTexts.annotation')</p>

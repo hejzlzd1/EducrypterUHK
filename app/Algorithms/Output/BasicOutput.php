@@ -48,7 +48,10 @@ class BasicOutput
         $this->key = $key;
     }
 
-    public function getSteps(): array
+    /**
+     * @return array<Step>|null
+     */
+    public function getSteps(): ?array
     {
         return $this->steps;
     }
@@ -58,7 +61,10 @@ class BasicOutput
         $this->steps = $steps;
     }
 
-    public function getAdditionalInformation(): array
+    /**
+     * @return array{array-key, string}|null
+     */
+    public function getAdditionalInformation(): array|null
     {
         return $this->additionalInformation;
     }
@@ -78,13 +84,8 @@ class BasicOutput
         $this->additionalInformation = array_merge($this->additionalInformation, $information);
     }
 
-    public function getStep(int $i): Step
+    public function getStep(int $i): Step|null
     {
         return $this->steps[$i];
-    }
-
-    public function setKeyStream(?int $keyStream): void
-    {
-        $this->keyStream = $keyStream;
     }
 }
