@@ -29,7 +29,7 @@
                                     src="{{asset('img/tripleDesPage/tripleDes_' . App::getLocale() . '.png')}}"
                                 />
                             </a>
-                            <figure class="text-center">@lang('tripleDesPageTexts.blockSchema')</figure>
+                            <figure class="text-center schemaTitle">@lang('tripleDesPageTexts.blockSchema')</figure>
                         </div>
                     </div>
                 </div>

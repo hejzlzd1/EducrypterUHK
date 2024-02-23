@@ -28,7 +28,7 @@
                                      src="{{asset("img/blowfishPage/blowfish_".App::getLocale().".png")}}"
                                 />
                             </a>
-                            <figure class="text-center">@lang("blowfishPageTexts.blockSchema")</figure>
+                            <figure class="text-center schemaTitle">@lang("blowfishPageTexts.blockSchema")</figure>
                         </div>
                     </div>
                 </div>

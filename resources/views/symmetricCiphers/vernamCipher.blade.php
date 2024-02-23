@@ -28,7 +28,7 @@
                                     src="{{asset('img/vernamPage/vernam_' . App::getLocale() . '.png')}}"
                                 />
                             </a>
-                            <figure class="text-center">@lang("vernamPageTexts.schema")</figure>
+                            <figure class="text-center schemaTitle">@lang("vernamPageTexts.schema")</figure>
                         </div>
                     </div>
                 </div>

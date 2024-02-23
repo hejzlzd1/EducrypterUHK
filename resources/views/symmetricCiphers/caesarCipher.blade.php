@@ -30,7 +30,7 @@
                                     alt=""
                                 />
                             </a>
-                            <figure class="text-center">@lang("caesarPageTexts.alphabetShift")</figure>
+                            <figure class="text-center schemaTitle">@lang("caesarPageTexts.alphabetShift")</figure>
                         </div>
                     </div>
                 </div>

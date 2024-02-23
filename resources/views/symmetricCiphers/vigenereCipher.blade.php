@@ -29,7 +29,7 @@
                                     src="{{ asset('img/vigenerePage/vigenere.svg') }}"
                                 />
                             </a>
-                            <figure class="text-center">@lang("vigenerePageTexts.table")</figure>
+                            <figure class="text-center schemaTitle">@lang("vigenerePageTexts.table")</figure>
                         </div>
                     </div>
                 </div>

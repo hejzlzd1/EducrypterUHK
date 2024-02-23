@@ -133,7 +133,7 @@
                                     src="{{asset('img/simpleDesPage/simpleDes_' . App::getLocale() . '.png')}}"
                                 />
                             </a>
-                            <figure class="text-center">
+                            <figure class="text-center schemaTitle">
                                 @lang('simpleDesPageTexts.blockSchema')
                             </figure>
 
@@ -142,7 +142,7 @@
                                     <img alt="" src="{{ asset('img/simpleDesPage/roundFunction.png') }}" width="100%"
                                          title="@lang('baseTexts.clickToSeeInFullSize')">
                                 </a>
-                                <figure class="text-center">
+                                <figure class="text-center schemaTitle">
                                     @lang('simpleDesPageTexts.roundFunction')
                                 </figure>
                             </div>

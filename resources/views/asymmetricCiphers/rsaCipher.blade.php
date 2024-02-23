@@ -25,7 +25,7 @@
                                      src="{{ asset('img/rsaPage/rsa_' . App::getLocale() . '.png') }}"
                                 />
                             </a>
-                            <figure class="text-center">@lang("rsaPageTexts.schema")</figure>
+                            <figure class="text-center schemaTitle">@lang("rsaPageTexts.schema")</figure>
                         </div>
                     </div>
                 </div>

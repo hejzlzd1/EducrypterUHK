@@ -115,7 +115,7 @@
                                     src="{{asset('img/simpleAesPage/simpleAes_' . App::getLocale() . '.png')}}"
                                 />
                             </a>
-                            <figure class="text-center">
+                            <figure class="text-center schemaTitle">
                                 @lang('simpleAesPageTexts.blockSchema')
                             </figure>
                         </div>

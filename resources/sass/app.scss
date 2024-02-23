@@ -55,7 +55,7 @@ $c-purples: #532E62, #8E44AD, #9B59B6;
     border:none;
     padding: 10px 15px;
     font-size: 16px;
-    font-family: 'Source Sans Pro';
+    font-family: 'Source Sans Pro', serif;
     color: #fff;
     outline: none;
     cursor: pointer;
@@ -75,7 +75,7 @@ $c-purples: #532E62, #8E44AD, #9B59B6;
     display: table;
     position: relative;
     margin: 10px;
-    margin-right: 0px;
+    margin-right: 0;
     width: 300px;
     height: auto;
     background-color: nth($c-blues, 2);
@@ -154,9 +154,9 @@ $c-purples: #532E62, #8E44AD, #9B59B6;
 }
 
 .back-to-top:hover {
-    -webkit-box-shadow: 5px 5px 5px 0px rgba(0,0,0,0.75);
-    -moz-box-shadow: 5px 5px 5px 0px rgba(0,0,0,0.75);
-    box-shadow: 5px 5px 5px 0px rgba(0,0,0,0.75);
+    -webkit-box-shadow: 5px 5px 5px 0 rgba(0,0,0,0.75);
+    -moz-box-shadow: 5px 5px 5px 0 rgba(0,0,0,0.75);
+    box-shadow: 5px 5px 5px 0 rgba(0,0,0,0.75);
 }
 
 .nav-link{
@@ -228,4 +228,7 @@ $c-purples: #532E62, #8E44AD, #9B59B6;
 .custom-carousel .carousel-item .label {
     font-weight: bold;
     text-align: center;
+}
+.schemaTitle {
+    font-weight: bold;
 }

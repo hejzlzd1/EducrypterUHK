@@ -23,7 +23,7 @@
                                 <img alt="" title="@lang('baseTexts.clickToSeeInFullSize')" width="100%"
                                      src="{{ asset('img/a51Page/a51_' . App::getLocale() . '.png') }}">
                             </a>
-                            <figure class="text-center">@lang("a51PageTexts.imageDescription")</figure>
+                            <figure class="text-center schemaTitle">@lang("a51PageTexts.imageDescription")</figure>
                         </div>
                     </div>
                 </div>
