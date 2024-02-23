@@ -20,7 +20,7 @@ return [
         For better clarity, the diagram is divided into several additional diagrams listed below.
     ',
     'differencesToDESTitle' => 'Implementation differences between S-DES and DES',
-    'differencesToDES' => 'Compared to DES, S-DES is modified in several aspects. First of all, it is the length of the processed data blocks - DES works with 64-bit blocks and a 56-bit key. Another major difference is in the number of rounds. In this implementation, S-DES uses only 2 rounds compared to the original 16 rounds. There is also a difference in the round function - in this implementation the operations are simplified. Specifically, this is an omitted P-box permutation, and the permutation is performed with a reduced S-box.',
+    'differencesToDES' => 'Compared to DES, S-DES is modified in several aspects. First of all, it is the length of the processed data blocks - DES works with 64-bit blocks and a 56-bit key. Another major difference is in the number of rounds. In this implementation, S-DES uses only 2 rounds compared to the original 16 rounds. There is also a difference in the round function - in this implementation the operations are simplified. Specifically, P-permutation is reduced, and the permutation by S-box is performed with a reduced S-box.',
     'blockSchema' => 'Simple DES Block Diagram',
 
     'keyGeneration' => 'Key generation',
