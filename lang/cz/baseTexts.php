@@ -66,4 +66,5 @@ return [
     'clickToSeeInFullSize' => 'Kliknutím lze obrázek zobrazit v samostatném okně (zvětšeně)',
     'privateKey' => 'Soukromý klíč',
     'publicKey' => 'Veřejný klíč',
+    'generateInput' => 'Vygenerovat'
 ];

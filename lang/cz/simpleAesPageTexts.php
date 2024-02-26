@@ -2,8 +2,8 @@
 
 return [
     'title' => 'Krypto aplikace - Simplified AES',
-    'annotation' => 'Simplified AES (S-AES) je zjednodušená verze algoritmu Advanced Encryption Standard (AES) navržená pro výukové účely.  Byl navržen pro výukové účely a poskytuje přehledný a snadno pochopitelný náhled na základy blokového šifrování a zjednodušený pohled na původní AES. Algoritmus AES je široce používaný symetrický šifrovací standard, který je přijat vládou Spojených států a běžně používaný po celém světě k šifrování citlivých dat.
-        Ve zjednodušeném AES jsou obvykle použity menší bloků a klíčů velikosti (16-bitů) ve srovnání s plnou verzí AES (128, 192 či 256 bitů). Zahrnuje také menší počet rund, což znamená menší počet substitucí, prohození řádků matice a kombinování sloupců.
+    'annotation' => 'Simplified AES (S-AES) je zjednodušená verze algoritmu Advanced Encryption Standard (AES).  Byl navržen pro výukové účely a poskytuje přehledný a snadno pochopitelný náhled na základy blokového šifrování a zjednodušený pohled na původní AES. Algoritmus AES je široce používaný symetrický šifrovací standard, který je přijat vládou Spojených států a běžně používaný po celém světě k šifrování citlivých dat.
+        Ve zjednodušeném AES jsou použity menší bloky a klíče (16-bitů) ve srovnání s plnou verzí AES (128, 192 či 256 bitů). Zahrnuje také menší počet rund, což znamená menší počet substitucí, prohození řádků matice a kombinování sloupců.
         ',
     'keyGenerationTitle' => 'Generování klíčů',
     'keyGenerationInfo' => '

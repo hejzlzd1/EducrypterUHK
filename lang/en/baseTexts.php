@@ -64,5 +64,6 @@ return [
     '500' => 'An error occurred in the application!',
     'internalError' => 'An unexpected error occurred in the application, author has been noticed about this incident. We apologize for the inconvenience!',
     'reportException' => 'Report exception in application',
+    'generateInput' => 'Generate'
 
 ];

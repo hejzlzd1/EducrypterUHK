@@ -12,7 +12,7 @@ return [
         <br /> <br />
         It is important that the key is used only once and then destroyed. This procedure ensures a higher level of security for this encryption procedure. The Vernam cipher provides a high degree of secrecy, but practical challenges such as secure key distribution may limit its practical use in real-world applications.
         <br />
-        This implementation of Vernam cipger takes binary inputs and provides binary output. If the binary key is too short, it is padded with 0 from the left side. In the case when input text is longer than key, then the key is cut from the left side. The steps of the algorithm show the individual XOR operations performed on input text.
+        This implementation of Vernam cipher takes binary inputs and provides binary output. If the binary key is too short, it is padded with 0 from the left side. In the case when input text is longer than key, then the key is cut from the left side. The steps of the algorithm show the individual XOR operations performed on input text.
     ',
     'schema' => 'Vernam cipher binary encryption scheme',
 ];

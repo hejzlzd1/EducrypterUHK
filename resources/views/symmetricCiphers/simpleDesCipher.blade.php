@@ -12,7 +12,7 @@
     <section class="m-5">
         <div class="shadow-lg border rounded-4 p-5">
             <div>
-                <div class="container">
+                <div class="p-5 pt-0 pb-0">
                     <div class="row align-items-start">
                         <h1><i class="fa-solid fa-circle-info"></i> S-DES</h1>
                         <hr/>
@@ -137,9 +137,9 @@
                                 @lang('simpleDesPageTexts.blockSchema')
                             </figure>
 
-                            <div class="mt-5">
+                            <div class="mt-5 text-center">
                                 <a href="{{ asset('img/simpleDesPage/roundFunction.png') }}" target="_blank">
-                                    <img alt="" src="{{ asset('img/simpleDesPage/roundFunction.png') }}" width="100%"
+                                    <img alt="" src="{{ asset('img/simpleDesPage/roundFunction.png') }}" width="75%"
                                          title="@lang('baseTexts.clickToSeeInFullSize')">
                                 </a>
                                 <figure class="text-center schemaTitle">
