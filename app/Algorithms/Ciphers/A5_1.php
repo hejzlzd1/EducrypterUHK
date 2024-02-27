@@ -2,13 +2,14 @@
 
 namespace App\Algorithms\Ciphers;
 
+use App\Algorithms\CipherBase;
 use App\Algorithms\Output\BasicOutput;
 use App\Algorithms\Output\Steps\A5_1Step;
-use App\Algorithms\StreamCipher;
 
-class A5_1 extends StreamCipher
+class A5_1 extends CipherBase
 {
     private string $keyStream = '';
+    private int $dataFrame;
 
     private BasicOutput $output;
 

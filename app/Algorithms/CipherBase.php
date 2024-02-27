@@ -218,4 +218,19 @@ abstract class CipherBase
 
         return $output;
     }
+
+    /** $data (binary string), $size -> requiredSize*/
+    protected function expandOrTrimToSpecificBits(string $data, int $size): string
+    {
+        $dataLength = mb_strlen($data);
+        if ($dataLength < $size) {
+            // If data is shorter, pad with zeros
+            $data = str_pad($data, $size, '0', STR_PAD_LEFT);
+        } elseif ($dataLength > $size) {
+            // If data is longer, truncate to x bits
+            $data = strrev(mb_substr(strrev($data), 0, $size));
+        }
+
+        return $data;
+    }
 }

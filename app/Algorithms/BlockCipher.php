@@ -2,6 +2,8 @@
 
 namespace App\Algorithms;
 
+use Exception;
+
 class BlockCipher extends CipherBase
 {
     /**
@@ -292,5 +294,23 @@ class BlockCipher extends CipherBase
     public function getSubkeys(): array
     {
         return $this->subkeys;
+    }
+
+    /**
+     * Takes two binary arrays and performs XOR between them - returns only XORed array
+     * @return String[]
+     * @throws Exception
+     */
+    protected function xor(array $firstInput, array $secondInput, bool $returnSteps = false): array
+    {
+        if (count($firstInput) !== count($secondInput)) {
+            throw new Exception(trans('Cannot xor two different sized inputs'));
+        }
+        $output = [];
+        foreach ($firstInput as $index => $binaryValue) {
+            $output[] = $binaryValue === $secondInput[$index] ? '0' : '1';
+        }
+
+        return $output;
     }
 }

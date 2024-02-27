@@ -22,10 +22,24 @@
                 <h4><i class="fa-solid fa-key"></i> @lang('baseTexts.key') K1 & K3</h4>
                 <p>{{ $result->getKey() }}</p>
             </div>
+            @if(strlen($data["key1"]) !== strlen($result->getKey()))
+                <div class="col-lg-5">
+                    <h4><i class="fa-solid fa-key"></i> @lang('baseTexts.formattedKey') </h4>
+                    <p>{{$result->getKey()}}</p>
+                    <p class="text-black-50">@lang('baseTexts.keyFormatted')</p>
+                </div>
+            @endif
             <div class="col-lg-5">
                 <h4><i class="fa-solid fa-key"></i> @lang('baseTexts.key') K2</h4>
                 <p>{{ $result->getKey2() }}</p>
             </div>
+            @if(strlen($data["key2"]) !== strlen($result->getKey2()))
+                <div class="col-lg-5">
+                    <h4><i class="fa-solid fa-key"></i> @lang('baseTexts.formattedKey') </h4>
+                    <p>{{$result->getKey2()}}</p>
+                    <p class="text-black-50">@lang('baseTexts.keyFormatted')</p>
+                </div>
+            @endif
         </div>
         <div class="row align-items-start">
             <div class="col-lg">

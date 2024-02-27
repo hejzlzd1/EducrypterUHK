@@ -46,12 +46,8 @@ class SimpleDes extends BlockCipher
      */
     public function __construct(string $text, string $key, int $operation)
     {
-        if (mb_strlen($key) < 10) {
-            $key = str_pad($key, 10, 0, STR_PAD_LEFT);
-        }
-        if (mb_strlen($text) < 8) {
-            $text = str_pad($text, 8, 0, STR_PAD_LEFT);
-        }
+        $key = $this->expandOrTrimToSpecificBits($key, 10);
+        $text = $this->expandOrTrimToSpecificBits($text, 8);
 
         $this->output = new SDESOutput(inputValue: $text, operation: $operation, key: $key);
 

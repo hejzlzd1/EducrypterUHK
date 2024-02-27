@@ -71,8 +71,9 @@ class SimpleAes extends BlockCipher
      */
     public function __construct(string $text, string $key, int $operation)
     {
-        $key = str_pad($key, 16, '0', STR_PAD_LEFT);
-        $text = str_pad($text, 16, '0', STR_PAD_LEFT);
+
+        $key = $this->expandOrTrimToSpecificBits($key, 16);
+        $text = $this->expandOrTrimToSpecificBits($text, 16);
         $this->output = new SAESOutput(inputValue: $text, operation: $operation, key: $key);
 
         $this->roundKeys = $this->generateRoundKeys($key);
@@ -629,21 +630,4 @@ class SimpleAes extends BlockCipher
         return $this->output;
     }
 
-    /**
-     * Takes two binary arrays and performs XOR between them
-     * @return String[]
-     * @throws Exception
-     */
-    protected function xor(array $firstInput, array $secondInput, bool $returnSteps = false): array
-    {
-        if (count($firstInput) !== count($secondInput)) {
-            throw new Exception(trans('Cannot xor two different sized inputs'));
-        }
-        $output = [];
-        foreach ($firstInput as $index => $binaryValue) {
-            $output[] = $binaryValue === $secondInput[$index] ? '0' : '1';
-        }
-
-        return $output;
-    }
 }

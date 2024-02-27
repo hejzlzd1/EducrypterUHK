@@ -23,6 +23,13 @@
                 <h4><i class="fa-solid fa-key"></i> @lang('baseTexts.key')</h4>
                 <p>{{$result->getKey()}}</p>
             </div>
+            @if(strlen($data["key"]) !== strlen($result->getKey()))
+                <div class="col-lg-5">
+                    <h4><i class="fa-solid fa-key"></i> @lang('baseTexts.formattedKey') </h4>
+                    <p>{{$result->getKey()}}</p>
+                    <p class="text-black-50">@lang('baseTexts.keyFormatted')</p>
+                </div>
+            @endif
         </div>
         <div class="row align-items-start">
             <div class="col-lg">
