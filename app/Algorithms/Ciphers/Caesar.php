@@ -85,8 +85,9 @@ class Caesar extends CipherBase
         $result = '';
         for ($i = 0; $i < strlen($this->text); $i++) {
             if ($this->text[$i] !== ' ') {
-                $isUpperCase = ctype_upper($this->text[$i]) ? 65 : 97;
-                $result = $result . chr((ord($this->text[$i]) + $shift - $isUpperCase) % 26 + $isUpperCase);
+                // $firstChar represents first char in ASCII (65 = A, 97 = a), mod 26 ensures that new char stays in boundaries
+                $firstChar = ctype_upper($this->text[$i]) ? 65 : 97;
+                $result = $result . chr((ord($this->text[$i]) + $shift - $firstChar) % 26 + $firstChar);
             } else {
                 $result = $result . chr(32);
             }
