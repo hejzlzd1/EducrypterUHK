@@ -66,7 +66,7 @@
                                 </div>
                                 <div class="col-lg-6">
                                     <label class="form-label" for="key">
-                                        @lang('simpleDesPageTexts.binaryKey') K1 & K3
+                                        @lang('simpleDesPageTexts.binaryKey') K1
                                         <x-tooltipButton
                                             :tooltip="trans('baseTexts.binaryInputPrompt')"></x-tooltipButton>
                                     </label>

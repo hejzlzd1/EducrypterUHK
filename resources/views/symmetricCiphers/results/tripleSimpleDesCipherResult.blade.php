@@ -19,7 +19,7 @@
                 <p>{{ $result->getInputValue() }}</p>
             </div>
             <div class="col-lg-5">
-                <h4><i class="fa-solid fa-key"></i> @lang('baseTexts.key') K1 & K3</h4>
+                <h4><i class="fa-solid fa-key"></i> @lang('baseTexts.key') K1</h4>
                 <p>{{ $result->getKey() }}</p>
             </div>
             @if(strlen($data["key"]) !== strlen($result->getKey()))
