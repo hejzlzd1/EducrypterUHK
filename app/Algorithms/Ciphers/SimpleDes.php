@@ -16,6 +16,12 @@ use Exception;
  */
 class SimpleDes extends BlockCipher
 {
+    private const P10 = [3, 5, 2, 7, 4, 10, 1, 9, 8, 6],
+        P8 = [6, 3, 7, 4, 8, 5, 10, 9],
+        EP = [4, 1, 2, 3, 2, 3, 4, 1],
+        IP = [2, 6, 3, 1, 4, 8, 5, 7],
+        IIP = [4, 1, 3, 5, 7, 2, 8, 6],
+        P4 = [2, 4, 3, 1];
     private SDESOutput $output;
 
     private string $firstHalfKey;
@@ -63,7 +69,7 @@ class SimpleDes extends BlockCipher
     public function keyGeneration(string $key): void
     {
         // Permutation is first step - P10
-        $permutedKey = $this->permutation(str_split($key), [3, 5, 2, 7, 4, 10, 1, 9, 8, 6]);
+        $permutedKey = $this->permutation(str_split($key), self::P10);
         $this->output->addKeyGenerationStep(
             new NamedStep(
                 input: $key,
@@ -112,7 +118,7 @@ class SimpleDes extends BlockCipher
         // Perform P8 on both parts of key (merged in method) -> this creates first part of 8bit key
         $this->firstHalfKey = implode(
             '',
-            $this->permutation(array_merge($firstHalfKey, $secondHalfKey), [6, 3, 7, 4, 8, 5, 10, 9])
+            $this->permutation(array_merge($firstHalfKey, $secondHalfKey), self::P8)
         );
         $this->output->addKeyGenerationStep(
             new NamedStep(
@@ -147,7 +153,7 @@ class SimpleDes extends BlockCipher
         // Perform P8 on both parts of key (merged in method) -> this creates second part of 8bit key
         $this->secondHalfKey = implode(
             '',
-            $this->permutation(array_merge($firstHalfKey, $secondHalfKey), [6, 3, 7, 4, 8, 5, 10, 9])
+            $this->permutation(array_merge($firstHalfKey, $secondHalfKey), self::P8)
         );
         $this->output->addKeyGenerationStep(
             new NamedStep(
@@ -232,7 +238,7 @@ class SimpleDes extends BlockCipher
      */
     private function roundFunction(array $leftHalf, array $rightHalf, array $key): array
     {
-        $permutedSecondHalf = $this->permutation($rightHalf, [4, 1, 2, 3, 2, 3, 4, 1]);
+        $permutedSecondHalf = $this->permutation($rightHalf, self::EP);
         $this->output->addStep(
             new NamedStep(
                 input: implode($rightHalf),
@@ -286,7 +292,7 @@ class SimpleDes extends BlockCipher
         );
 
         $mergedXor = array_merge($xorFirstAfterSBox, $xorSecondAfterSBox);
-        $p4 = $this->permutation($mergedXor, [2, 4, 3, 1]);
+        $p4 = $this->permutation($mergedXor, self::P4);
         $this->output->addStep(
             new NamedStep(
                 input: implode($mergedXor),
@@ -333,7 +339,7 @@ class SimpleDes extends BlockCipher
     public function encrypt(): SDESOutput
     {
         // Init permutation
-        $permutedText = $this->permutation(str_split($this->text), [2, 6, 3, 1, 4, 8, 5, 7]);
+        $permutedText = $this->permutation(str_split($this->text), self::IP);
         $this->output->addStep(
             new NamedStep(
                 input: $this->text,
@@ -380,7 +386,7 @@ class SimpleDes extends BlockCipher
         // Merge and perform inverse permutation
         $mergedOutputs = array_merge($leftHalf, $rightHalf);
         /** @var array{array-key, string} $mergedOutputs */
-        $output = $this->permutation($mergedOutputs, [4, 1, 3, 5, 7, 2, 8, 6]);
+        $output = $this->permutation($mergedOutputs, self::IIP);
         $this->output->addStep(
             new NamedStep(
                 input: implode($mergedOutputs),
@@ -404,7 +410,7 @@ class SimpleDes extends BlockCipher
     public function decrypt(): SDESOutput
     {
         // Init permutation
-        $permutedText = $this->permutation(str_split($this->text), [2, 6, 3, 1, 4, 8, 5, 7]);
+        $permutedText = $this->permutation(str_split($this->text), self::IP);
         $this->output->addStep(
             new NamedStep(
                 input: $this->text,
@@ -452,7 +458,7 @@ class SimpleDes extends BlockCipher
         // Merge and perform inverse permutation
         $mergedOutputs = array_merge($leftHalf, $rightHalf);
         /** @var String[] $mergedOutputs */
-        $output = $this->permutation($mergedOutputs, [4, 1, 3, 5, 7, 2, 8, 6]);
+        $output = $this->permutation($mergedOutputs, self::IIP);
         $this->output->addStep(
             new NamedStep(
                 input: implode($mergedOutputs),
