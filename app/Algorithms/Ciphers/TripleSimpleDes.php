@@ -25,8 +25,7 @@ class TripleSimpleDes extends CipherBase
         private readonly string $key2,
         private readonly string $key3,
         protected int $operation
-    )
-    {
+    ) {
         $key = $this->expandOrTrimToSpecificBits($key, 10);
         $key2 = $this->expandOrTrimToSpecificBits($key2, 10);
         $key3 = $this->expandOrTrimToSpecificBits($key3, 10);
