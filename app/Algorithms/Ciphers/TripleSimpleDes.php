@@ -38,7 +38,7 @@ class TripleSimpleDes extends CipherBase
     public function decrypt(): TSDESOutput
     {
         // Decrypt, encrypt, decrypt
-        $decryption = new SimpleDes($this->text, $this->key, CipherBase::ALGORITHM_DECRYPT);
+        $decryption = new SimpleDes($this->text, $this->key3, CipherBase::ALGORITHM_DECRYPT);
         $result = $decryption->decrypt();
 
         $decryptedBinary = $result->getOutputValue();
@@ -50,10 +50,10 @@ class TripleSimpleDes extends CipherBase
         $encryptedBinary = $result->getOutputValue();
         $this->output->addDesStep($result);
 
-        $decryptedBinary = new SimpleDes($encryptedBinary, $this->key3, CipherBase::ALGORITHM_DECRYPT);
+        $decryptedBinary = new SimpleDes($encryptedBinary, $this->key, CipherBase::ALGORITHM_DECRYPT);
         $result = $decryptedBinary->decrypt();
-
         $this->output->addDesStep($result);
+
         $this->output->setOutputValue($result->getOutputValue());
         return $this->output;
     }
