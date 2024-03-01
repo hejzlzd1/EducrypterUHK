@@ -104,6 +104,26 @@
                                         </x-generateInputButton>
                                     </div>
                                 </div>
+                                <div class="col-lg-6 mt-2">
+                                    <label class="form-label" for="key3">
+                                        @lang('simpleDesPageTexts.binaryKey') K3
+                                        <x-tooltipButton
+                                            :tooltip="trans('simpleDesPageTexts.binaryKey')"></x-tooltipButton>
+                                    </label>
+                                    <div class="input-group">
+                                        <input class="form-control binaryValidation" minlength="1" maxlength="10"
+                                               type="text" id="key3"
+                                               name="key3"
+                                               placeholder="@lang('baseTexts.binaryInputPrompt')"
+                                               @if(isset($data['key3'])) value="{{$data['key3']}}"
+                                               @else value="" @endif>
+                                        <x-generateInputButton
+                                            type="{{ GenerateInputButton::TYPE_BINARY }}"
+                                            size="10"
+                                            target="#key3">
+                                        </x-generateInputButton>
+                                    </div>
+                                </div>
                             </fieldset>
                             <div class="p-2">
                                 <fieldset>

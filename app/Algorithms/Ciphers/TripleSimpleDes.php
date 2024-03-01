@@ -15,22 +15,24 @@ use Exception;
  *
  * @author hejzlzd1
  */
-class TripleSimpleDes
+class TripleSimpleDes extends CipherBase
 {
     private TSDESOutput $output;
 
-    public function __construct(private string $text, private string $key, private string $key2, private int $operation)
+    public function __construct(
+        protected string $text,
+        protected ?string $key,
+        private readonly string $key2,
+        private readonly string $key3,
+        protected int $operation
+    )
     {
-        if (mb_strlen($key) < 10) {
-            $key = str_pad($key, 10, 0, STR_PAD_LEFT);
-        }
-        if (mb_strlen($key2) < 10) {
-            $key2 = str_pad($key2, 10, 0, STR_PAD_LEFT);
-        }
-        if (mb_strlen($text) < 8) {
-            $text = str_pad($text, 8, 0, STR_PAD_LEFT);
-        }
-        $this->output = new TSDESOutput(inputValue: $text, operation: $operation, key: $key, key2: $key2);
+        $key = $this->expandOrTrimToSpecificBits($key, 10);
+        $key2 = $this->expandOrTrimToSpecificBits($key2, 10);
+        $key3 = $this->expandOrTrimToSpecificBits($key3, 10);
+        $text = $this->expandOrTrimToSpecificBits($text, 8);
+
+        $this->output = new TSDESOutput(inputValue: $text, operation: $operation, key: $key, key2: $key2, key3: $key3);
     }
 
     public function decrypt(): TSDESOutput
@@ -48,7 +50,7 @@ class TripleSimpleDes
         $encryptedBinary = $result->getOutputValue();
         $this->output->addDesStep($result);
 
-        $decryptedBinary = new SimpleDes($encryptedBinary, $this->key, CipherBase::ALGORITHM_DECRYPT);
+        $decryptedBinary = new SimpleDes($encryptedBinary, $this->key3, CipherBase::ALGORITHM_DECRYPT);
         $result = $decryptedBinary->decrypt();
 
         $this->output->addDesStep($result);
@@ -71,7 +73,7 @@ class TripleSimpleDes
         $decryptedBinary = $result->getOutputValue();
         $this->output->addDesStep($result);
 
-        $encryption = new SimpleDes($decryptedBinary, $this->key, CipherBase::ALGORITHM_ENCRYPT);
+        $encryption = new SimpleDes($decryptedBinary, $this->key3, CipherBase::ALGORITHM_ENCRYPT);
         $result = $encryption->encrypt();
 
         $this->output->addDesStep($result);

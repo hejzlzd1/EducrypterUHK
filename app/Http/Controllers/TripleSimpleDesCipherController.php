@@ -33,16 +33,16 @@ class TripleSimpleDesCipherController extends BaseController
         $data = $request->all();
         $this->isBinary($data['key'], trans('baseTexts.key'));
         $this->isBinary($data['key2'], trans('baseTexts.key') . ' 2');
+        $this->isBinary($data['key3'], trans('baseTexts.key') . ' 3');
         $this->isBinary($data['text'], trans('baseTexts.text'));
         $this->isVariableSet($data['action'], BaseController::TYPE_NUMBER, trans('baseTexts.action'));
 
         if (!empty($this->validationFailedVariable)) {
             Session::flash('alert-error', $this->getValidationErrorTranslation());
-
             return back()->withInput($data);
         }
 
-        $tdes = new TripleSimpleDes($data['text'], $data['key'], $data['key2'], $data['action']);
+        $tdes = new TripleSimpleDes($data['text'], $data['key'], $data['key2'], $data['key3'], $data['action']);
         $result = match ($tdes->getOperation()) {
             CipherBase::ALGORITHM_DECRYPT => $tdes->decrypt(),
             CipherBase::ALGORITHM_ENCRYPT => $tdes->encrypt()

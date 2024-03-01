@@ -40,6 +40,17 @@
                     <p class="text-black-50">@lang('baseTexts.keyFormatted')</p>
                 </div>
             @endif
+            <div class="col-lg-5">
+                <h4><i class="fa-solid fa-key"></i> @lang('baseTexts.key') K3</h4>
+                <p>{{ $result->getKey3() }}</p>
+            </div>
+            @if(strlen($data["key3"]) !== strlen($result->getKey3()))
+                <div class="col-lg-5">
+                    <h4><i class="fa-solid fa-key"></i> @lang('baseTexts.formattedKey') </h4>
+                    <p>{{$result->getKey3()}}</p>
+                    <p class="text-black-50">@lang('baseTexts.keyFormatted')</p>
+                </div>
+            @endif
         </div>
         <div class="row align-items-start">
             <div class="col-lg">
