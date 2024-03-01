@@ -75,9 +75,9 @@
                 <div class="accordion" id="accordion">
                     @for($i = 0 ; $i < strlen($result->getInputValue()); $i++)
                         <div class="accordion-item">
-                            <h2 class="accordion-header" id="heading{{$i+1}}">
-                                <button class="accordion-button" type="button" data-bs-toggle="collapse"
-                                        data-bs-target="#collapse{{$i}}" aria-expanded="true"
+                            <h2 class="accordion-header" id="heading{{$i}}">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                        data-bs-target="#collapse{{$i}}" aria-expanded="false"
                                         aria-controls="collapse{{$i}}">
                                     @lang('baseTexts.stepNum') {{$i+1}}
                                 </button>

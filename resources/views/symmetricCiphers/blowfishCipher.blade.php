@@ -64,6 +64,7 @@
                                     </label>
                                     <div class="input-group">
                                     <input class="form-control" maxlength="30" type="text" id="key" name="key"
+                                           required
                                            placeholder="@lang('baseTexts.insertKey')" pattern="^[a-zA-Z ]*$"
                                            @if(isset($data['key'])) value="{{$data['key']}}" @else value="" @endif>
                                         <x-generateInputButton

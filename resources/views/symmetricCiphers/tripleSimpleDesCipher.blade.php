@@ -74,6 +74,7 @@
                                         <input class="form-control binaryValidation" minlength="1" maxlength="10"
                                                type="text" id="key"
                                                name="key"
+                                               required
                                                placeholder="@lang('baseTexts.binaryInputPrompt')"
                                                @if(isset($data['key'])) value="{{$data['key']}}" @else value="" @endif>
                                         <x-generateInputButton
@@ -94,6 +95,7 @@
                                         <input class="form-control binaryValidation" minlength="1" maxlength="10"
                                                type="text" id="key2"
                                                name="key2"
+                                               required
                                                placeholder="@lang('baseTexts.binaryInputPrompt')"
                                                @if(isset($data['key2'])) value="{{$data['key2']}}"
                                                @else value="" @endif>
@@ -114,6 +116,7 @@
                                         <input class="form-control binaryValidation" minlength="1" maxlength="10"
                                                type="text" id="key3"
                                                name="key3"
+                                               required
                                                placeholder="@lang('baseTexts.binaryInputPrompt')"
                                                @if(isset($data['key3'])) value="{{$data['key3']}}"
                                                @else value="" @endif>

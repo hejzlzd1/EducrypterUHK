@@ -69,7 +69,7 @@
                 @foreach($result->getSteps() as $block)
                     <div class="accordion-item">
                         <h2 class="accordion-header" id="blockHeading{{$loop->index}}">
-                            <button class="accordion-button" type="button" data-bs-toggle="collapse"
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
                                     data-bs-target="#block{{$loop->index}}" aria-expanded="true"
                                     aria-controls="block{{$loop->index}}">
                                 @lang('baseTexts.block') {{$loop->index+1}} - @lang('baseTexts.output'):

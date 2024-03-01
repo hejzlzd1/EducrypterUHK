@@ -76,8 +76,8 @@
                 @foreach($result->getDesOutputs() as $simpleDES)
                     <div class="accordion-item">
                         <h2 class="accordion-header">
-                            <button class="accordion-button" type="button" data-bs-toggle="collapse"
-                                    data-bs-target="#output{{$loop->index}}" aria-expanded="true"
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                    data-bs-target="#output{{$loop->index}}" aria-expanded="false"
                                     aria-controls="output{{$loop->index}}">
                                 <i class="fa-solid fa-circle-arrow-down"></i> 
                                 @lang('baseTexts.output') #{{ $loop->index + 1 }} ({{ CipherBase::getStringAlgorithmOperation($simpleDES->getOperation()) }})

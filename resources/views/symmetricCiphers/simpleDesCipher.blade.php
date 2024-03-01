@@ -190,6 +190,7 @@
                                         <input class="form-control binaryValidation" minlength="1" maxlength="10"
                                                type="text" id="key"
                                                name="key"
+                                               required
                                                placeholder="@lang('baseTexts.binaryInputPrompt')"
                                                @if(isset($data['key'])) value="{{$data['key']}}" @else value="" @endif>
                                         <x-generateInputButton

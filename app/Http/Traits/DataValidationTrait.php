@@ -8,8 +8,12 @@ trait DataValidationTrait
 {
     public array $validationFailedVariable;
 
-    protected function isBinary(string $text, string $variableName): void
+    protected function isBinary(?string $text, string $variableName): void
     {
+        if ($text === null) {
+            $this->validationFailedVariable[BaseController::VALIDATION_EMPTY] = $variableName;
+            return;
+        }
         if (preg_match('/^[01]+$/', $text) !== 1) {
             $this->validationFailedVariable[BaseController::VALIDATION_NOT_BINARY] = $variableName;
         }
