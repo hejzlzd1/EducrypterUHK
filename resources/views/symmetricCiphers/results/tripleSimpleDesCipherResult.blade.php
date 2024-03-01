@@ -1,3 +1,4 @@
+@php use App\Algorithms\CipherBase; @endphp
 @php
     /** @var App\Algorithms\Output\TSDESOutput $result */
 @endphp
@@ -10,7 +11,7 @@
             <div class="col-lg-5">
                 <h4>
                     <i class="fa-solid fa-keyboard"></i>
-                    @if($result->getOperation() === \App\Algorithms\CipherBase::ALGORITHM_ENCRYPT)
+                    @if($result->getOperation() === CipherBase::ALGORITHM_ENCRYPT)
                         @lang('baseTexts.plainText')
                     @else
                         @lang('baseTexts.encryptedText')
@@ -56,7 +57,7 @@
             <div class="col-lg">
                 <h4>
                     <i class="fa-solid fa-circle-down"></i>
-                    @if($result->getOperation() === \App\Algorithms\CipherBase::ALGORITHM_ENCRYPT)
+                    @if($result->getOperation() === CipherBase::ALGORITHM_ENCRYPT)
                         @lang('baseTexts.encryptedText')
                     @else
                         @lang('baseTexts.plainText')
@@ -79,7 +80,7 @@
                                     data-bs-target="#output{{$loop->index}}" aria-expanded="true"
                                     aria-controls="output{{$loop->index}}">
                                 <i class="fa-solid fa-circle-arrow-down"></i> 
-                                @lang('baseTexts.output') #{{ $loop->index + 1 }}
+                                @lang('baseTexts.output') #{{ $loop->index + 1 }} ({{ CipherBase::getStringAlgorithmOperation($simpleDES->getOperation()) }})
                                 => {{$simpleDES->getOutputValue()}}
                             </button>
                         </h2>
@@ -90,7 +91,7 @@
                                     <div class="col-lg-5">
                                         <h4>
                                             <i class="fa-solid fa-keyboard"></i>
-                                            @if($simpleDES->getOperation() === \App\Algorithms\CipherBase::ALGORITHM_ENCRYPT)
+                                            @if($simpleDES->getOperation() === CipherBase::ALGORITHM_ENCRYPT)
                                                 @lang('baseTexts.plainText')
                                             @else
                                                 @lang('baseTexts.encryptedText')
@@ -107,7 +108,7 @@
                                     <div class="col-lg">
                                         <h4>
                                             <i class="fa-solid fa-circle-down"></i>
-                                            @if($simpleDES->getOperation() === \App\Algorithms\CipherBase::ALGORITHM_ENCRYPT)
+                                            @if($simpleDES->getOperation() === CipherBase::ALGORITHM_ENCRYPT)
                                                 @lang('baseTexts.encryptedText')
                                             @else
                                                 @lang('baseTexts.plainText')
@@ -191,7 +192,7 @@
                                                     data-bs-target="#operationsSteps{{$loop->index}}"
                                                     aria-expanded="false"
                                                     aria-controls="operationsSteps{{$loop->index}}">
-                                                <i class="fa-solid fa-gear"></i> {{\App\Algorithms\CipherBase::getStringAlgorithmOperation($result->getOperation())}}
+                                                <i class="fa-solid fa-gear"></i> {{CipherBase::getStringAlgorithmOperation($result->getOperation())}}
                                             </button>
                                         </h2>
                                         <div id="operationsSteps{{$loop->index}}"
