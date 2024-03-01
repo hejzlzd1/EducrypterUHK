@@ -9,7 +9,7 @@ return [
         <br /> <br />
         Triple DES poskytuje vyšší úroveň bezpečnosti než původní DES a zároveň zachovává kompatibilitu s existujícími systémy, které stále používají DES. Používá se tam, kde je vyžadována větší úroveň bezpečnosti než může poskytnout DES. Díky třem vrstvám šifrování Triple DES lépe odolává kryptoanalytickým útokům, které by mohly ohrozit použití jednoduchého DES. Je vhodný pro bezpečné šifrování při zachování některých výhod původního DES.
         <br /> <br/>
-        Tato implementace 3-DES je postavena na <a href="/simpleDesCipher">S-DES</a> z edukačních důvodů, jelikož využití této implementace umožňuje lépe proniknout do struktury a fungování 3DES. Jako vstup jsou přijímány dva klíče K1 a K2 - klíč K3 = K1. Tento management klíčů je využíván v případěch, kdy je nutno zachovat kompabilitu s DES. Využití stejného klíče může i ovlivnit rychlost algoritmu, protože se nemusí generovat další klíč. Tento způsob správy klíčů potenciálně snižuje bezpečnost algoritmu.
+        Tato implementace 3-DES je postavena na <a href="/simpleDesCipher">S-DES</a> z edukačních důvodů, jelikož využití této implementace umožňuje lépe proniknout do struktury a fungování 3DES. Jako vstup jsou přijímány tři klíče K1, K2 a K3, což vede v případě plného algoritmu k dostatečné úrovni zabezpečení.
     ',
     'blockSchema' => 'Blokové schéma Triple DES',
 

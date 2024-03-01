@@ -9,7 +9,8 @@ return [
         <br /> <br />
         Triple DES provides a higher level of security than the original DES while maintaining compatibility with existing systems that still use DES. It is used where a greater level of security is required than DES can provide. With three layers of encryption, Triple DES is better able to withstand cryptanalytic attacks that could compromise the use of single DES. It is suitable for secure encryption while retaining some of the benefits of the original DES.
         <br /> <br/>
-        This 3-DES implementation is built on top of <a href="/simpleDesCipher">S-DES</a> for educational reasons, as using this implementation allows you to better understand the structure and operation of 3DES. Two keys K1 and K2 are accepted as input - key K3 = K1. This key management is used in cases where it is necessary to maintain compatibility with DES. Using the same key can also affect the speed of the algorithm, since another key does not have to be generated. This way of managing keys potentially reduces the security of the algorithm.',
+        This 3-DES implementation is built on top of <a href="/simpleDesCipher">S-DES</a> for educational reasons, as using this implementation allows you to better understand the structure and operation of 3DES. Three keys K1, K2 and K3 are accepted as input, which leads to a sufficient level of security in the case of the full algorithm.
+    ',
     'blockSchema' => 'Triple DES block diagram',
 
 ];
