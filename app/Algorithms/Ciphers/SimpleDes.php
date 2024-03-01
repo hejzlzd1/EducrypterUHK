@@ -208,13 +208,13 @@ class SimpleDes extends BlockCipher
     }
 
     /**
-     * Takes binary array and performs sbox permutation depending on specified sbox number
+     * Takes binary array and performs sbox substitution depending on specified sbox number
      * Returns permuted array
      * @param array<string> $input
      * @param int $sboxNumber
      * @return array
      */
-    private function sboxPermutation(array $input, int $sboxNumber): array
+    private function sboxSubstitution(array $input, int $sboxNumber): array
     {
         $row = bindec($input[0] . $input[3]);
         $col = bindec($input[1] . $input[2]);
@@ -270,7 +270,7 @@ class SimpleDes extends BlockCipher
         );
 
         /** @var array{array-key, string} $xorFirst */
-        $xorFirstAfterSBox = $this->sboxPermutation($xorFirst, 0);
+        $xorFirstAfterSBox = $this->sboxSubstitution($xorFirst, 0);
         $this->output->addStep(
             new NamedStep(
                 input: implode($xorOutput),
@@ -281,7 +281,7 @@ class SimpleDes extends BlockCipher
         );
 
         /** @var array{array-key, string} $xorSecond */
-        $xorSecondAfterSBox = $this->sboxPermutation($xorSecond, 1);
+        $xorSecondAfterSBox = $this->sboxSubstitution($xorSecond, 1);
         $this->output->addStep(
             new NamedStep(
                 input: implode($xorOutput),
