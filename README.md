@@ -1,17 +1,35 @@
 ## Developer info
-Webová aplikace je plně zdokerizovaná. 
+Webová aplikace je plně zdokerizovaná.
+<br />
 Pro start aplikace je nutno vytvořit platný .env soubor - lze zkopírovat .env.example a pojmenovat jako .env
+<br />
+<hr />
+V případě localhostu (tato verze je připravena pro produkci) <br />
+Zakomentování SSH nastavení pomocí # v docker/php/Dockerfile -> Blok je označen pomocí komentáře 
+<br/>
+<br/>
+V <code>public/.htaccess</code> je potřeba zakomentovat řádek: <code>RewriteRule ^(.*)$ https://educrypter.uhk.cz/$1 [R,L] </code>
+<hr />
+<br />
+
 
 Nyní stačí mít nainstalovaný Docker a v adresáři projektu spustit následující příkazy:
 
+<br />
 Vytvoření image a zapnutí kontejneru:
-docker-compose build
-docker-compose up -d
+<br />
+<code>docker-compose build</code>
+<br />
+<code>docker-compose up -d</code>
+<br />
 
 Vytvoření šifrovací klíče a build aplikace (stažení a instalace závislostí)
-docker-compose exec php bash build.sh
-docker-compose exec php php artisan key:generate
-docker-compose exec php php artisan cache:clear
+<br />
+<code>docker-compose exec php bash build.sh </code>
+<br />
+<code>docker-compose exec php php artisan key:generate </code>
+<br />
+<code>docker-compose exec php php artisan cache:clear </code>
 
 Nyní by mělo být vše připraveno
 
