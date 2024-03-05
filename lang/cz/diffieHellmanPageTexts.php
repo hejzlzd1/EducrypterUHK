@@ -29,7 +29,7 @@ return [
     'calculatePublicB' => 'Výpočet veřejného klíče B',
     'calculateSecret' => 'Výpočet společného tajného klíče',
     'base' => 'Domluvený základ (g)',
-    'inputBase' => 'Vlož základ',
+    'inputBase' => 'Vlož základ, který je primitivním kořenem pro modulus (p)',
     'modulus' => 'Domluvený modulus (p)',
     'inputModulus' => 'Vlož modulus - prvočíslo',
     'userA' => 'Uživatel A',

@@ -102,6 +102,9 @@ trait DataValidationTrait
                 case BaseController::VALIDATION_NOT_PRIME_NUMBER:
                     $validationTexts[] = (string) trans('baseTexts.notPrime', ['variableName' => $failedValidation]);
                     break;
+                case BaseController::VALIDATION_NOT_PRIMITIVE_ROOT:
+                    $validationTexts[] = (string) trans('baseTexts.notPrimitiveRoot', ['variableName' => $failedValidation]);
+                    break;
                 case BaseController::VALIDATION_CUSTOM_MESSAGE:
                     // Adds custom message validation -> allows to add custom errors from controller
                     $validationTexts[] = $failedValidation;

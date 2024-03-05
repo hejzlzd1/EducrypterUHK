@@ -28,7 +28,7 @@ return [
     'calculatePublicB' => 'Calculate public key B',
     'calculateSecret' => 'Calculate Shared Secret',
     'base' => 'User agreed base (g)',
-    'inputBase' => 'Insert Base',
+    'inputBase' => 'Insert a base that is a primitive root for modulus (p)',
     'modulus' => 'User agreed modulus (p)',
     'inputModulus' => 'Insert modulus - prime number',
     'userA' => 'User A',
