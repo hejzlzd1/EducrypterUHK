@@ -47,6 +47,31 @@ trait DataValidationTrait
         }
     }
 
+    protected function isPrimitiveRoot(int $number, int $modulus, string $variableName): void
+    {
+        $phi = $modulus - 1;
+        $factors = $this->primeFactors($phi);
+
+        foreach ($factors as $factor) {
+            if (pow($number, $phi / $factor) % $modulus == 1) {
+                $this->validationFailedVariable[BaseController::VALIDATION_NOT_PRIMITIVE_ROOT] = $variableName;
+                return;
+            }
+        }
+    }
+
+    private function primeFactors($num) {
+        $factors = [];
+        for ($i = 2; $i <= sqrt($num); $i++) {
+            while ($num % $i == 0) {
+                $factors[] = $i;
+                $num /= $i;
+            }
+        }
+        if ($num > 1) $factors[] = $num;
+        return $factors;
+    }
+
     protected function isPrimeNumber(int $number, string $variableName): void
     {
         if ($number <= 1) {

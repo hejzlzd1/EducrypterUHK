@@ -20,6 +20,7 @@ class BaseController extends Controller
     const VALIDATION_NOT_PRIME_NUMBER = 'notPrimeNumber';
 
     const VALIDATION_CUSTOM_MESSAGE = 'customMessage';
+    const VALIDATION_NOT_PRIMITIVE_ROOT = 'notPrimitiveRoot';
 
     use DataValidationTrait;
 

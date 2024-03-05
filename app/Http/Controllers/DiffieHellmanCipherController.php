@@ -35,7 +35,7 @@ class DiffieHellmanCipherController extends BaseController
         $this->isVariableSet($data['keyA'], self::TYPE_NONZERO_NUMBER, trans('diffieHellmanPageTexts.keyA'));
         $this->isVariableSet($data['keyB'], self::TYPE_NONZERO_NUMBER, trans('diffieHellmanPageTexts.keyB'));
         $this->isPrimeNumber($data['modulus'], trans('diffieHellmanPageTexts.modulus'));
-        $this->isVariableSet($data['base'], self::TYPE_NONZERO_NUMBER, trans('diffieHellmanPageTexts.base'));
+        $this->isPrimitiveRoot($data['base'], $data['modulus'], trans('diffieHellmanPageTexts.base'));
 
         if (!empty($this->validationFailedVariable)) {
             Session::flash('alert-error', $this->getValidationErrorTranslation());
@@ -45,8 +45,8 @@ class DiffieHellmanCipherController extends BaseController
         $diffieHellman = new DiffieHellman(
             a: $data['keyA'],
             b: $data['keyB'],
-            base: $data['base'],
-            modulus: $data['modulus']
+            modulus: $data['modulus'],
+            base: $data['base']
         );
 
         $result = $diffieHellman->generateSecret();

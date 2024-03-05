@@ -4,7 +4,7 @@ return [
     'annotation' => '
         Diffie-Hellmanova výměna klíčů je postup navržený pro zabezpečenou komunikaci mezi dvěma stranami v prostředí, kde není zajištěno bezpečné spojení. Takovým prostředím může být například internet. Tento matematický protokol využívá principů modulární aritmetiky a obtížnosti diskrétního logaritmu k vytvoření společného tajného klíče mezi účastníky.
         <br /><br />
-        Princip tohoto protokolu spočívá v několika krocích. Nejprve se obě strany dohodnou na společných parametrech, včetně velikosti prvočíselného modulusu a jeho základu. Poté každá strana generuje svůj soukromý klíč, který je náhodně vygenerován z rozsahu daného modulusu, a vypočítá svůj veřejný klíč pomocí vzorce A = gᵃ mod p - kde A je veřejný klíč, g mocniný základ, a - soukromý klíč a p - modulus.
+        Princip tohoto protokolu spočívá v několika krocích. Nejprve se obě strany dohodnou na společných parametrech, včetně velikosti prvočíselného modulusu a jeho základu, který je náhodným číslem z rozmezí daného modulusu. Poté každá strana generuje svůj soukromý klíč, který je náhodně vygenerován z rozsahu daného modulusu, a vypočítá svůj veřejný klíč pomocí vzorce A = gᵃ mod p - kde A je veřejný klíč, g mocniný základ, a - soukromý klíč a p - modulus.
         <br /><br />
         Po výměně veřejných klíčů každá strana použije svůj soukromý klíč a veřejný klíč protistrany k výpočtu společného tajného klíče. Tímto způsobem se vytvoří společný tajný klíč, který může být použit pro šifrování komunikace mezi stranami.
         <br /><br />
