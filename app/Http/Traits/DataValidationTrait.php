@@ -47,6 +47,31 @@ trait DataValidationTrait
         }
     }
 
+    protected function isPrimitiveRoot(int $number, int $modulus, string $variableName): void
+    {
+        $phi = $modulus - 1;
+        $factors = $this->primeFactors($phi);
+
+        foreach ($factors as $factor) {
+            if (pow($number, $phi / $factor) % $modulus == 1) {
+                $this->validationFailedVariable[BaseController::VALIDATION_NOT_PRIMITIVE_ROOT] = $variableName;
+                return;
+            }
+        }
+    }
+
+    private function primeFactors($num) {
+        $factors = [];
+        for ($i = 2; $i <= sqrt($num); $i++) {
+            while ($num % $i == 0) {
+                $factors[] = $i;
+                $num /= $i;
+            }
+        }
+        if ($num > 1) $factors[] = $num;
+        return $factors;
+    }
+
     protected function isPrimeNumber(int $number, string $variableName): void
     {
         if ($number <= 1) {
@@ -76,6 +101,9 @@ trait DataValidationTrait
                     break;
                 case BaseController::VALIDATION_NOT_PRIME_NUMBER:
                     $validationTexts[] = (string) trans('baseTexts.notPrime', ['variableName' => $failedValidation]);
+                    break;
+                case BaseController::VALIDATION_NOT_PRIMITIVE_ROOT:
+                    $validationTexts[] = (string) trans('baseTexts.notPrimitiveRoot', ['variableName' => $failedValidation]);
                     break;
                 case BaseController::VALIDATION_CUSTOM_MESSAGE:
                     // Adds custom message validation -> allows to add custom errors from controller
