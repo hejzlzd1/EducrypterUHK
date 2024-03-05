@@ -52,6 +52,7 @@ return [
     'binaryKeyInputPrompt' => 'Input key in binary',
     'cannotBeEmpty' => 'Input value [:variableName] cannot be empty. ',
     'notBinary' => 'Input value [:variableName] must be in binary. ',
+    'notPrime' => 'Input value [:variableName] must be prime. ',
 
     'initVector' => 'Initialization vector',
 

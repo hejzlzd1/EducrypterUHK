@@ -72,41 +72,16 @@ $(document).ready(function () {
         }
     });
 
-    $('.primeNumber').each(function () {
-        $(this).on('change', function () {
-            checkPrimeInputs();
-        });
-    });
-
-    function checkPrimeInputs() {
-        const primeNumber1 = $('#primeNumber1');
-        const primeNumber2 = $('#primeNumber2');
-
-        let firstResult = isPrime(primeNumber1.val());
-        let secondResult = isPrime(primeNumber2.val());
-
-        if (!firstResult || !secondResult) {
-            showErrorDialog();
-            if (!firstResult) {
-                primeNumber1.css('color', 'red');
-            } else {
-                primeNumber1.css('color', 'black');
-            }
-
-            if (!secondResult) {
-                primeNumber2.css("color", "red");
-            } else {
-                primeNumber2.css('color', 'black');
-            }
-
-            $("#submit").prop('disabled', true);
+    $('.primeNumber').on('change', function (event) {
+        const value = $(this).val();
+        if (!isPrime(value)) {
+            $(this).css('color', 'red')
+            event.target.setCustomValidity(Lang.get('jsErrors.inputCanBeOnlyPrimeNumber'));
         } else {
-            hideErrorDialog();
-            primeNumber1.css('color', 'black');
-            primeNumber2.css('color', 'black');
-            $("#submit").prop('disabled', false);
+            $(this).css('color', 'black')
+            event.target.setCustomValidity('');
         }
-    }
+    });
 
     function isPrime(number) {
         if (isNaN(number)) {
@@ -125,16 +100,6 @@ $(document).ready(function () {
         return true;
     }
 
-    function showErrorDialog() {
-        const errorDialog = $('#error-dialog');
-        errorDialog.css('display', 'block');
-    }
-
-    function hideErrorDialog() {
-        const errorDialog = $('#error-dialog');
-        errorDialog.css('display', 'none');
-    }
-
     window.generateInput = function (type, size, target) {
         const generators = {
             1: generateRandomText,
@@ -146,6 +111,7 @@ $(document).ready(function () {
         const generator = generators[type];
         if (generator) {
             $(target).val(generator(size));
+            $(target).trigger("change");
         }
     }
     function generateRandomBinaryString(size) {
