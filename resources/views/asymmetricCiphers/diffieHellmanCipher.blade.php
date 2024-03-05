@@ -45,46 +45,6 @@
                             @csrf
                             <fieldset class="row p-2">
                                 <div class="col-lg-6">
-                                    <label class="form-label" for="modulus">
-                                        @lang('diffieHellmanPageTexts.modulus')
-                                        <x-tooltipButton
-                                            :tooltip="trans('diffieHellmanPageTexts.inputModulus')"></x-tooltipButton>
-                                    </label>
-                                    <fieldset class="input-group">
-                                        <input class="form-control" min=1 max=500 required type="number"
-                                               id="modulus" name="modulus"
-                                               placeholder="@lang('diffieHellmanPageTexts.modulus')"
-                                               @if(isset($data['modulus'])) value="{{ $data['modulus'] }}" @endif
-                                        />
-                                        <x-generateInputButton
-                                            type="{{ GenerateInputButton::TYPE_NUMBER }}"
-                                            size="500"
-                                            target="#modulus">
-                                        </x-generateInputButton>
-                                    </fieldset>
-                                </div>
-                                <div class="col-lg-6">
-                                    <label class="form-label" for="base">
-                                        @lang('diffieHellmanPageTexts.base')
-                                        <x-tooltipButton
-                                            :tooltip="trans('diffieHellmanPageTexts.inputBase')"></x-tooltipButton>
-                                    </label>
-                                    <fieldset class="input-group">
-                                        <input class="form-control" min=1 required type="number"
-                                               id="base" name="base"
-                                               placeholder="@lang('diffieHellmanPageTexts.inputBase')"
-                                               @if(isset($data['base'])) value="{{ $data['base'] }}" @endif
-                                        />
-                                        <x-generateInputButton
-                                            type="{{ GenerateInputButton::TYPE_NUMBER }}"
-                                            size="500"
-                                            target="#base">
-                                        </x-generateInputButton>
-                                    </fieldset>
-                                </div>
-                            </fieldset>
-                            <fieldset class="row p-2">
-                                <div class="col-lg-6">
                                     <label class="form-label" for="keyA">
                                         @lang('diffieHellmanPageTexts.keyA')
                                         <x-tooltipButton

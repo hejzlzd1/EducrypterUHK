@@ -13,8 +13,6 @@ class DiffieHellmanOutput extends BasicOutput
     /**
      * @param int $base
      * @param int $modulus
-     * @param int|null $outputValue
-     * @param array<Step>|null $steps
      * @param int $a
      * @param int $b
      */
@@ -23,8 +21,10 @@ class DiffieHellmanOutput extends BasicOutput
         private int $modulus,
         private int $a,
         private int $b,
-        private ?int $outputValue = null,
-        private ?array $steps = null,
+        private ?int $publicA = null,
+        private ?int $publicB = null,
+        private ?int $secretA = null,
+        private ?int $secretB = null,
     ) {
         //
     }
@@ -49,13 +49,44 @@ class DiffieHellmanOutput extends BasicOutput
         return $this->b;
     }
 
-    public function getOutputValue(): ?string
+    public function getPublicA(): ?int
     {
-        return $this->outputValue;
+        return $this->publicA;
     }
 
-    public function getSteps(): ?array
+    public function setPublicA(?int $publicA): void
     {
-        return $this->steps;
+        $this->publicA = $publicA;
     }
+
+    public function getPublicB(): ?int
+    {
+        return $this->publicB;
+    }
+
+    public function setPublicB(?int $publicB): void
+    {
+        $this->publicB = $publicB;
+    }
+
+    public function getSecretA(): ?int
+    {
+        return $this->secretA;
+    }
+
+    public function setSecretA(?int $secretA): void
+    {
+        $this->secretA = $secretA;
+    }
+
+    public function getSecretB(): ?int
+    {
+        return $this->secretB;
+    }
+
+    public function setSecretB(?int $secretB): void
+    {
+        $this->secretB = $secretB;
+    }
+
 }

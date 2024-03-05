@@ -32,8 +32,6 @@ class DiffieHellmanCipherController extends BaseController
         $timerStart = microtime(true);
         $data = $request->all();
 
-        $this->isVariableSet($data['base'], self::TYPE_NONZERO_NUMBER, trans('diffieHellmanPageTexts.base'));
-        $this->isVariableSet($data['modulus'], self::TYPE_NONZERO_NUMBER, trans('diffieHellmanPageTexts.modulus'));
         $this->isVariableSet($data['keyA'], self::TYPE_NONZERO_NUMBER, trans('diffieHellmanPageTexts.keyA'));
         $this->isVariableSet($data['keyB'], self::TYPE_NONZERO_NUMBER, trans('diffieHellmanPageTexts.keyB'));
 
@@ -43,8 +41,6 @@ class DiffieHellmanCipherController extends BaseController
         }
 
         $diffieHellman = new DiffieHellman(
-            modulus: $data['modulus'],
-            base: $data['base'],
             a: $data['keyA'],
             b: $data['keyB'],
         );
