@@ -70,7 +70,7 @@
                         @lang('menuTexts.asymmetricAlgo')
                     </a>
                     <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="/todo">DSA</a></li>
+                        <li><a class="dropdown-item" href="{{ route('diffieHellmanCipher') }}">Diffie-Hellman</a></li>
                         <li><a class="dropdown-item" href="{{ route('rsaCipher') }}">RSA</a></li>
                     </ul>
                 </li>

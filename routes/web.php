@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\A5_1CipherController;
+use App\Http\Controllers\DiffieHellmanCipherController;
 use App\Http\Controllers\SimpleAesCipherController;
 use App\Http\Controllers\BlowfishCipherController;
 use App\Http\Controllers\CaesarCipherController;
@@ -79,4 +80,7 @@ Route::post('tripleDesCipher', [TripleSimpleDesCipherController::class, 'compute
 // RSA
 Route::get('rsaCipher', [RsaCipherController::class, 'index'])->name('rsaCipher');
 Route::post('rsaCipher', [RsaCipherController::class, 'compute'])->name('rsaCipherCompute');
+
+Route::get('diffieHellmanCipher', [DiffieHellmanCipherController::class, 'index'])->name('diffieHellmanCipher');
+Route::post('diffieHellmanCipher', [DiffieHellmanCipherController::class, 'compute'])->name('diffieHellmanCipherCompute');
 

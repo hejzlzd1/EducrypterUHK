@@ -46,14 +46,15 @@
                                 <div class="col-lg-6">
                                     <label class="form-label" for="text">
                                         @lang('baseTexts.text')
-                                        <x-tooltipButton :tooltip="trans('rsaPageTexts.inputTextTooltip')"></x-tooltipButton>
+                                        <x-tooltipButton
+                                            :tooltip="trans('rsaPageTexts.inputTextTooltip')"></x-tooltipButton>
                                     </label>
                                     <div class="input-group">
-                                    <input class="form-control" maxlength="255" minlength="1" required type="text"
-                                           id="text" name="text"
-                                           placeholder="@lang('baseTexts.text')"
-                                           @if(isset($data['text'])) value="{{ $data['text'] }}" @endif
-                                    />
+                                        <input class="form-control" maxlength="255" minlength="1" required type="text"
+                                               id="text" name="text"
+                                               placeholder="@lang('baseTexts.text')"
+                                               @if(isset($data['text'])) value="{{ $data['text'] }}" @endif
+                                        />
                                         <x-generateInputButton
                                             type="{{ GenerateInputButton::TYPE_TEXT }}"
                                             size="40"
@@ -97,16 +98,17 @@
                                             :tooltip="trans('rsaPageTexts.insertPrimeNumberTooltip')"></x-tooltipButton>
                                     </label>
                                     <div class="input-group">
-                                    <input class="form-control primeNumber disableOnDecrypt"
-                                           placeholder="@lang('rsaPageTexts.insertPrimeNumber')" min="13" type="number"
-                                           id="primeNumber1" name="primeNumber1"
-                                           @if(isset($data['primeNumber1'])) value="{{ $data['primeNumber1'] }}"
-                                           @endif required/>
-                                    <x-generateInputButton
-                                        type="{{ GenerateInputButton::TYPE_PRIME }}"
-                                        size="1000"
-                                        target="#primeNumber1">
-                                    </x-generateInputButton>
+                                        <input class="form-control primeNumber disableOnDecrypt"
+                                               placeholder="@lang('rsaPageTexts.insertPrimeNumber')" min="13"
+                                               type="number"
+                                               id="primeNumber1" name="primeNumber1"
+                                               @if(isset($data['primeNumber1'])) value="{{ $data['primeNumber1'] }}"
+                                               @endif required/>
+                                        <x-generateInputButton
+                                            type="{{ GenerateInputButton::TYPE_PRIME }}"
+                                            size="1000"
+                                            target="#primeNumber1">
+                                        </x-generateInputButton>
                                     </div>
                                 </div>
                                 <div class="col-lg-6">
@@ -116,17 +118,18 @@
                                             :tooltip="trans('rsaPageTexts.insertPrimeNumberTooltip')"></x-tooltipButton>
                                     </label>
                                     <div class="input-group">
-                                    <input class="form-control primeNumber disableOnDecrypt"
-                                           placeholder="@lang('rsaPageTexts.insertPrimeNumber')" min="23" type="number"
-                                           id="primeNumber2" name="primeNumber2"
-                                           @if(isset($data['primeNumber2'])) value="{{ $data['primeNumber2'] }}"
-                                           @endif required/>
+                                        <input class="form-control primeNumber disableOnDecrypt"
+                                               placeholder="@lang('rsaPageTexts.insertPrimeNumber')" min="23"
+                                               type="number"
+                                               id="primeNumber2" name="primeNumber2"
+                                               @if(isset($data['primeNumber2'])) value="{{ $data['primeNumber2'] }}"
+                                               @endif required/>
                                         <x-generateInputButton
                                             type="{{ GenerateInputButton::TYPE_PRIME }}"
                                             size="1000"
                                             target="#primeNumber2">
                                         </x-generateInputButton>
-                                </div>
+                                    </div>
                                 </div>
                                 <div id="error-dialog" style="display: none;"
                                      class="text-danger">@lang('rsaPageTexts.noPrimeNumbers')
