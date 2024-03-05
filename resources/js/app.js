@@ -72,41 +72,28 @@ $(document).ready(function () {
         }
     });
 
-    $('.primeNumber').each(function () {
-        $(this).on('change', function () {
-            checkPrimeInputs();
-        });
+    $('.primeNumber').on('change', function (event) {
+        const value = $(this).val();
+        if (!isPrime(value)) {
+            $(this).css('color', 'red')
+            event.target.setCustomValidity(Lang.get('jsErrors.inputCanBeOnlyPrimeNumber'));
+        } else {
+            $(this).css('color', 'black')
+            event.target.setCustomValidity('');
+        }
     });
 
-    function checkPrimeInputs() {
-        const primeNumber1 = $('#primeNumber1');
-        const primeNumber2 = $('#primeNumber2');
-
-        let firstResult = isPrime(primeNumber1.val());
-        let secondResult = isPrime(primeNumber2.val());
-
-        if (!firstResult || !secondResult) {
-            showErrorDialog();
-            if (!firstResult) {
-                primeNumber1.css('color', 'red');
-            } else {
-                primeNumber1.css('color', 'black');
-            }
-
-            if (!secondResult) {
-                primeNumber2.css("color", "red");
-            } else {
-                primeNumber2.css('color', 'black');
-            }
-
-            $("#submit").prop('disabled', true);
+    $('.primitiveRootNumber').on('change', function (event) {
+        const value = $(this).val();
+        const modulus = $($(this).data('ref')).val();
+        if (!isPrimitiveRoot(value, modulus)) {
+            $(this).css('color', 'red')
+            event.target.setCustomValidity(Lang.get('jsErrors.inputCanBeOnlyPrimitiveRoot'));
         } else {
-            hideErrorDialog();
-            primeNumber1.css('color', 'black');
-            primeNumber2.css('color', 'black');
-            $("#submit").prop('disabled', false);
+            $(this).css('color', 'black')
+            event.target.setCustomValidity('');
         }
-    }
+    });
 
     function isPrime(number) {
         if (isNaN(number)) {
@@ -125,27 +112,28 @@ $(document).ready(function () {
         return true;
     }
 
-    function showErrorDialog() {
-        const errorDialog = $('#error-dialog');
-        errorDialog.css('display', 'block');
-    }
+    window.generateInput = function (type, size, target, inputValueFrom) {
+        if (inputValueFrom !== '') {
+            if ($.isNumeric($(inputValueFrom).val()) && isPrime($(inputValueFrom).val())) {
+                size = $(inputValueFrom).val();
+            } else {
+                $(inputValueFrom).val(size);
+                $(inputValueFrom).trigger('change');
+            }
+        }
 
-    function hideErrorDialog() {
-        const errorDialog = $('#error-dialog');
-        errorDialog.css('display', 'none');
-    }
-
-    window.generateInput = function (type, size, target) {
         const generators = {
             1: generateRandomText,
             2: generateRandomInteger,
             3: generateRandomBinaryString,
-            4: generateRandomPrimeNumber
+            4: generateRandomPrimeNumber,
+            5: generateRandomPrimitiveRoot
         };
 
         const generator = generators[type];
         if (generator) {
             $(target).val(generator(size));
+            $(target).trigger('change');
         }
     }
     function generateRandomBinaryString(size) {
@@ -183,4 +171,54 @@ $(document).ready(function () {
 
         return randomNum;
     }
+
+    // Function to find the prime factors of a number
+    function primeFactors(num) {
+        const factors = [];
+        for (let i = 2; i <= Math.sqrt(num); i++) {
+            while (num % i === 0) {
+                factors.push(i);
+                num /= i;
+            }
+        }
+        if (num > 1) factors.push(num);
+        return factors;
+    }
+
+// Function to calculate modular exponentiation (a^b mod n)
+    function modExponentiation(base, exponent, modulus) {
+        let result = 1;
+        base %= modulus;
+        while (exponent > 0) {
+            if (exponent % 2 === 1) {
+                result = (result * base) % modulus;
+            }
+            exponent = Math.floor(exponent / 2);
+            base = (base * base) % modulus;
+        }
+        return result;
+    }
+
+// Function to check if a number is a primitive root modulo n
+    function isPrimitiveRoot(g, n) {
+        const phi = n - 1;
+        const factors = primeFactors(phi);
+
+        for (let factor of factors) {
+            if (modExponentiation(g, phi / factor, n) === 1) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    // Function to generate a random primitive root modulo n
+    function generateRandomPrimitiveRoot(n) {
+        let primitiveRoot;
+        do {
+            primitiveRoot = Math.floor(Math.random() * (n - 1) + 1);
+        } while (!isPrimitiveRoot(primitiveRoot, n));
+        return primitiveRoot;
+    }
+
 });
