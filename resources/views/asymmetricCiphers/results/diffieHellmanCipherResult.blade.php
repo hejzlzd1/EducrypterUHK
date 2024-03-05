@@ -30,16 +30,16 @@
             <div class="col-lg-5">
                 <h4>
                     <i class="fa-solid fa-eye"></i>
-                    @lang('diffieHellmanPageTexts.modulus')
+                    @lang('diffieHellmanPageTexts.base')
                 </h4>
-                <p>{{ $result->getModulus() }}</p>
+                <p>{{ $result->getBase() }}</p>
             </div>
             <div class="col-lg-5">
                 <h4>
                     <i class="fa-solid fa-eye"></i>
-                    @lang('diffieHellmanPageTexts.base')
+                    @lang('diffieHellmanPageTexts.modulus')
                 </h4>
-                <p>{{ $result->getBase() }}</p>
+                <p>{{ $result->getModulus() }}</p>
             </div>
         </div>
 

@@ -49,8 +49,9 @@ return [
     'copy' => 'Kopírovat',
     'copyDone' => 'Vloženo do schránky',
 
-    'cannotBeEmpty' => 'Vstupní hodnota :variableName musí být vyplněná. ',
-    'notBinary' => 'Vstupní hodnota :variableName musí být v binární soustavě. ',
+    'cannotBeEmpty' => 'Vstupní hodnota [:variableName] musí být vyplněná. ',
+    'notBinary' => 'Vstupní hodnota [:variableName] musí být v binární soustavě. ',
+    'notPrime' => 'Vstupní hodnota [:variableName] musí být prvočíslem. ',
 
     'binaryInputPrompt' => 'Vlož binární řetězec',
     'binaryInput' => 'Binarní vstup',

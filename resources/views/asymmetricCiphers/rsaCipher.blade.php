@@ -131,9 +131,6 @@
                                         </x-generateInputButton>
                                     </div>
                                 </div>
-                                <div id="error-dialog" style="display: none;"
-                                     class="text-danger">@lang('rsaPageTexts.noPrimeNumbers')
-                                </div>
                             </fieldset>
 
                             <div class="p-2">
