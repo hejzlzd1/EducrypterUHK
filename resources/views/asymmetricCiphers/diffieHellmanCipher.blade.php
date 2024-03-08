@@ -20,7 +20,7 @@
                         </div>
 
                         <div class="col-lg-5 m-t-5">
-                            <a href="{{ asset('img/diffieHellmanPage/diffie' . App::getLocale() . '.png') }}"
+                            <a href="{{ asset('img/diffieHellmanPage/diffieHellman_' . App::getLocale() . '.png') }}"
                                target="_blank">
                                 <img alt="" width="100%" title="@lang('baseTexts.clickToSeeInFullSize')"
                                      src="{{ asset('img/diffieHellmanPage/diffieHellman_' . App::getLocale() . '.png') }}"

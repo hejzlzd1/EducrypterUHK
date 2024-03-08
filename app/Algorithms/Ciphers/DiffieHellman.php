@@ -33,9 +33,9 @@ class DiffieHellman extends CipherBase
         $output->setPublicA(gmp_strval($publicA));
         $output->addStep(
             new NamedStep(
-                'A = gᵃ mod p',
+                sprintf('A = %d<sup>%d</sup> mod %d', $this->base, $this->a, $this->modulus),
                 gmp_strval($publicA),
-                '<i class="fa-solid fa-eye"></i> ' . trans('diffieHellmanPageTexts.calculatePublicA') . ' - ' . trans('diffieHellmanPageTexts.userA')
+                '<i class="fa-solid fa-eye m-r-2"></i>' . trans('diffieHellmanPageTexts.calculatePublicA') . ' - ' . trans('diffieHellmanPageTexts.userA')
             )
         );
 
@@ -43,9 +43,9 @@ class DiffieHellman extends CipherBase
         $output->setPublicB(gmp_strval($publicB));
         $output->addStep(
             new NamedStep(
-                'B = gᵇ mod p',
+                sprintf('B = %d<sup>%d</sup> mod %d', $this->base, $this->b, $this->modulus),
                 gmp_strval($publicB),
-                '<i class="fa-solid fa-eye"></i> ' . trans('diffieHellmanPageTexts.calculatePublicB') . ' - ' . trans('diffieHellmanPageTexts.userB')
+                '<i class="fa-solid fa-eye m-r-2"></i>' . trans('diffieHellmanPageTexts.calculatePublicB') . ' - ' . trans('diffieHellmanPageTexts.userB')
             )
         );
 
@@ -63,9 +63,9 @@ class DiffieHellman extends CipherBase
         $output->setSecretA(gmp_strval($sA));
         $output->addStep(
             new NamedStep(
-                'S = Bᵃ mod p',
+                sprintf('S = %d<sup>%d</sup> mod %d', $publicB, $this->a, $this->modulus),
                 gmp_strval($sA),
-                '<i class="fa-solid fa-eye-slash"></i> ' . trans('diffieHellmanPageTexts.calculateSecret') . ' - ' . trans('diffieHellmanPageTexts.userA')
+                '<i class="fa-solid fa-eye-slash m-r-2"></i>' . trans('diffieHellmanPageTexts.calculateSecret') . ' - ' . trans('diffieHellmanPageTexts.userA')
             )
         );
 
@@ -73,9 +73,9 @@ class DiffieHellman extends CipherBase
         $output->setSecretB(gmp_strval($sB));
         $output->addStep(
             new NamedStep(
-                'S = Aᵇ mod p',
+                sprintf('S = %d<sup>%d</sup> mod %d', $publicA, $this->a, $this->modulus),
                 gmp_strval($sB),
-                '<i class="fa-solid fa-eye-slash"></i> ' . trans('diffieHellmanPageTexts.calculateSecret') . ' - ' . trans('diffieHellmanPageTexts.userB')
+                '<i class="fa-solid fa-eye-slash m-r-2"></i>' . trans('diffieHellmanPageTexts.calculateSecret') . ' - ' . trans('diffieHellmanPageTexts.userB')
             )
         );
 
