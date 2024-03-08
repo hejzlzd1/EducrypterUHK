@@ -1,9 +1,9 @@
 <?php
 return [
     'annotation' => '
-        Diffie-Hellman key exchange is a procedure designed for secure communication between two parties in an environment where a secure connection is not provided. Such an environment can be, for example, the Internet. This mathematical protocol uses the principles of modular arithmetic and discrete logarithm difficulty to create a shared secret key between participants.
+        Diffie-Hellman key exchange is a procedure designed for secure communication between two parties in an environment where a secure connection is not provided. Such an environment can be, for example, the Internet. This mathematical protocol uses the principles of modular arithmetic and discrete logarithm difficulty to create a shared secret key between participants. The established shared secret key is then used as the key for the symmetric cipher that is used to encrypt the communication.
         <br /><br />
-        The principle of this protocol consists of several steps. First, both parties agree on common parameters, including the size of the prime modulus and its basis. Then each party generates its private key, which is randomly generated from the given modulus range, and calculates its public key using the formula A = gᵃ mod p - where A is the public key, g the power base, a - the private key, and p - the modulus.
+        TODO algorithm description
         <br /><br />
         After the exchange of public keys, each party uses its private key and the counterparty\'s public key to calculate a shared secret key. This creates a shared secret key that can be used to encrypt communications between the parties.
         <br /><br />
@@ -13,14 +13,12 @@ return [
     'metaComment' => 'This page contains a description and test form of the Diffie-Hellman key exchange algorithm',
     'schema' => 'Diffie-Hellman illustration',
     'keyExchange' => 'Key Exchange',
-    'keyA' => 'Private key of user A (a)',
-    'keyB' => 'Private key of user B (b)',
+    'keyA' => 'Private key of Alice (a)',
+    'keyB' => 'Private key of Bob (b)',
     'sharedKey' => 'Shared Secret Key (S)',
     'inputKey' => 'Insert integer key',
-    'publicA' => 'Public key of user A',
-    'publicB' => 'Public key of user B',
-    'secretA' => 'Shared secret key of user A',
-    'secretB' => 'Shared secret key of user B',
+    'publicA' => 'Public key of Alice (A)',
+    'publicB' => 'Public key of Bob (B)',
     'transferPublicKeys' => 'Exchange public keys',
     'function' => 'Calculation function',
     'functionOutput' => 'Function Output',
@@ -31,6 +29,6 @@ return [
     'inputBase' => 'Insert a base that is a primitive root for modulus (p)',
     'modulus' => 'User agreed modulus (p)',
     'inputModulus' => 'Insert modulus - prime number',
-    'userA' => 'User A',
-    'userB' => 'User B',
+    'userA' => 'Alice',
+    'userB' => 'Bob',
 ];

@@ -65,22 +65,6 @@
                     </h4>
                     <p><b>{{ $result->getPublicB() }}</b></p>
                 </div>
-                <div class="col-lg-5">
-                    <h4>
-                        <i class="fa-solid fa-eye-slash"></i>
-                        @lang('diffieHellmanPageTexts.secretA')
-                        <x-copyButton :textToCopy="$result->getSecretA()"></x-copyButton>
-                    </h4>
-                    <p><b>{{ $result->getSecretA() }}</b></p>
-                </div>
-                <div class="col-lg-5">
-                    <h4>
-                        <i class="fa-solid fa-eye-slash"></i>
-                        @lang('diffieHellmanPageTexts.secretB')
-                        <x-copyButton :textToCopy="$result->getSecretB()"></x-copyButton>
-                    </h4>
-                    <p><b>{{ $result->getSecretB() }}</b></p>
-                </div>
 
                 <div class="col-lg-5">
                     <h4>
@@ -103,7 +87,7 @@
                     <div class="accordion-item">
                         <h2 class="accordion-header">
                             <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                                    data-bs-target="#step{{ $loop->index }}" aria-expanded="false"
+                                    data-bs-target="#step{{ $loop->index }}" aria-expanded="false" {{ $step->getInput() === '-' && $step->getOutput() === '-' ? 'disabled' : ''}}
                                     aria-controls="step{{ $loop->index }}">
                                 {!! $step->getTranslatedActionName() !!}
                             </button>
@@ -116,7 +100,7 @@
                                         <h4>
                                             <i class="fa-solid fa-calculator"></i> @lang('diffieHellmanPageTexts.function')
                                         </h4>
-                                        <p> {{ $step->getInput() }} </p>
+                                        <p> {!! $step->getInput() !!} </p>
                                     </div>
                                     <div class="col-lg-5">
                                         <h4>
