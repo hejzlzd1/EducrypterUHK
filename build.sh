@@ -27,10 +27,8 @@ echo "Running 'npm run build'..."
 npm run build
 
 echo "Clearing laravel cache..."
-php artisan cache:clear
+php artisan optimize:clear
 
 php artisan lang:js -c -s ./lang
-
-php artisan optimize
 
 echo "All done... Website is ready!"
