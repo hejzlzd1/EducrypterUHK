@@ -520,32 +520,46 @@ class SimpleAes extends BlockCipher
     /**
      * Galois Field multiplication.
      *
-     * @param int $a
-     * @param int $b
+     * This function performs multiplication in a Galois Field GF(16), where the coefficients are in the finite field GF(2).
+     * The polynomial representation of GF(16) is x^4 + x + 1.
+     * The function multiplies two integers within this field and returns the result.
      *
-     * @return int
+     * @param int $a The first integer operand.
+     * @param int $b The second integer operand.
+     *
+     * @return int The result of the multiplication operation within the Galois Field GF(16).
      */
     private function gfMultiply(int $a, int $b): int
     {
+        // Initialize the result to 0.
         $result = 0;
 
+        // Perform multiplication in the Galois Field GF(16) using the standard algorithm.
         for ($i = 0; $i < 4; $i++) {
+            // If the least significant bit of $b is 1, then XOR the result with $a.
             if (($b & 1) != 0) {
                 $result ^= $a;
             }
 
+            // Check if the most significant bit of $a is set.
             $msbSet = ($a & 0x8) != 0;
+
+            // Left shift $a by 1.
             $a <<= 1;
 
+            // If the most significant bit of $a was set, XOR $a with 0x3 to reduce modulo x^4 + x + 1.
             if ($msbSet) {
                 $a ^= 0x3; // Reduce modulo x^4 + x + 1
             }
 
+            // Right shift $b by 1.
             $b >>= 1;
         }
 
+        // Reduce the result modulo x^4 + x + 1 and return it.
         return $result & 0xF; // Reduce modulo x^4 + x + 1
     }
+
 
     /**
      * Add round key to the input.
