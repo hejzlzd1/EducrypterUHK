@@ -5,6 +5,19 @@
 
 
     <div class="anchor" id="intro"></div>
+    @if( env('INFO_BANNER', false) )
+        <section class="m-5">
+        <div class="container shadow-lg rounded-4 p-5 border">
+            <h1>
+                <i class="fa-regular fa-circle-question"></i> @lang('mainPageTexts.infoBannerTitle')
+            </h1>
+            <hr />
+            <p>
+                @lang('mainPageTexts.infoBanner')
+            </p>
+        </div>
+        </section>
+    @endif
 
     <section class="m-5">
         <div>
