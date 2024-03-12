@@ -1,7 +1,7 @@
 <nav id="navbar" class="navbar sticky-top bg-white navbar-expand-lg shadow">
     <div class="container-fluid">
         <div class="logo" style="padding-left: 20px">
-            <a class="navbar-brand" href="https://educrypter.uhk.cz">
+            <a class="navbar-brand" href="{{ route('mainPage') }}">
                 <img src="{{ asset('img/logo.png') }}" height="50px" alt="Logo uhk"
                      class="logoimg">
             </a>
