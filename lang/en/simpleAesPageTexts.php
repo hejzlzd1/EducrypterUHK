@@ -1,7 +1,7 @@
 <?php
 
 return [
-    'title' => 'Crypto application - Simplified AES',
+    'title' => 'Educrypter - Simplified AES',
 'annotation' => 'Simplified AES (S-AES) is a simplified version of the Advanced Encryption Standard (AES). Designed for educational purposes, it provides a clear and easy-to-understand overview of the basics of block ciphers and a simplified view of the original AES. The AES algorithm is a widely used symmetric encryption standard that is adopted by the United States government and commonly used around the world to encrypt sensitive data.
         Smaller block and key sizes (16-bit) are usually used in simplified AES compared to the full version of AES (128, 192 or 256 bits). It also involves fewer rounds, which means fewer substitutions, swapping matrix rows, and combining columns.
         ',

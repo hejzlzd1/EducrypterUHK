@@ -1,7 +1,7 @@
 <?php
 
 return [
-    'title' => 'Crypto application - Caesar cipher',
+    'title' => 'Educrypter - Caesar cipher',
     'metaComment' => 'This page contains theory and test form of caesar cipher',
     'annotation' => 'The Caesar cipher is the simplest and best known encryption algorithm that uses a symmetric key. It is a mono-alphabetic substitution cipher, which means that characters are systematically replaced by other characters.
                     <br/><br/>The cipher algorithm consists of replacing the original characters with new characters in a shifted alphabet (relative to the classical alphabet).

@@ -9,7 +9,7 @@ return [
         <br /><br />
         An important feature of this protocol is that even though public keys are sent over public channels, it is not possible to obtain the shared secret key without knowing the private keys.
     ',
-    'title' => 'Crypto Application - Diffie-Hellman',
+    'title' => 'Educrypter - Diffie-Hellman',
     'metaComment' => 'This page contains a description and test form of the Diffie-Hellman key exchange algorithm',
     'schema' => 'Diffie-Hellman illustration',
     'keyExchange' => 'Key Exchange',

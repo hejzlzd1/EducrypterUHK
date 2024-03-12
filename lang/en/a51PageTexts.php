@@ -1,7 +1,7 @@
 <?php
 
 return [
-    'title' => 'Crypto application - A51',
+    'title' => 'Educrypter - A51',
     'annotation' => '
         A5/1 is a stream encryption algorithm that is used in GSM mobile networks to secure communication between mobile phones and mobile stations. The algorithm uses three shift registers (A, B, C) of different lengths (19, 22, 23). During initialization, the key is split into three parts, each initializing one of the three registers. A keystream is generated in each cycle of the algorithm when the registers are shifted and the bits of the keystream are derived from their contents.
         <br /> <br />

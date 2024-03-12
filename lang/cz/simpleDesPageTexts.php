@@ -1,7 +1,7 @@
 <?php
 
 return [
-    'title' => 'Krypto aplikace - S-DES',
+    'title' => 'Educrypter - S-DES',
     'metaComment' => 'Tato stránka obsahuje popis a zkušební formulář S-DES šifry',
     'annotation' => '
        Simple DES (S-DES) je zjednodušená verze klasického šifrovacího algoritmu Data Encryption Standard (DES). Byl navržen pro výukové účely a poskytuje přehledný a snadno pochopitelný náhled na základy blokového šifrování a zjednodušený pohled na původní DES. Tento algoritmus není určen pro reálné zabezpečení aplikace, jelikož lze snadno prolomit kvůli krátké délce klíče. <br /> <br />

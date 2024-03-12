@@ -1,7 +1,7 @@
 <?php
 
 return [
-    'title' => 'Krypto aplikace - Blowfish šifra',
+    'title' => 'Educrypter - Blowfish šifra',
     'metaComment' => 'Tato stránka obsahuje popis a zkušební formulář blowfish šifry',
     'annotation' => 'Blowfish je bloková šifra se symetrickým klíčem, kterou v roce 1993 navrhl Bruce Schneier. Jedná se o rychlý, poměrně bezpečný šifrovací algoritmus, který se využíval v různých aplikacích, včetně elektronického obchodování, virtuálních privátních sítí (VPN) a ukládání hesel.
                        <br/><br/>

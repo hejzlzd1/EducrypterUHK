@@ -10,7 +10,7 @@ return [
         <br /><br />
         Důležitou vlastností tohoto protokolu je, že i když veřejné klíče jsou odesílány po veřejných kanálech, není možné získat společný tajný klíč bez znalosti soukromých klíčů. 
     ',
-    'title' => 'Krypto aplikace - Diffie-Hellman',
+    'title' => 'Educrypter - Diffie-Hellman',
     'metaComment' => 'Tato stránka obsahuje popis a zkušební formulář Diffie-Hellman algoritmu pro výměnu klíčů',
     'schema' => 'Diffie-Hellman ilustrace',
     'keyExchange' => 'Výměna klíčů',
