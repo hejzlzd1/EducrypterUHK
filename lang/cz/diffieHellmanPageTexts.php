@@ -4,9 +4,9 @@ return [
     'annotation' => '
         Diffie-Hellmanova výměna klíčů je postup, který se podílí na zajištění zabezpečenou komunikaci mezi dvěma stranami v prostředí, kde není zajištěno bezpečné spojení. Takovým prostředím může být například internet. Tento matematický protokol využívá principů modulární aritmetiky a obtížnosti diskrétního logaritmu k vytvoření společného tajného klíče mezi účastníky. Ustanovaný společný tajný klíč se poté využívá jako klíč pro symetrickou šifru, která je použita k zašifrování komunikace.
         <br /><br />
-        TODO: popis fungování algoritmu a popsání root primitive
+        První krok při Diffie-Hellmanově výměně klíčů spočívá v inicializaci veřejných vstupních parametrů. Mezi tyto parametry patří náhodné prvočíslo (p) a primitivní kořen modulo p (g). Primitivní kořen modulo n je takové číslo g, pokud je pro každé celé číslo <i>a</i> nesoudělné s <i>p</i> existuje takové číslo <i>k</i>, pro které platí gᵏ ≡ a (mod p). 
         <br /><br />
-        Po výměně veřejných klíčů každá strana použije svůj soukromý klíč a veřejný klíč protistrany k výpočtu společného tajného klíče. Tímto způsobem se vytvoří společný tajný klíč, který může být použit pro šifrování komunikace symetrickou šifrou.
+        V druhém kroku uživatelé vygenerují svůj vlastní soukromý klíč, pomocí kterého vypočítají veřejný klíč dle vzorce <i>A = gᵃ mod p</i>, kde <i>a</i> je soukromý klíč uživatele. Tyto veřejné klíče si následně uživatelé vymění po nezabezpečeném veřejném kanálu. Díky veřejným klíčům je možné vypočítat společný tajný klíč vzorcem <i>S = Bᵃ mod p</i>, kde <i>B</i> představuje cizí veřejný klíč, <i>a</i> je soukromým klíčem. Tímto způsobem se vytvoří společný tajný klíč, který může být použit pro šifrování komunikace symetrickou šifrou.
         <br /><br />
         Důležitou vlastností tohoto protokolu je, že i když veřejné klíče jsou odesílány po veřejných kanálech, není možné získat společný tajný klíč bez znalosti soukromých klíčů. 
     ',
@@ -26,10 +26,10 @@ return [
     'calculatePublicA' => 'Výpočet veřejného klíče A',
     'calculatePublicB' => 'Výpočet veřejného klíče B',
     'calculateSecret' => 'Výpočet společného tajného klíče',
-    'base' => 'Domluvená grupa (g)',
-    'inputBase' => 'Vlož základ, který je primitivním kořenem pro modulus (p)',
-    'modulus' => 'Domluvený modulus (p)',
-    'inputModulus' => 'Vlož modulus - prvočíslo',
+    'base' => 'Domluvený primitivní kořen modulo p (g)',
+    'inputBase' => 'Vlož primitivní kořen pro modulus p',
+    'modulus' => 'Prvočíslo (p)',
+    'inputModulus' => 'Vlož prvočíslo',
     'userA' => 'Alice',
     'userB' => 'Bob',
 ];
