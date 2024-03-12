@@ -35,7 +35,7 @@ class DiffieHellman extends CipherBase
             new NamedStep(
                 sprintf('A = %d<sup>%d</sup> mod %d', $this->base, $this->a, $this->modulus),
                 gmp_strval($publicA),
-                '<i class="fa-solid fa-eye m-r-2"></i>' . trans('diffieHellmanPageTexts.calculatePublicA') . ' - ' . trans('diffieHellmanPageTexts.userA')
+                '<i class="fa-solid fa-eye w-25-px"></i>' . trans('diffieHellmanPageTexts.calculatePublicA') . ' - ' . trans('diffieHellmanPageTexts.userA')
             )
         );
 
@@ -45,7 +45,7 @@ class DiffieHellman extends CipherBase
             new NamedStep(
                 sprintf('B = %d<sup>%d</sup> mod %d', $this->base, $this->b, $this->modulus),
                 gmp_strval($publicB),
-                '<i class="fa-solid fa-eye m-r-2"></i>' . trans('diffieHellmanPageTexts.calculatePublicB') . ' - ' . trans('diffieHellmanPageTexts.userB')
+                '<i class="fa-solid fa-eye w-25-px"></i>' . trans('diffieHellmanPageTexts.calculatePublicB') . ' - ' . trans('diffieHellmanPageTexts.userB')
             )
         );
 
@@ -53,7 +53,7 @@ class DiffieHellman extends CipherBase
             new NamedStep(
                 '-',
                 '-',
-                '<i class="fa-solid fa-arrow-right-arrow-left"></i>' . trans(
+                '<i class="fa-solid fa-arrow-right-arrow-left w-25-px"></i>' . trans(
                     'diffieHellmanPageTexts.transferPublicKeys'
                 )
             )
@@ -65,7 +65,7 @@ class DiffieHellman extends CipherBase
             new NamedStep(
                 sprintf('S = %d<sup>%d</sup> mod %d', $publicB, $this->a, $this->modulus),
                 gmp_strval($sA),
-                '<i class="fa-solid fa-eye-slash m-r-2"></i>' . trans('diffieHellmanPageTexts.calculateSecret') . ' - ' . trans('diffieHellmanPageTexts.userA')
+                '<i class="fa-solid fa-eye-slash w-25-px"></i>' . trans('diffieHellmanPageTexts.calculateSecret') . ' - ' . trans('diffieHellmanPageTexts.userA')
             )
         );
 
@@ -75,7 +75,7 @@ class DiffieHellman extends CipherBase
             new NamedStep(
                 sprintf('S = %d<sup>%d</sup> mod %d', $publicA, $this->a, $this->modulus),
                 gmp_strval($sB),
-                '<i class="fa-solid fa-eye-slash m-r-2"></i>' . trans('diffieHellmanPageTexts.calculateSecret') . ' - ' . trans('diffieHellmanPageTexts.userB')
+                '<i class="fa-solid fa-eye-slash w-25-px"></i>' . trans('diffieHellmanPageTexts.calculateSecret') . ' - ' . trans('diffieHellmanPageTexts.userB')
             )
         );
 

@@ -84,10 +84,11 @@
             <h1><i class="fa-solid fa-list-ol"></i> @lang('baseTexts.algorithmSteps')</h1>
             <div class="accordion" id="diffieHellmanSteps">
                 @foreach($result->getSteps() as $step)
+                    @php $disableAccordion = $step->getInput() === '-' && $step->getOutput() === '-'; @endphp
                     <div class="accordion-item">
                         <h2 class="accordion-header">
-                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                                    data-bs-target="#step{{ $loop->index }}" aria-expanded="false" {{ $step->getInput() === '-' && $step->getOutput() === '-' ? 'disabled' : ''}}
+                            <button class="accordion-button collapsed {{$disableAccordion ? 'no-bg-image' : ''}}" type="button" data-bs-toggle="collapse"
+                                    data-bs-target="#step{{ $loop->index }}" aria-expanded="false" {{ $disableAccordion ? 'disabled' : ''}}
                                     aria-controls="step{{ $loop->index }}">
                                 {!! $step->getTranslatedActionName() !!}
                             </button>

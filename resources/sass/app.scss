@@ -233,3 +233,10 @@ $c-purples: #532E62, #8E44AD, #9B59B6;
     margin-top: 5px;
     font-weight: bold;
 }
+.w-25-px {
+    width: 25px;
+}
+.no-bg-image.accordion-button::after {
+    background-image: unset !important;
+}
+
