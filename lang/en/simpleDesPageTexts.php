@@ -1,7 +1,7 @@
 <?php
 
 return [
-    'title' => 'Educrypter - Simple DES',
+    'title' => 'EduCrypter - Simple DES',
     'metaComment' => 'This page contains a description and test form of the Simple DES cipher',
     'annotation' => '
        Simple DES (S-DES) is a simplified version of the classic Data Encryption Standard (DES) algorithm. It was designed for educational purposes and provides a clear and easy way to understand the basics of block cipher. It also provides simplified point of view for original DES algorithm. This algorithm is not intended for real application as it can be easily broken due to the short key length.<br /> <br />

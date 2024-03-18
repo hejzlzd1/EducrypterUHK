@@ -1,7 +1,7 @@
 <?php
 
 return [
-    'title' => 'Educrypter - Vernamova šifra',
+    'title' => 'EduCrypter - Vernamova šifra',
     'metaComment' => 'Tato stránka obsahuje popis a zkušební formulář Vernamovy šifry',
     'annotation' => '
         Vernamova šifra, známá také jako jednorázová tabulková šifra, představuje symetrickou kryptografickou metodu, která využívá exkluzivní logickou operaci XOR (exclusive OR). Základní princip spočívá v tom, že každý znak v otevřeném textu je kombinován s odpovídajícím znakem v tajném klíči.

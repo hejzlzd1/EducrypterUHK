@@ -1,7 +1,7 @@
 <?php
 
 return [
-    'title' => 'Educrypter - Vernam Cipher',
+    'title' => 'EduCrypter - Vernam Cipher',
     'metaComment' => 'This page contains a description and trial form of the Vernam cipher',
     'annotation' => '
         The Vernam cipher, also known as the one-time table cipher or one-time pad, is a symmetric cryptographic method that uses the exclusive logical operation XOR (exclusive OR). The basic principle is that each character in the plain text is combined with the corresponding character in the secret key.

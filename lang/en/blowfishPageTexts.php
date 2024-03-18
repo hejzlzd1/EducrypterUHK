@@ -1,7 +1,7 @@
 <?php
 
 return [
-    'title' => 'Educrypter - Blowfish cipher',
+    'title' => 'EduCrypter - Blowfish cipher',
     'metaComment' => 'This page contains theory and test form of blowfish cipher',
     'annotation' => 'Blowfish is a symmetric key block cipher designed in 1993 by Bruce Schneier. It is a fast, relatively secure encryption algorithm that has been used for use in a variety of applications, including e-commerce, virtual private networks (VPNs), and password storage.
                        <br/><br/>

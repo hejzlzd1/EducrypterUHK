@@ -1,6 +1,6 @@
 <?php
 return [
-    'title' => 'Educrypter - Triple DES',
+    'title' => 'EduCrypter - Triple DES',
     'metaComment' => 'This page contains a description and trial form of the Triple DES cipher',
     'annotation' => '
         Triple DES (3-DES) is an encryption algorithm that uses <a href="/simpleDesCipher">Data Encryption Standard (DES)</a>. DES itself was built on a Feistel network that uses 56-bit keys, which may be considered insufficient for modern security standards. Triple DES comes as an improved version of DES to increase security through the use of multiple layers of DES.

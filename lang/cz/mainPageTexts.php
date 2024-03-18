@@ -1,7 +1,7 @@
 <?php
 
 return [
-    'mainPageTitle' => 'Krypto aplikace - Úvodní stránka',
+    'mainPageTitle' => 'EduCrypter - Úvodní stránka',
     'metaComment' => 'Úvodní stránka výukové webové aplikace. Tato aplikace se zaměřuje na výuku kryptografie a je projektem diplomové práce na téma Zabezpečení TLS.',
     'cryptoInNutshell' => 'Kryptografie v kostce',
     'annotation' => 'Jednou z nejdůležitějších částí při utajování informací ve zprávě je kryptografie. Při procesu šifrování převádíme původní „otevřenou“ čitelnou zprávu na zašifrovaný text. Výsledný text by v závislosti na použitém algoritmu měl být nesmyslný či přímo nečitelný pro entitu, která nezná pomocné informace k dešifrování. Tento proces se provádí dle předem určených pravidel či pomocí zvoleného algoritmu. Příkladem finálního produktu šifrování může být náhodná směsice čísel, písmen, slov. <br /><br /> Tato podkategorie kryptologie se zabývá celkovým pohledem na šifrování dat. Dále zkoumá bezpečnost použitých šifrovacích algoritmů či případně celkovou bezpečnost šifrovacích systémů. Podstatnou částí je i tvorba a management šifrovacích a dešifrovacích klíčů, které se využívají v šifrovacích algoritmech a jejich případných interních výpočtech. Dešifrováním a prolamováním šifer se zabývá kryptoanalýza.',
@@ -18,5 +18,5 @@ return [
     'certificates' => 'Certifikáty SSL/TLS',
     'certificatesInfo' => 'SSL/TLS certifikáty jsou možností, jak ověřit bezpečnost připojení k serveru. Tyto certifikáty umožňují šifrování HTTP přenosu, což se projevuje známým prefixem HTTPS a ikonou zámečku v internetových prohlížečích. Vygenerovaný certifikát obsahuje například název domény, název organizace, název vystavitele certifikátu, datum vystavení, datum zániku, digitální podpis, veřejný klíč a další důležité informace. Taktéž může obsahovat případné subdomény. <br/><br/> Při připojení k serveru pod šifrovaným portem je tento certifikát odeslán klientovi ve fázi „handshake“. Klient přijatý certifikát ověřuje na straně vydavatele před další komunikací. Tato kontrola zajistí, že je server tím, za koho se vydává. Pokud je certifikát platný a jeho ověření na straně vydavatele také, pak se přechází k další komunikaci v opačném případě k ukončení handshaku a spojení.',
     'infoBannerTitle' => 'Informace k testování aplikace',
-    'infoBanner' => 'Po vyzkoušení webové aplikace <b>Educrypter</b> Vás žádám o vyplnění dotazníku pomocí <a href="https://forms.gle/s4WVh4rjetFtG7Cu6">formuláře</a>. Tento dotazník je zcela anonymní, získaná data poslouží k vyhodnocení zpětné vazby do diplomové práce. <br /> Předem děkuji za vyplnění.'
+    'infoBanner' => 'Po vyzkoušení webové aplikace <b>EduCrypter</b> Vás žádám o vyplnění dotazníku pomocí <a href="https://forms.gle/s4WVh4rjetFtG7Cu6">formuláře</a>. Tento dotazník je zcela anonymní, získaná data poslouží k vyhodnocení zpětné vazby do diplomové práce. <br /> Předem děkuji za vyplnění.'
 ];

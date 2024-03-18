@@ -1,6 +1,6 @@
 <?php
 return [
-    'title' => 'Educrypter - Triple DES',
+    'title' => 'EduCrypter - Triple DES',
     'metaComment' => 'Tato stránka obsahuje popis a zkušební formulář Triple DES šifry',
     'annotation' => '
         Triple DES (3-DES) je šifrovací algoritmus, který využívá <a href="/simpleDesCipher">Data Encryption Standard (DES)</a>. DES sám o sobě byl postaven na Feistelově síti, která využívá 56bitové klíče, což může být považováno za nedostatečné pro moderní bezpečnostní standardy. Triple DES přichází jako zlepšená verze DES s cílem zvýšit bezpečnost prostřednictvím vícevrstvého použití DES.

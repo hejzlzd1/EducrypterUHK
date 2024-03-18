@@ -1,15 +1,15 @@
 <?php
 return [
     'annotation' => '
-        Diffie-Hellman key exchange is a procedure designed for secure communication between two parties in an environment where a secure connection is not provided. Such an environment can be, for example, the Internet. This mathematical protocol uses the principles of modular arithmetic and discrete logarithm difficulty to create a shared secret key between participants. The established shared secret key is then used as the key for the symmetric cipher that is used to encrypt the communication.
+        Diffie-Hellman key exchange is a procedure involved in ensuring secure communication between two parties in an environment where a secure connection is not provided. Such an environment can be, for example, the Internet. This mathematical protocol uses the principles of modular arithmetic and discrete logarithm difficulty to create a shared secret key between participants. The established shared secret key is then used as the key for the symmetric cipher that is used to encrypt the communication.
         <br /><br />
-        The first step in Diffie-Hellman key exchange is to initialize the public input parameters. These parameters include a random prime (p) and a primitive root modulo p (g). A primitive root modulo n is a number <i>g</i> that for every integer <i>a</i> coprime to <i>p</i> there is some number <i>k</i> for which gᵏ ≡ a (mod p).
+        The first step in Diffie-Hellman key exchange is to initialize the public input parameters. These parameters include a random prime (p) and a primitive root modulo p (g). A primitive root modulo p is a number g such that for every integer <i>a</i> not commensurate with <i>p</i> there exists an integer <i>k</i> such that that gᵏ ≡ a (mod p).
         <br /><br />
-        In the second step, users generate their own private key, with which they calculate the public key according to the formula <i>A = gᵃ mod p</i>, where <i>a</i> is the user\'s private key. Users then exchange these public keys over an unsecured public channel. Thanks to public keys, it is possible to calculate the shared secret key with the formula <i>S = Bᵃ mod p</i>, where <i>B</i> represents the foreign public key, <i>a</i> is the private key. This shared secret key can be used for communication between the parties.
+        In the second step, Alice and Bob generate their own private key, Alice key a, Bob key b, with which they calculate the public key according to the formula <i>A = gᵃ mod p</i>, or B = gᵇ mod p<i>< /i> where <i>a,b</i> are user\'s private keys. Users then exchange these public keys over an unsecured public channel. Thanks to public keys, it is possible to calculate a common secret key using the formula <i>S = Bᵃ mod p</i>, or S = Aᵇ mod p, where <i>A,B</i> represent foreign public keys, <i>a ,b</i> are private keys. In this way, a common secret key is created that is known to both communicating parties and can be used to encrypt communication with a symmetric cipher.
         <br /><br />
         An important feature of this protocol is that even though public keys are sent over public channels, it is not possible to obtain the shared secret key without knowing the private keys.
     ',
-    'title' => 'Educrypter - Diffie-Hellman',
+    'title' => 'EduCrypter - Diffie-Hellman',
     'metaComment' => 'This page contains a description and test form of the Diffie-Hellman key exchange algorithm',
     'schema' => 'Diffie-Hellman illustration',
     'keyExchange' => 'Key Exchange',

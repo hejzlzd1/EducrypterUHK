@@ -1,7 +1,7 @@
 <?php
 
 return [
-    'title' => 'Educrypter - A5/1',
+    'title' => 'EduCrypter - A5/1',
     'annotation' => '
         A5/1 je proudový šifrovací algoritmus, který se využívá v mobilních sítích GSM pro zabezpečení komunikace mezi mobilními telefony a mobilními stanicemi. Algoritmus používá tři posuvné registry (A, B, C) o různých délkách (19, 22, 23). Při inicializaci se klíč rozdělí na tři části, každá inicializuje jeden ze tří registrů. Klíčový proud (key stream) je generován v každém taktu algoritmu, kdy registry jsou posunuty a bity klíčového proudu jsou odvozeny z jejich obsahu.
         <br /> <br />

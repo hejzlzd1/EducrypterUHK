@@ -1,7 +1,7 @@
 <?php
 
 return [
-    'title' => 'Educrypter - Caesarova šifra',
+    'title' => 'EduCrypter - Caesarova šifra',
     'metaComment' => 'Tato stránka obsahuje popis a zkušební formulář caesarovi šifry',
     'annotation' => 'Caesarova šifra je nejjednodušší a nejznámější šifrovací algoritmus, který využívá symetrického klíče. Jedná se o monoalfabetickou substituční šifru, což znamená, že znaky jsou systematicky nahrazovány jinými znaky.
                     <br/><br/> Algoritmus šifry spočívá v nahrazování původních znaků novými znaky v posunuté abecedě (vůči klasické abecedě).

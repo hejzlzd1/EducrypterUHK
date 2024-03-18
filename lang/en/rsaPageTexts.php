@@ -12,7 +12,7 @@ return [
         <br /> <br />
         The RSA algorithm is also used to verify the authenticity and integrity of data using a digital signature. The digital signing process is based on the creation of a public and private key. In the first step, the message is hashed using a hash function. This hash is then encrypted with a private key, creating a digital signature. The hash created in this way is sent to the recipient along with the name of the hash function. Signature verification takes place by applying a hash function to the received data and decrypting the obtained hash using a public key. If the hash matches the hash of the message, then the signature is considered valid.
     ',
-    'title' => 'Educrypter - RSA',
+    'title' => 'EduCrypter - RSA',
     'metaComment' => 'This page contains a description and test form of RSA cipher',
     'schema' => 'Diagram of RSA',
 

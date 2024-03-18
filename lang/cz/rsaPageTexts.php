@@ -12,7 +12,7 @@ return [
         <br /> <br />
         Algoritmus RSA se taktéž používá k ověření autenticity a integrity dat pomocí digitálního podpisu. Postup digitálního podepisování probíhá na základě vytvoření veřejného a soukromého klíče. V prvním kroku se zpráva zahashuje pomocí hashovací funkce. Tento hash je následně šifrován soukromým klíčem, čímz vzniká digitální podpis. Takto vytvořený hash se pošle příjemci i s názvem hashovací funkce. Ověření podpisu probíhá použitím hashovací funkce na přijaté data a dešifrováním získaného hashe pomocí veřejného klíče. Pokud se hash shoduje s hashem zprávy, pak je podpis považován za platný.
     ',
-    'title' => 'Educrypter - RSA',
+    'title' => 'EduCrypter - RSA',
     'metaComment' => 'Tato stránka obsahuje popis a zkušební formulář RSA šifry',
     'schema' => 'Schéma RSA',
 
