@@ -54,7 +54,8 @@ class Rsa extends CipherBase
         // Encryption key generation -> calculate n from prime numbers
         $n = gmp_mul($p, $q);
 
-        // fermat number
+        // Largest known prime number of the form 2^(2^n) + 1 (n =4)
+        // Used for security reasons
         $e = 65537;
         // declaring phi
         $phi = gmp_mul(gmp_sub($p, 1), gmp_sub($q, 1));
