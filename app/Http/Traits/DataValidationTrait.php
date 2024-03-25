@@ -74,6 +74,10 @@ trait DataValidationTrait
 
     protected function isPrimeNumber(int $number, string $variableName): void
     {
+        if ($number > self::MAX_PRIME_NUMBER) {
+            $this->validationFailedVariable[BaseController::VALIDATION_CUSTOM_MESSAGE] = trans('baseTexts.primeNumberCannotBeLargerThanMax');
+            return;
+        }
         if ($number <= 1) {
             $this->validationFailedVariable[BaseController::VALIDATION_NOT_PRIME_NUMBER] = $variableName;
             return;

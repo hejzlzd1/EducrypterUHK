@@ -10,6 +10,7 @@ class BaseController extends Controller
     const TYPE_TEXT = 0;
 
     const TYPE_NUMBER = 1;
+    const MAX_PRIME_NUMBER = 6767369771;
 
     const TYPE_NONZERO_NUMBER = 2;
 

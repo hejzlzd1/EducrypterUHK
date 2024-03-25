@@ -74,12 +74,15 @@ $(document).ready(function () {
 
     $('.primeNumber').on('change', function (event) {
         const value = $(this).val();
-        if (!isPrime(value)) {
-            $(this).css('color', 'red')
-            event.target.setCustomValidity(Lang.get('jsErrors.inputCanBeOnlyPrimeNumber'));
-        } else {
-            $(this).css('color', 'black')
-            event.target.setCustomValidity('');
+        // Check only if value is in <min,max> interval¨- implemented prime validation is not effective for large numbers
+        if (value <= 67673697711) {
+            if (!isPrime(value)) {
+                $(this).css('color', 'red')
+                event.target.setCustomValidity(Lang.get('jsErrors.inputCanBeOnlyPrimeNumber'));
+            } else {
+                $(this).css('color', 'black')
+                event.target.setCustomValidity('');
+            }
         }
     });
 

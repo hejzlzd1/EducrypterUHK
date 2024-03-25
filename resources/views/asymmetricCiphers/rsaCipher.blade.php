@@ -71,7 +71,7 @@
                                         <x-tooltipButton
                                             :tooltip="trans('rsaPageTexts.inputPrivateKey')"></x-tooltipButton>
                                     </label>
-                                    <input class="form-control disableOnEncrypt" min=1 max=6767369771 required type="number"
+                                    <input class="form-control disableOnEncrypt" min=1 required type="number"
                                            id="publicKey" name="publicKey"
                                            placeholder="@lang('rsaPageTexts.inputPublicKey')"
                                            @if(isset($data['publicKey'])) value="{{ $data['publicKey'] }}" @endif
@@ -83,7 +83,7 @@
                                         <x-tooltipButton
                                             :tooltip="trans('rsaPageTexts.inputPrivateKey')"></x-tooltipButton>
                                     </label>
-                                    <input class="form-control disableOnEncrypt" min=1 max=6767369771 required type="number"
+                                    <input class="form-control disableOnEncrypt" min=1 required type="number"
                                            id="privateKey" name="privateKey"
                                            placeholder="@lang('rsaPageTexts.inputPrivateKey')"
                                            @if(isset($data['privateKey'])) value="{{ $data['privateKey'] }}" @endif />
@@ -99,7 +99,7 @@
                                     </label>
                                     <div class="input-group">
                                         <input class="form-control primeNumber disableOnDecrypt"
-                                               placeholder="@lang('rsaPageTexts.insertPrimeNumber')" min="13"
+                                               placeholder="@lang('rsaPageTexts.insertPrimeNumber')" min="13" max=6767369771
                                                type="number"
                                                id="primeNumber1" name="primeNumber1"
                                                @if(isset($data['primeNumber1'])) value="{{ $data['primeNumber1'] }}"
@@ -119,7 +119,7 @@
                                     </label>
                                     <div class="input-group">
                                         <input class="form-control primeNumber disableOnDecrypt"
-                                               placeholder="@lang('rsaPageTexts.insertPrimeNumber')" min="23"
+                                               placeholder="@lang('rsaPageTexts.insertPrimeNumber')" min="23" max=6767369771
                                                type="number"
                                                id="primeNumber2" name="primeNumber2"
                                                @if(isset($data['primeNumber2'])) value="{{ $data['primeNumber2'] }}"
