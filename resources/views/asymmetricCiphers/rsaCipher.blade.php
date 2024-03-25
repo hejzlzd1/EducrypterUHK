@@ -71,7 +71,7 @@
                                         <x-tooltipButton
                                             :tooltip="trans('rsaPageTexts.inputPrivateKey')"></x-tooltipButton>
                                     </label>
-                                    <input class="form-control disableOnEncrypt" min=1 required type="number"
+                                    <input class="form-control disableOnEncrypt" min=1 max=6767369771 required type="number"
                                            id="publicKey" name="publicKey"
                                            placeholder="@lang('rsaPageTexts.inputPublicKey')"
                                            @if(isset($data['publicKey'])) value="{{ $data['publicKey'] }}" @endif
@@ -83,7 +83,7 @@
                                         <x-tooltipButton
                                             :tooltip="trans('rsaPageTexts.inputPrivateKey')"></x-tooltipButton>
                                     </label>
-                                    <input class="form-control disableOnEncrypt" min=1 required type="number"
+                                    <input class="form-control disableOnEncrypt" min=1 max=6767369771 required type="number"
                                            id="privateKey" name="privateKey"
                                            placeholder="@lang('rsaPageTexts.inputPrivateKey')"
                                            @if(isset($data['privateKey'])) value="{{ $data['privateKey'] }}" @endif />
