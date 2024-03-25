@@ -1,6 +1,6 @@
 @php use App\Algorithms\Output\BasicOutput; @endphp
 @php /** @var BasicOutput $result */ @endphp
-<section class="m-5">
+<section id="renderedResult" class="m-5">
     <div class="shadow-lg border rounded-4 p-5">
         <div class="container text-break">
             <h1 class=""><i class="fa-solid fa-comment"></i> @lang('baseTexts.cipherResult')</h1>

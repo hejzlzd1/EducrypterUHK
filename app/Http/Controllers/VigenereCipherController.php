@@ -62,6 +62,6 @@ class VigenereCipherController extends Controller
         Session::flash('data', $data);
         Session::flash('result', $result);
 
-        return redirect('vigenereCipher');
+        return redirect()->back()->withFragment('renderedResult');
     }
 }

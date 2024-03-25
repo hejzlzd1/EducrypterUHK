@@ -56,6 +56,6 @@ class CaesarCipherController extends BaseController
         Session::flash('result', $result);
         Session::flash('data', $data);
 
-        return redirect('caesarCipher');
+        return redirect()->back()->withFragment('renderedResult');
     }
 }

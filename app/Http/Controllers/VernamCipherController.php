@@ -53,6 +53,6 @@ class VernamCipherController extends BaseController
         Session::flash('result', $result);
         Session::flash('data', $data);
 
-        return redirect('vernamCipher');
+        return redirect()->back()->withFragment('renderedResult');
     }
 }

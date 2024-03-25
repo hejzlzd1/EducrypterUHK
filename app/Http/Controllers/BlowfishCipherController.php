@@ -50,6 +50,6 @@ class BlowfishCipherController extends BaseController
         Session::flash('data', $data);
         Session::flash('result', $result);
 
-        return redirect('blowfishCipher');
+        return redirect()->back()->withFragment('renderedResult');
     }
 }

@@ -56,6 +56,6 @@ class DiffieHellmanCipherController extends BaseController
         Session::flash('data', $data);
         Session::flash('result', $result);
 
-        return redirect('diffieHellmanCipher');
+        return redirect()->back()->withFragment('renderedResult');
     }
 }

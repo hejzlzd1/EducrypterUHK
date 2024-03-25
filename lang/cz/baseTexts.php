@@ -52,7 +52,7 @@ return [
     'cannotBeEmpty' => 'Vstupní hodnota [:variableName] musí být vyplněná. ',
     'notBinary' => 'Vstupní hodnota [:variableName] musí být v binární soustavě. ',
     'notPrime' => 'Vstupní hodnota [:variableName] musí být prvočíslem. ',
-    'notPrime' => 'Vstupní hodnota [:variableName] musí být primitivním kořenem. ',
+    'notPrimitiveRoot' => 'Vstupní hodnota [:variableName] musí být primitivním kořenem. ',
 
     'binaryInputPrompt' => 'Vlož binární řetězec',
     'binaryInput' => 'Binarní vstup',
@@ -68,5 +68,6 @@ return [
     'clickToSeeInFullSize' => 'Kliknutím lze obrázek zobrazit v samostatném okně (zvětšeně)',
     'privateKey' => 'Soukromý klíč',
     'publicKey' => 'Veřejný klíč',
-    'generateInput' => 'Vygenerovat'
+    'generateInput' => 'Vygenerovat',
+    'primeNumberCannotBeLargerThanMax' => 'Z edukačních důvodů prvočíslo nemůže mít více než 10 číslic.'
 ];

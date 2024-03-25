@@ -51,6 +51,6 @@ class A5_1CipherController extends BaseController
         Session::flash('data', $data);
         Session::flash('result', $result);
 
-        return back();
+        return redirect()->back()->withFragment('renderedResult');
     }
 }

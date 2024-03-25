@@ -50,6 +50,6 @@ class SimpleAesCipherController extends BaseController
         Session::flash('data', $data);
         Session::flash('result', $result);
 
-        return redirect('simpleAesCipher');
+        return redirect()->back()->withFragment('renderedResult');
     }
 }

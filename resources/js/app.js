@@ -49,6 +49,20 @@ window.clickToCopyText = function (textToCopy, elem) {
 }
 
 $(document).ready(function () {
+    function smoothScrollTo(hash) {
+        if (!hash) {
+            return;
+        }
+        $('html, body').animate({
+            scrollTop: $(hash).first().offset().top - 100
+        }, 500);
+    }
+
+    $(function() {
+        // Smooth scrolling when the page is loaded
+        smoothScrollTo(window.location.hash);
+    });
+
     $('.disableOnEncrypt').hide();
 
     $('#encrypt').on('change', function () {
@@ -75,7 +89,7 @@ $(document).ready(function () {
     $('.primeNumber').on('change', function (event) {
         const value = $(this).val();
         // Check only if value is in <min,max> interval¨- implemented prime validation is not effective for large numbers
-        if (value <= 67673697711) {
+        if (value <= 9999999999) {
             if (!isPrime(value)) {
                 $(this).css('color', 'red')
                 event.target.setCustomValidity(Lang.get('jsErrors.inputCanBeOnlyPrimeNumber'));

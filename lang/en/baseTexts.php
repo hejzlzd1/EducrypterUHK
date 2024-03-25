@@ -53,6 +53,7 @@ return [
     'cannotBeEmpty' => 'Input value [:variableName] cannot be empty. ',
     'notBinary' => 'Input value [:variableName] must be in binary. ',
     'notPrime' => 'Input value [:variableName] must be prime. ',
+    'notPrimitiveRoot' => 'The input value [:variableName] must be a primitive root. ',
 
     'initVector' => 'Initialization vector',
 
@@ -65,6 +66,6 @@ return [
     '500' => 'An error occurred in the application!',
     'internalError' => 'An unexpected error occurred in the application, author has been noticed about this incident. We apologize for the inconvenience!',
     'reportException' => 'Report exception in application',
-    'generateInput' => 'Generate'
-
+    'generateInput' => 'Generate',
+    'primeNumberCannotBeLargerThanMax' => 'For educational reasons, a prime number cannot have more than 10 digits.'
 ];

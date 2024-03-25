@@ -82,6 +82,6 @@ class RsaCipherController extends BaseController
         Session::flash('data', $data);
         Session::flash('result', $result);
 
-        return redirect('rsaCipher');
+        return redirect()->back()->withFragment('renderedResult');
     }
 }

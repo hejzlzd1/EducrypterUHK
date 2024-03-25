@@ -53,6 +53,6 @@ class TripleSimpleDesCipherController extends BaseController
         Session::flash('data', $data);
         Session::flash('result', $result);
 
-        return redirect(route('tripleSimpleDesCipherCompute'));
+        return redirect()->back()->withFragment('renderedResult');
     }
 }

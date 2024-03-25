@@ -2,7 +2,7 @@
     /** @var App\Algorithms\Output\SDESOutput $result */
     use App\Algorithms\CipherBase;
 @endphp
-<section class="m-5 shadow-lg border rounded-4 p-5">
+<section id="renderedResult" class="m-5 shadow-lg border rounded-4 p-5">
     <div class="container text-break">
 
         <h1 class=""><i class="fa-solid fa-comment"></i> @lang('baseTexts.cipherResult')</h1>
@@ -120,7 +120,10 @@
                     <div id="operationsSteps" class="accordion-collapse collapse">
                         <div class="accordion-body">
                             <div class="accordion" id="stepsAccordion">
-                                @php /** @var NamedStep $step */ @endphp
+                                @php
+                                    use App\Algorithms\Output\Steps\NamedStep;
+                                    /** @var NamedStep $step */
+                                @endphp
                                 @foreach($result->getSteps() as $step)
                                     <div class="accordion-item">
                                         <h2 class="accordion-header">

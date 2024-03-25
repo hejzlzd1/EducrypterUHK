@@ -51,6 +51,6 @@ class SimpleDesCipherController extends BaseController
         Session::flash('data', $data);
         Session::flash('result', $result);
 
-        return redirect('simpleDesCipher');
+        return redirect()->back()->withFragment('renderedResult');
     }
 }
