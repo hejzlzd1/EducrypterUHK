@@ -149,8 +149,8 @@ $(document).ready(function () {
 
         const generator = generators[type];
         if (generator) {
-            $(target).val(generator(size));
-            $(target).trigger('change');
+            $(target).val(generator(size)).change();
+            $(target).get(0).setCustomValidity('');
         }
     }
     function generateRandomBinaryString(size) {
