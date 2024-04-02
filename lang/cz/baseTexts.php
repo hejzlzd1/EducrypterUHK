@@ -57,6 +57,9 @@ return [
     'binaryInputPrompt' => 'Vlož binární řetězec',
     'binaryInput' => 'Binarní vstup',
 
+    'binaryKeyInputPrompt' => 'Vlož binární klíč',
+    'binaryKeyInput' => 'Binarní klíč',
+
     'insertInputData' => 'Zadejte vstupní data',
 
     'notReady' => 'Tato funkce není zatím připravena.',

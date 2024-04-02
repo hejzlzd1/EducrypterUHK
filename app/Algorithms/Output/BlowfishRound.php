@@ -18,12 +18,12 @@ class BlowfishRound
         private string $rightBlockAfterFeistel,
         private string $subkey
     ) {
-        $this->inputLeft = base64_encode($inputLeft);
-        $this->inputRight = base64_encode($inputRight);
-        $this->leftBlockAfterXor = base64_encode($leftBlockAfterXor);
-        $this->rightBlockAfterXor = base64_encode($rightBlockAfterXor);
-        $this->rightBlockAfterFeistel = base64_encode($rightBlockAfterFeistel);
-        $this->subkey = base64_encode($subkey);
+        $this->inputLeft = ($inputLeft);
+        $this->inputRight = ($inputRight);
+        $this->leftBlockAfterXor = ($leftBlockAfterXor);
+        $this->rightBlockAfterXor = ($rightBlockAfterXor);
+        $this->rightBlockAfterFeistel = ($rightBlockAfterFeistel);
+        $this->subkey = ($subkey);
     }
 
     public function getInputLeft(): string

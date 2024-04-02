@@ -36,8 +36,9 @@ class Blowfish extends BlockCipher
         if (empty($key)) {
             throw new Exception(__('baseTexts.keyCannotBeEmpty'));
         }
-        $keyArray = $this->stringToWordArray($key);
-        if (count($keyArray) > 14) {
+        $hexKeyArray = $this->stringToHexBytes($key);
+
+        if (count($hexKeyArray) < 4 || count($hexKeyArray) > 56) {
             throw new Exception(__('baseTexts.keyLongerThan448'));
         }
 
@@ -46,7 +47,7 @@ class Blowfish extends BlockCipher
         }
 
         //start blowfish key schedule -> modify sboxes and generate permuted subkeys
-        $this->modifySubkeys($keyArray);
+        $this->modifySubkeys($hexKeyArray);
         $this->keysModified = true;
         $this->output = new BasicOutput(inputValue: $text, operation: $operation, key: $key);
         $this->output->addAdditionalInformation(
@@ -65,26 +66,34 @@ class Blowfish extends BlockCipher
      */
     private function modifySubkeys(array $keyArray)
     {
+        $keyString = implode($keyArray);
+        $keyParts = str_split($keyString,8);
+        $j = 0;
         for ($i = 0; $i < 18; $i++) { // 18 permutation subkeys (modify predefined parr keys with input key)
-            $this->parr[$i] ^= $keyArray[$i % count($keyArray)];
+            if ($j >= count($keyParts)) {
+                $j = 0;
+            }
+            $this->parr[$i] = $this->xorHex($this->parr[$i], $keyParts[$j]);
+            $j++;
         }
 
         //fill input blocks with zeros for padding shorter input key
-        $rightBlock = 0x00000000;
-        $leftBlock = 0x00000000;
+        $rightBlock = '00000000';
+        $leftBlock = '00000000';
 
         //key and sbox expansion
-        for ($i = 0; $i < 9; $i++) {
+        for ($i = 0; $i < 18; $i = $i + 2) {
             $lastoutput = $this->rounds($leftBlock, $rightBlock);
-            [$this->parr[2 * $i], $this->parr[2 * $i + 1]] = $lastoutput;
+            [$this->parr[$i], $this->parr[$i + 1]] = $lastoutput;
         }
 
         for ($j = 0; $j < 4; $j++) {
-            for ($i = 0; $i < 128; $i++) {
+            for ($i = 0; $i < 256; $i = $i + 2) {
                 $lastoutput = $this->rounds($leftBlock, $rightBlock);
-                [$this->sboxes[$j][2 * $i], $this->sboxes[$j][2 * $i + 1]] = $lastoutput;
+                [$this->sboxes[$j][$i], $this->sboxes[$j][$i + 1]] = $lastoutput;
             }
-        }
+        };
+
         $this->subkeys = $this->parr;
     }
 
@@ -98,12 +107,12 @@ class Blowfish extends BlockCipher
             $inputLeft = $leftBlock;
             $inputRight = $rightBlock;
 
-            $leftBlock = $leftBlock ^ $this->parr[$i]; // XOR left block with permuted key
+            $leftBlock = $this->xorHex($leftBlock, $this->parr[$i]); // XOR left block with permuted key
 
             $leftBlockAfterXor = $leftBlock;
             $rightBlockAfterFeistel = $this->feistelFunction($leftBlock);
 
-            $rightBlock = $this->feistelFunction($leftBlock) ^ $rightBlock; // XOR right block with result of Feistel
+            $rightBlock = $this->xorHex($this->feistelFunction($leftBlock), $rightBlock); // XOR right block with result of Feistel
 
             $rightBlockAfterXor = $rightBlock;
 
@@ -123,12 +132,11 @@ class Blowfish extends BlockCipher
         }
         //last step
         [$leftBlock, $rightBlock] = [$rightBlock, $leftBlock]; //undo last swap from cycle
-
         $inputLeft = $leftBlock;
         $inputRight = $rightBlock;
 
-        $rightBlock = $rightBlock ^ $this->parr[16]; //xor right block with corresponding subkey
-        $leftBlock = $leftBlock ^ $this->parr[17]; //xor left block with corresponding subkey
+        $rightBlock = $this->xorHex($rightBlock, $this->parr[16]); //xor right block with corresponding subkey
+        $leftBlock = $this->xorHex($leftBlock, $this->parr[17]); //xor left block with corresponding subkey
 
         $rightBlockAfterXor = $rightBlock;
         $leftBlockAfterXor = $leftBlock;
@@ -145,8 +153,8 @@ class Blowfish extends BlockCipher
                 );
             $this->output->addAdditionalInformation(
                 [
-                    'subkey17' => base64_encode($this->parr[16]),
-                    'subkey18' => base64_encode($this->parr[17]),
+                    'subkey17' => $this->parr[16],
+                    'subkey18' => $this->parr[17],
                 ]
             );
         }
@@ -165,25 +173,25 @@ class Blowfish extends BlockCipher
             ]
         ); //set bit length of input for visualisation
         $cipherText = ''; //init variable for ciphered text
-        $chunks = array_chunk($this->stringToWordArray($this->text), 2); //create arrays that contain 2x 32bit blocks
+        $chunks = implode(array_merge($this->stringToHexBytes($this->text)));
+        $blocks = str_split($chunks, 16);
 
-        foreach ($chunks as $chunk) { //for each 64 bit chunk
-
+        foreach ($blocks as $block) { //for each 64 bit chunk
+            $halfBlocks = str_split($block, 8);
             $blockStep = new BlowfishBlockStep();
 
-            if (count($chunk) == 1) {
-                $chunk[1] = 0;
+            if (!isset($halfBlocks[1])) {
+                $halfBlocks[1] = str_pad('', 8, '0', STR_PAD_LEFT);
             } //if second 32bit chunk is not present fill it with 0 to make sure function works
-            $encryptedChunk = $this->encryptChunk($chunk); //encrypt 64bit by blowfish chunk
-            $blockText = $this->wordArrayToString($encryptedChunk); //get text value of encryption
-            $cipherText .= $this->wordArrayToString($encryptedChunk);
 
-            $blockStep->setOutputValue(base64_encode($blockText));
+            $encryptedChunk = $this->encryptChunk([$halfBlocks[0], $halfBlocks[1]]); //encrypt 64bit by blowfish chunk
+            $cipherText .= $encryptedChunk[0] . $encryptedChunk[1];
+            $blockStep->setOutputValue($encryptedChunk[0] . $encryptedChunk[1]);
             $blockStep->setRounds($this->roundSteps);
             $this->output->addStep($blockStep);
         }
 
-        $this->output->setOutputValue(base64_encode($cipherText));
+        $this->output->setOutputValue($cipherText);
 
         return $this->output; //return full encrypted text with steps
     }
@@ -193,6 +201,7 @@ class Blowfish extends BlockCipher
      */
     public function decrypt(): BasicOutput
     {
+        /*
         $this->output->addAdditionalInformation(
             [
                 'inputSize' => strlen($this->text) * 8,
@@ -216,7 +225,7 @@ class Blowfish extends BlockCipher
         }
 
         $this->output->setOutputValue($plainText);
-
+        */
         return $this->output; //return output class
     }
 
