@@ -1,0 +1,21 @@
+@media only screen and (max-width: 500px) {
+    .mainContent {
+        margin: 0 0 25px;
+    }
+
+    p {
+        text-align: justify;
+    }
+
+    .secondaryBox {
+        padding: 25px !important;
+        margin: unset !important;
+        border-radius: unset;
+    }
+    form .row {
+        gap: 15px;
+    }
+    #renderedResult {
+        margin: 15px 0 0 !important;
+    }
+}

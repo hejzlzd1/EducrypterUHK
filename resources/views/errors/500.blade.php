@@ -3,7 +3,7 @@
 @section("comment",__('baseTexts.internalError'))
 @section("content")
 
-    <section class="m-5">
+    <section class="mainContent">
         <div class="container shadow-lg text-center border rounded-4 p-5">
             <h3>@lang('baseTexts.500')</h3>
             <p>@lang('baseTexts.internalError')</p>

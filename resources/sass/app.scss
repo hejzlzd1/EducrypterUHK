@@ -240,3 +240,8 @@ $c-purples: #532E62, #8E44AD, #9B59B6;
     background-image: unset !important;
 }
 
+.mainContent {
+    margin: 3rem;
+}
+
+@import 'mediaQuerries';

@@ -5,7 +5,7 @@
     /** @var DiffieHellmanOutput $result */
     /** @var NamedStep $step */
 @endphp
-<section id="renderedResult" class="m-5 shadow-lg border rounded-4 p-5">
+<section id="renderedResult" class="m-5 shadow-lg border rounded-4 secondaryBox p-5">
     <div class="container text-break">
 
         <h1 class="">

@@ -9,8 +9,8 @@
 
     <div class="anchor" id="info"></div>
 
-    <section class="m-5">
-        <div class="p-5 shadow-lg border rounded-4">
+    <section class="mainContent">
+        <div class="p-5 shadow-lg border rounded-4 secondaryBox">
             <div class="">
                 <div class="container">
                     <div class="row align-items-start">

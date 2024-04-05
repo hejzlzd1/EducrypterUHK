@@ -47,8 +47,8 @@
                                     data-bs-target="#collapse{{$loop->index}}" aria-expanded="false"
                                     aria-controls="collapse{{$loop->index}}">
                                 @lang('baseTexts.stepNum') {{$loop->index + 1}}
-                                => {{ substr($result->getOutputValue(), 0, $loop->index) }}
-                                <b>{{ $step->getOutput() }}</b>
+                                => <span> {{ substr($result->getOutputValue(), 0, $loop->index) }}
+                                <b>{{ $step->getOutput() }}</b></span>
                             </button>
                         </h2>
                         <div id="collapse{{$loop->index}}" class="accordion-collapse collapse"

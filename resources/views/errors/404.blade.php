@@ -3,7 +3,7 @@
 @section("comment",__('baseTexts.notFound'))
 @section("content")
 
-    <section class="m-5">
+    <section class="mainContent">
         <div class="container shadow-lg text-center border rounded-4 p-5">
             <h3>@lang('baseTexts.404')</h3>
             <p>@lang('baseTexts.notFound')</p>

@@ -8,8 +8,8 @@
 @section("content")
     <div class="anchor" id="info"></div>
 
-    <section class="m-5">
-        <div class="shadow-lg border rounded-4 p-5">
+    <section class="mainContent">
+        <div class="shadow-lg border rounded-4 secondaryBox p-5">
             <div>
                 <div class="container ">
                     <div class="row align-items-start">

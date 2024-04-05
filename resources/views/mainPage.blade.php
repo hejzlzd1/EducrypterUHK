@@ -6,7 +6,7 @@
 
     <div class="anchor" id="intro"></div>
     @if( env('INFO_BANNER', false) )
-        <section class="m-5">
+        <section class="mainContent">
         <div class="container shadow-lg rounded-4 p-5 border">
             <h1>
                 <i class="fa-regular fa-circle-question"></i> @lang('mainPageTexts.infoBannerTitle')
@@ -19,9 +19,9 @@
         </section>
     @endif
 
-    <section class="m-5">
+    <section class="mainContent">
         <div>
-            <div class="container shadow-lg border rounded-4 p-5">
+            <div class="container shadow-lg border rounded-4 secondaryBox p-5">
                 <div class="row align-items-start">
                     <h1>@lang('mainPageTexts.cryptoInNutshell')</h1>
                     <hr />
@@ -39,9 +39,9 @@
 
     <div class="anchor" id="symmetric"></div>
 
-    <section class="m-5">
+    <section class="mainContent">
         <div>
-            <div class="container shadow-lg border rounded-4 p-5">
+            <div class="container shadow-lg border rounded-4 secondaryBox p-5">
                 <div class="row align-items-start">
                     <h1>@lang('mainPageTexts.symmetric')</h1>
                     <hr />
@@ -60,9 +60,9 @@
 
     <div class="anchor" id="asymmetric"></div>
 
-    <section class="m-5">
+    <section class="mainContent">
         <div>
-            <div class="container shadow-lg border rounded-4 p-5">
+            <div class="container shadow-lg border rounded-4 secondaryBox p-5">
                 <div class="row align-items-start">
                     <h1>@lang('mainPageTexts.asymmetric')</h1>
                     <hr />
@@ -82,9 +82,9 @@
 
     <div class="anchor" id="usage"></div>
 
-    <section class="m-5">
+    <section class="mainContent">
         <div>
-            <div class="container shadow-lg border rounded-4 p-5">
+            <div class="container shadow-lg border rounded-4 secondaryBox p-5">
                 <div class="row align-items-start">
                     <h1>@lang('mainPageTexts.usage')</h1>
                     <hr />
@@ -101,9 +101,9 @@
 
     <div class="anchor" id="protocols"></div>
 
-    <section class="m-5">
+    <section class="mainContent">
         <div>
-            <div class="container shadow-lg border rounded-4 p-5">
+            <div class="container shadow-lg border rounded-4 secondaryBox p-5">
                 <div class="row align-items-start">
                     <h1>@lang('mainPageTexts.protocols')</h1>
                     <hr />
@@ -121,9 +121,9 @@
 
     <div class="anchor" id="sslvstls"></div>
 
-    <section class="m-5">
+    <section class="mainContent">
         <div>
-            <div class="container shadow-lg border rounded-4 p-5">
+            <div class="container shadow-lg border rounded-4 secondaryBox p-5">
                 <div class="row align-items-start">
                     <h1>SSL vs TLS</h1>
                     <hr />
@@ -143,9 +143,9 @@
 
     <div class="anchor" id="certificates"></div>
 
-    <section class="m-5">
+    <section class="mainContent">
         <div>
-            <div class="container shadow-lg border rounded-4 p-5">
+            <div class="container shadow-lg border rounded-4 secondaryBox p-5">
                 <div class="row align-items-start">
                     <h1>@lang('mainPageTexts.certificates')</h1>
                     <hr />

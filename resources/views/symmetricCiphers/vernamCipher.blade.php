@@ -8,8 +8,8 @@
 
     <div class="anchor" id="info"></div>
 
-    <section class="m-5">
-        <div class="p-5 shadow-lg border rounded-4">
+    <section class="mainContent">
+        <div class="p-5 shadow-lg border rounded-4 secondaryBox">
             <div class="">
                 <div class="container">
                     <div class="row align-items-start">
@@ -84,8 +84,6 @@
                                 <fieldset>
                                     <label>
                                         @lang("baseTexts.action")
-                                        <x-tooltipButton
-                                            :tooltip="trans('vernamPageTexts.keyMustBeSameLengthAsInput')"></x-tooltipButton>
                                     </label>
                                     <br/>
                                     <div class="form-check form-switch">
