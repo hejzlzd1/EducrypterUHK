@@ -41,11 +41,19 @@ class SimpleDesCipherController extends BaseController
         }
 
         $simpleDes = new SimpleDes($data['text'], $data['key'], $data['action']);
+
+        /**
+         * Improvement idea:
+         * Instead of repeating this four-liner, there could be helper class that does same thing but uses abstract class.
+         * This solution would make one-line function - removing boilerplate.
+         * @see BaseCipher
+        */
         $result = match ($simpleDes->getOperation()) {
             CipherBase::ALGORITHM_DECRYPT => $simpleDes->decrypt(),
             CipherBase::ALGORITHM_ENCRYPT => $simpleDes->encrypt()
         };
 
+        // This could be also improved by some static helper class
         $time_elapsed_secs = microtime(true) - $timerStart;
         Session::flash('alert-info', trans('baseTexts.actionTook') . ' ' . $time_elapsed_secs . ' s');
         Session::flash('data', $data);

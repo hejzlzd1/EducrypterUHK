@@ -2,19 +2,15 @@
 Webová aplikace je plně zdokerizovaná.
 <br />
 Pro start aplikace je nutno vytvořit platný .env soubor - lze zkopírovat .env.example a pojmenovat jako .env
+<br /><br />
+Pro rozjetí na localhostu je potřeba zakomentování SSH nastavení pomocí # v docker/php/Dockerfile -> Blok je označen pomocí komentáře
 <br />
+Také je možné si odkomentovat xdebug -> pak lze používat debugger
 <hr />
-V případě localhostu (tato verze je připravena pro produkci) <br />
-Zakomentování SSH nastavení pomocí # v docker/php/Dockerfile -> Blok je označen pomocí komentáře 
-<br/>
-<br/>
-V <code>public/.htaccess</code> je potřeba zakomentovat řádek: <code>RewriteRule ^(.*)$ https://educrypter.uhk.cz/$1 [R,L] </code>
+Potřebné nástroje ke spuštění: <br />
+- Docker
 <hr />
-<br />
-
-
-Nyní stačí mít nainstalovaný Docker a v adresáři projektu spustit následující příkazy:
-
+Prvotní setup:<br />
 <br />
 Vytvoření image a zapnutí kontejneru:
 <br />
@@ -25,13 +21,17 @@ Vytvoření image a zapnutí kontejneru:
 
 Vytvoření šifrovací klíče a build aplikace (stažení a instalace závislostí)
 <br />
-<code>docker-compose exec php bash build.sh </code>
+<code>docker-compose exec php bash build.sh </code> (tento příkaz zajistí vytvoření validního <code>.htaccess</code>. Je potřeba mít nastavenou proměnnou <code>APP_ENV</code> v <code>.env</code> - přípustné hodnoty jsou: <code>LOCAL</code> a <code>PROD</code>)
 <br />
 <code>docker-compose exec php php artisan key:generate </code>
 <br />
 <code>docker-compose exec php php artisan cache:clear </code>
+<br/>
+<br/>
 
-Nyní by mělo být vše připraveno
+<hr />
+Soubor <code>public/.htaccess</code> se nyní přidá sám po provedení příkazu <code>docker-compose exec php bash build.sh </code>
+<br />
 
 ## Použitý framework (vygenerovaný zbytek readme)
 <p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>

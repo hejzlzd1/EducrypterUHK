@@ -4,6 +4,14 @@ namespace App\Http\Traits;
 
 use App\Http\Controllers\BaseController;
 
+/**
+ * This trait has some basic validations.
+ * Adding new one requires adding translation in getValidationErrorTranslation() function.
+ *
+ * Possible improvement:
+ * Could be improved by creating ValidationException classes, that will have validationTranslation property and validate() function.
+ * For better usage, there could be validation interface or abstract class.
+ */
 trait DataValidationTrait
 {
     public array $validationFailedVariable;
