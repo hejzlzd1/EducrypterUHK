@@ -100,7 +100,7 @@ class SimpleDes extends BlockCipher
                 output: implode($firstHalfKey),
                 translatedActionName: trans(
                     'simpleDesPageTexts.leftShiftLeftKey'
-                ) . ' - 2b',
+                ),
                 imageUrl: asset('img/simpleDesPage/LS.png')
             )
         );
@@ -110,7 +110,7 @@ class SimpleDes extends BlockCipher
             new NamedStep(
                 input: implode($rightKey),
                 output: implode($secondHalfKey),
-                translatedActionName: trans('simpleDesPageTexts.leftShiftRightKey') . ' - 2b',
+                translatedActionName: trans('simpleDesPageTexts.leftShiftRightKey'),
                 imageUrl: asset('img/simpleDesPage/LS.png')
             )
         );
@@ -132,22 +132,25 @@ class SimpleDes extends BlockCipher
             )
         );
 
+        // Left key shift - 2 bits
         $step = new NamedStep(
             input: implode($firstHalfKey),
-            translatedActionName: trans('simpleDesPageTexts.leftShiftLeftKey'),
+            translatedActionName: trans('simpleDesPageTexts.leftShiftLeftKey') . ' - 2b',
             imageUrl: asset('img/simpleDesPage/LS.png')
         );
         $firstHalfKey = $this->leftShift($firstHalfKey, 2);
         $step->setOutput(implode($firstHalfKey));
         $this->output->addKeyGenerationStep($step);
 
+        // Right key shift - 2 bits
         $step = new NamedStep(
             input: implode($secondHalfKey),
-            translatedActionName: trans('simpleDesPageTexts.leftShiftRightKey'),
+            translatedActionName: trans('simpleDesPageTexts.leftShiftRightKey') . ' - 2b',
             imageUrl: asset('img/simpleDesPage/LS.png')
         );
+
         $secondHalfKey = $this->leftShift($secondHalfKey, 2);
-        $step->setOutput(implode($firstHalfKey));
+        $step->setOutput(implode($secondHalfKey));
         $this->output->addKeyGenerationStep($step);
 
         // Perform P8 on both parts of key (merged in method) -> this creates second part of 8bit key
@@ -155,6 +158,7 @@ class SimpleDes extends BlockCipher
             '',
             $this->permutation(array_merge($firstHalfKey, $secondHalfKey), self::P8)
         );
+
         $this->output->addKeyGenerationStep(
             new NamedStep(
                 input: implode(array_merge($firstHalfKey, $secondHalfKey)),
