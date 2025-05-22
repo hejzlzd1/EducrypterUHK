@@ -53,6 +53,10 @@ RUN groupmod -g 1000 www-data
 COPY /ssl/educrypter.uhk.cz.cert /etc/apache2/ssl/educrypter.uhk.cz.cert
 COPY /ssl/educrypter.uhk.cz.key /etc/apache2/ssl/educrypter.uhk.cz.key
 RUN a2enmod ssl
+# Enable SSL site
+COPY ./conf/default-ssl.conf /etc/apache2/sites-available/default-ssl.conf
+RUN a2ensite default-ssl.conf
+
 RUN chmod 600 /etc/apache2/ssl/educrypter.uhk.cz.key
 
 # Expose ports
@@ -60,4 +64,5 @@ EXPOSE 80
 
 # comment this if you want localhost
 EXPOSE 443
+
 
