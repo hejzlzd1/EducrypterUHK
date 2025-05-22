@@ -50,8 +50,8 @@ RUN usermod -u 1000 www-data
 RUN groupmod -g 1000 www-data
 
 # Copy SSL certificate and private key - comment this section if you want to run on localhost
-COPY ssl/educrypter.uhk.cz.cert /etc/apache2/ssl/educrypter.uhk.cz.cert
-COPY ssl/educrypter.uhk.cz.key /etc/apache2/ssl/educrypter.uhk.cz.key
+COPY /ssl/educrypter.uhk.cz.cert /etc/apache2/ssl/educrypter.uhk.cz.cert
+COPY /ssl/educrypter.uhk.cz.key /etc/apache2/ssl/educrypter.uhk.cz.key
 RUN a2enmod ssl
 RUN chmod 600 /etc/apache2/ssl/educrypter.uhk.cz.key
 
